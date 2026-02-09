@@ -29,9 +29,16 @@ from config import (
     VOLUME_CONTRACTION_WARNING, BREAKOUT_VOLUME_MULTIPLIER, HEAVY_SELL_VOLUME_MULTIPLIER,
     RECENT_DAYS_FOR_VOLUME, AVG_VOLUME_LOOKBACK_DAYS,
     # Breakout Rules
-    PIVOT_CLEARANCE_PCT, BREAKOUT_LOOKBACK_DAYS, CLOSE_POSITION_MIN_PCT_BREAKOUT, VOLUME_EXPANSION_MIN,
+    PIVOT_CLEARANCE_PCT, BREAKOUT_LOOKBACK_DAYS, BREAKOUT_LOOKBACK_DAYS_FOR_REPORT,
+    CLOSE_POSITION_MIN_PCT_BREAKOUT, VOLUME_EXPANSION_MIN,
+    USE_MULTI_DAY_VOLUME_CONFIRMATION, VOLUME_CONFIRMATION_DAYS_AFTER_BREAKOUT,
+    # RS trading improvement
+    RS_RELAX_LINE_DECLINE_IF_STRONG,
     # Buy/Sell Prices
     STOP_LOSS_PCT, PROFIT_TARGET_1_PCT, PROFIT_TARGET_2_PCT, BUY_PRICE_BUFFER_PCT,
+    USE_ATR_STOP, ATR_PERIOD, ATR_STOP_MULTIPLIER,
+    # Market regime & base recency
+    REQUIRE_MARKET_ABOVE_200SMA, BASE_MAX_DAYS_OLD,
     # Grading
     MAX_FAILURES_FOR_A, MAX_FAILURES_FOR_B, CRITICAL_FAILURE_GRADE
 )
@@ -57,12 +64,13 @@ class MinerviniScanner:
         self.data_provider = data_provider
         self.benchmark = benchmark
         
-    def scan_stock(self, ticker: str) -> Dict:
+    def scan_stock(self, ticker: str, benchmark_override: Optional[str] = None) -> Dict:
         """
         Scan a single stock against all Minervini SEPA criteria
         
         Args:
             ticker: Stock ticker symbol
+            benchmark_override: If set, use this benchmark for RS (e.g. per-region: ^GSPC for US, ^GDAXI for EU)
             
         Returns:
             Dictionary with complete scan results including:
@@ -73,7 +81,8 @@ class MinerviniScanner:
             - detailed_analysis: All calculated metrics
         """
         try:
-            logger.info(f"Scanning {ticker} for Minervini SEPA criteria...")
+            benchmark = benchmark_override if benchmark_override else self.benchmark
+            logger.info(f"Scanning {ticker} for Minervini SEPA criteria (benchmark={benchmark})...")
             
             # Get historical data (need at least 1 year for 52-week calculations)
             hist = self.data_provider.get_historical_data(ticker, period="1y", interval="1d")
@@ -99,8 +108,8 @@ class MinerviniScanner:
             # PART 2: Base Quality (pass base_info)
             base_results = self._check_base_quality(hist, base_info)
             
-            # PART 3: Relative Strength (pass base_info)
-            rs_results = self._check_relative_strength(ticker, hist, base_info)
+            # PART 3: Relative Strength (pass base_info; use benchmark_override when provided)
+            rs_results = self._check_relative_strength(ticker, hist, base_info, benchmark=benchmark)
             
             # PART 4: Volume Signature (pass base_info)
             volume_results = self._check_volume_signature(hist, base_info)
@@ -137,7 +146,8 @@ class MinerviniScanner:
                     "price_from_52w_high_pct": grade_result.get("price_from_52w_high_pct", 0),
                     "price_from_52w_low_pct": grade_result.get("price_from_52w_low_pct", 0),
                 },
-                "stock_info": stock_info
+                "stock_info": stock_info,
+                "benchmark_used": benchmark,
             }
             
         except Exception as e:
@@ -461,7 +471,7 @@ class MinerviniScanner:
             logger.debug(f"Error identifying base: {e}")
             return None
     
-    def _check_relative_strength(self, ticker: str, hist: pd.DataFrame, base_info: Optional[Dict] = None) -> Dict:
+    def _check_relative_strength(self, ticker: str, hist: pd.DataFrame, base_info: Optional[Dict] = None, benchmark: Optional[str] = None) -> Dict:
         """
         PART 3: Relative Strength (CRITICAL)
         
@@ -470,6 +480,7 @@ class MinerviniScanner:
         - Stock outperforms index (DAX / STOXX / FTSE)
         - RSI(14) > 60 before breakout
         """
+        bench = benchmark if benchmark is not None else self.benchmark
         results = {
             "passed": True,
             "failures": [],
@@ -501,11 +512,11 @@ class MinerviniScanner:
                     results["failures"].append(f"RSI({RSI_PERIOD}) = {rsi_to_check:.1f} (need >{RSI_MIN_THRESHOLD})")
             
             # Calculate relative strength vs benchmark
-            rs_data = self.data_provider.calculate_relative_strength(ticker, self.benchmark, period=252)
+            rs_data = self.data_provider.calculate_relative_strength(ticker, bench, period=252)
             
             if not rs_data or "error" in rs_data:
                 # Try to calculate manually
-                benchmark_hist = self.data_provider.get_historical_data(self.benchmark, period="1y", interval="1d")
+                benchmark_hist = self.data_provider.get_historical_data(bench, period="1y", interval="1d")
                 if not benchmark_hist.empty:
                     # Calculate RS manually
                     stock_returns = hist['Close'].pct_change().dropna()
@@ -545,7 +556,7 @@ class MinerviniScanner:
             
             # Check if RS line is near new highs
             # Calculate RS line (price / benchmark price)
-            benchmark_hist = self.data_provider.get_historical_data(self.benchmark, period="1y", interval="1d")
+            benchmark_hist = self.data_provider.get_historical_data(bench, period="1y", interval="1d")
             if not benchmark_hist.empty:
                 # Align dates
                 common_dates = hist.index.intersection(benchmark_hist.index)
@@ -565,13 +576,14 @@ class MinerviniScanner:
                     rs_trend_ago = rs_line_normalized.iloc[-rs_trend_lookback] if rs_trend_lookback > 0 else rs_line_normalized.iloc[0]
                     rs_trending_up = current_rs > rs_trend_ago
                     
-                    if rs_from_high_pct > RS_LINE_DECLINE_WARNING_PCT:
+                    # Optionally relax RS line failure when stock is strong (outperforming + RSI >= threshold)
+                    relax_rs = RS_RELAX_LINE_DECLINE_IF_STRONG and rs_data.get("relative_strength", 0) > 0 and rsi_to_check >= RSI_MIN_THRESHOLD
+                    if rs_from_high_pct > RS_LINE_DECLINE_WARNING_PCT and not relax_rs:
                         if not rs_trending_up and rs_from_high_pct > RS_LINE_DECLINE_FAIL_PCT:
-                            # RS line declining significantly
                             results["failures"].append(f"RS line declining ({rs_from_high_pct:.1f}% below recent high)")
                         else:
-                            # RS line near high but not trending up
                             results["failures"].append(f"RS line {rs_from_high_pct:.1f}% below recent high")
+                        results["passed"] = False  # Hard failure: RS line decline affects grade
             
             # Store details
             results["details"] = {
@@ -600,6 +612,18 @@ class MinerviniScanner:
         rsi = 100 - (100 / (1 + rs))
         
         return rsi
+    
+    def _calculate_atr(self, hist: pd.DataFrame, period: int = 14) -> Optional[float]:
+        """Calculate Average True Range; returns latest ATR value or None."""
+        if len(hist) < period + 1:
+            return None
+        high = hist['High']
+        low = hist['Low']
+        close = hist['Close']
+        prev_close = close.shift(1)
+        tr = pd.concat([high - low, (high - prev_close).abs(), (low - prev_close).abs()], axis=1).max(axis=1)
+        atr = tr.rolling(window=period).mean()
+        return float(atr.iloc[-1]) if not pd.isna(atr.iloc[-1]) else None
     
     def _check_volume_signature(self, hist: pd.DataFrame, base_info: Optional[Dict] = None) -> Dict:
         """
@@ -724,6 +748,20 @@ class MinerviniScanner:
             
             base_high = base_info["data"]['High'].max()
             current_price = hist['Close'].iloc[-1]
+            pivot_clearance = base_high * (1 + PIVOT_CLEARANCE_PCT / 100)
+            
+            # For reporting: last date price closed >= pivot (within longer lookback)
+            report_lookback = min(BREAKOUT_LOOKBACK_DAYS_FOR_REPORT, len(hist))
+            report_days = hist.tail(report_lookback)
+            last_above_pivot_date = None
+            days_since_breakout = None
+            for i in range(len(report_days) - 1, -1, -1):
+                if report_days['Close'].iloc[i] >= pivot_clearance:
+                    last_ts = report_days.index[i]
+                    last_above_pivot_date = last_ts.date() if hasattr(last_ts, 'date') else str(last_ts)[:10]
+                    now_ts = hist.index[-1]
+                    days_since_breakout = (now_ts - last_ts).days if hasattr(now_ts - last_ts, 'days') else None
+                    break
             
             # Check last N days for breakout conditions (not just current day)
             recent_days = hist.tail(BREAKOUT_LOOKBACK_DAYS)
@@ -732,7 +770,6 @@ class MinerviniScanner:
             breakout_day = None
             
             # Check if any day in last N days cleared pivot
-            pivot_clearance = base_high * (1 + PIVOT_CLEARANCE_PCT / 100)
             for i in range(len(recent_days)):
                 day_price = recent_days['Close'].iloc[i]
                 if day_price >= pivot_clearance:
@@ -751,7 +788,9 @@ class MinerviniScanner:
                     "clears_pivot": False,
                     "close_position_pct": 0,
                     "volume_ratio": 0,
-                    "in_breakout": False
+                    "in_breakout": False,
+                    "last_above_pivot_date": last_above_pivot_date,
+                    "days_since_breakout": days_since_breakout,
                 }
                 return results
             
@@ -761,20 +800,32 @@ class MinerviniScanner:
             breakout_low = breakout_day['Low']
             breakout_volume = breakout_day['Volume']
             
-            # Check close position on breakout day
+            # Check close position on breakout day (hard failure: affects grade)
             daily_range = breakout_high - breakout_low
             close_position = 0
             if daily_range > 0:
                 close_position = ((breakout_price - breakout_low) / daily_range) * 100
                 if close_position < CLOSE_POSITION_MIN_PCT_BREAKOUT:
                     results["failures"].append(f"Close not in top {100-CLOSE_POSITION_MIN_PCT_BREAKOUT}% of range on breakout day (at {close_position:.1f}%)")
+                    results["passed"] = False
             else:
                 results["failures"].append("Zero daily range on breakout day")
+                results["passed"] = False
             
-            # Check volume on breakout day
+            # Check volume: on breakout day and optionally on next N days (configurable)
             avg_volume = hist.tail(AVG_VOLUME_LOOKBACK_DAYS)['Volume'].mean()
             volume_ratio = breakout_volume / avg_volume if avg_volume > 0 else 0
-            if volume_ratio < VOLUME_EXPANSION_MIN:
+            volume_ok = volume_ratio >= VOLUME_EXPANSION_MIN
+            if not volume_ok and USE_MULTI_DAY_VOLUME_CONFIRMATION and VOLUME_CONFIRMATION_DAYS_AFTER_BREAKOUT > 0:
+                # Allow volume confirmation on breakout day or in the next N days
+                end_idx = min(breakout_day_idx + 1 + VOLUME_CONFIRMATION_DAYS_AFTER_BREAKOUT, len(recent_days))
+                for j in range(breakout_day_idx, end_idx):
+                    day_vol = recent_days['Volume'].iloc[j]
+                    if avg_volume > 0 and (day_vol / avg_volume) >= VOLUME_EXPANSION_MIN:
+                        volume_ok = True
+                        volume_ratio = day_vol / avg_volume
+                        break
+            if not volume_ok:
                 results["passed"] = False
                 results["failures"].append(f"Volume expansion insufficient ({volume_ratio:.2f}x, need ≥{VOLUME_EXPANSION_MIN}x)")
             
@@ -786,7 +837,9 @@ class MinerviniScanner:
                 "clears_pivot": True,
                 "close_position_pct": float(close_position),
                 "volume_ratio": float(volume_ratio),
-                "in_breakout": True
+                "in_breakout": True,
+                "last_above_pivot_date": last_above_pivot_date,
+                "days_since_breakout": days_since_breakout,
             }
             
         except Exception as e:
@@ -897,6 +950,14 @@ class MinerviniScanner:
             # Calculate stop loss: below buy price (Minervini's rule)
             stop_loss = buy_price * (1 - STOP_LOSS_PCT / 100)
             
+            # Optional ATR-based stop (for reporting / volatile names)
+            stop_loss_atr = None
+            atr_value = None
+            if USE_ATR_STOP:
+                atr_value = self._calculate_atr(hist, period=ATR_PERIOD)
+                if atr_value is not None:
+                    stop_loss_atr = float(buy_price - atr_value * ATR_STOP_MULTIPLIER)
+            
             # Profit Target 1: above buy price (take partial profits)
             profit_target_1 = buy_price * (1 + PROFIT_TARGET_1_PCT / 100)
             
@@ -912,7 +973,17 @@ class MinerviniScanner:
             # Calculate distance from current price to buy price
             distance_to_buy_pct = ((current_price - buy_price) / buy_price) * 100 if buy_price > 0 else 0
             
-            return {
+            # Base recency: days since base end (for reporting / optional filter)
+            days_since_base_end = None
+            if base_info and "end_date" in base_info:
+                end_ts = base_info["end_date"]
+                now_ts = hist.index[-1]
+                try:
+                    days_since_base_end = (now_ts - end_ts).days if hasattr(now_ts - end_ts, 'days') else None
+                except Exception:
+                    days_since_base_end = None
+            
+            out = {
                 "pivot_price": pivot_price,
                 "buy_price": float(buy_price),
                 "current_price": float(current_price),
@@ -927,8 +998,13 @@ class MinerviniScanner:
                 "risk_per_share": float(buy_price - stop_loss),
                 "potential_profit_1": float(profit_target_1 - buy_price),
                 "potential_profit_2": float(profit_target_2 - buy_price),
-                "in_breakout": current_price >= buy_price * (1 + BUY_PRICE_BUFFER_PCT / 100) if pivot_price else False
+                "in_breakout": current_price >= buy_price * (1 + BUY_PRICE_BUFFER_PCT / 100) if pivot_price else False,
+                "days_since_base_end": days_since_base_end,
             }
+            if USE_ATR_STOP and stop_loss_atr is not None:
+                out["stop_loss_atr"] = stop_loss_atr
+                out["atr_value"] = atr_value
+            return out
             
         except Exception as e:
             logger.error(f"Error calculating buy/sell prices: {e}", exc_info=True)
@@ -962,4 +1038,20 @@ class MinerviniScanner:
                                     -x.get("detailed_analysis", {}).get("price_from_52w_high_pct", 100)))
         
         return results
+    
+    def get_market_regime(self, benchmark: Optional[str] = None) -> Dict:
+        """
+        Check if market (benchmark) is above 200 SMA (optional filter for report).
+        Returns {"above_200sma": bool, "benchmark": str, "error": str or None}.
+        """
+        bench = benchmark or self.benchmark
+        try:
+            hist = self.data_provider.get_historical_data(bench, period="1y", interval="1d")
+            if hist.empty or len(hist) < SMA_200_PERIOD:
+                return {"above_200sma": None, "benchmark": bench, "error": "Insufficient data"}
+            sma_200 = hist['Close'].rolling(window=SMA_200_PERIOD).mean().iloc[-1]
+            current = hist['Close'].iloc[-1]
+            return {"above_200sma": bool(current > sma_200), "benchmark": bench, "error": None}
+        except Exception as e:
+            return {"above_200sma": None, "benchmark": bench, "error": str(e)}
 

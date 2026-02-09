@@ -5,16 +5,23 @@ Stores historical data for all stocks to avoid repeated API calls
 import sys
 import io
 import argparse
+import time
+from concurrent.futures import ThreadPoolExecutor, TimeoutError as FuturesTimeoutError
 from pathlib import Path
 from datetime import datetime
 from typing import Dict, List
+
+# Delay between Yahoo Finance requests (seconds) to reduce rate limiting
+DELAY_BETWEEN_FETCHES_SEC = 1.0
+# Max seconds per ticker so one stuck request (e.g. Yahoo hang) doesn't block the whole run
+FETCH_TIMEOUT_SEC = 60
 from bot import TradingBot
 from logger_config import setup_logging, get_logger
 from cache_utils import load_cached_data, save_cached_data
-from config import CACHE_FILE
+from config import CACHE_FILE, FAILED_FETCH_LIST
 
-# Fix Windows console encoding
-if sys.platform == 'win32':
+# Fix Windows console encoding (skip when running under pytest to avoid breaking capture)
+if sys.platform == 'win32' and 'pytest' not in sys.modules:
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
     sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', errors='replace')
 
@@ -182,10 +189,20 @@ def fetch_all_data(force_refresh: bool = False, benchmark: str = "^GDAXI"):
             if cached_entry.get("error") and not cached_entry.get("data_available", False):
                 print(f"[{i}/{total}] {ticker:12s} - Force refresh (was failed: {cached_entry.get('error', 'Unknown')[:30]}...)")
         
-        # Fetch new data (with retry logic)
+        # Fetch new data (with retry logic), with timeout so one stuck ticker doesn't hang the run
         print(f"[{i}/{total}] {ticker:12s} - Fetching...", end=" ", flush=True)
-        result = fetch_stock_data_with_retry(ticker, bot)
-        
+        try:
+            with ThreadPoolExecutor(max_workers=1) as executor:
+                future = executor.submit(fetch_stock_data_with_retry, ticker, bot)
+                result = future.result(timeout=FETCH_TIMEOUT_SEC)
+        except FuturesTimeoutError:
+            result = {
+                "ticker": ticker,
+                "error": f"Timeout after {FETCH_TIMEOUT_SEC}s (skipped)",
+                "data_available": False,
+                "fetched_at": datetime.now().isoformat(),
+            }
+
         if result.get("data_available", False):
             cached_stocks[ticker] = result
             fetched += 1
@@ -195,6 +212,9 @@ def fetch_all_data(force_refresh: bool = False, benchmark: str = "^GDAXI"):
             errors += 1
             error_msg = result.get("error", "Unknown error")
             print(f"✗ Error: {error_msg}")
+
+        # Throttle requests to avoid Yahoo Finance rate limiting
+        time.sleep(DELAY_BETWEEN_FETCHES_SEC)
     
     # Update metadata
     cached_data["metadata"] = {
@@ -210,6 +230,17 @@ def fetch_all_data(force_refresh: bool = False, benchmark: str = "^GDAXI"):
     save_cached_data(cached_data)
     logger.info(f"Saved {len(cached_data.get('stocks', {}))} stocks to cache: {CACHE_FILE}")
 
+    # Write list of failed tickers
+    failed = [t for t, s in cached_stocks.items() if not s.get("data_available", False)]
+    failed.sort()
+    if failed:
+        FAILED_FETCH_LIST.parent.mkdir(parents=True, exist_ok=True)
+        FAILED_FETCH_LIST.write_text("\n".join(failed) + "\n", encoding="utf-8")
+        logger.info(f"Wrote {len(failed)} failed tickers to {FAILED_FETCH_LIST}")
+    elif FAILED_FETCH_LIST.exists():
+        FAILED_FETCH_LIST.write_text("", encoding="utf-8")
+        logger.info(f"Cleared {FAILED_FETCH_LIST} (no failures)")
+
     # Print summary
     print(f"\n{'='*80}")
     print(f"FETCHING COMPLETE")
@@ -219,6 +250,8 @@ def fetch_all_data(force_refresh: bool = False, benchmark: str = "^GDAXI"):
     print(f"Skipped (cached): {skipped}")
     print(f"Errors: {errors}")
     print(f"Cache saved to: {CACHE_FILE}")
+    if failed:
+        print(f"Failed tickers list: {FAILED_FETCH_LIST}")
     print(f"{'='*80}\n")
 
 

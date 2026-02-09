@@ -39,6 +39,15 @@ OPENAI_API_TIMEOUT = 60  # seconds for OpenAI API calls
 # Used by: AI analysis features (if enabled)
 # Why important: AI calls can take longer, so timeout is more generous
 
+# ChatGPT validation (03_chatgpt_validation.py)
+OPENAI_CHATGPT_MODEL = "gpt-5.2"  # Model for validation (e.g. gpt-5.2, gpt-5, gpt-4o)
+OPENAI_CHATGPT_MAX_COMPLETION_TOKENS = 32000  # Allow long analysis for many stocks
+OPENAI_CHATGPT_MAX_A_GRADE_STOCKS = 50  # Max A+ and A stocks in one prompt
+OPENAI_CHATGPT_MAX_PRE_BREAKOUT_STOCKS = 50  # Max pre-breakout setups in one prompt
+OPENAI_CHATGPT_INCLUDE_FULL_SCAN_DATA = False  # If False, report omits duplicate "ORIGINAL SCAN DATA" block (smaller file)
+OPENAI_CHATGPT_RETRY_ATTEMPTS = 3  # Retries on rate limit / transient errors
+OPENAI_CHATGPT_RETRY_BASE_SECONDS = 60  # First backoff wait (then 120, 180...)
+
 DATA_PROVIDER_TIMEOUT = 30  # seconds for data provider API calls
 # Purpose: Maximum time to wait for stock data API responses
 # Used by: StockDataProvider (yfinance, Alpha Vantage)
@@ -88,6 +97,10 @@ DEFAULT_LOG_FILE = "trading212_bot.log"
 CACHE_FILE = Path("data/cached_stock_data.json")
 # Purpose: Path to cached stock data from 01_fetch_stock_data.py
 # Used by: 01, 02, 03, 04 and cache_utils
+
+FAILED_FETCH_LIST = Path("data/failed_fetch.txt")
+# Purpose: List of tickers that failed to fetch (one per line), updated after each fetch
+# Used by: 01_fetch_stock_data.py, list_failed_fetches.py
 
 REPORTS_DIR = Path("reports")
 # Purpose: Directory for summary/detailed reports and scan results
@@ -209,7 +222,7 @@ PRICE_FROM_52W_LOW_MIN_PCT = 30  # Minimum % above 52-week low
 # Why important: Stocks near 52W lows are in Stage 1 (base) or Stage 4 (decline), not Stage 2
 # Minervini's rule: Stock should be at least 30% above 52-week low
 
-PRICE_FROM_52W_HIGH_MAX_PCT = 25  # Maximum % below 52-week high
+PRICE_FROM_52W_HIGH_MAX_PCT = 15  # Maximum % below 52-week high (Minervini: within 15%)
 # Purpose: Ensures stock is near recent highs (not too far extended)
 # Used by: Trend & Structure check
 # Why important: Stocks more than 15% below high may be in late Stage 2 or Stage 3
@@ -429,10 +442,14 @@ PIVOT_CLEARANCE_PCT = 2  # Minimum % above base high to clear pivot
 # Why important: 2% clearance ensures decisive breakout, not just touching high
 # Minervini's rule: Price must clear pivot decisively (≥2% above base high)
 
-BREAKOUT_LOOKBACK_DAYS = 5  # Days to check for breakout
+BREAKOUT_LOOKBACK_DAYS = 5  # Days to check for breakout (try 10 for more names)
 # Purpose: Period to check if breakout occurred
 # Used by: Breakout Rules check
 # Why important: Checks last 5 days, not just current day (catches recent breakouts)
+
+BREAKOUT_LOOKBACK_DAYS_FOR_REPORT = 21  # Days to scan for "last close above pivot" (reporting only)
+# Purpose: When reporting, find the most recent date price closed >= 2% above base high
+# Used by: Breakout Rules details (last_above_pivot_date, days_since_breakout)
 
 CLOSE_POSITION_MIN_PCT_BREAKOUT = 70  # Minimum close position in range (was 75%, top 30% vs 25%)
 # Purpose: Ensures breakout day closes in top 30% of daily range
@@ -440,11 +457,32 @@ CLOSE_POSITION_MIN_PCT_BREAKOUT = 70  # Minimum close position in range (was 75%
 # Why important: Strong closes show buyers in control on breakout day
 # Minervini's rule: Breakout day should close in top 25-30% of range
 
-VOLUME_EXPANSION_MIN = 1.2  # Minimum volume expansion (was 1.4x, now 1.2x = 20%)
-# Purpose: Minimum volume increase on breakout day (1.2x = 20% increase)
+VOLUME_EXPANSION_MIN = 1.2  # Minimum volume expansion (1.2x = 20% increase)
+# Purpose: Minimum volume increase on breakout day (or within volume confirmation window)
 # Used by: Breakout Rules check
 # Why important: Breakouts need volume confirmation (institutional participation)
 # Minervini's rule: Breakout volume should be +20% minimum (prefer +40%+)
+
+# Multi-day breakout / volume confirmation (trading improvement)
+USE_MULTI_DAY_VOLUME_CONFIRMATION = True
+# Purpose: When True, volume confirmation can occur on breakout day OR in the next N days
+# Used by: Breakout Rules check
+# Why important: In practice volume often spikes 1-2 days after pivot clearance; single-day requirement gave 0% pass rate
+
+VOLUME_CONFIRMATION_DAYS_AFTER_BREAKOUT = 2
+# Purpose: Number of days after the breakout day to look for volume >= VOLUME_EXPANSION_MIN
+# Used by: Breakout Rules when USE_MULTI_DAY_VOLUME_CONFIRMATION is True
+# 0 = volume must be on breakout day only (strict); 1 or 2 = allow confirmation on next 1-2 days
+
+# ----------------------------------------------------------------------------
+# RELATIVE STRENGTH - Trading improvements (configurable)
+# ----------------------------------------------------------------------------
+# Benchmark is set per run via script args (e.g. 01/02 --benchmark ^GDAXI or ^GSPC)
+
+RS_RELAX_LINE_DECLINE_IF_STRONG = True
+# Purpose: When True, if stock outperforms benchmark AND RSI >= RSI_MIN_THRESHOLD, RS line decline from high is treated as warning only (no failure)
+# Used by: Relative Strength check
+# Why important: Single benchmark (e.g. DAX) can unfairly fail US names; strong RSI + outperformance still indicates strength
 
 # ----------------------------------------------------------------------------
 # BUY/SELL PRICE Variables
@@ -473,6 +511,24 @@ BUY_PRICE_BUFFER_PCT = 2  # Buy when price is 2% above pivot (breakout confirmat
 # Used by: Buy/Sell price calculation and Breakout Rules check
 # Why important: 2% clearance confirms breakout is real, not false
 # Minervini's rule: Buy when price clears pivot by 2% or more
+
+# ----------------------------------------------------------------------------
+# ATR STOP (optional volatility-based stop)
+# ----------------------------------------------------------------------------
+USE_ATR_STOP = False  # When True, report also shows ATR-based stop (in addition to fixed %)
+ATR_PERIOD = 14  # Period for ATR calculation
+ATR_STOP_MULTIPLIER = 1.5  # Stop = buy_price - ATR * this multiplier
+
+# ----------------------------------------------------------------------------
+# MARKET REGIME (optional)
+# ----------------------------------------------------------------------------
+REQUIRE_MARKET_ABOVE_200SMA = False  # When True, report shows market regime; optional filter
+# Market benchmark for regime: use same as RS benchmark per run if None
+
+# ----------------------------------------------------------------------------
+# BASE RECENCY (optional filter)
+# ----------------------------------------------------------------------------
+BASE_MAX_DAYS_OLD = 0  # 0 = off. When >0, flag/exclude bases older than N days in pre-breakout
 
 # ----------------------------------------------------------------------------
 # GRADING Variables

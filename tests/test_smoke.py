@@ -8,7 +8,7 @@ from pathlib import Path
 
 import pytest
 
-pytestmark = pytest.mark.skip(reason="Loading 02 replaces sys.stdout/stderr and breaks pytest capture")
+# Report tests run now that 02 skips stdout/stderr wrap under pytest
 
 _root = Path(__file__).resolve().parent.parent
 
@@ -31,7 +31,6 @@ def test_summary_report_contains_headers():
             "overall_grade": "A",
             "meets_criteria": True,
             "position_size": "Half",
-            "error": None,
             "checklist": {
                 "base_quality": {"details": {"base_depth_pct": 10.0, "volume_contraction": 0.8}},
                 "relative_strength": {"details": {"rs_rating": 80}},

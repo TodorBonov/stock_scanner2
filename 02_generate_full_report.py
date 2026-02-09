@@ -2,6 +2,7 @@
 Generate full Minervini SEPA analysis report from cached data
 Produces: Summary report + Detailed list of all stocks
 """
+import importlib.util
 import json
 import sys
 import io
@@ -16,8 +17,8 @@ from data_provider import StockDataProvider
 from logger_config import setup_logging, get_logger
 import pandas as pd
 
-# Fix Windows console encoding
-if sys.platform == 'win32':
+# Fix Windows console encoding (skip when running under pytest to avoid breaking capture)
+if sys.platform == 'win32' and 'pytest' not in sys.modules:
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
     sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', errors='replace')
 
@@ -25,8 +26,11 @@ if sys.platform == 'win32':
 setup_logging(log_level="INFO", log_to_file=True)
 logger = get_logger(__name__)
 
-from config import CACHE_FILE, REPORTS_DIR, SCAN_RESULTS_LATEST
+from config import CACHE_FILE, REPORTS_DIR, SCAN_RESULTS_LATEST, REQUIRE_MARKET_ABOVE_200SMA, USE_ATR_STOP
 from cache_utils import load_cached_data
+from pre_breakout_utils import get_pre_breakout_stocks, actionability_sort_key
+from pre_breakout_config import PRE_BREAKOUT_MAX_DISTANCE_PCT, PRE_BREAKOUT_MIN_GRADE, PRE_BREAKOUT_NEAR_PIVOT_PCT
+from benchmark_mapping import get_benchmark
 
 
 def sanitize_for_json(obj):
@@ -141,7 +145,7 @@ class CachedDataProvider:
         return self.original_provider.calculate_relative_strength(ticker, benchmark, period)
 
 
-def scan_all_stocks_from_cache(cached_data: Dict, benchmark: str = "^GDAXI", single_ticker: Optional[str] = None) -> List[Dict]:
+def scan_all_stocks_from_cache(cached_data: Dict, benchmark: str = "^GDAXI", single_ticker: Optional[str] = None):
     """Scan all stocks using cached data"""
     stocks = cached_data.get("stocks", {})
     
@@ -162,7 +166,7 @@ def scan_all_stocks_from_cache(cached_data: Dict, benchmark: str = "^GDAXI", sin
             stocks = {single_ticker: stocks[single_ticker]}
         else:
             logger.error(f"Ticker {single_ticker} not found in cache")
-            return []
+            return [], scanner
     
     total = len(stocks)
     print(f"\n{'='*80}")
@@ -189,9 +193,10 @@ def scan_all_stocks_from_cache(cached_data: Dict, benchmark: str = "^GDAXI", sin
         
         print(f"[{i}/{total}] Scanning {ticker:12s}...", end=" ", flush=True)
         
-        # Scan using cached data
+        # Scan using cached data (per-ticker benchmark when mapping available)
         try:
-            result = scanner.scan_stock(ticker)
+            benchmark_override = get_benchmark(ticker, benchmark)
+            result = scanner.scan_stock(ticker, benchmark_override=benchmark_override)
             # Add company name from cached stock_info if available
             cached_stock_info = cached_stock.get("stock_info", {})
             company_name = cached_stock_info.get("company_name", "")
@@ -220,7 +225,7 @@ def scan_all_stocks_from_cache(cached_data: Dict, benchmark: str = "^GDAXI", sin
                 "overall_grade": "F"
             })
     
-    return results
+    return results, scanner
 
 
 def get_company_name(result: Dict) -> str:
@@ -230,26 +235,8 @@ def get_company_name(result: Dict) -> str:
     return company_name if company_name else "N/A"
 
 
-def actionability_sort_key(r: Dict) -> tuple:
-    """
-    Sort key for 'Best setups': tighter base, drier volume, closer to pivot, higher RS.
-    Lower key = better setup. Used only for A-grade (and A+) stocks.
-    """
-    bq = r.get("checklist", {}).get("base_quality", {}).get("details") or {}
-    buy_sell = r.get("buy_sell_prices") or {}
-    rs_details = r.get("checklist", {}).get("relative_strength", {}).get("details") or {}
-
-    base_depth = bq.get("base_depth_pct", 99.0)  # lower better
-    vol_contract = bq.get("volume_contraction", 2.0)  # lower better
-    dist_buy = buy_sell.get("distance_to_buy_pct")
-    dist_buy = abs(dist_buy) if dist_buy is not None else 999.0  # smaller better
-    rs_rating = rs_details.get("rs_rating", 0)  # higher better -> use -rs_rating
-
-    return (base_depth, vol_contract, dist_buy, -rs_rating)
-
-
-def generate_summary_report(results: List[Dict], output_file: Optional[Path] = None):
-    """Generate summary report with grade distribution"""
+def generate_summary_report(results: List[Dict], output_file: Optional[Path] = None, market_regime: Optional[Dict] = None):
+    """Generate summary report with grade distribution. market_regime: from scanner.get_market_regime() when REQUIRE_MARKET_ABOVE_200SMA."""
     total = len(results)
     grade_counts = defaultdict(int)
     meets_criteria = sum(1 for r in results if r.get('meets_criteria', False))
@@ -313,6 +300,21 @@ def generate_summary_report(results: List[Dict], output_file: Optional[Path] = N
         except Exception as e:
             logger.debug("Data freshness section failed: %s", e)
             pass
+    
+    # Market regime (optional)
+    if REQUIRE_MARKET_ABOVE_200SMA and market_regime and market_regime.get("error") is None:
+        above = market_regime.get("above_200sma")
+        bench = market_regime.get("benchmark", "")
+        if above is True:
+            lines.append("🌐 MARKET REGIME")
+            lines.append("-" * 100)
+            lines.append(f"  {bench}: Above 200 SMA ✓ (favorable for new breakouts)")
+            lines.append("")
+        elif above is False:
+            lines.append("🌐 MARKET REGIME")
+            lines.append("-" * 100)
+            lines.append(f"  {bench}: Below 200 SMA ⚠ (consider reducing size or skipping new breakouts)")
+            lines.append("")
     
     # Overall Statistics
     lines.append("📊 OVERALL STATISTICS")
@@ -431,7 +433,12 @@ def generate_summary_report(results: List[Dict], output_file: Optional[Path] = N
                 stop_loss = buy_sell.get("stop_loss", 0)
                 profit_target_1 = buy_sell.get("profit_target_1", 0)
                 lines.append(f"  {i:2d}. {name_part} - {price_info}{timestamp_str}")
-                lines.append(f"      Buy: ${buy_price:.2f} | Stop: ${stop_loss:.2f} | Target 1: ${profit_target_1:.2f}")
+                stop_line = f"      Buy: ${buy_price:.2f} | Stop: ${stop_loss:.2f} | Target 1: ${profit_target_1:.2f}"
+                if USE_ATR_STOP and buy_sell.get("stop_loss_atr") is not None:
+                    stop_line += f" | Stop(ATR): ${buy_sell.get('stop_loss_atr', 0):.2f}"
+                lines.append(stop_line)
+                if buy_sell.get("days_since_base_end") is not None:
+                    lines.append(f"      Days since base end: {buy_sell.get('days_since_base_end')}")
             else:
                 lines.append(f"  {i:2d}. {name_part} - {price_info}{timestamp_str}")
     
@@ -478,7 +485,68 @@ def generate_summary_report(results: List[Dict], output_file: Optional[Path] = N
                 buy_price = buy_sell.get("buy_price", 0)
                 stop_loss = buy_sell.get("stop_loss", 0)
                 profit_target_1 = buy_sell.get("profit_target_1", 0)
-                lines.append(f"      Buy: ${buy_price:.2f} | Stop: ${stop_loss:.2f} | Target 1: ${profit_target_1:.2f}")
+                line = f"      Buy: ${buy_price:.2f} | Stop: ${stop_loss:.2f} | Target 1: ${profit_target_1:.2f}"
+                if USE_ATR_STOP and buy_sell.get("stop_loss_atr") is not None:
+                    line += f" | Stop(ATR): ${buy_sell.get('stop_loss_atr', 0):.2f}"
+                lines.append(line)
+                if buy_sell.get("days_since_base_end") is not None:
+                    lines.append(f"      Days since base end: {buy_sell.get('days_since_base_end')}")
+    
+    # Pre-breakout setups (setup ready, not yet broken out) - additive view only
+    pre_breakout_stocks = get_pre_breakout_stocks(results)
+    if pre_breakout_stocks:
+        lines.append("")
+        lines.append("📐 PRE-BREAKOUT SETUPS (setup ready, not yet broken out)")
+        lines.append("-" * 100)
+        lines.append(f"  Stocks with valid base, grade ≥ {PRE_BREAKOUT_MIN_GRADE}, within {PRE_BREAKOUT_MAX_DISTANCE_PCT:.0f}% below pivot, breakout not yet triggered.")
+        lines.append("  Ranked by: base depth (tighter) → volume contraction (drier) → distance to pivot (closer) → RS rating (higher)")
+        lines.append("")
+        for i, stock in enumerate(pre_breakout_stocks, 1):
+            ticker = stock.get("ticker", "UNKNOWN")
+            company_name = get_company_name(stock)
+            buy_sell = stock.get("buy_sell_prices", {})
+            bq = stock.get("checklist", {}).get("base_quality", {}).get("details") or {}
+            rs_details = stock.get("checklist", {}).get("relative_strength", {}).get("details") or {}
+            if company_name and company_name != "N/A":
+                name_part = f"{ticker:12s} ({company_name[:40]})"
+            else:
+                name_part = f"{ticker:12s}"
+            base_depth = bq.get("base_depth_pct")
+            vol_contract = bq.get("volume_contraction")
+            dist_buy = buy_sell.get("distance_to_buy_pct")
+            rs_rating = rs_details.get("rs_rating")
+            metrics = []
+            if base_depth is not None:
+                metrics.append(f"base {base_depth:.1f}%")
+            if vol_contract is not None:
+                metrics.append(f"vol {vol_contract:.2f}x")
+            if dist_buy is not None:
+                metrics.append(f"dist {dist_buy:.1f}%")
+            if rs_rating is not None:
+                metrics.append(f"RS {rs_rating:.0f}")
+            metrics_str = " | ".join(metrics) if metrics else ""
+            grade = stock.get("overall_grade", "?")
+            near_pivot = (dist_buy is not None and 0 >= dist_buy >= -PRE_BREAKOUT_NEAR_PIVOT_PCT)
+            suffix = "  [near pivot]" if near_pivot else ""
+            lines.append(f"  {i:2d}. {name_part}  [{metrics_str}]  Grade: {grade}{suffix}")
+            if buy_sell and buy_sell.get("pivot_price") is not None:
+                buy_price = buy_sell.get("buy_price", 0)
+                stop_loss = buy_sell.get("stop_loss", 0)
+                profit_target_1 = buy_sell.get("profit_target_1", 0)
+                line = f"      Pivot: ${buy_price:.2f} | Stop: ${stop_loss:.2f} | Target 1: ${profit_target_1:.2f}"
+                if USE_ATR_STOP and buy_sell.get("stop_loss_atr") is not None:
+                    line += f" | Stop(ATR): ${buy_sell.get('stop_loss_atr', 0):.2f}"
+                lines.append(line)
+                if buy_sell.get("days_since_base_end") is not None:
+                    lines.append(f"      Days since base end: {buy_sell.get('days_since_base_end')}")
+            br_details = stock.get("checklist", {}).get("breakout_rules", {}).get("details", {})
+            if br_details.get("last_above_pivot_date") is not None or br_details.get("days_since_breakout") is not None:
+                last_date = br_details.get("last_above_pivot_date")
+                days_since = br_details.get("days_since_breakout")
+                if last_date is not None:
+                    lines.append(f"      Last close above pivot: {last_date}" + (f" ({days_since} days ago)" if days_since is not None else ""))
+                elif days_since is not None:
+                    lines.append(f"      Days since breakout: {days_since}")
     
     lines.append("")
     lines.append("=" * 100)
@@ -616,6 +684,10 @@ def generate_detailed_report(results: List[Dict], output_file: Optional[Path] = 
                     lines.append(f"  Distance to Buy: {buy_sell.get('distance_to_buy_pct', 0):.1f}%")
                 lines.append("")
                 lines.append(f"  Stop Loss: ${buy_sell.get('stop_loss', 0):.2f} ({buy_sell.get('stop_loss_pct', 0):.1f}% below entry)")
+                if USE_ATR_STOP and buy_sell.get("stop_loss_atr") is not None:
+                    lines.append(f"  Stop Loss (ATR): ${buy_sell.get('stop_loss_atr', 0):.2f}")
+                if buy_sell.get("days_since_base_end") is not None:
+                    lines.append(f"  Days Since Base End: {buy_sell.get('days_since_base_end')}")
                 lines.append(f"  Profit Target 1: ${buy_sell.get('profit_target_1', 0):.2f} ({buy_sell.get('profit_target_1_pct', 0):.1f}% above entry) - Take Partial Profits")
                 lines.append(f"  Profit Target 2: ${buy_sell.get('profit_target_2', 0):.2f} ({buy_sell.get('profit_target_2_pct', 0):.1f}% above entry) - Let Winners Run")
                 if buy_sell.get('risk_reward_ratio'):
@@ -714,6 +786,10 @@ def generate_detailed_report(results: List[Dict], output_file: Optional[Path] = 
                             lines.append(f"  Close Position on Breakout: {details.get('close_position_pct', 0):.1f}% (need ≥70%)")
                             lines.append(f"  Volume Ratio: {details.get('volume_ratio', 0):.2f}x (need ≥1.2x)")
                             lines.append(f"  In Breakout: {'✓' if details.get('in_breakout') else '✗'}")
+                            if details.get('last_above_pivot_date') is not None:
+                                lines.append(f"  Last Close Above Pivot: {details.get('last_above_pivot_date')}")
+                            if details.get('days_since_breakout') is not None:
+                                lines.append(f"  Days Since Breakout: {details.get('days_since_breakout')}")
                         
                         lines.append("")
                     
@@ -765,8 +841,8 @@ def main():
     parser.add_argument(
         "--benchmark",
         default="^GDAXI",
-        choices=["^GDAXI", "^FCHI", "^AEX", "^SSMI", "^OMX"],
-        help="Benchmark index (default: ^GDAXI)"
+        type=str,
+        help="Benchmark index for RS (default: ^GDAXI). Examples: ^GDAXI, ^GSPC, ^FCHI, ^AEX, ^SSMI, ^GSPTSE. Per-ticker mapping in benchmark_mapping.py when scanning mixed watchlists."
     )
     parser.add_argument(
         "--summary-only",
@@ -781,11 +857,15 @@ def main():
     
     args = parser.parse_args()
     
-    # Refresh data if requested
+    # Refresh data if requested (load 01_fetch_stock_data via importlib - module name can't start with number)
     if args.refresh:
         print("Refreshing stock data...")
-        from fetch_stock_data import fetch_all_data
-        fetch_all_data(force_refresh=True, benchmark=args.benchmark)
+        _fetch_spec = importlib.util.spec_from_file_location(
+            "fetch_stock_data", Path(__file__).parent / "01_fetch_stock_data.py"
+        )
+        _fetch_module = importlib.util.module_from_spec(_fetch_spec)
+        _fetch_spec.loader.exec_module(_fetch_module)
+        _fetch_module.fetch_all_data(force_refresh=True, benchmark=args.benchmark)
         print()
     
     # Load cached data (shared cache_utils)
@@ -798,7 +878,7 @@ def main():
     logger.info(f"Loaded {len(cached_data.get('stocks', {}))} stocks from cache")
     
     # Scan all stocks
-    results = scan_all_stocks_from_cache(
+    results, scanner = scan_all_stocks_from_cache(
         cached_data, 
         benchmark=args.benchmark,
         single_ticker=args.ticker
@@ -824,7 +904,8 @@ def main():
     # Generate reports
     if not args.detailed_only:
         summary_file = REPORTS_DIR / f"summary_report_{timestamp}.txt"
-        generate_summary_report(results, summary_file)
+        market_regime = scanner.get_market_regime(args.benchmark) if REQUIRE_MARKET_ABOVE_200SMA else None
+        generate_summary_report(results, summary_file, market_regime=market_regime)
         print()
     
     if not args.summary_only:

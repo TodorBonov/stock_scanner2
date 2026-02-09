@@ -44,9 +44,12 @@ Thumbs.db
 config.ini
 secrets.json
 
-# Logs
+# Logs and runtime output (do not commit)
 *.log
 logs/
+*_log.txt
+*_error.txt
+fetch_output.log
 
 # Data files (cached data, scan results)
 data/

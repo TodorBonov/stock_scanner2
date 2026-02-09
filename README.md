@@ -17,8 +17,8 @@ A professional-grade stock scanner that implements Mark Minervini's exact SEPA (
    - **B/C/F**: More than 2 flaws → Walk away
 
 3. **European Market Focus**: Optimized for SEPA stocks
-   - Supports DAX (^GDAXI), CAC 40 (^FCHI), AEX (^AEX), Swiss (^SSMI), Nordics (^OMX)
-   - Relative strength calculated vs European benchmarks
+   - Supports DAX (^GDAXI), CAC 40 (^FCHI), AEX (^AEX), Swiss (^SSMI), Nordics (^OMX), and others (e.g. ^GSPC). Use `--benchmark` on steps 01/02. Mixed watchlists can use per-ticker benchmarks via `benchmark_mapping.py`.
+   - Relative strength calculated vs chosen benchmark
 
 4. **Free Data Sources**: Uses Yahoo Finance (yfinance) as primary data source
    - No API key required for basic scanning
@@ -43,9 +43,12 @@ For additional data coverage, get a free Alpha Vantage key:
 
 ### 3. Configure (Optional)
 
-Create a `.env` file in the project root (optional):
+Create a `.env` file in the project root (optional). Copy `config.example.env` and fill in as needed:
 ```
 ALPHA_VANTAGE_API_KEY=your_key_here
+# For position suggestions (step 05):
+TRADING212_API_KEY=your_key_here
+TRADING212_API_SECRET=your_secret_here
 ```
 
 ## Quick Start
@@ -77,11 +80,13 @@ Two pipelines are available:
 ### Run individual steps
 
 ```bash
-# 1. Fetch and cache data (watchlist.txt)
+# 1. Fetch and cache data (watchlist.txt). Use --refresh to force refresh all; use --benchmark for RS (default ^GDAXI).
 python 01_fetch_stock_data.py
+# python 01_fetch_stock_data.py --refresh --benchmark ^GDAXI
 
-# 2. Generate Minervini report from cache
+# 2. Generate Minervini report from cache. Use --refresh to fetch then report in one go; --ticker X for one stock; --benchmark for RS.
 python 02_generate_full_report.py
+# python 02_generate_full_report.py --refresh --benchmark ^GSPC
 
 # 3. ChatGPT validation (A-grade stocks)
 python 03_chatgpt_validation.py
@@ -89,7 +94,7 @@ python 03_chatgpt_validation.py
 # 4. Retry failed fetches (optional)
 python 04_retry_failed_stocks.py
 
-# 5. Position suggestions (Trading 212 positions + scan grades)
+# 5. Position suggestions (Trading 212 positions + scan grades; requires TRADING212_API_KEY/SECRET in .env)
 python 05_position_suggestions.py
 ```
 
@@ -129,7 +134,7 @@ python 05_position_suggestions.py
 ### PART 5: Breakout Day Rules
 
 - ✅ Clears pivot decisively
-- ✅ Closes in top 25% of range
+- ✅ Closes in top 25–30% of range
 - ✅ Volume expansion present
 
 ## Output Format
@@ -178,6 +183,8 @@ Based on Minervini's methodology:
 
 ## Project Structure
 
+Key files:
+
 ```
 .
 ├── 01_fetch_stock_data.py      # Fetch and cache data from watchlist
@@ -186,14 +193,22 @@ Based on Minervini's methodology:
 ├── 04_retry_failed_stocks.py   # Retry failed fetches
 ├── 05_position_suggestions.py  # Position suggestions (Trading 212 + scan grades)
 ├── run_full_pipeline.ps1       # Full pipeline (01 → 02 → 03 → 05)
+├── run_full_pipeline.cmd      # Same as above (use if PowerShell scripts disabled)
 ├── run_latest_data_pipeline.ps1 # Latest-data pipeline (02 → 03 → 05)
 ├── bot.py                      # Main bot interface
 ├── minervini_scanner.py        # Core Minervini SEPA scanner logic
 ├── data_provider.py            # Data fetching (yfinance, Alpha Vantage)
+├── trading212_client.py       # Trading 212 API client (positions, step 05)
 ├── config.py                   # Configuration and paths
+├── cache_utils.py              # Cache load/save (used by 01, 02, 03, 04)
+├── benchmark_mapping.py        # Per-ticker benchmark for mixed watchlists
 ├── position_suggestions_config.py # Position suggestion rules
+├── config.example.env          # Example .env (copy to .env)
 ├── requirements.txt            # Python dependencies
-└── README.md                   # This file
+├── watchlist.txt               # Ticker list for scanning
+├── data/                       # cached_stock_data.json (from step 01)
+├── reports/                    # Summary/detailed reports, scan results
+└── tests/                      # Unit tests
 ```
 
 ## Data Sources

@@ -3,10 +3,13 @@ Shared cache helpers for stock data.
 Used by 01_fetch_stock_data.py, 02_generate_full_report.py, 03_chatgpt_validation.py, 04_retry_failed_stocks.py.
 """
 import json
+import logging
 from pathlib import Path
 from typing import Dict, Any, Optional
 
 from config import CACHE_FILE
+
+logger = logging.getLogger(__name__)
 
 
 def load_cached_data() -> Optional[Dict[str, Any]]:
@@ -20,9 +23,11 @@ def load_cached_data() -> Optional[Dict[str, Any]]:
         with open(CACHE_FILE, "r", encoding="utf-8") as f:
             data = json.load(f)
         if not isinstance(data, dict):
+            logger.debug("Cache file content is not a dict")
             return None
         return data
-    except Exception:
+    except Exception as e:
+        logger.debug("Failed to load cache from %s: %s", CACHE_FILE, e, exc_info=True)
         return None
 
 

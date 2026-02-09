@@ -214,7 +214,7 @@ def refresh_data_for_tickers(tickers: List[str]) -> None:
     for ticker in tickers:
         print(f"  Scanning {ticker}...")
         try:
-            results = report_module.scan_all_stocks_from_cache(cached_data, benchmark="^GDAXI", single_ticker=ticker)
+            results, _ = report_module.scan_all_stocks_from_cache(cached_data, benchmark="^GDAXI", single_ticker=ticker)
             if not results:
                 continue
             one = results[0]

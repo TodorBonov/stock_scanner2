@@ -7,6 +7,7 @@ Fetches stock data from multiple sources with automatic fallback:
 """
 import pandas as pd
 import requests
+import time
 from typing import Dict, List, Optional, Tuple
 from datetime import datetime, timedelta
 from ticker_utils import clean_ticker
@@ -16,10 +17,28 @@ import logging
 try:
     import yfinance as yf
     YFINANCE_AVAILABLE = True
+    try:
+        from yfinance.exceptions import YFRateLimitError
+    except ImportError:
+        YFRateLimitError = None  # Older yfinance may not have it
 except ImportError:
     YFINANCE_AVAILABLE = False
+    YFRateLimitError = None
 
 logging.getLogger('urllib3').setLevel(logging.ERROR)  # Suppress HTTP warnings
+
+logger = logging.getLogger(__name__)
+
+# Yahoo Finance rate-limit retry: wait times in seconds (exponential backoff)
+YF_RATE_LIMIT_WAIT_SECONDS = [60, 120, 180]
+YF_RATE_LIMIT_MAX_RETRIES = len(YF_RATE_LIMIT_WAIT_SECONDS)
+
+
+def _is_yf_rate_limit_error(exc: Exception) -> bool:
+    """True if the exception is Yahoo Finance rate limiting."""
+    if YFRateLimitError is not None and isinstance(exc, YFRateLimitError):
+        return True
+    return "rate limit" in str(exc).lower() or "too many requests" in str(exc).lower()
 
 
 class StockDataProvider:
@@ -48,7 +67,6 @@ class StockDataProvider:
         self.prefer_yfinance = prefer_yfinance and YFINANCE_AVAILABLE
         
         if self.prefer_yfinance:
-            logger = logging.getLogger(__name__)
             logger.info("Using Yahoo Finance (yfinance) as primary data source (free, no API key needed)")
     
     def _get_stock_info_alpha_vantage(self, ticker: str) -> Dict:
@@ -172,8 +190,6 @@ class StockDataProvider:
             
             return {}
         except Exception as e:
-            import logging
-            logger = logging.getLogger(__name__)
             logger.debug(f"Alpha Vantage stock info error for {ticker}: {e}")
             return {}
     
@@ -293,8 +309,6 @@ class StockDataProvider:
             
             return pd.DataFrame()
         except Exception as e:
-            import logging
-            logger = logging.getLogger(__name__)
             logger.debug(f"Alpha Vantage API error for {ticker}: {e}")
             return pd.DataFrame()
     
@@ -330,50 +344,54 @@ class StockDataProvider:
     
     def _get_stock_info_yfinance(self, ticker: str) -> Dict:
         """
-        Get stock information and fundamentals from Yahoo Finance
-        
-        Args:
-            ticker: Stock ticker symbol
-            
-        Returns:
-            Dictionary with stock information
+        Get stock information and fundamentals from Yahoo Finance.
+        Retries with backoff on rate limit (YFRateLimitError / Too Many Requests).
         """
         if not YFINANCE_AVAILABLE:
             return {}
-        
-        try:
-            ticker_clean = clean_ticker(ticker)
-            stock = yf.Ticker(ticker_clean)
-            info = stock.info
-            
-            if not info or len(info) < 5:  # Basic validation
-                return {}
-            
-            # Extract key information
-            return {
-                "ticker": info.get("symbol", ticker_clean),
-                "company_name": info.get("longName") or info.get("shortName", ""),
-                "sector": info.get("sector", ""),
-                "industry": info.get("industry", ""),
-                "market_cap": info.get("marketCap", 0),
-                "current_price": info.get("currentPrice") or info.get("regularMarketPrice", 0),
-                "earnings_growth": (info.get("earningsQuarterlyGrowth", 0) or 0) * 100,  # Convert to percentage
-                "revenue_growth": (info.get("revenueGrowth", 0) or 0) * 100,  # Convert to percentage
-                "profit_margins": (info.get("profitMargins", 0) or 0) * 100,  # Convert to percentage
-                "return_on_equity": (info.get("returnOnEquity", 0) or 0) * 100,  # Convert to percentage
-                "debt_to_equity": info.get("debtToEquity", 0),
-                "trailing_pe": info.get("trailingPE", 0),
-                "forward_pe": info.get("forwardPE", 0),
-                "dividend_yield": (info.get("dividendYield", 0) or 0) * 100,  # Convert to percentage
-                "beta": info.get("beta", 1.0),
-                "52_week_high": info.get("fiftyTwoWeekHigh", 0),
-                "52_week_low": info.get("fiftyTwoWeekLow", 0),
-                "source": "yfinance"
-            }
-        except Exception as e:
-            logger = logging.getLogger(__name__)
-            logger.debug(f"Yahoo Finance stock info error for {ticker}: {e}")
-            return {}
+
+        ticker_clean = clean_ticker(ticker)
+        last_error = None
+
+        for attempt in range(YF_RATE_LIMIT_MAX_RETRIES + 1):
+            try:
+                stock = yf.Ticker(ticker_clean)
+                info = stock.info
+
+                if not info or len(info) < 5:
+                    return {}
+
+                return {
+                    "ticker": info.get("symbol", ticker_clean),
+                    "company_name": info.get("longName") or info.get("shortName", ""),
+                    "sector": info.get("sector", ""),
+                    "industry": info.get("industry", ""),
+                    "market_cap": info.get("marketCap", 0),
+                    "current_price": info.get("currentPrice") or info.get("regularMarketPrice", 0),
+                    "earnings_growth": (info.get("earningsQuarterlyGrowth", 0) or 0) * 100,
+                    "revenue_growth": (info.get("revenueGrowth", 0) or 0) * 100,
+                    "profit_margins": (info.get("profitMargins", 0) or 0) * 100,
+                    "return_on_equity": (info.get("returnOnEquity", 0) or 0) * 100,
+                    "debt_to_equity": info.get("debtToEquity", 0),
+                    "trailing_pe": info.get("trailingPE", 0),
+                    "forward_pe": info.get("forwardPE", 0),
+                    "dividend_yield": (info.get("dividendYield", 0) or 0) * 100,
+                    "beta": info.get("beta", 1.0),
+                    "52_week_high": info.get("fiftyTwoWeekHigh", 0),
+                    "52_week_low": info.get("fiftyTwoWeekLow", 0),
+                    "source": "yfinance"
+                }
+            except Exception as e:
+                last_error = e
+                if _is_yf_rate_limit_error(e) and attempt < YF_RATE_LIMIT_MAX_RETRIES:
+                    wait = YF_RATE_LIMIT_WAIT_SECONDS[attempt]
+                    logger.warning(f"Yahoo Finance rate limited (stock info) for {ticker}. Waiting {wait}s before retry {attempt + 1}/{YF_RATE_LIMIT_MAX_RETRIES}...")
+                    time.sleep(wait)
+                else:
+                    break
+
+        logger.debug(f"Yahoo Finance stock info error for {ticker}: {last_error}")
+        return {}
     
     def get_stock_info(self, ticker: str) -> Dict:
         """
@@ -411,62 +429,47 @@ class StockDataProvider:
     
     def _get_historical_data_yfinance(self, ticker: str, period: str = "1y", interval: str = "1d") -> pd.DataFrame:
         """
-        Get historical data from Yahoo Finance using yfinance
-        
-        Args:
-            ticker: Stock ticker symbol
-            period: Time period (1d, 5d, 1mo, 3mo, 6mo, 1y, 2y, 5y, 10y, ytd, max)
-            interval: Data interval (1m, 2m, 5m, 15m, 30m, 60m, 90m, 1h, 1d, 5d, 1wk, 1mo, 3mo)
-            
-        Returns:
-            DataFrame with OHLCV data or empty DataFrame
+        Get historical data from Yahoo Finance using yfinance.
+        Retries with backoff on rate limit (YFRateLimitError / Too Many Requests).
         """
         if not YFINANCE_AVAILABLE:
-            logger = logging.getLogger(__name__)
             logger.warning("yfinance not available - install with: pip install yfinance")
             return pd.DataFrame()
-        
-        try:
-            ticker_clean = clean_ticker(ticker)
-            logger = logging.getLogger(__name__)
-            logger.debug(f"Fetching historical data from Yahoo Finance for {ticker_clean}")
-            
-            # Create yfinance ticker object
-            stock = yf.Ticker(ticker_clean)
-            
-            # Map period to yfinance format (yfinance uses: 1d, 5d, 1mo, 3mo, 6mo, 1y, 2y, 5y, 10y, ytd, max)
-            yf_period = period if period in ["1d", "5d", "1mo", "3mo", "6mo", "1y", "2y", "5y", "10y", "ytd", "max"] else "1y"
-            
-            # Map interval to yfinance format
-            yf_interval = interval if interval in ["1m", "2m", "5m", "15m", "30m", "60m", "90m", "1h", "1d", "5d", "1wk", "1mo", "3mo"] else "1d"
-            
-            # Download historical data
-            hist = stock.history(period=yf_period, interval=yf_interval)
-            
-            if hist.empty:
-                logger.warning(f"Yahoo Finance returned empty data for {ticker_clean}")
-                return pd.DataFrame()
-            
-            logger.debug(f"Yahoo Finance returned {len(hist)} rows for {ticker_clean}")
-            
-            # yfinance returns columns with proper capitalization already (Open, High, Low, Close, Volume)
-            # But let's make sure they're correct
-            required_cols = ['Open', 'High', 'Low', 'Close', 'Volume']
-            available_cols = [col for col in hist.columns if col in required_cols]
-            
-            if len(available_cols) < len(required_cols):
-                logger.warning(f"Missing required columns. Available: {list(hist.columns)}, Required: {required_cols}")
-                return pd.DataFrame()
-            
-            # Return only required columns in correct order
-            result = hist[required_cols].copy()
-            logger.debug(f"Returning {len(result)} rows with columns: {list(result.columns)}")
-            return result
-            
-        except Exception as e:
-            logger = logging.getLogger(__name__)
-            logger.error(f"Yahoo Finance error for {ticker}: {e}", exc_info=True)
-            return pd.DataFrame()
+
+        ticker_clean = clean_ticker(ticker)
+        yf_period = period if period in ["1d", "5d", "1mo", "3mo", "6mo", "1y", "2y", "5y", "10y", "ytd", "max"] else "1y"
+        yf_interval = interval if interval in ["1m", "2m", "5m", "15m", "30m", "60m", "90m", "1h", "1d", "5d", "1wk", "1mo", "3mo"] else "1d"
+        last_error = None
+
+        for attempt in range(YF_RATE_LIMIT_MAX_RETRIES + 1):
+            try:
+                logger.debug(f"Fetching historical data from Yahoo Finance for {ticker_clean}" + (f" (attempt {attempt + 1})" if attempt else ""))
+                stock = yf.Ticker(ticker_clean)
+                hist = stock.history(period=yf_period, interval=yf_interval)
+
+                if hist.empty:
+                    logger.warning(f"Yahoo Finance returned empty data for {ticker_clean}")
+                    return pd.DataFrame()
+
+                logger.debug(f"Yahoo Finance returned {len(hist)} rows for {ticker_clean}")
+                required_cols = ['Open', 'High', 'Low', 'Close', 'Volume']
+                available_cols = [col for col in hist.columns if col in required_cols]
+                if len(available_cols) < len(required_cols):
+                    logger.warning(f"Missing required columns. Available: {list(hist.columns)}, Required: {required_cols}")
+                    return pd.DataFrame()
+                return hist[required_cols].copy()
+
+            except Exception as e:
+                last_error = e
+                if _is_yf_rate_limit_error(e) and attempt < YF_RATE_LIMIT_MAX_RETRIES:
+                    wait = YF_RATE_LIMIT_WAIT_SECONDS[attempt]
+                    logger.warning(f"Yahoo Finance rate limited for {ticker}. Waiting {wait}s before retry {attempt + 1}/{YF_RATE_LIMIT_MAX_RETRIES}...")
+                    time.sleep(wait)
+                else:
+                    break
+
+        logger.error(f"Yahoo Finance error for {ticker}: {last_error}", exc_info=True)
+        return pd.DataFrame()
     
     def get_historical_data(self, ticker: str, period: str = "1y", interval: str = "1d") -> pd.DataFrame:
         """
@@ -512,7 +515,6 @@ class StockDataProvider:
             Dictionary with current price and moving average values
         """
         try:
-            logger = logging.getLogger(__name__)
             logger.debug(f"Calculating moving averages for {ticker}")
             hist = self.get_historical_data(ticker, period="1y")
             if hist.empty:
@@ -536,7 +538,6 @@ class StockDataProvider:
             
             return result
         except Exception as e:
-            logger = logging.getLogger(__name__)
             logger.error(f"Error calculating moving averages for {ticker}: {e}", exc_info=True)
             return {"error": str(e)}
     

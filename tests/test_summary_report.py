@@ -8,8 +8,7 @@ from pathlib import Path
 
 import pytest
 
-# Skip all tests in this module if we want to avoid loading 02 (which breaks pytest capture on Windows)
-pytestmark = pytest.mark.skip(reason="Loading 02_generate_full_report replaces sys.stdout/stderr and breaks pytest capture")
+# Report tests run now that 02 skips stdout/stderr wrap under pytest
 
 
 def _get_actionability_sort_key():
