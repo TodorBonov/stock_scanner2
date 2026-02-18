@@ -1,0 +1,53 @@
+================================================================================
+POSITION SUGGESTIONS (Trading 212)
+================================================================================
+Generated: 2026-02-18 15:30:48
+Positions: 5
+
+Rules: position_suggestions_config.py (stop loss, profit targets, grade-based)
+
+--------------------------------------------------------------------------------
+  RWED
+  Grade (scan): F
+  Suggestion: HOLD
+  Reason: Weak grade (F); hold or trim on strength
+  Entry: 51.89  Current: 52.52  PnL: 1.2%
+  Your targets:  Stop loss: 49.29  Target 1: 57.08  Target 2: 75.24
+  Current vs targets:  6.5% above stop  |  8.7% to Target 1  |  43.3% to Target 2
+
+--------------------------------------------------------------------------------
+  WTAI
+  Grade (scan): F
+  Suggestion: EXIT
+  Reason: Weak grade (F) and in loss (-5.0%)
+  Entry: 78.65  Current: 74.74  PnL: -5.0%
+  Your targets:  Stop loss: 74.72  Target 1: 86.52  Target 2: 114.04
+  Current vs targets:  0.0% above stop  |  15.8% to Target 1  |  52.6% to Target 2
+
+--------------------------------------------------------------------------------
+  TTWO
+  Grade (scan): F
+  Suggestion: HOLD
+  Reason: Weak grade (F); hold or trim on strength
+  Entry: 193.50  Current: 194.23  PnL: 0.4%
+  Your targets:  Stop loss: 183.82  Target 1: 212.85  Target 2: 280.57
+  Current vs targets:  5.7% above stop  |  9.6% to Target 1  |  44.5% to Target 2
+
+--------------------------------------------------------------------------------
+  PFED
+  Suggestion: HOLD
+  Reason: No strong signal; hold
+  Entry: 23.07  Current: 23.15  PnL: 0.4%
+  Your targets:  Stop loss: 21.91  Target 1: 25.37  Target 2: 33.44
+  Current vs targets:  5.7% above stop  |  9.6% to Target 1  |  44.4% to Target 2
+
+--------------------------------------------------------------------------------
+  TXT
+  Grade (scan): C
+  Suggestion: HOLD
+  Reason: Weak grade (C); hold or trim on strength
+  Entry: 97.85  Current: 100.12  PnL: 2.3%
+  Your targets:  Stop loss: 92.96  Target 1: 107.64  Target 2: 141.88
+  Current vs targets:  7.7% above stop  |  7.5% to Target 1  |  41.7% to Target 2
+
+================================================================================

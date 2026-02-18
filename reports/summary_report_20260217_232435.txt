@@ -1,0 +1,939 @@
+====================================================================================================
+MINERVINI SEPA SCAN - SUMMARY REPORT
+====================================================================================================
+Report Generated: 2026-02-17 23:24:35
+
+📅 DATA FRESHNESS
+----------------------------------------------------------------------------------------------------
+  Oldest Data: 2026-01-28 19:01:42
+  Newest Data: 2026-02-17 23:13:18
+
+📊 OVERALL STATISTICS
+----------------------------------------------------------------------------------------------------
+Total Stocks Scanned: 1754
+Stocks Meeting Criteria: 59 (3.4%)
+Stocks NOT Meeting Criteria: 1695 (96.6%)
+
+🎯 GRADE DISTRIBUTION
+----------------------------------------------------------------------------------------------------
+A+ :    0 stocks (  0.0%)  Full Position
+A  :   59 stocks (  3.4%) █ Half Position
+B  :  388 stocks ( 22.1%) ███████████ Half Position (Watch)
+C  :  168 stocks (  9.6%) ████ Avoid
+F  : 1096 stocks ( 62.5%) ███████████████████████████████ Avoid
+
+💰 POSITION SIZE RECOMMENDATIONS
+----------------------------------------------------------------------------------------------------
+Full  :    0 stocks (  0.0%)
+Half  :  447 stocks ( 25.5%)
+None  : 1264 stocks ( 72.1%)
+
+✅ CRITERIA PASS RATES
+----------------------------------------------------------------------------------------------------
+Trend & Structure        :  615 stocks ( 35.1%) █████████████████
+Base Quality             :  325 stocks ( 18.5%) █████████
+Relative Strength        :   37 stocks (  2.1%) █
+Volume Signature         :  855 stocks ( 48.7%) ████████████████████████
+Breakout Rules           :    0 stocks (  0.0%) 
+
+📈 TOP STOCKS BY GRADE
+----------------------------------------------------------------------------------------------------
+
+A Grade (59 stocks):
+   1. SAF.PA       (Safran SA) - 0.0% from 52W high | Data: 2026-02-17 22:12
+      Buy: $340.90 | Stop: $323.85 | Target 1: $374.99
+      Days since base end: 0
+   2. ROG.SW       (Roche Holding AG) - 0.0% from 52W high | Data: 2026-02-17 22:14
+      Buy: $369.30 | Stop: $350.83 | Target 1: $406.23
+      Days since base end: 0
+   3. FRE.DE       (Fresenius SE & Co. KGaA) - 0.1% from 52W high | Data: 2026-02-17 22:14
+      Buy: $52.18 | Stop: $49.57 | Target 1: $57.40
+      Days since base end: 0
+   4. PH           (Parker-Hannifin Corporation) - 0.2% from 52W high | Data: 2026-02-17 22:33
+      Buy: $1014.42 | Stop: $963.70 | Target 1: $1115.86
+      Days since base end: 0
+   5. ULTA         (Ulta Beauty, Inc.) - 0.3% from 52W high | Data: 2026-02-17 22:24
+      Buy: $702.95 | Stop: $667.80 | Target 1: $773.25
+      Days since base end: 0
+   6. GTLS         (Chart Industries, Inc.) - 0.4% from 52W high | Data: 2026-02-17 22:43
+      Buy: $208.24 | Stop: $197.83 | Target 1: $229.06
+      Days since base end: 0
+   7. GATX         (GATX Corporation) - 0.4% from 52W high | Data: 2026-02-17 22:42
+      Buy: $194.80 | Stop: $185.06 | Target 1: $214.28
+      Days since base end: 0
+   8. ROST         (Ross Stores, Inc.) - 0.5% from 52W high | Data: 2026-02-17 22:21
+      Buy: $198.98 | Stop: $189.03 | Target 1: $218.88
+      Days since base end: 0
+   9. TTC          (The Toro Company) - 0.6% from 52W high | Data: 2026-02-17 22:26
+      Buy: $101.08 | Stop: $96.03 | Target 1: $111.19
+      Days since base end: 0
+  10. NOVN.SW      (Novartis AG) - 0.6% from 52W high | Data: 2026-02-17 22:13
+      Buy: $129.14 | Stop: $122.68 | Target 1: $142.05
+      Days since base end: 0
+  11. HIG          (The Hartford Insurance Group, Inc.) - 0.6% from 52W high | Data: 2026-02-17 22:43
+      Buy: $144.50 | Stop: $137.28 | Target 1: $158.95
+      Days since base end: 0
+  12. MNST         (Monster Beverage Corporation) - 0.7% from 52W high | Data: 2026-02-17 22:46
+      Buy: $83.24 | Stop: $79.08 | Target 1: $91.56
+      Days since base end: 0
+  13. RR.L         (Rolls-Royce Holdings plc) - 0.7% from 52W high | Data: 2026-02-17 22:12
+      Buy: $1306.60 | Stop: $1241.27 | Target 1: $1437.26
+      Days since base end: 0
+  14. UCB.BR       (UCB SA) - 0.7% from 52W high | Data: 2026-02-17 22:14
+      Buy: $285.60 | Stop: $271.32 | Target 1: $314.16
+      Days since base end: 0
+  15. ENGI.PA      (Engie SA) - 0.9% from 52W high | Data: 2026-02-17 22:16
+      Buy: $26.78 | Stop: $25.44 | Target 1: $29.46
+      Days since base end: 0
+  16. REP.MC       (Repsol, S.A.) - 1.0% from 52W high | Data: 2026-02-17 22:13
+      Buy: $17.33 | Stop: $16.46 | Target 1: $19.06
+      Days since base end: 0
+  17. JNJ          (Johnson & Johnson) - 1.1% from 52W high | Data: 2026-02-17 22:11
+      Buy: $246.35 | Stop: $234.03 | Target 1: $270.99
+      Days since base end: 0
+  18. AM           (Antero Midstream Corporation) - 1.2% from 52W high | Data: 2026-02-17 22:35
+      Buy: $21.66 | Stop: $20.58 | Target 1: $23.83
+      Days since base end: 0
+  19. EOAN.DE      (E.ON SE) - 1.3% from 52W high | Data: 2026-02-17 22:16
+      Buy: $18.88 | Stop: $17.94 | Target 1: $20.77
+      Days since base end: 0
+  20. ATCO-A.ST    (Atlas Copco AB (publ)) - 1.3% from 52W high | Data: 2026-02-17 22:30
+      Buy: $196.25 | Stop: $186.44 | Target 1: $215.88
+      Days since base end: 0
+  21. ATCO-B.ST    (Atlas Copco AB (publ)) - 1.3% from 52W high | Data: 2026-02-17 22:30
+      Buy: $170.30 | Stop: $161.79 | Target 1: $187.33
+      Days since base end: 0
+  22. IBE.MC       (Iberdrola, S.A.) - 1.4% from 52W high | Data: 2026-02-17 22:16
+      Buy: $20.38 | Stop: $19.36 | Target 1: $22.42
+      Days since base end: 0
+  23. NEOG         (Neogen Corporation) - 1.4% from 52W high | Data: 2026-02-17 23:05
+      Buy: $11.15 | Stop: $10.59 | Target 1: $12.26
+      Days since base end: 0
+  24. XLI          (State Street Industrial Select Sector SP) - 1.6% from 52W high | Data: 2026-02-17 22:33
+      Buy: $177.76 | Stop: $168.87 | Target 1: $195.54
+      Days since base end: 0
+  25. RTX          (RTX Corporation) - 1.8% from 52W high | Data: 2026-02-17 22:27
+      Buy: $206.48 | Stop: $196.16 | Target 1: $227.13
+      Days since base end: 0
+  26. CA.PA        (Carrefour SA) - 2.1% from 52W high | Data: 2026-02-17 22:16
+      Buy: $15.73 | Stop: $14.94 | Target 1: $17.30
+      Days since base end: 0
+  27. FAE.MC       (Faes Farma, S.A.) - 2.2% from 52W high | Data: 2026-02-17 22:15
+      Buy: $5.40 | Stop: $5.13 | Target 1: $5.94
+      Days since base end: 0
+  28. ALFA.ST      (Alfa Laval AB (publ)) - 2.6% from 52W high | Data: 2026-02-17 22:30
+      Buy: $530.00 | Stop: $503.50 | Target 1: $583.00
+      Days since base end: 0
+  29. BNS          (The Bank of Nova Scotia) - 2.6% from 52W high | Data: 2026-02-17 22:31
+      Buy: $78.28 | Stop: $74.37 | Target 1: $86.11
+      Days since base end: 0
+  30. AME          (AMETEK, Inc.) - 2.8% from 52W high | Data: 2026-02-17 22:35
+      Buy: $239.94 | Stop: $227.94 | Target 1: $263.93
+      Days since base end: 0
+  31. ECPG         (Encore Capital Group, Inc.) - 3.2% from 52W high | Data: 2026-02-17 23:00
+      Buy: $59.20 | Stop: $56.24 | Target 1: $65.12
+      Days since base end: 0
+  32. CFR          (Cullen/Frost Bankers, Inc.) - 3.2% from 52W high | Data: 2026-02-17 22:38
+      Buy: $148.97 | Stop: $141.52 | Target 1: $163.87
+      Days since base end: 0
+  33. IMI.L        (IMI plc) - 3.3% from 52W high | Data: 2026-02-17 22:30
+      Buy: $2938.00 | Stop: $2791.10 | Target 1: $3231.80
+      Days since base end: 0
+  34. AMG          (Affiliated Managers Group, Inc.) - 3.4% from 52W high | Data: 2026-02-17 22:35
+      Buy: $334.00 | Stop: $317.30 | Target 1: $367.40
+      Days since base end: 0
+  35. TD           (The Toronto-Dominion Bank) - 3.5% from 52W high | Data: 2026-02-17 22:31
+      Buy: $99.04 | Stop: $94.09 | Target 1: $108.94
+      Days since base end: 0
+  36. EVN.VI       (EVN AG) - 3.5% from 52W high | Data: 2026-02-17 22:15
+      Buy: $29.85 | Stop: $28.36 | Target 1: $32.84
+      Days since base end: 0
+  37. AWI          (Armstrong World Industries, Inc.) - 3.5% from 52W high | Data: 2026-02-17 22:57
+      Buy: $206.05 | Stop: $195.75 | Target 1: $226.66
+      Days since base end: 0
+  38. RY           (Royal Bank of Canada) - 3.8% from 52W high | Data: 2026-02-17 22:31
+      Buy: $176.19 | Stop: $167.38 | Target 1: $193.81
+      Days since base end: 0
+  39. HSBA.L       (HSBC Holdings plc) - 4.0% from 52W high | Data: 2026-02-17 22:12
+      Buy: $1322.60 | Stop: $1256.47 | Target 1: $1454.86
+      Days since base end: 0
+  40. BA           (The Boeing Company) - 4.4% from 52W high | Data: 2026-02-17 22:27
+      Buy: $254.35 | Stop: $241.63 | Target 1: $279.79
+      Days since base end: 0
+  41. TNL          (Travel + Leisure Co.) - 4.6% from 52W high | Data: 2026-02-17 22:52
+      Buy: $76.21 | Stop: $72.40 | Target 1: $83.83
+      Days since base end: 0
+  42. USB          (U.S. Bancorp) - 4.9% from 52W high | Data: 2026-02-17 22:22
+      Buy: $61.19 | Stop: $58.13 | Target 1: $67.31
+      Days since base end: 0
+  43. PHIA.AS      (Koninklijke Philips N.V.) - 5.4% from 52W high | Data: 2026-02-17 22:14
+      Buy: $27.70 | Stop: $26.32 | Target 1: $30.47
+      Days since base end: 0
+  44. ENEL.MI      (Enel SpA) - 5.5% from 52W high | Data: 2026-02-17 22:16
+      Buy: $9.76 | Stop: $9.27 | Target 1: $10.74
+      Days since base end: 0
+  45. WCC          (WESCO International, Inc.) - 5.5% from 52W high | Data: 2026-02-17 22:54
+      Buy: $319.68 | Stop: $303.70 | Target 1: $351.65
+      Days since base end: 0
+  46. RF           (Regions Financial Corporation) - 5.5% from 52W high | Data: 2026-02-17 22:50
+      Buy: $31.53 | Stop: $29.95 | Target 1: $34.68
+      Days since base end: 0
+  47. RWE.DE       (RWE Aktiengesellschaft) - 5.6% from 52W high | Data: 2026-02-17 22:30
+      Buy: $54.76 | Stop: $52.02 | Target 1: $60.24
+      Days since base end: 0
+  48. PZU.WA       (Powszechny Zaklad Ubezpieczen SA) - 5.8% from 52W high | Data: 2026-02-17 22:15
+      Buy: $72.72 | Stop: $69.08 | Target 1: $79.99
+      Days since base end: 0
+  49. JXN          (Jackson Financial Inc.) - 6.1% from 52W high | Data: 2026-02-17 23:03
+      Buy: $123.61 | Stop: $117.43 | Target 1: $135.97
+      Days since base end: 0
+  50. NLY          (Annaly Capital Management, Inc.) - 6.3% from 52W high | Data: 2026-02-17 22:47
+      Buy: $24.52 | Stop: $23.29 | Target 1: $26.97
+      Days since base end: 0
+  51. BARC.L       (Barclays PLC) - 6.4% from 52W high | Data: 2026-02-17 22:12
+      Buy: $506.40 | Stop: $481.08 | Target 1: $557.04
+      Days since base end: 0
+  52. NTRS         (Northern Trust Corporation) - 6.7% from 52W high | Data: 2026-02-17 22:22
+      Buy: $157.60 | Stop: $149.72 | Target 1: $173.36
+      Days since base end: 0
+  53. GS           (The Goldman Sachs Group, Inc.) - 6.9% from 52W high | Data: 2026-02-17 22:22
+      Buy: $984.70 | Stop: $935.47 | Target 1: $1083.17
+      Days since base end: 0
+  54. KEY          (KeyCorp) - 6.9% from 52W high | Data: 2026-02-17 22:22
+      Buy: $23.35 | Stop: $22.18 | Target 1: $25.69
+      Days since base end: 0
+  55. BTSG         (BrightSpring Health Services, Inc.) - 7.0% from 52W high | Data: 2026-02-17 22:57
+      Buy: $41.26 | Stop: $39.20 | Target 1: $45.39
+      Days since base end: 0
+  56. INGA.AS      (ING Groep N.V.) - 7.4% from 52W high | Data: 2026-02-17 22:13
+      Buy: $26.44 | Stop: $25.12 | Target 1: $29.09
+      Days since base end: 0
+  57. SAN.MC       (Banco Santander, S.A.) - 7.5% from 52W high | Data: 2026-02-17 22:13
+      Buy: $11.26 | Stop: $10.70 | Target 1: $12.39
+      Days since base end: 0
+  58. BK           (The Bank of New York Mellon Corporation) - 7.7% from 52W high | Data: 2026-02-17 22:22
+      Buy: $128.76 | Stop: $122.32 | Target 1: $141.64
+      Days since base end: 0
+  59. ARR          (ARMOUR Residential REIT, Inc.) - 8.2% from 52W high | Data: 2026-02-17 22:56
+      Buy: $19.31 | Stop: $18.34 | Target 1: $21.24
+      Days since base end: 0
+
+B Grade (388 stocks):
+   1. AZN.L        (AstraZeneca PLC) - 0.0% from 52W high | Data: 2026-02-17 22:14
+      Buy: $15522.00 | Stop: $14745.90 | Target 1: $17074.20
+      Days since base end: 0
+   2. SSE.L        (SSE plc) - 0.0% from 52W high | Data: 2026-02-17 22:34
+   3. DAY          (Dayforce, Inc.) - 0.0% from 52W high | Data: 2026-02-17 22:40
+      Buy: $69.86 | Stop: $66.37 | Target 1: $76.85
+      Days since base end: 0
+   4. SWX          (Southwest Gas Holdings, Inc.) - 0.0% from 52W high | Data: 2026-02-17 22:52
+      Buy: $88.69 | Stop: $84.26 | Target 1: $97.56
+      Days since base end: 0
+   5. JHG          (Janus Henderson Group plc) - 0.0% from 52W high | Data: 2026-02-17 22:45
+      Buy: $49.63 | Stop: $47.15 | Target 1: $54.59
+      Days since base end: 0
+   6. SPG          (Simon Property Group, Inc.) - 0.0% from 52W high | Data: 2026-02-17 22:27
+      Buy: $201.89 | Stop: $191.80 | Target 1: $222.08
+      Days since base end: 0
+   7. KW           (Kennedy-Wilson Holdings, Inc.) - 0.1% from 52W high | Data: 2026-02-17 23:04
+      Buy: $10.89 | Stop: $10.35 | Target 1: $11.98
+      Days since base end: 0
+   8. AL           (Air Lease Corporation) - 0.1% from 52W high | Data: 2026-02-17 22:56
+      Buy: $64.81 | Stop: $61.57 | Target 1: $71.29
+      Days since base end: 0
+   9. OHI          (Omega Healthcare Investors, Inc.) - 0.2% from 52W high | Data: 2026-02-17 22:48
+      Buy: $47.94 | Stop: $45.54 | Target 1: $52.73
+      Days since base end: 0
+  10. EXAS         (Exact Sciences Corporation) - 0.2% from 52W high | Data: 2026-02-17 22:23
+      Buy: $103.54 | Stop: $98.36 | Target 1: $113.89
+      Days since base end: 0
+
+C Grade (168 stocks):
+   1. CURB         (Curbline Properties Corp.) - 0.0% from 52W high | Data: 2026-02-17 22:59
+      Buy: $27.09 | Stop: $25.74 | Target 1: $29.80
+      Days since base end: 0
+   2. BRX          (Brixmor Property Group Inc.) - 0.1% from 52W high | Data: 2026-02-17 22:37
+      Buy: $29.61 | Stop: $28.13 | Target 1: $32.58
+      Days since base end: 0
+   3. O            (Realty Income Corporation) - 0.1% from 52W high | Data: 2026-02-17 22:33
+      Buy: $66.74 | Stop: $63.40 | Target 1: $73.41
+      Days since base end: 0
+   4. LTC          (LTC Properties, Inc.) - 0.4% from 52W high | Data: 2026-02-17 23:04
+      Buy: $40.05 | Stop: $38.05 | Target 1: $44.05
+      Days since base end: 0
+   5. ALEX         (Alexander & Baldwin, Inc.) - 0.4% from 52W high | Data: 2026-02-17 22:56
+      Buy: $20.83 | Stop: $19.79 | Target 1: $22.91
+      Days since base end: 0
+   6. WPC          (W. P. Carey Inc.) - 0.5% from 52W high | Data: 2026-02-17 22:54
+      Buy: $74.65 | Stop: $70.92 | Target 1: $82.12
+      Days since base end: 0
+   7. GTY          (Getty Realty Corp.) - 0.5% from 52W high | Data: 2026-02-17 23:01
+      Buy: $34.01 | Stop: $32.31 | Target 1: $37.41
+      Days since base end: 0
+   8. PRA          (ProAssurance Corporation) - 0.8% from 52W high | Data: 2026-02-17 23:07
+      Buy: $24.66 | Stop: $23.43 | Target 1: $27.13
+      Days since base end: 0
+   9. NYT          (The New York Times Company) - 0.8% from 52W high | Data: 2026-02-17 22:48
+      Buy: $74.59 | Stop: $70.86 | Target 1: $82.05
+      Days since base end: 0
+  10. UNP          (Union Pacific Corporation) - 0.9% from 52W high | Data: 2026-02-17 22:33
+      Buy: $265.37 | Stop: $252.10 | Target 1: $291.91
+      Days since base end: 0
+
+📐 BEST SETUPS (A-grade by setup quality)
+----------------------------------------------------------------------------------------------------
+  Ranked by: base depth (tighter) → volume contraction (drier) → distance to pivot (closer) → RS rating (higher)
+
+   1. GTLS         (Chart Industries, Inc.)  [base 1.1% | vol 1.23x | dist -0.4% | RS 50]
+      Buy: $208.24 | Stop: $197.83 | Target 1: $229.06
+      Days since base end: 0
+   2. RY           (Royal Bank of Canada)  [base 6.4% | vol 1.20x | dist -3.8% | RS 50]
+      Buy: $176.19 | Stop: $167.38 | Target 1: $193.81
+      Days since base end: 0
+   3. PZU.WA       (Powszechny Zaklad Ubezpieczen SA)  [base 6.6% | vol 0.93x | dist -5.8% | RS 79]
+      Buy: $72.72 | Stop: $69.08 | Target 1: $79.99
+      Days since base end: 0
+   4. TD           (The Toronto-Dominion Bank)  [base 6.9% | vol 1.39x | dist -3.5% | RS 50]
+      Buy: $99.04 | Stop: $94.09 | Target 1: $108.94
+      Days since base end: 0
+   5. ROST         (Ross Stores, Inc.)  [base 8.1% | vol 1.11x | dist -0.5% | RS 50]
+      Buy: $198.98 | Stop: $189.03 | Target 1: $218.88
+      Days since base end: 0
+   6. BNS          (The Bank of Nova Scotia)  [base 8.5% | vol 1.41x | dist -2.6% | RS 50]
+      Buy: $78.28 | Stop: $74.37 | Target 1: $86.11
+      Days since base end: 0
+   7. ATCO-B.ST    (Atlas Copco AB (publ))  [base 8.6% | vol 1.47x | dist -1.3% | RS 46]
+      Buy: $170.30 | Stop: $161.79 | Target 1: $187.33
+      Days since base end: 0
+   8. RR.L         (Rolls-Royce Holdings plc)  [base 8.8% | vol 0.75x | dist -0.7% | RS 100]
+      Buy: $1306.60 | Stop: $1241.27 | Target 1: $1437.26
+      Days since base end: 0
+   9. NLY          (Annaly Capital Management, Inc.)  [base 9.2% | vol 1.22x | dist -6.3% | RS 50]
+      Buy: $24.52 | Stop: $23.29 | Target 1: $26.97
+      Days since base end: 0
+  10. EVN.VI       (EVN AG)  [base 9.4% | vol 0.99x | dist -3.5% | RS 70]
+      Buy: $29.85 | Stop: $28.36 | Target 1: $32.84
+      Days since base end: 0
+  11. ENEL.MI      (Enel SpA)  [base 9.7% | vol 1.35x | dist -5.5%]
+      Buy: $9.76 | Stop: $9.27 | Target 1: $10.74
+      Days since base end: 0
+  12. ECPG         (Encore Capital Group, Inc.)  [base 9.7% | vol 0.67x | dist -3.2% | RS 50]
+      Buy: $59.20 | Stop: $56.24 | Target 1: $65.12
+      Days since base end: 0
+  13. TNL          (Travel + Leisure Co.)  [base 9.8% | vol 0.76x | dist -4.6% | RS 50]
+      Buy: $76.21 | Stop: $72.40 | Target 1: $83.83
+      Days since base end: 0
+  14. BA           (The Boeing Company)  [base 10.0% | vol 0.92x | dist -4.4% | RS 50]
+      Buy: $254.35 | Stop: $241.63 | Target 1: $279.79
+      Days since base end: 0
+  15. MNST         (Monster Beverage Corporation)  [base 10.1% | vol 1.04x | dist -0.7% | RS 50]
+      Buy: $83.24 | Stop: $79.08 | Target 1: $91.56
+      Days since base end: 0
+  16. ATCO-A.ST    (Atlas Copco AB (publ))  [base 10.4% | vol 1.30x | dist -1.3% | RS 47]
+      Buy: $196.25 | Stop: $186.44 | Target 1: $215.88
+      Days since base end: 0
+  17. ROG.SW       (Roche Holding AG)  [base 10.5% | vol 1.07x | dist -0.0% | RS 73]
+      Buy: $369.30 | Stop: $350.83 | Target 1: $406.23
+      Days since base end: 0
+  18. ALFA.ST      (Alfa Laval AB (publ))  [base 10.6% | vol 1.23x | dist -2.6% | RS 53]
+      Buy: $530.00 | Stop: $503.50 | Target 1: $583.00
+      Days since base end: 0
+  19. BTSG         (BrightSpring Health Services, Inc.)  [base 10.6% | vol 0.56x | dist -7.0% | RS 50]
+      Buy: $41.26 | Stop: $39.20 | Target 1: $45.39
+      Days since base end: 0
+  20. RTX          (RTX Corporation)  [base 10.7% | vol 1.51x | dist -1.8% | RS 50]
+      Buy: $206.48 | Stop: $196.16 | Target 1: $227.13
+      Days since base end: 0
+  21. HSBA.L       (HSBC Holdings plc)  [base 10.7% | vol 0.70x | dist -4.0% | RS 71]
+      Buy: $1322.60 | Stop: $1256.47 | Target 1: $1454.86
+      Days since base end: 0
+  22. INGA.AS      (ING Groep N.V.)  [base 10.8% | vol 1.01x | dist -7.4% | RS 100]
+      Buy: $26.44 | Stop: $25.12 | Target 1: $29.09
+      Days since base end: 0
+  23. XLI          (State Street Industrial Select Sector SP)  [base 10.9% | vol 1.06x | dist -1.6% | RS 50]
+      Buy: $177.76 | Stop: $168.87 | Target 1: $195.54
+      Days since base end: 0
+  24. IBE.MC       (Iberdrola, S.A.)  [base 11.1% | vol 1.41x | dist -1.4% | RS 67]
+      Buy: $20.38 | Stop: $19.36 | Target 1: $22.42
+      Days since base end: 0
+  25. FRE.DE       (Fresenius SE & Co. KGaA)  [base 11.3% | vol 1.25x | dist -0.1% | RS 85]
+      Buy: $52.18 | Stop: $49.57 | Target 1: $57.40
+      Days since base end: 0
+  26. REP.MC       (Repsol, S.A.)  [base 11.5% | vol 1.36x | dist -1.0% | RS 52]
+      Buy: $17.33 | Stop: $16.46 | Target 1: $19.06
+      Days since base end: 0
+  27. FAE.MC       (Faes Farma, S.A.)  [base 11.7% | vol 1.25x | dist -2.2% | RS 60]
+      Buy: $5.40 | Stop: $5.13 | Target 1: $5.94
+      Days since base end: 0
+  28. HIG          (The Hartford Insurance Group, Inc.)  [base 11.7% | vol 1.08x | dist -0.6% | RS 50]
+      Buy: $144.50 | Stop: $137.28 | Target 1: $158.95
+      Days since base end: 0
+  29. SAN.MC       (Banco Santander, S.A.)  [base 11.7% | vol 0.89x | dist -7.5% | RS 96]
+      Buy: $11.26 | Stop: $10.70 | Target 1: $12.39
+      Days since base end: 0
+  30. AWI          (Armstrong World Industries, Inc.)  [base 11.7% | vol 1.32x | dist -3.5% | RS 50]
+      Buy: $206.05 | Stop: $195.75 | Target 1: $226.66
+      Days since base end: 0
+  31. GS           (The Goldman Sachs Group, Inc.)  [base 11.7% | vol 1.31x | dist -6.9% | RS 50]
+      Buy: $984.70 | Stop: $935.47 | Target 1: $1083.17
+      Days since base end: 0
+  32. ARR          (ARMOUR Residential REIT, Inc.)  [base 11.8% | vol 1.40x | dist -8.2% | RS 50]
+      Buy: $19.31 | Stop: $18.34 | Target 1: $21.24
+      Days since base end: 0
+  33. NTRS         (Northern Trust Corporation)  [base 11.8% | vol 1.09x | dist -6.7% | RS 50]
+      Buy: $157.60 | Stop: $149.72 | Target 1: $173.36
+      Days since base end: 0
+  34. ULTA         (Ulta Beauty, Inc.)  [base 11.9% | vol 1.09x | dist -0.3% | RS 50]
+      Buy: $702.95 | Stop: $667.80 | Target 1: $773.25
+      Days since base end: 0
+  35. PH           (Parker-Hannifin Corporation)  [base 12.1% | vol 0.92x | dist -0.2% | RS 50]
+      Buy: $1014.42 | Stop: $963.70 | Target 1: $1115.86
+      Days since base end: 0
+  36. BARC.L       (Barclays PLC)  [base 12.2% | vol 0.94x | dist -6.4% | RS 85]
+      Buy: $506.40 | Stop: $481.08 | Target 1: $557.04
+      Days since base end: 0
+  37. BK           (The Bank of New York Mellon Corporation)  [base 12.4% | vol 1.31x | dist -7.7% | RS 50]
+      Buy: $128.76 | Stop: $122.32 | Target 1: $141.64
+      Days since base end: 0
+  38. EOAN.DE      (E.ON SE)  [base 12.6% | vol 1.16x | dist -1.3% | RS 100]
+      Buy: $18.88 | Stop: $17.94 | Target 1: $20.77
+      Days since base end: 0
+  39. GATX         (GATX Corporation)  [base 12.8% | vol 0.96x | dist -0.4% | RS 50]
+      Buy: $194.80 | Stop: $185.06 | Target 1: $214.28
+      Days since base end: 0
+  40. UCB.BR       (UCB SA)  [base 12.9% | vol 0.50x | dist -0.7% | RS 80]
+      Buy: $285.60 | Stop: $271.32 | Target 1: $314.16
+      Days since base end: 0
+  41. USB          (U.S. Bancorp)  [base 13.0% | vol 1.54x | dist -4.9% | RS 50]
+      Buy: $61.19 | Stop: $58.13 | Target 1: $67.31
+      Days since base end: 0
+  42. TTC          (The Toro Company)  [base 13.2% | vol 1.30x | dist -0.6% | RS 50]
+      Buy: $101.08 | Stop: $96.03 | Target 1: $111.19
+      Days since base end: 0
+  43. AME          (AMETEK, Inc.)  [base 13.3% | vol 0.90x | dist -2.8% | RS 50]
+      Buy: $239.94 | Stop: $227.94 | Target 1: $263.93
+      Days since base end: 0
+  44. NOVN.SW      (Novartis AG)  [base 13.3% | vol 1.24x | dist -0.6% | RS 82]
+      Buy: $129.14 | Stop: $122.68 | Target 1: $142.05
+      Days since base end: 0
+  45. CFR          (Cullen/Frost Bankers, Inc.)  [base 13.3% | vol 1.14x | dist -3.2% | RS 50]
+      Buy: $148.97 | Stop: $141.52 | Target 1: $163.87
+      Days since base end: 0
+  46. RWE.DE       (RWE Aktiengesellschaft)  [base 13.4% | vol 1.07x | dist -5.6% | RS 100]
+      Buy: $54.76 | Stop: $52.02 | Target 1: $60.24
+      Days since base end: 0
+  47. PHIA.AS      (Koninklijke Philips N.V.)  [base 13.4% | vol 1.11x | dist -5.4% | RS 58]
+      Buy: $27.70 | Stop: $26.32 | Target 1: $30.47
+      Days since base end: 0
+  48. AMG          (Affiliated Managers Group, Inc.)  [base 13.5% | vol 1.43x | dist -3.4% | RS 50]
+      Buy: $334.00 | Stop: $317.30 | Target 1: $367.40
+      Days since base end: 0
+  49. RF           (Regions Financial Corporation)  [base 13.6% | vol 0.51x | dist -5.5% | RS 50]
+      Buy: $31.53 | Stop: $29.95 | Target 1: $34.68
+      Days since base end: 0
+  50. SAF.PA       (Safran SA)  [base 13.6% | vol 1.32x | dist 0.0% | RS 86]
+      Buy: $340.90 | Stop: $323.85 | Target 1: $374.99
+      Days since base end: 0
+  51. KEY          (KeyCorp)  [base 13.6% | vol 0.87x | dist -6.9% | RS 50]
+      Buy: $23.35 | Stop: $22.18 | Target 1: $25.69
+      Days since base end: 0
+  52. ENGI.PA      (Engie SA)  [base 13.6% | vol 0.92x | dist -0.9% | RS 100]
+      Buy: $26.78 | Stop: $25.44 | Target 1: $29.46
+      Days since base end: 0
+  53. CA.PA        (Carrefour SA)  [base 13.6% | vol 1.13x | dist -2.1% | RS 81]
+      Buy: $15.73 | Stop: $14.94 | Target 1: $17.30
+      Days since base end: 0
+  54. JXN          (Jackson Financial Inc.)  [base 13.8% | vol 1.01x | dist -6.1% | RS 50]
+      Buy: $123.61 | Stop: $117.43 | Target 1: $135.97
+      Days since base end: 0
+  55. IMI.L        (IMI plc)  [base 13.8% | vol 0.95x | dist -3.3% | RS 75]
+      Buy: $2938.00 | Stop: $2791.10 | Target 1: $3231.80
+      Days since base end: 0
+  56. JNJ          (Johnson & Johnson)  [base 14.6% | vol 1.17x | dist -1.1% | RS 50]
+      Buy: $246.35 | Stop: $234.03 | Target 1: $270.99
+      Days since base end: 0
+  57. WCC          (WESCO International, Inc.)  [base 15.6% | vol 0.91x | dist -5.5% | RS 50]
+      Buy: $319.68 | Stop: $303.70 | Target 1: $351.65
+      Days since base end: 0
+  58. AM           (Antero Midstream Corporation)  [base 16.8% | vol 1.23x | dist -1.2% | RS 50]
+      Buy: $21.66 | Stop: $20.58 | Target 1: $23.83
+      Days since base end: 0
+  59. NEOG         (Neogen Corporation)  [base 19.9% | vol 0.99x | dist -1.4% | RS 50]
+      Buy: $11.15 | Stop: $10.59 | Target 1: $12.26
+      Days since base end: 0
+
+📐 PRE-BREAKOUT SETUPS (setup ready, not yet broken out)
+----------------------------------------------------------------------------------------------------
+  Stocks with valid base, grade ≥ B, within 5% below pivot, breakout not yet triggered.
+  Ranked by: base depth (tighter) → volume contraction (drier) → distance to pivot (closer) → RS rating (higher)
+
+   1. HI           (Hillenbrand, Inc.)  [base 0.7% | vol 0.52x | dist -0.1% | RS 50]  Grade: B  [near pivot]
+      Pivot: $32.00 | Stop: $30.40 | Target 1: $35.20
+      Days since base end: 0
+   2. FOLD         (Amicus Therapeutics, Inc.)  [base 0.7% | vol 1.44x | dist -0.1% | RS 50]  Grade: B  [near pivot]
+      Pivot: $14.36 | Stop: $13.64 | Target 1: $15.80
+      Days since base end: 0
+   3. SEE          (Sealed Air Corporation)  [base 0.8% | vol 0.90x | dist -0.1% | RS 50]  Grade: B  [near pivot]
+      Pivot: $42.00 | Stop: $39.90 | Target 1: $46.20
+      Days since base end: 0
+   4. AL           (Air Lease Corporation)  [base 1.0% | vol 0.75x | dist -0.1% | RS 50]  Grade: B  [near pivot]
+      Pivot: $64.81 | Stop: $61.57 | Target 1: $71.29
+      Days since base end: 0
+   5. GTLS         (Chart Industries, Inc.)  [base 1.1% | vol 1.23x | dist -0.4% | RS 50]  Grade: A  [near pivot]
+      Pivot: $208.24 | Stop: $197.83 | Target 1: $229.06
+      Days since base end: 0
+   6. HOLX         (Hologic, Inc.)  [base 1.1% | vol 0.60x | dist -0.2% | RS 50]  Grade: B  [near pivot]
+      Pivot: $75.36 | Stop: $71.59 | Target 1: $82.90
+      Days since base end: 0
+   7. DAY          (Dayforce, Inc.)  [base 1.4% | vol 1.33x | dist 0.0% | RS 50]  Grade: B  [near pivot]
+      Pivot: $69.86 | Stop: $66.37 | Target 1: $76.85
+      Days since base end: 0
+   8. EXAS         (Exact Sciences Corporation)  [base 1.5% | vol 0.78x | dist -0.2% | RS 50]  Grade: B  [near pivot]
+      Pivot: $103.54 | Stop: $98.36 | Target 1: $113.89
+      Days since base end: 0
+   9. CSGS         (CSG Systems International, Inc.)  [base 1.6% | vol 0.61x | dist -1.2% | RS 50]  Grade: B  [near pivot]
+      Pivot: $80.67 | Stop: $76.64 | Target 1: $88.74
+      Days since base end: 0
+  10. DVAX         (Dynavax Technologies Corp)  [base 1.7% | vol 1.42x | dist -1.4% | RS 50]  Grade: B  [near pivot]
+      Pivot: $15.72 | Stop: $14.93 | Target 1: $17.29
+      Days since base end: 0
+  11. JHG          (Janus Henderson Group plc)  [base 4.2% | vol 1.04x | dist -0.0% | RS 50]  Grade: B  [near pivot]
+      Pivot: $49.63 | Stop: $47.15 | Target 1: $54.59
+      Days since base end: 0
+  12. JAZZ         (Jazz Pharmaceuticals plc)  [base 6.0% | vol 0.59x | dist -2.2% | RS 50]  Grade: B
+      Pivot: $171.70 | Stop: $163.11 | Target 1: $188.87
+      Days since base end: 0
+  13. RY           (Royal Bank of Canada)  [base 6.4% | vol 1.20x | dist -3.8% | RS 50]  Grade: A
+      Pivot: $176.19 | Stop: $167.38 | Target 1: $193.81
+      Days since base end: 0
+  14. TD           (The Toronto-Dominion Bank)  [base 6.9% | vol 1.39x | dist -3.5% | RS 50]  Grade: A
+      Pivot: $99.04 | Stop: $94.09 | Target 1: $108.94
+      Days since base end: 0
+  15. ROST         (Ross Stores, Inc.)  [base 8.1% | vol 1.11x | dist -0.5% | RS 50]  Grade: A  [near pivot]
+      Pivot: $198.98 | Stop: $189.03 | Target 1: $218.88
+      Days since base end: 0
+  16. WBD          (Warner Bros. Discovery, Inc.)  [base 8.3% | vol 0.62x | dist -0.9% | RS 50]  Grade: B  [near pivot]
+      Pivot: $29.01 | Stop: $27.56 | Target 1: $31.91
+      Days since base end: 0
+  17. CM           (Canadian Imperial Bank of Commerce)  [base 8.4% | vol 1.36x | dist -2.0% | RS 50]  Grade: B
+      Pivot: $98.50 | Stop: $93.57 | Target 1: $108.35
+      Days since base end: 0
+  18. BNS          (The Bank of Nova Scotia)  [base 8.5% | vol 1.41x | dist -2.6% | RS 50]  Grade: A
+      Pivot: $78.28 | Stop: $74.37 | Target 1: $86.11
+      Days since base end: 0
+  19. EGP          (EastGroup Properties, Inc.)  [base 8.6% | vol 1.18x | dist -0.4% | RS 50]  Grade: B  [near pivot]
+      Pivot: $193.68 | Stop: $184.00 | Target 1: $213.05
+      Days since base end: 0
+  20. TJX          (The TJX Companies, Inc.)  [base 8.6% | vol 1.10x | dist -1.9% | RS 50]  Grade: B  [near pivot]
+      Pivot: $159.03 | Stop: $151.08 | Target 1: $174.93
+      Days since base end: 0
+  21. ATCO-B.ST    (Atlas Copco AB (publ))  [base 8.6% | vol 1.47x | dist -1.3% | RS 46]  Grade: A  [near pivot]
+      Pivot: $170.30 | Stop: $161.79 | Target 1: $187.33
+      Days since base end: 0
+  22. WAFD         (WaFd, Inc.)  [base 8.7% | vol 0.93x | dist -2.9% | RS 50]  Grade: B
+      Pivot: $34.02 | Stop: $32.32 | Target 1: $37.42
+      Days since base end: 0
+  23. NVRI         (Enviri Corporation)  [base 8.7% | vol 0.94x | dist -2.5% | RS 50]  Grade: B
+      Pivot: $19.48 | Stop: $18.51 | Target 1: $21.43
+      Days since base end: 0
+  24. RR.L         (Rolls-Royce Holdings plc)  [base 8.8% | vol 0.75x | dist -0.7% | RS 100]  Grade: A  [near pivot]
+      Pivot: $1306.60 | Stop: $1241.27 | Target 1: $1437.26
+      Days since base end: 0
+  25. F            (Ford Motor Company)  [base 9.0% | vol 0.55x | dist -1.8% | RS 50]  Grade: B  [near pivot]
+      Pivot: $14.34 | Stop: $13.63 | Target 1: $15.78
+      Days since base end: 0
+  26. SUPN         (Supernus Pharmaceuticals, Inc.)  [base 9.0% | vol 0.62x | dist -0.7% | RS 50]  Grade: B  [near pivot]
+      Pivot: $51.99 | Stop: $49.39 | Target 1: $57.19
+      Days since base end: 0
+  27. SMIN.L       (Smiths Group plc)  [base 9.1% | vol 1.27x | dist -1.1% | RS 54]  Grade: B  [near pivot]
+      Pivot: $2664.00 | Stop: $2530.80 | Target 1: $2930.40
+      Days since base end: 0
+  28. FRT          (Federal Realty Investment Trust)  [base 9.4% | vol 1.13x | dist -2.2% | RS 50]  Grade: B
+      Pivot: $108.54 | Stop: $103.11 | Target 1: $119.39
+      Days since base end: 0
+  29. EVN.VI       (EVN AG)  [base 9.4% | vol 0.99x | dist -3.5% | RS 70]  Grade: A
+      Pivot: $29.85 | Stop: $28.36 | Target 1: $32.84
+      Days since base end: 0
+  30. DG           (Dollar General Corporation)  [base 9.5% | vol 1.09x | dist -2.8% | RS 50]  Grade: B
+      Pivot: $154.74 | Stop: $147.00 | Target 1: $170.21
+      Days since base end: 0
+  31. ECPG         (Encore Capital Group, Inc.)  [base 9.7% | vol 0.67x | dist -3.2% | RS 50]  Grade: A
+      Pivot: $59.20 | Stop: $56.24 | Target 1: $65.12
+      Days since base end: 0
+  32. TNL          (Travel + Leisure Co.)  [base 9.8% | vol 0.76x | dist -4.6% | RS 50]  Grade: A
+      Pivot: $76.21 | Stop: $72.40 | Target 1: $83.83
+      Days since base end: 0
+  33. LAMR         (Lamar Advertising Company)  [base 9.9% | vol 0.84x | dist -3.3% | RS 50]  Grade: B
+      Pivot: $136.69 | Stop: $129.86 | Target 1: $150.36
+      Days since base end: 0
+  34. BKH          (Black Hills Corporation)  [base 9.9% | vol 0.88x | dist -2.8% | RS 50]  Grade: B
+      Pivot: $75.87 | Stop: $72.08 | Target 1: $83.46
+      Days since base end: 0
+  35. BA           (The Boeing Company)  [base 10.0% | vol 0.92x | dist -4.4% | RS 50]  Grade: A
+      Pivot: $254.35 | Stop: $241.63 | Target 1: $279.79
+      Days since base end: 0
+  36. MNST         (Monster Beverage Corporation)  [base 10.1% | vol 1.04x | dist -0.7% | RS 50]  Grade: A  [near pivot]
+      Pivot: $83.24 | Stop: $79.08 | Target 1: $91.56
+      Days since base end: 0
+  37. HGV          (Hilton Grand Vacations Inc.)  [base 10.2% | vol 0.78x | dist -2.2% | RS 50]  Grade: B
+      Pivot: $48.68 | Stop: $46.25 | Target 1: $53.55
+      Days since base end: 0
+  38. BURL         (Burlington Stores, Inc.)  [base 10.4% | vol 0.91x | dist -2.7% | RS 50]  Grade: B
+      Pivot: $319.93 | Stop: $303.93 | Target 1: $351.92
+      Days since base end: 0
+  39. SNA          (Snap-on Incorporated)  [base 10.4% | vol 1.32x | dist -2.0% | RS 50]  Grade: B  [near pivot]
+      Pivot: $390.13 | Stop: $370.62 | Target 1: $429.14
+      Days since base end: 0
+  40. ATCO-A.ST    (Atlas Copco AB (publ))  [base 10.4% | vol 1.30x | dist -1.3% | RS 47]  Grade: A  [near pivot]
+      Pivot: $196.25 | Stop: $186.44 | Target 1: $215.88
+      Days since base end: 0
+  41. ROG.SW       (Roche Holding AG)  [base 10.5% | vol 1.07x | dist -0.0% | RS 73]  Grade: A  [near pivot]
+      Pivot: $369.30 | Stop: $350.83 | Target 1: $406.23
+      Days since base end: 0
+  42. BMO          (Bank of Montreal)  [base 10.5% | vol 1.10x | dist -3.3% | RS 50]  Grade: B
+      Pivot: $146.35 | Stop: $139.03 | Target 1: $160.99
+      Days since base end: 0
+  43. ALFA.ST      (Alfa Laval AB (publ))  [base 10.6% | vol 1.23x | dist -2.6% | RS 53]  Grade: A
+      Pivot: $530.00 | Stop: $503.50 | Target 1: $583.00
+      Days since base end: 0
+  44. RTX          (RTX Corporation)  [base 10.7% | vol 1.51x | dist -1.8% | RS 50]  Grade: A  [near pivot]
+      Pivot: $206.48 | Stop: $196.16 | Target 1: $227.13
+      Days since base end: 0
+  45. HSBA.L       (HSBC Holdings plc)  [base 10.7% | vol 0.70x | dist -4.0% | RS 71]  Grade: A
+      Pivot: $1322.60 | Stop: $1256.47 | Target 1: $1454.86
+      Days since base end: 0
+  46. MAC          (The Macerich Company)  [base 10.7% | vol 1.09x | dist -4.7% | RS 50]  Grade: B
+      Pivot: $19.74 | Stop: $18.75 | Target 1: $21.71
+      Days since base end: 0
+  47. SPG          (Simon Property Group, Inc.)  [base 10.8% | vol 1.22x | dist -0.0% | RS 50]  Grade: B  [near pivot]
+      Pivot: $201.89 | Stop: $191.80 | Target 1: $222.08
+      Days since base end: 0
+  48. NWE          (NorthWestern Energy Group, Inc.)  [base 10.8% | vol 1.38x | dist -2.4% | RS 50]  Grade: B
+      Pivot: $71.26 | Stop: $67.70 | Target 1: $78.39
+      Days since base end: 0
+  49. HAYW         (Hayward Holdings, Inc.)  [base 10.9% | vol 0.69x | dist -4.4% | RS 50]  Grade: B
+      Pivot: $17.24 | Stop: $16.38 | Target 1: $18.96
+      Days since base end: 0
+  50. FHI          (Federated Hermes, Inc.)  [base 10.9% | vol 1.18x | dist -2.8% | RS 50]  Grade: B
+      Pivot: $56.68 | Stop: $53.85 | Target 1: $62.35
+      Days since base end: 0
+  51. XLI          (State Street Industrial Select Sector SP)  [base 10.9% | vol 1.06x | dist -1.6% | RS 50]  Grade: A  [near pivot]
+      Pivot: $177.76 | Stop: $168.87 | Target 1: $195.54
+      Days since base end: 0
+  52. APG          (APi Group Corporation)  [base 11.0% | vol 0.64x | dist -3.6% | RS 50]  Grade: B
+      Pivot: $46.11 | Stop: $43.80 | Target 1: $50.72
+      Days since base end: 0
+  53. NWN          (Northwest Natural Holding Company)  [base 11.0% | vol 1.08x | dist -1.2% | RS 50]  Grade: B  [near pivot]
+      Pivot: $50.81 | Stop: $48.27 | Target 1: $55.89
+      Days since base end: 0
+  54. IBE.MC       (Iberdrola, S.A.)  [base 11.1% | vol 1.41x | dist -1.4% | RS 67]  Grade: A  [near pivot]
+      Pivot: $20.38 | Stop: $19.36 | Target 1: $22.42
+      Days since base end: 0
+  55. LIVN         (LivaNova PLC)  [base 11.1% | vol 0.94x | dist -1.7% | RS 50]  Grade: B  [near pivot]
+      Pivot: $67.92 | Stop: $64.52 | Target 1: $74.71
+      Days since base end: 0
+  56. GIII         (G-III Apparel Group, Ltd.)  [base 11.1% | vol 1.22x | dist -2.4% | RS 50]  Grade: B
+      Pivot: $31.38 | Stop: $29.81 | Target 1: $34.52
+      Days since base end: 0
+  57. TKO          (TKO Group Holdings, Inc.)  [base 11.1% | vol 0.68x | dist -2.6% | RS 50]  Grade: B
+      Pivot: $216.66 | Stop: $205.83 | Target 1: $238.33
+      Days since base end: 0
+  58. WSR          (Whitestone REIT)  [base 11.2% | vol 0.79x | dist -0.6% | RS 50]  Grade: B  [near pivot]
+      Pivot: $15.32 | Stop: $14.55 | Target 1: $16.85
+      Days since base end: 0
+  59. FRE.DE       (Fresenius SE & Co. KGaA)  [base 11.3% | vol 1.25x | dist -0.1% | RS 85]  Grade: A  [near pivot]
+      Pivot: $52.18 | Stop: $49.57 | Target 1: $57.40
+      Days since base end: 0
+  60. GL           (Globe Life Inc.)  [base 11.3% | vol 0.85x | dist -4.2% | RS 50]  Grade: B
+      Pivot: $152.71 | Stop: $145.07 | Target 1: $167.98
+      Days since base end: 0
+  61. REP.MC       (Repsol, S.A.)  [base 11.5% | vol 1.36x | dist -1.0% | RS 52]  Grade: A  [near pivot]
+      Pivot: $17.33 | Stop: $16.46 | Target 1: $19.06
+      Days since base end: 0
+  62. ST           (Sensata Technologies Holding plc)  [base 11.6% | vol 1.27x | dist -2.4% | RS 50]  Grade: B
+      Pivot: $37.95 | Stop: $36.05 | Target 1: $41.75
+      Days since base end: 0
+  63. PLD          (Prologis, Inc.)  [base 11.6% | vol 1.13x | dist -0.3% | RS 50]  Grade: B  [near pivot]
+      Pivot: $141.95 | Stop: $134.85 | Target 1: $156.14
+      Days since base end: 0
+  64. SWX          (Southwest Gas Holdings, Inc.)  [base 11.6% | vol 2.01x | dist 0.0% | RS 50]  Grade: B  [near pivot]
+      Pivot: $88.69 | Stop: $84.26 | Target 1: $97.56
+      Days since base end: 0
+  65. FAE.MC       (Faes Farma, S.A.)  [base 11.7% | vol 1.25x | dist -2.2% | RS 60]  Grade: A
+      Pivot: $5.40 | Stop: $5.13 | Target 1: $5.94
+      Days since base end: 0
+  66. HIG          (The Hartford Insurance Group, Inc.)  [base 11.7% | vol 1.08x | dist -0.6% | RS 50]  Grade: A  [near pivot]
+      Pivot: $144.50 | Stop: $137.28 | Target 1: $158.95
+      Days since base end: 0
+  67. AWI          (Armstrong World Industries, Inc.)  [base 11.7% | vol 1.32x | dist -3.5% | RS 50]  Grade: A
+      Pivot: $206.05 | Stop: $195.75 | Target 1: $226.66
+      Days since base end: 0
+  68. IBOC         (International Bancshares Corporation)  [base 11.7% | vol 1.06x | dist -3.0% | RS 50]  Grade: B
+      Pivot: $74.68 | Stop: $70.95 | Target 1: $82.15
+      Days since base end: 0
+  69. CATY         (Cathay General Bancorp)  [base 11.8% | vol 1.04x | dist -2.1% | RS 50]  Grade: B
+      Pivot: $54.99 | Stop: $52.24 | Target 1: $60.49
+      Days since base end: 0
+  70. ULTA         (Ulta Beauty, Inc.)  [base 11.9% | vol 1.09x | dist -0.3% | RS 50]  Grade: A  [near pivot]
+      Pivot: $702.95 | Stop: $667.80 | Target 1: $773.25
+      Days since base end: 0
+  71. GEF          (Greif, Inc.)  [base 11.9% | vol 1.06x | dist -0.9% | RS 50]  Grade: B  [near pivot]
+      Pivot: $77.14 | Stop: $73.28 | Target 1: $84.85
+      Days since base end: 0
+  72. TRV          (The Travelers Companies, Inc.)  [base 12.0% | vol 1.36x | dist -1.7% | RS 50]  Grade: B  [near pivot]
+      Pivot: $304.40 | Stop: $289.18 | Target 1: $334.84
+      Days since base end: 0
+  73. L            (Loews Corporation)  [base 12.0% | vol 1.03x | dist -3.8% | RS 50]  Grade: B
+      Pivot: $114.90 | Stop: $109.16 | Target 1: $126.39
+      Days since base end: 0
+  74. NVDA         (NVIDIA Corporation)  [base 12.1% | vol 0.88x | dist -4.5% | RS 50]  Grade: B
+      Pivot: $194.49 | Stop: $184.77 | Target 1: $213.94
+      Days since base end: 0
+  75. PH           (Parker-Hannifin Corporation)  [base 12.1% | vol 0.92x | dist -0.2% | RS 50]  Grade: A  [near pivot]
+      Pivot: $1014.42 | Stop: $963.70 | Target 1: $1115.86
+      Days since base end: 0
+  76. SBSI         (Southside Bancshares, Inc.)  [base 12.1% | vol 0.76x | dist -3.7% | RS 50]  Grade: B
+      Pivot: $34.37 | Stop: $32.65 | Target 1: $37.81
+      Days since base end: 0
+  77. PFE          (Pfizer Inc.)  [base 12.2% | vol 0.53x | dist -2.0% | RS 50]  Grade: B  [near pivot]
+      Pivot: $27.94 | Stop: $26.54 | Target 1: $30.73
+      Days since base end: 0
+  78. KW           (Kennedy-Wilson Holdings, Inc.)  [base 12.2% | vol 0.69x | dist -0.1% | RS 50]  Grade: B  [near pivot]
+      Pivot: $10.89 | Stop: $10.35 | Target 1: $11.98
+      Days since base end: 0
+  79. NBHC         (National Bank Holdings Corporation)  [base 12.2% | vol 1.73x | dist -2.8% | RS 50]  Grade: B
+      Pivot: $42.99 | Stop: $40.84 | Target 1: $47.29
+      Days since base end: 0
+  80. JBTM         (JBT Marel Corporation)  [base 12.4% | vol 0.90x | dist -4.1% | RS 50]  Grade: B
+      Pivot: $170.19 | Stop: $161.68 | Target 1: $187.21
+      Days since base end: 0
+  81. FBP          (First BanCorp.)  [base 12.5% | vol 0.99x | dist -3.6% | RS 50]  Grade: B
+      Pivot: $23.43 | Stop: $22.26 | Target 1: $25.77
+      Days since base end: 0
+  82. REGN         (Regeneron Pharmaceuticals, Inc.)  [base 12.5% | vol 0.83x | dist -3.5% | RS 50]  Grade: B
+      Pivot: $821.11 | Stop: $780.05 | Target 1: $903.22
+      Days since base end: 0
+  83. EOAN.DE      (E.ON SE)  [base 12.6% | vol 1.16x | dist -1.3% | RS 100]  Grade: A  [near pivot]
+      Pivot: $18.88 | Stop: $17.94 | Target 1: $20.77
+      Days since base end: 0
+  84. HST          (Host Hotels & Resorts, Inc.)  [base 12.6% | vol 0.84x | dist -1.4% | RS 50]  Grade: B  [near pivot]
+      Pivot: $20.33 | Stop: $19.31 | Target 1: $22.36
+      Days since base end: 0
+  85. PK           (Park Hotels & Resorts Inc.)  [base 12.7% | vol 1.06x | dist -4.3% | RS 50]  Grade: B
+      Pivot: $11.98 | Stop: $11.38 | Target 1: $13.18
+      Days since base end: 0
+  86. DRH          (DiamondRock Hospitality Company)  [base 12.7% | vol 0.70x | dist -2.3% | RS 50]  Grade: B
+      Pivot: $10.24 | Stop: $9.73 | Target 1: $11.26
+      Days since base end: 0
+  87. GNW          (Genworth Financial, Inc.)  [base 12.7% | vol 0.85x | dist -2.1% | RS 50]  Grade: B
+      Pivot: $9.19 | Stop: $8.73 | Target 1: $10.11
+      Days since base end: 0
+  88. GATX         (GATX Corporation)  [base 12.8% | vol 0.96x | dist -0.4% | RS 50]  Grade: A  [near pivot]
+      Pivot: $194.80 | Stop: $185.06 | Target 1: $214.28
+      Days since base end: 0
+  89. STBA         (S&T Bancorp, Inc.)  [base 12.8% | vol 1.01x | dist -1.0% | RS 50]  Grade: B  [near pivot]
+      Pivot: $44.43 | Stop: $42.21 | Target 1: $48.88
+      Days since base end: 0
+  90. GE           (GE Aerospace)  [base 12.8% | vol 1.58x | dist -2.0% | RS 50]  Grade: B
+      Pivot: $332.79 | Stop: $316.15 | Target 1: $366.07
+      Days since base end: 0
+  91. UCB.BR       (UCB SA)  [base 12.9% | vol 0.50x | dist -0.7% | RS 80]  Grade: A  [near pivot]
+      Pivot: $285.60 | Stop: $271.32 | Target 1: $314.16
+      Days since base end: 0
+  92. XHR          (Xenia Hotels & Resorts, Inc.)  [base 12.9% | vol 0.76x | dist -2.0% | RS 50]  Grade: B  [near pivot]
+      Pivot: $16.23 | Stop: $15.41 | Target 1: $17.85
+      Days since base end: 0
+  93. WAL          (Western Alliance Bancorporation)  [base 12.9% | vol 1.07x | dist -2.5% | RS 50]  Grade: B
+      Pivot: $97.23 | Stop: $92.37 | Target 1: $106.95
+      Days since base end: 0
+  94. POR          (Portland General Electric Company)  [base 12.9% | vol 0.63x | dist -3.9% | RS 50]  Grade: B
+      Pivot: $54.39 | Stop: $51.67 | Target 1: $59.83
+      Days since base end: 0
+  95. FCF          (First Commonwealth Financial Corporation)  [base 12.9% | vol 1.06x | dist -3.0% | RS 50]  Grade: B
+      Pivot: $18.95 | Stop: $18.00 | Target 1: $20.85
+      Days since base end: 0
+  96. CNP          (CenterPoint Energy, Inc.)  [base 13.0% | vol 1.12x | dist -1.1% | RS 50]  Grade: B  [near pivot]
+      Pivot: $43.08 | Stop: $40.93 | Target 1: $47.39
+      Days since base end: 0
+  97. FE           (FirstEnergy Corp.)  [base 13.0% | vol 1.06x | dist -1.9% | RS 50]  Grade: B  [near pivot]
+      Pivot: $50.44 | Stop: $47.92 | Target 1: $55.48
+      Days since base end: 0
+  98. USB          (U.S. Bancorp)  [base 13.0% | vol 1.54x | dist -4.9% | RS 50]  Grade: A
+      Pivot: $61.19 | Stop: $58.13 | Target 1: $67.31
+      Days since base end: 0
+  99. CLH          (Clean Harbors, Inc.)  [base 13.1% | vol 0.65x | dist -3.8% | RS 50]  Grade: B
+      Pivot: $276.51 | Stop: $262.68 | Target 1: $304.16
+      Days since base end: 0
+  100. ASB          (Associated Banc-Corp)  [base 13.1% | vol 1.55x | dist -4.7% | RS 50]  Grade: B
+      Pivot: $29.52 | Stop: $28.04 | Target 1: $32.47
+      Days since base end: 0
+  101. TRNO         (Terreno Realty Corporation)  [base 13.2% | vol 1.25x | dist -0.8% | RS 50]  Grade: B  [near pivot]
+      Pivot: $66.74 | Stop: $63.40 | Target 1: $73.41
+      Days since base end: 0
+  102. CVBF         (CVB Financial Corp.)  [base 13.2% | vol 1.63x | dist -3.2% | RS 50]  Grade: B
+      Pivot: $21.48 | Stop: $20.41 | Target 1: $23.63
+      Days since base end: 0
+  103. TTC          (The Toro Company)  [base 13.2% | vol 1.30x | dist -0.6% | RS 50]  Grade: A  [near pivot]
+      Pivot: $101.08 | Stop: $96.03 | Target 1: $111.19
+      Days since base end: 0
+  104. AME          (AMETEK, Inc.)  [base 13.3% | vol 0.90x | dist -2.8% | RS 50]  Grade: A
+      Pivot: $239.94 | Stop: $227.94 | Target 1: $263.93
+      Days since base end: 0
+  105. NOVN.SW      (Novartis AG)  [base 13.3% | vol 1.24x | dist -0.6% | RS 82]  Grade: A  [near pivot]
+      Pivot: $129.14 | Stop: $122.68 | Target 1: $142.05
+      Days since base end: 0
+  106. OHI          (Omega Healthcare Investors, Inc.)  [base 13.3% | vol 1.12x | dist -0.2% | RS 50]  Grade: B  [near pivot]
+      Pivot: $47.94 | Stop: $45.54 | Target 1: $52.73
+      Days since base end: 0
+  107. NTCT         (NetScout Systems, Inc.)  [base 13.3% | vol 0.89x | dist -2.8% | RS 50]  Grade: B
+      Pivot: $30.18 | Stop: $28.67 | Target 1: $33.20
+      Days since base end: 0
+  108. CBOE         (Cboe Global Markets, Inc.)  [base 13.3% | vol 1.14x | dist -0.8% | RS 50]  Grade: B  [near pivot]
+      Pivot: $285.80 | Stop: $271.51 | Target 1: $314.38
+      Days since base end: 0
+  109. CFR          (Cullen/Frost Bankers, Inc.)  [base 13.3% | vol 1.14x | dist -3.2% | RS 50]  Grade: A
+      Pivot: $148.97 | Stop: $141.52 | Target 1: $163.87
+      Days since base end: 0
+  110. WES          (Western Midstream Partners, LP)  [base 13.3% | vol 0.75x | dist -0.5% | RS 50]  Grade: B  [near pivot]
+      Pivot: $44.24 | Stop: $42.03 | Target 1: $48.66
+      Days since base end: 0
+  111. CAH          (Cardinal Health, Inc.)  [base 13.4% | vol 0.66x | dist -2.3% | RS 50]  Grade: B
+      Pivot: $230.81 | Stop: $219.27 | Target 1: $253.89
+      Days since base end: 0
+  112. BCO          (The Brink's Company)  [base 13.4% | vol 0.93x | dist -2.4% | RS 50]  Grade: B
+      Pivot: $133.62 | Stop: $126.94 | Target 1: $146.98
+      Days since base end: 0
+  113. MCY          (Mercury General Corporation)  [base 13.5% | vol 1.04x | dist -0.7% | RS 50]  Grade: B  [near pivot]
+      Pivot: $96.86 | Stop: $92.02 | Target 1: $106.55
+      Days since base end: 0
+  114. AMG          (Affiliated Managers Group, Inc.)  [base 13.5% | vol 1.43x | dist -3.4% | RS 50]  Grade: A
+      Pivot: $334.00 | Stop: $317.30 | Target 1: $367.40
+      Days since base end: 0
+  115. FIVE         (Five Below, Inc.)  [base 13.5% | vol 1.02x | dist -0.3% | RS 50]  Grade: B  [near pivot]
+      Pivot: $212.41 | Stop: $201.79 | Target 1: $233.65
+      Days since base end: 0
+  116. NSC          (Norfolk Southern Corporation)  [base 13.6% | vol 0.89x | dist -1.2% | RS 50]  Grade: B  [near pivot]
+      Pivot: $319.94 | Stop: $303.94 | Target 1: $351.93
+      Days since base end: 0
+  117. SAF.PA       (Safran SA)  [base 13.6% | vol 1.32x | dist 0.0% | RS 86]  Grade: A  [near pivot]
+      Pivot: $340.90 | Stop: $323.85 | Target 1: $374.99
+      Days since base end: 0
+  118. KRG          (Kite Realty Group Trust)  [base 13.6% | vol 1.04x | dist -1.0% | RS 50]  Grade: B  [near pivot]
+      Pivot: $26.13 | Stop: $24.82 | Target 1: $28.74
+      Days since base end: 0
+  119. ENGI.PA      (Engie SA)  [base 13.6% | vol 0.92x | dist -0.9% | RS 100]  Grade: A  [near pivot]
+      Pivot: $26.78 | Stop: $25.44 | Target 1: $29.46
+      Days since base end: 0
+  120. CA.PA        (Carrefour SA)  [base 13.6% | vol 1.13x | dist -2.1% | RS 81]  Grade: A
+      Pivot: $15.73 | Stop: $14.94 | Target 1: $17.30
+      Days since base end: 0
+  121. NI           (NiSource Inc.)  [base 13.8% | vol 0.95x | dist -0.7% | RS 50]  Grade: B  [near pivot]
+      Pivot: $47.05 | Stop: $44.70 | Target 1: $51.75
+      Days since base end: 0
+  122. IMI.L        (IMI plc)  [base 13.8% | vol 0.95x | dist -3.3% | RS 75]  Grade: A
+      Pivot: $2938.00 | Stop: $2791.10 | Target 1: $3231.80
+      Days since base end: 0
+  123. SSB          (SouthState Bank Corporation)  [base 13.9% | vol 0.89x | dist -3.9% | RS 50]  Grade: B
+      Pivot: $108.46 | Stop: $103.04 | Target 1: $119.31
+      Days since base end: 0
+  124. AMPH         (Amphastar Pharmaceuticals, Inc.)  [base 13.9% | vol 0.68x | dist -3.3% | RS 50]  Grade: B
+      Pivot: $29.52 | Stop: $28.04 | Target 1: $32.47
+      Days since base end: 0
+  125. DEA          (Easterly Government Properties, Inc.)  [base 14.0% | vol 0.75x | dist -1.7% | RS 50]  Grade: B  [near pivot]
+      Pivot: $24.45 | Stop: $23.23 | Target 1: $26.90
+      Days since base end: 0
+  126. EVRG         (Evergy, Inc.)  [base 14.2% | vol 0.88x | dist -1.9% | RS 50]  Grade: B  [near pivot]
+      Pivot: $83.19 | Stop: $79.03 | Target 1: $91.51
+      Days since base end: 0
+  127. AZN.L        (AstraZeneca PLC)  [base 14.5% | vol 1.35x | dist 0.0% | RS 61]  Grade: B  [near pivot]
+      Pivot: $15522.00 | Stop: $14745.90 | Target 1: $17074.20
+      Days since base end: 0
+  128. JNJ          (Johnson & Johnson)  [base 14.6% | vol 1.17x | dist -1.1% | RS 50]  Grade: A  [near pivot]
+      Pivot: $246.35 | Stop: $234.03 | Target 1: $270.99
+      Days since base end: 0
+  129. CMI          (Cummins Inc.)  [base 14.7% | vol 1.19x | dist -3.7% | RS 50]  Grade: B
+      Pivot: $617.98 | Stop: $587.08 | Target 1: $679.78
+      Days since base end: 0
+  130. SBRA         (Sabra Health Care REIT, Inc.)  [base 15.2% | vol 0.88x | dist -0.7% | RS 50]  Grade: B  [near pivot]
+      Pivot: $20.70 | Stop: $19.67 | Target 1: $22.77
+      Days since base end: 0
+  131. VTR          (Ventas, Inc.)  [base 15.4% | vol 0.98x | dist -0.4% | RS 50]  Grade: B  [near pivot]
+      Pivot: $87.24 | Stop: $82.88 | Target 1: $95.96
+      Days since base end: 0
+  132. ENI.MI       (Eni S.p.A.)  [base 15.7% | vol 0.92x | dist -1.7%]  Grade: B  [near pivot]
+      Pivot: $18.44 | Stop: $17.52 | Target 1: $20.28
+      Days since base end: 0
+  133. CTRE         (CareTrust REIT, Inc.)  [base 16.0% | vol 0.95x | dist -0.5% | RS 50]  Grade: B  [near pivot]
+      Pivot: $41.35 | Stop: $39.28 | Target 1: $45.48
+      Days since base end: 0
+  134. GBX          (The Greenbrier Companies, Inc.)  [base 16.5% | vol 1.00x | dist -0.8% | RS 50]  Grade: B  [near pivot]
+      Pivot: $57.76 | Stop: $54.88 | Target 1: $63.54
+      Days since base end: 0
+  135. HCA          (HCA Healthcare, Inc.)  [base 16.6% | vol 0.84x | dist -3.1% | RS 50]  Grade: B
+      Pivot: $552.90 | Stop: $525.26 | Target 1: $608.19
+      Days since base end: 0
+  136. PLAB         (Photronics, Inc.)  [base 16.8% | vol 1.99x | dist -1.1% | RS 50]  Grade: B  [near pivot]
+      Pivot: $39.04 | Stop: $37.09 | Target 1: $42.94
+      Days since base end: 0
+  137. AM           (Antero Midstream Corporation)  [base 16.8% | vol 1.23x | dist -1.2% | RS 50]  Grade: A  [near pivot]
+      Pivot: $21.66 | Stop: $20.58 | Target 1: $23.83
+      Days since base end: 0
+  138. FDP          (Fresh Del Monte Produce Inc.)  [base 17.0% | vol 0.77x | dist -1.7% | RS 50]  Grade: B  [near pivot]
+      Pivot: $41.05 | Stop: $39.00 | Target 1: $45.15
+      Days since base end: 0
+  139. DTM          (DT Midstream, Inc.)  [base 17.1% | vol 0.88x | dist -2.0% | RS 50]  Grade: B  [near pivot]
+      Pivot: $134.81 | Stop: $128.07 | Target 1: $148.29
+      Days since base end: 0
+  140. ACT          (Enact Holdings, Inc.)  [base 17.4% | vol 1.07x | dist -4.0% | RS 50]  Grade: B
+      Pivot: $44.80 | Stop: $42.56 | Target 1: $49.28
+      Days since base end: 0
+  141. CDP          (COPT Defense Properties)  [base 17.4% | vol 1.42x | dist -3.0% | RS 50]  Grade: B
+      Pivot: $32.78 | Stop: $31.14 | Target 1: $36.06
+      Days since base end: 0
+  142. TRP          (TC Energy Corporation)  [base 17.6% | vol 0.87x | dist -2.7% | RS 50]  Grade: B
+      Pivot: $63.94 | Stop: $60.74 | Target 1: $70.33
+      Days since base end: 0
+  143. JBSS         (John B. Sanfilippo & Son, Inc.)  [base 17.7% | vol 0.71x | dist -2.6% | RS 50]  Grade: B
+      Pivot: $81.93 | Stop: $77.83 | Target 1: $90.12
+      Days since base end: 0
+  144. NEE          (NextEra Energy, Inc.)  [base 18.0% | vol 0.98x | dist -2.9% | RS 50]  Grade: B
+      Pivot: $95.56 | Stop: $90.78 | Target 1: $105.12
+      Days since base end: 0
+  145. ECL          (Ecolab Inc.)  [base 18.1% | vol 0.91x | dist -1.0% | RS 50]  Grade: B  [near pivot]
+      Pivot: $306.52 | Stop: $291.19 | Target 1: $337.17
+      Days since base end: 0
+  146. AS           (Amer Sports, Inc.)  [base 18.4% | vol 0.72x | dist -2.8% | RS 50]  Grade: B
+      Pivot: $41.31 | Stop: $39.24 | Target 1: $45.44
+      Days since base end: 0
+  147. AMGN         (Amgen Inc.)  [base 18.9% | vol 1.05x | dist -2.5% | RS 50]  Grade: B
+      Pivot: $382.47 | Stop: $363.35 | Target 1: $420.72
+      Days since base end: 0
+  148. TTE.PA       (TotalEnergies SE)  [base 19.0% | vol 1.17x | dist -1.9% | RS 64]  Grade: B  [near pivot]
+      Pivot: $65.79 | Stop: $62.50 | Target 1: $72.37
+      Days since base end: 0
+  149. FANG         (Diamondback Energy, Inc.)  [base 19.3% | vol 1.10x | dist -2.8% | RS 50]  Grade: B
+      Pivot: $172.80 | Stop: $164.16 | Target 1: $190.08
+      Days since base end: 0
+  150. BDX          (Becton, Dickinson and Company)  [base 19.5% | vol 0.73x | dist -3.0% | RS 50]  Grade: B
+      Pivot: $182.75 | Stop: $173.61 | Target 1: $201.03
+      Days since base end: 0
+  151. NEOG         (Neogen Corporation)  [base 19.9% | vol 0.99x | dist -1.4% | RS 50]  Grade: A  [near pivot]
+      Pivot: $11.15 | Stop: $10.59 | Target 1: $12.26
+      Days since base end: 0
+  152. KMI          (Kinder Morgan, Inc.)  [base 20.2% | vol 0.86x | dist -1.6% | RS 50]  Grade: B  [near pivot]
+      Pivot: $32.57 | Stop: $30.94 | Target 1: $35.83
+      Days since base end: 0
+  153. RNR          (RenaissanceRe Holdings Ltd.)  [base 20.3% | vol 0.82x | dist -2.6% | RS 50]  Grade: B
+      Pivot: $315.88 | Stop: $300.09 | Target 1: $347.47
+      Days since base end: 0
+  154. NG.L         (National Grid plc)  [base 21.2% | vol 0.90x | dist -1.6% | RS 76]  Grade: B  [near pivot]
+      Pivot: $1399.00 | Stop: $1329.05 | Target 1: $1538.90
+      Days since base end: 0
+  155. GEV          (GE Vernova Inc.)  [base 23.7% | vol 1.00x | dist -3.0% | RS 50]  Grade: B
+      Pivot: $846.00 | Stop: $803.70 | Target 1: $930.60
+      Days since base end: 0
+  156. ROIV         (Roivant Sciences Ltd.)  [base 24.9% | vol 0.77x | dist -3.4% | RS 50]  Grade: B
+      Pivot: $27.94 | Stop: $26.54 | Target 1: $30.73
+      Days since base end: 0
+
+====================================================================================================
