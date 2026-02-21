@@ -1,6 +1,6 @@
 @echo off
-REM Full pipeline: fetch data, then report, ChatGPT validation, and position suggestions
-REM Runs: 01 -> 02 -> 03 -> 05 (no PowerShell required)
+REM Full pipeline: fetch, report, position suggestions, ChatGPT validation (execution order 01->02->03->04)
+REM Optional: 05_chatgpt_validation_advanced, 06_chatgpt_position_suggestions, 07_retry_failed_stocks
 
 echo ================================================================================
 echo FULL PIPELINE (Fetch + Report + ChatGPT + Position Suggestions)
@@ -23,18 +23,18 @@ if errorlevel 1 (
 )
 
 echo.
-echo [3/4] Running ChatGPT validation...
-python 03_chatgpt_validation.py
+echo [3/4] Running position suggestions...
+python 03_position_suggestions.py
 if errorlevel 1 (
-    echo [ERROR] ChatGPT validation failed!
+    echo [ERROR] Position suggestions failed!
     exit /b 1
 )
 
 echo.
-echo [4/4] Running position suggestions...
-python 05_position_suggestions.py
+echo [4/4] Running ChatGPT validation...
+python 04_chatgpt_validation.py
 if errorlevel 1 (
-    echo [ERROR] Position suggestions failed!
+    echo [ERROR] ChatGPT validation failed!
     exit /b 1
 )
 

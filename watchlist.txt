@@ -920,7 +920,7 @@ CNQ
 # S&P 1000 COMPONENTS
 # ============================================
 # Note: S&P 1000 = S&P 500 + S&P 400 Mid-Cap + S&P 600 Small-Cap
-# Run fetch_sp1000.py to get the full list, or manually add from:
+# Add tickers manually or from your own list.
 # - S&P 500: https://en.wikipedia.org/wiki/List_of_S%26P_500_companies
 # - S&P 400: https://en.wikipedia.org/wiki/List_of_S%26P_400_companies  
 # - S&P 600: https://en.wikipedia.org/wiki/List_of_S%26P_600_companies

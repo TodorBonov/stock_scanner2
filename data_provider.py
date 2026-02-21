@@ -368,6 +368,7 @@ class StockDataProvider:
                     "industry": info.get("industry", ""),
                     "market_cap": info.get("marketCap", 0),
                     "current_price": info.get("currentPrice") or info.get("regularMarketPrice", 0),
+                    "currency": info.get("currency", "") or "",
                     "earnings_growth": (info.get("earningsQuarterlyGrowth", 0) or 0) * 100,
                     "revenue_growth": (info.get("revenueGrowth", 0) or 0) * 100,
                     "profit_margins": (info.get("profitMargins", 0) or 0) * 100,

@@ -57,7 +57,7 @@ The scanner implements Mark Minervini’s five-part SEPA checklist. Trend & Stru
 - Stock outperforms benchmark over the lookback period.
 - RS line not declining sharply from recent high (warning/fail thresholds in config).
 
-**Benchmark:** Set per run (e.g. `02_generate_full_report.py --benchmark ^GDAXI` or `^GSPC`). Not in config; default in bot is `^GDAXI`.
+**Benchmark:** Set per run (e.g. `02_generate_full_report.py --benchmark ^GDAXI` or `^GSPC`). Not in config; default in bot is `^GDAXI`. (Script numbers = execution order.)
 
 **Config:** `RSI_PERIOD`, `RSI_MIN_THRESHOLD`, `RS_LINE_DECLINE_WARNING_PCT`, `RS_LINE_DECLINE_FAIL_PCT`, `RS_LOOKBACK_DAYS`, `RS_TREND_LOOKBACK_DAYS`, and **`RS_RELAX_LINE_DECLINE_IF_STRONG`** (trading improvement).
 
@@ -160,7 +160,7 @@ Both BEST SETUPS and the pre-breakout list use the same **actionability** sort k
 - **BEST SETUPS:** A and A+ stocks only, sorted by actionability. Shows names that already meet the checklist; some may have broken out (breakout rules passed), others not yet.
 - **PRE-BREAKOUT:** Subset of scan results that pass the pre-breakout filter (grade ≥ B, has pivot, not broken out, within X% below pivot), sorted by actionability. Shown in the “PRE-BREAKOUT SETUPS” section of the summary report.
 
-ChatGPT validation (03) can include both A-grade and pre-breakout data; see `03_chatgpt_validation.py` and the prompt construction.
+ChatGPT validation (04) can include both A-grade and pre-breakout data; see `04_chatgpt_validation.py` and the prompt construction.
 
 ---
 

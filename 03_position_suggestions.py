@@ -16,7 +16,8 @@ import requests
 from trading212_client import Trading212Client
 from ticker_utils import clean_ticker
 from logger_config import get_logger
-from config import DEFAULT_ENV_PATH
+from config import DEFAULT_ENV_PATH, TICKER_MAPPING_ERRORS_FILE
+from currency_utils import get_eur_usd_rate, get_eur_usd_rate_with_date, warn_if_eur_rate_unavailable
 from position_suggestions_config import (
     POSITION_REPORTS_DIR,
     SCAN_RESULTS_PATH,
@@ -28,6 +29,8 @@ from position_suggestions_config import (
     WEAK_GRADES,
     EXIT_ON_WEAK_GRADE_IF_LOSS,
     ALLOW_ADD_ON_STRONG_GRADE,
+    REDUCE_ON_GRADE_B_IN_PROFIT,
+    DO_NOT_ADD_BELOW_PIVOT,
     INCLUDE_GRADE_IN_REPORT,
     INCLUDE_PRICE_DETAILS,
 )
@@ -48,6 +51,18 @@ def _get_ticker_from_position(position: Dict) -> str:
     instrument = position.get("instrument") or {}
     ticker = instrument.get("ticker") or instrument.get("symbol") or ""
     return ticker
+
+
+def _get_currency_from_position(position: Dict) -> str:
+    """Extract currency from Trading212 position (instrument.currency or walletImpact.currency)."""
+    instrument = position.get("instrument") or {}
+    currency = instrument.get("currency") or ""
+    if currency:
+        return currency
+    impact = position.get("walletImpact") or position.get("wallet_impact")
+    if isinstance(impact, dict):
+        return impact.get("currency") or ""
+    return ""
 
 
 def _get_entry_price(position: Dict) -> float:
@@ -137,6 +152,41 @@ def load_scan_base_levels() -> Dict[str, Optional[float]]:
     return base_levels
 
 
+def load_scan_pivots() -> Dict[str, Optional[float]]:
+    """Load ticker -> pivot (base high / buy_sell_prices.pivot_price) from latest scan results. Returns {} if missing/invalid."""
+    if not SCAN_RESULTS_PATH or not Path(SCAN_RESULTS_PATH).exists():
+        return {}
+    try:
+        with open(SCAN_RESULTS_PATH, "r", encoding="utf-8") as f:
+            data = json.load(f)
+    except Exception as e:
+        logger.warning("Could not load scan results for pivots: %s", e)
+        return {}
+    if not isinstance(data, list):
+        return {}
+    pivots: Dict[str, Optional[float]] = {}
+    for item in data:
+        ticker = (item.get("ticker") or "").strip().upper()
+        if not ticker:
+            continue
+        buy_sell = item.get("buy_sell_prices") or {}
+        pivot = buy_sell.get("pivot_price")
+        if pivot is None:
+            base_quality = (item.get("checklist") or {}).get("base_quality") or {}
+            details = (base_quality.get("details") or {}) if isinstance(base_quality, dict) else {}
+            pivot = (details.get("base_high") if isinstance(details, dict) else None) or None
+        if pivot is not None:
+            try:
+                val = float(pivot)
+            except (TypeError, ValueError):
+                continue
+            pivots[ticker] = val
+            cleaned = clean_ticker(ticker)
+            if cleaned and cleaned not in pivots:
+                pivots[cleaned] = val
+    return pivots
+
+
 def refresh_data_for_tickers(tickers: List[str]) -> None:
     """Fetch fresh data and re-scan for the given tickers; update cache and scan_results_latest.json."""
     if not tickers:
@@ -153,7 +203,7 @@ def refresh_data_for_tickers(tickers: List[str]) -> None:
             logger.warning("Could not load cache: %s", e)
     stocks = cached_data.get("stocks", {})
 
-    # Fetch fresh data for each ticker (same structure as 01_fetch_stock_data)
+    # Fetch fresh data for each ticker (same structure as 01_fetch_stock_data.py)
     from bot import TradingBot
     bot = TradingBot(skip_trading212=True)
     for ticker in tickers:
@@ -170,11 +220,30 @@ def refresh_data_for_tickers(tickers: List[str]) -> None:
             else:
                 stock_info = bot.data_provider.get_stock_info(ticker)
                 hist_dict = {"index": [str(idx) for idx in hist.index], "data": hist.to_dict("records")}
+                # Normalize to USD (same as 01_fetch_stock_data.py): convert EUR->USD so cache is consistent
+                if (stock_info or {}).get("currency") == "EUR":
+                    rate = get_eur_usd_rate()
+                    if rate and rate > 0:
+                        for row in hist_dict["data"]:
+                            for key in ("Open", "High", "Low", "Close"):
+                                if key in row and row[key] is not None:
+                                    row[key] = round(float(row[key]) * rate, 4)
+                        if stock_info:
+                            for key in ("current_price", "52_week_high", "52_week_low"):
+                                if stock_info.get(key) is not None:
+                                    stock_info[key] = round(float(stock_info[key]) * rate, 4)
+                            stock_info["currency"] = "USD"
+                            stock_info["original_currency"] = "EUR"
+                    else:
+                        if stock_info:
+                            stock_info["original_currency"] = "EUR"
+                            stock_info["rate_unavailable"] = True
+                        logger.warning("EUR/USD rate unavailable for %s during refresh; data left in EUR.", ticker)
                 stocks[ticker] = {
                     "ticker": ticker,
                     "data_available": True,
                     "historical_data": hist_dict,
-                    "stock_info": stock_info,
+                    "stock_info": stock_info or {},
                     "data_points": len(hist),
                     "date_range": {"start": str(hist.index[0]), "end": str(hist.index[-1])},
                     "fetched_at": datetime.now().isoformat(),
@@ -195,6 +264,23 @@ def refresh_data_for_tickers(tickers: List[str]) -> None:
     except Exception as e:
         logger.warning("Could not save cache: %s", e)
         return
+
+    # Write ticker mapping errors for any failed tickers (for manual resolution)
+    failed_refresh = [t for t in tickers if not stocks.get(t, {}).get("data_available", False)]
+    if failed_refresh:
+        failed_refresh.sort()
+        TICKER_MAPPING_ERRORS_FILE.parent.mkdir(parents=True, exist_ok=True)
+        err_lines = [
+            "# Tickers that failed to fetch (possible T212/Yahoo mapping issues).",
+            "# Add mappings to data/ticker_mapping.json and re-run. Format: \"T212_SYMBOL\": \"Yahoo_SYMBOL\"",
+            "# Generated: " + datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            "",
+        ] + failed_refresh
+        try:
+            TICKER_MAPPING_ERRORS_FILE.write_text("\n".join(err_lines) + "\n", encoding="utf-8")
+            logger.info("Wrote %d ticker mapping error(s) to %s", len(failed_refresh), TICKER_MAPPING_ERRORS_FILE)
+        except Exception as e:
+            logger.warning("Could not write ticker mapping errors: %s", e)
 
     # Re-scan and merge into scan_results_latest.json
     spec = importlib.util.spec_from_file_location("report_module", Path("02_generate_full_report.py"))
@@ -242,10 +328,12 @@ def suggest_action(
     current: float,
     pnl_pct: Optional[float],
     grade: Optional[str],
+    pivot: Optional[float] = None,
 ) -> tuple[str, str]:
     """
     Return (action, reason) for a position.
     action: EXIT | REDUCE | HOLD | ADD
+    pivot: scan pivot (base high); when DO_NOT_ADD_BELOW_PIVOT, ADD is suppressed if current < pivot.
     """
     if not entry or entry <= 0:
         return "HOLD", "Unknown entry price; no suggestion."
@@ -271,8 +359,14 @@ def suggest_action(
     if EXIT_ON_WEAK_GRADE_IF_LOSS and grade in WEAK_GRADES and pnl_pct < 0:
         return "EXIT", f"Weak grade ({grade}) and in loss ({pnl_pct:.1f}%)"
 
-    # 5) Strong grade + below target 1
+    # 5) Grade B + in profit -> consider REDUCE (trim)
+    if REDUCE_ON_GRADE_B_IN_PROFIT and grade == "B" and pnl_pct > 0:
+        return "REDUCE", f"Grade B in profit ({pnl_pct:.1f}%); consider trimming"
+
+    # 6) Strong grade + below target 1 -> ADD or HOLD (no ADD below pivot)
     if ALLOW_ADD_ON_STRONG_GRADE and grade in STRONG_GRADES and pnl_pct < PROFIT_SUGGEST_MIN_PCT:
+        if DO_NOT_ADD_BELOW_PIVOT and pivot is not None and current < pivot:
+            return "HOLD", f"Strong grade ({grade}) but below pivot ({current:.2f} < {pivot:.2f}); do not add in pullback"
         return "ADD", f"Strong grade ({grade}); consider adding below target 1"
 
     if grade in STRONG_GRADES:
@@ -337,7 +431,15 @@ def run() -> None:
 
     grades = load_scan_grades()
     base_levels = load_scan_base_levels()
+    pivots = load_scan_pivots()
     POSITION_REPORTS_DIR.mkdir(parents=True, exist_ok=True)
+
+    # EUR/USD rate and date for reference (and for any USD-sourced values shown in EUR)
+    has_eur = any(_get_currency_from_position(p) == "EUR" for p in positions if _get_quantity(p) > 0)
+    eur_usd_rate, eur_usd_rate_date = get_eur_usd_rate_with_date() if has_eur else (None, None)
+    warn_if_eur_rate_unavailable(has_eur, eur_usd_rate)
+    if eur_usd_rate is not None and has_eur:
+        logger.info("EUR/USD rate (Yahoo): %.4f", eur_usd_rate)
 
     lines = []
     lines.append("=" * 80)
@@ -345,6 +447,8 @@ def run() -> None:
     lines.append("=" * 80)
     lines.append(f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     lines.append(f"Positions: {len(positions)}")
+    if eur_usd_rate is not None and has_eur:
+        lines.append(f"EUR/USD rate (Yahoo): {eur_usd_rate:.4f} (for EUR positions)" + (f"  Rate date: {eur_usd_rate_date}" if eur_usd_rate_date else ""))
     lines.append("")
     lines.append("Rules: position_suggestions_config.py (stop loss, profit targets, grade-based)")
     lines.append("")
@@ -360,8 +464,9 @@ def run() -> None:
         pnl_pct = _get_pnl_pct(pos, entry, current)
         grade = grades.get(ticker_clean) or grades.get(ticker_raw.upper())
         base_low = base_levels.get(ticker_clean) or base_levels.get(ticker_raw.upper())
+        pivot = pivots.get(ticker_clean) or pivots.get(ticker_raw.upper())
 
-        action, reason = suggest_action(entry, current, pnl_pct, grade)
+        action, reason = suggest_action(entry, current, pnl_pct, grade, pivot=pivot)
 
         block = []
         block.append("-" * 80)
@@ -371,26 +476,39 @@ def run() -> None:
         block.append(f"  Suggestion: {action}")
         block.append(f"  Reason: {reason}")
         if INCLUDE_PRICE_DETAILS and entry and current:
-            stop = entry * (1 - STOP_LOSS_PCT / 100)
+            stop_5pct = entry * (1 - STOP_LOSS_PCT / 100)
             t1 = entry * (1 + PROFIT_TARGET_1_PCT / 100)
             t2 = entry * (1 + PROFIT_TARGET_2_PCT / 100)
-            block.append(f"  Entry: {entry:.2f}  Current: {current:.2f}  PnL: {pnl_pct:.1f}%" if pnl_pct is not None else f"  Entry: {entry:.2f}  Current: {current:.2f}")
-            block.append(f"  Your targets:  Stop loss: {stop:.2f}  Target 1: {t1:.2f}  Target 2: {t2:.2f}")
+            # Structural stop: tighter of 5% stop and base low (use higher of the two when base_low > stop)
+            if base_low is not None and base_low > stop_5pct:
+                structural_stop = base_low
+                structural_label = " (base low)"
+            else:
+                structural_stop = stop_5pct
+                structural_label = " (5% stop)"
+            currency = _get_currency_from_position(pos)
+            if currency:
+                block.append(f"  Currency: {currency}")
+            if currency == "EUR" and eur_usd_rate is not None:
+                block.append(f"  EUR/USD rate: {eur_usd_rate:.4f}")
+            curr_label = f" (in {currency})" if currency else ""
+            block.append(f"  Entry{curr_label}: {entry:.2f}  Current: {current:.2f}  PnL: {pnl_pct:.1f}%" if pnl_pct is not None else f"  Entry{curr_label}: {entry:.2f}  Current: {current:.2f}")
+            block.append(f"  Stop loss{curr_label}: {stop_5pct:.2f}  Target 1: {t1:.2f}  Target 2: {t2:.2f}")
+            block.append(f"  Structural stop: {structural_stop:.2f}{structural_label}")
             # How current price relates to targets
-            pct_above_stop = ((current - stop) / stop) * 100 if stop and stop > 0 else None
+            pct_above_stop = ((current - structural_stop) / structural_stop) * 100 if structural_stop and structural_stop > 0 else None
             pct_to_t1 = ((t1 - current) / current) * 100 if current and current > 0 else None
             pct_to_t2 = ((t2 - current) / current) * 100 if current and current > 0 else None
             rel = []
             if pct_above_stop is not None:
-                rel.append(f"{pct_above_stop:.1f}% above stop")
+                rel.append(f"{pct_above_stop:.1f}% above structural stop")
             if pct_to_t1 is not None:
                 rel.append(f"{abs(pct_to_t1):.1f}% {'to' if pct_to_t1 > 0 else 'past'} Target 1")
             if pct_to_t2 is not None:
                 rel.append(f"{abs(pct_to_t2):.1f}% {'to' if pct_to_t2 > 0 else 'past'} Target 2")
             if rel:
                 block.append(f"  Current vs targets:  {'  |  '.join(rel)}")
-            # Base support: if scan identified a base whose low is above the % stop, suggest it as alternative exit
-            if base_low is not None and stop and base_low > stop:
+            if base_low is not None and base_low > stop_5pct:
                 block.append(f"  Base support: {base_low:.2f} – consider exit if price breaks below base.")
         block.append("")
         text = "\n".join(block)

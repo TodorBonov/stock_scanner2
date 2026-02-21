@@ -1,6 +1,6 @@
 """
 ChatGPT position suggestions script.
-Runs after 05_position_suggestions.py. Reads the latest position_suggestions_*.txt,
+Runs after 03_position_suggestions.py. Reads the latest position_suggestions_*.txt,
 sends it to ChatGPT, and writes AI suggestions to position_suggestions_Chat_GPT_*.txt.
 Uses stored scan results (50/200 DMA, base highs/lows, volume) for SEPA-style pivot/add and must-hold levels.
 Requires OPENAI_API_KEY in .env.
@@ -33,7 +33,7 @@ if env_file.exists():
 
 REPORTS_DIR.mkdir(exist_ok=True)
 
-# Scan results path (same as 05_position_suggestions)
+# Scan results path (same as 03_position_suggestions)
 SCAN_RESULTS_PATH = REPORTS_DIR / "scan_results_latest.json"
 
 
@@ -102,7 +102,11 @@ def load_chart_data_from_scan_results(tickers: list[str]) -> str:
     lines = []
     for ticker in tickers:
         t = ticker.upper()
-        row = by_ticker.get(t) or by_ticker.get(t.split("_")[0] if "_" in t else t)
+        row = (
+            by_ticker.get(t)
+            or by_ticker.get(t.split("_")[0] if "_" in t else t)
+            or (by_ticker.get(t[:-1]) if t.endswith("D") and len(t) > 1 else None)  # RWED->RWE, PFED->PFE
+        )
         if not row:
             continue
         checklist = row.get("checklist") or {}
@@ -215,7 +219,7 @@ def main() -> None:
 
     latest = get_latest_position_suggestions_file()
     if not latest or not latest.exists():
-        print("\n[ERROR] No position_suggestions_*.txt found. Run 05_position_suggestions.py first.")
+        print("\n[ERROR] No position_suggestions_*.txt found. Run 03_position_suggestions.py first.")
         return
 
     content = latest.read_text(encoding="utf-8")

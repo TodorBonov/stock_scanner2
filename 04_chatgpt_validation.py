@@ -58,6 +58,18 @@ def get_scan_date_from_latest_report() -> Optional[str]:
     return latest_date
 
 
+def _safe_float(val, default: float = 0.0):
+    """Return float for formatting; if val is not numeric, return default."""
+    if val is None:
+        return default
+    if isinstance(val, (int, float)):
+        return float(val)
+    try:
+        return float(val)
+    except (TypeError, ValueError):
+        return default
+
+
 def format_stock_data_for_chatgpt(stock_result: Dict, is_pre_breakout: bool = False) -> str:
     """
     Format stock analysis data for ChatGPT prompt.
@@ -78,7 +90,15 @@ def format_stock_data_for_chatgpt(stock_result: Dict, is_pre_breakout: bool = Fa
     lines = []
     if is_pre_breakout:
         dist = buy_sell.get("distance_to_buy_pct")
-        dist_str = f"{dist:.1f}%" if dist is not None else "N/A"
+        if dist is None:
+            dist_str = "N/A"
+        elif isinstance(dist, (int, float)):
+            dist_str = f"{float(dist):.1f}%"
+        else:
+            try:
+                dist_str = f"{float(dist):.1f}%"
+            except (TypeError, ValueError):
+                dist_str = str(dist)
         lines.append("*** PRE-BREAKOUT WATCHLIST — Not yet broken out; watch for breakout above pivot. ***")
         lines.append(f"*** Distance to pivot: {dist_str} (negative = below pivot) ***")
         lines.append("")
@@ -118,32 +138,32 @@ def format_stock_data_for_chatgpt(stock_result: Dict, is_pre_breakout: bool = Fa
     lines.append("FUNDAMENTAL METRICS:")
     earnings_growth = stock_info.get('earnings_growth')
     if earnings_growth is not None:
-        lines.append(f"  Earnings Growth: {earnings_growth:.1f}%")
+        lines.append(f"  Earnings Growth: {_safe_float(earnings_growth):.1f}%")
     revenue_growth = stock_info.get('revenue_growth')
     if revenue_growth is not None:
-        lines.append(f"  Revenue Growth: {revenue_growth:.1f}%")
+        lines.append(f"  Revenue Growth: {_safe_float(revenue_growth):.1f}%")
     profit_margins = stock_info.get('profit_margins')
     if profit_margins is not None:
-        lines.append(f"  Profit Margins: {profit_margins:.1f}%")
+        lines.append(f"  Profit Margins: {_safe_float(profit_margins):.1f}%")
     roe = stock_info.get('return_on_equity')
     if roe is not None:
-        lines.append(f"  Return on Equity (ROE): {roe:.1f}%")
+        lines.append(f"  Return on Equity (ROE): {_safe_float(roe):.1f}%")
     de = stock_info.get('debt_to_equity')
     if de is not None:
-        lines.append(f"  Debt to Equity: {de:.1f}")
+        lines.append(f"  Debt to Equity: {_safe_float(de):.1f}")
     lines.append("")
     
     # Valuation Metrics
     lines.append("VALUATION METRICS:")
     trailing_pe = stock_info.get('trailing_pe')
     if trailing_pe is not None:
-        lines.append(f"  Trailing P/E: {trailing_pe:.1f}")
+        lines.append(f"  Trailing P/E: {_safe_float(trailing_pe):.1f}")
     forward_pe = stock_info.get('forward_pe')
     if forward_pe is not None:
-        lines.append(f"  Forward P/E: {forward_pe:.1f}")
+        lines.append(f"  Forward P/E: {_safe_float(forward_pe):.1f}")
     div_yield = stock_info.get('dividend_yield')
     if div_yield is not None:
-        lines.append(f"  Dividend Yield: {div_yield:.2f}%")
+        lines.append(f"  Dividend Yield: {_safe_float(div_yield):.2f}%")
     lines.append("")
     
     # Price Information

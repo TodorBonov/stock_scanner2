@@ -145,8 +145,8 @@ class CachedDataProvider:
         return self.original_provider.calculate_relative_strength(ticker, benchmark, period)
 
 
-def scan_all_stocks_from_cache(cached_data: Dict, benchmark: str = "^GDAXI", single_ticker: Optional[str] = None):
-    """Scan all stocks using cached data"""
+def scan_all_stocks_from_cache(cached_data: Dict, benchmark: str = "^GDAXI", single_ticker: Optional[str] = None, tickers: Optional[List[str]] = None):
+    """Scan all stocks using cached data. Use single_ticker for one, or tickers for a list."""
     stocks = cached_data.get("stocks", {})
     
     # Initialize bot
@@ -160,8 +160,14 @@ def scan_all_stocks_from_cache(cached_data: Dict, benchmark: str = "^GDAXI", sin
     
     results = []
     
-    # Filter to single ticker if specified
-    if single_ticker:
+    # Filter to ticker list if specified (tickers takes precedence over single_ticker)
+    if tickers:
+        allowed = set(t.strip().upper() for t in tickers if t and t.strip())
+        stocks = {k: v for k, v in stocks.items() if k.upper() in allowed}
+        if not stocks:
+            logger.error("None of the requested tickers found in cache: %s", list(allowed))
+            return [], scanner
+    elif single_ticker:
         if single_ticker in stocks:
             stocks = {single_ticker: stocks[single_ticker]}
         else:
@@ -175,6 +181,8 @@ def scan_all_stocks_from_cache(cached_data: Dict, benchmark: str = "^GDAXI", sin
     print(f"Total stocks: {total}")
     if single_ticker:
         print(f"Single stock mode: {single_ticker}")
+    elif tickers:
+        print(f"Tickers: {', '.join(sorted(stocks.keys()))}")
     print(f"{'='*80}\n")
     
     # Scan each stock
@@ -834,6 +842,11 @@ def main():
         help="Analyze single stock only (optional)"
     )
     parser.add_argument(
+        "--tickers",
+        type=str,
+        help="Comma-separated tickers to scan only (e.g. RWE,TXT,PFE). Overrides --ticker."
+    )
+    parser.add_argument(
         "--refresh",
         action="store_true",
         help="Refresh data before analysis (runs fetch_stock_data.py)"
@@ -877,11 +890,15 @@ def main():
         sys.exit(1)
     logger.info(f"Loaded {len(cached_data.get('stocks', {}))} stocks from cache")
     
-    # Scan all stocks
+    # Scan all stocks (optionally limited to --tickers or --ticker)
+    ticker_list = None
+    if args.tickers:
+        ticker_list = [t.strip() for t in args.tickers.split(",") if t.strip()]
     results, scanner = scan_all_stocks_from_cache(
-        cached_data, 
+        cached_data,
         benchmark=args.benchmark,
-        single_ticker=args.ticker
+        single_ticker=args.ticker if not ticker_list else None,
+        tickers=ticker_list
     )
     
     if not results:

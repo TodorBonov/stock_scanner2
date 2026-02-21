@@ -1,6 +1,6 @@
 """
 Shared cache helpers for stock data.
-Used by 01_fetch_stock_data.py, 02_generate_full_report.py, 03_chatgpt_validation.py, 04_retry_failed_stocks.py.
+Used by 01_fetch_stock_data.py, 02_generate_full_report.py, 04_chatgpt_validation.py, 07_retry_failed_stocks.py.
 """
 import json
 import logging

@@ -1,19 +1,37 @@
 """
 Ticker Utility Module
-Centralized ticker cleaning and mapping logic for consistent handling across all modules
+Centralized ticker cleaning and mapping logic for consistent handling across all modules.
+Mappings can be edited in data/ticker_mapping.json (see reports/ticker_mapping_errors.txt for failures).
 """
-from typing import List
+import json
+from typing import Dict, List
 
-
-# Ticker mapping for Trading 212 tickers that need special handling
-# Maps Trading 212 ticker format to actual ticker symbol
-# Add new mappings here as needed
+# Built-in defaults (also kept in data/ticker_mapping.json so file can be edited)
 TICKER_MAPPING = {
     "WTAIM_EQ": "WTAI",
     "WTAIm_EQ": "WTAI",
-    # Add more mappings here as needed
-    # Format: "TRADING212_TICKER": "ACTUAL_TICKER"
 }
+
+
+def _load_ticker_mapping_from_file() -> Dict[str, str]:
+    """Load ticker mapping from config file. Returns {} if file missing or invalid."""
+    try:
+        from config import TICKER_MAPPING_FILE
+        if not TICKER_MAPPING_FILE.exists():
+            return {}
+        with open(TICKER_MAPPING_FILE, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        if not isinstance(data, dict):
+            return {}
+        return {str(k).upper(): str(v).upper() for k, v in data.items()}
+    except Exception:
+        return {}
+
+
+def get_effective_mapping() -> Dict[str, str]:
+    """Merge built-in TICKER_MAPPING with file (file overrides). Use for clean_ticker."""
+    file_map = _load_ticker_mapping_from_file()
+    return {**TICKER_MAPPING, **file_map}
 
 
 def clean_ticker(ticker: str, use_mapping: bool = True) -> str:
@@ -45,9 +63,11 @@ def clean_ticker(ticker: str, use_mapping: bool = True) -> str:
     
     ticker_upper = ticker.upper()
     
-    # Check for special ticker mappings first
-    if use_mapping and ticker_upper in TICKER_MAPPING:
-        return TICKER_MAPPING[ticker_upper]
+    # Check for special ticker mappings first (built-in + file)
+    if use_mapping:
+        mapping = get_effective_mapping()
+        if ticker_upper in mapping:
+            return mapping[ticker_upper]
     
     # Strip everything from "_" and including it (e.g., "WTAIm_EQ" -> "WTAIm")
     if "_" in ticker:

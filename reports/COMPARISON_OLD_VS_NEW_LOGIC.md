@@ -109,11 +109,11 @@ The following code and config changes directly affect the reported numbers and g
 ## Pipeline status
 
 - **Report (02):** Run when needed → `summary_report_*.txt`
-- **ChatGPT validation (03):** Optional after report
-- **Position suggestions (05):** Optional after report
+- **Position suggestions (03):** Optional after report
+- **ChatGPT validation (04):** Optional after report
 
 To re-run without fetching new data:
 ```powershell
 .\run_latest_data_pipeline.ps1
 ```
-Or step by step: `python 02_generate_full_report.py`, then `python 03_chatgpt_validation.py`, then `python 05_position_suggestions.py`.
+Or step by step: `python 02_generate_full_report.py`, then `python 03_position_suggestions.py`, then `python 04_chatgpt_validation.py`.

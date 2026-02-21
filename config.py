@@ -39,8 +39,9 @@ OPENAI_API_TIMEOUT = 60  # seconds for OpenAI API calls
 # Used by: AI analysis features (if enabled)
 # Why important: AI calls can take longer, so timeout is more generous
 
-# ChatGPT validation (03_chatgpt_validation.py)
-OPENAI_CHATGPT_MODEL = "gpt-5.2"  # Model for validation (e.g. gpt-5.2, gpt-5, gpt-4o)
+# ChatGPT validation (04_chatgpt_validation.py)
+# Confirm model name for your API: gpt-4o, gpt-4-turbo, gpt-4, etc. (gpt-5.2 used if available)
+OPENAI_CHATGPT_MODEL = "gpt-5.2"  # Model for validation (e.g. gpt-4o, gpt-4-turbo, gpt-5.2)
 OPENAI_CHATGPT_MAX_COMPLETION_TOKENS = 64000  # Allow long analysis for many stocks (increase if output is truncated)
 OPENAI_CHATGPT_MAX_A_GRADE_STOCKS = 9999  # Max A+ and A stocks in one prompt (9999 = send all)
 OPENAI_CHATGPT_MAX_PRE_BREAKOUT_STOCKS = 9999  # Max pre-breakout setups in one prompt (9999 = send all)
@@ -101,6 +102,16 @@ CACHE_FILE = Path("data/cached_stock_data.json")
 FAILED_FETCH_LIST = Path("data/failed_fetch.txt")
 # Purpose: List of tickers that failed to fetch (one per line), updated after each fetch
 # Used by: 01_fetch_stock_data.py, list_failed_fetches.py
+
+# Ticker mapping: file-based mapping (T212 symbol -> Yahoo/data symbol) for manual resolution
+TICKER_MAPPING_FILE = Path("data/ticker_mapping.json")
+# Purpose: JSON file of ticker mappings; edit to fix mapping errors (see reports/ticker_mapping_errors.txt)
+# Used by: ticker_utils.py
+
+# Ticker mapping errors: written each run that fetches; lists tickers that failed (possible mapping issues)
+TICKER_MAPPING_ERRORS_FILE = Path("reports/ticker_mapping_errors.txt")
+# Purpose: After each fetch, list tickers with no data/error so you can add them to data/ticker_mapping.json
+# Used by: 01_fetch_stock_data.py, 03_position_suggestions.py
 
 REPORTS_DIR = Path("reports")
 # Purpose: Directory for summary/detailed reports and scan results

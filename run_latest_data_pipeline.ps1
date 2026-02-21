@@ -1,5 +1,5 @@
-# Latest-data pipeline: report, ChatGPT validation, and position suggestions using existing cache
-# Runs: 02_generate_full_report.py -> 03_chatgpt_validation.py -> 05_position_suggestions.py
+# Latest-data pipeline: report, position suggestions, ChatGPT validation using existing cache
+# Runs: 02_generate_full_report.py -> 03_position_suggestions.py -> 04_chatgpt_validation.py
 # Requires: data/cached_stock_data.json (run 01_fetch_stock_data.py or run_full_pipeline.ps1 first)
 
 $ErrorActionPreference = "Stop"
@@ -22,17 +22,17 @@ if ($LASTEXITCODE -ne 0) {
     exit 1
 }
 
-Write-Host "`n[2/3] Running ChatGPT validation..."
-python 03_chatgpt_validation.py
+Write-Host "`n[2/3] Running position suggestions..."
+python 03_position_suggestions.py
 if ($LASTEXITCODE -ne 0) {
-    Write-Host "[ERROR] ChatGPT validation failed!"
+    Write-Host "[ERROR] Position suggestions failed!"
     exit 1
 }
 
-Write-Host "`n[3/3] Running position suggestions..."
-python 05_position_suggestions.py
+Write-Host "`n[3/3] Running ChatGPT validation..."
+python 04_chatgpt_validation.py
 if ($LASTEXITCODE -ne 0) {
-    Write-Host "[ERROR] Position suggestions failed!"
+    Write-Host "[ERROR] ChatGPT validation failed!"
     exit 1
 }
 

@@ -18,7 +18,8 @@ FETCH_TIMEOUT_SEC = 60
 from bot import TradingBot
 from logger_config import setup_logging, get_logger
 from cache_utils import load_cached_data, save_cached_data
-from config import CACHE_FILE, FAILED_FETCH_LIST
+from config import CACHE_FILE, FAILED_FETCH_LIST, TICKER_MAPPING_ERRORS_FILE
+from currency_utils import get_eur_usd_rate
 
 # Fix Windows console encoding (skip when running under pytest to avoid breaking capture)
 if sys.platform == 'win32' and 'pytest' not in sys.modules:
@@ -76,11 +77,32 @@ def fetch_stock_data(ticker: str, bot: TradingBot) -> Dict:
             "data": hist.to_dict('records')
         }
         
+        # Normalize to USD: scripts after Yahoo use only USD; convert back to EUR only in reports
+        if (stock_info or {}).get("currency") == "EUR":
+            rate = get_eur_usd_rate()
+            if rate and rate > 0:
+                for row in hist_dict["data"]:
+                    for key in ("Open", "High", "Low", "Close"):
+                        if key in row and row[key] is not None:
+                            row[key] = round(float(row[key]) * rate, 4)
+                if stock_info:
+                    for key in ("current_price", "52_week_high", "52_week_low"):
+                        if stock_info.get(key) is not None:
+                            stock_info[key] = round(float(stock_info[key]) * rate, 4)
+                    stock_info["currency"] = "USD"
+                    stock_info["original_currency"] = "EUR"
+                logger.debug(f"Converted {ticker} from EUR to USD (rate {rate:.4f})")
+            else:
+                if stock_info:
+                    stock_info["original_currency"] = "EUR"
+                    stock_info["rate_unavailable"] = True
+                logger.warning("EUR/USD rate unavailable for %s; cached data left in EUR (downstream may assume USD).", ticker)
+        
         return {
             "ticker": ticker,
             "data_available": True,
             "historical_data": hist_dict,
-            "stock_info": stock_info,
+            "stock_info": stock_info or {},
             "data_points": len(hist),
             "date_range": {
                 "start": str(hist.index[0]),
@@ -140,10 +162,10 @@ def fetch_stock_data_with_retry(ticker: str, bot: TradingBot, max_retries: int =
     }
 
 
-def fetch_all_data(force_refresh: bool = False, benchmark: str = "^GDAXI"):
+def fetch_all_data(force_refresh: bool = False, benchmark: str = "^GDAXI", watchlist_path: str = "watchlist.txt"):
     """Fetch data for all stocks in watchlist"""
     # Load watchlist
-    tickers = load_watchlist()
+    tickers = load_watchlist(watchlist_path)
     if not tickers:
         print("No tickers found in watchlist.txt")
         return
@@ -241,6 +263,21 @@ def fetch_all_data(force_refresh: bool = False, benchmark: str = "^GDAXI"):
         FAILED_FETCH_LIST.write_text("", encoding="utf-8")
         logger.info(f"Cleared {FAILED_FETCH_LIST} (no failures)")
 
+    # Write ticker mapping errors (for manual resolution in data/ticker_mapping.json)
+    TICKER_MAPPING_ERRORS_FILE.parent.mkdir(parents=True, exist_ok=True)
+    lines = [
+        "# Tickers that failed to fetch (possible T212/Yahoo mapping issues).",
+        "# Add mappings to data/ticker_mapping.json and re-run. Format: \"T212_SYMBOL\": \"Yahoo_SYMBOL\"",
+        "# Generated: " + datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "",
+    ]
+    if failed:
+        lines.extend(failed)
+        logger.info(f"Wrote {len(failed)} ticker mapping errors to {TICKER_MAPPING_ERRORS_FILE}")
+    else:
+        lines.append("(none)")
+    TICKER_MAPPING_ERRORS_FILE.write_text("\n".join(lines) + "\n", encoding="utf-8")
+
     # Print summary
     print(f"\n{'='*80}")
     print(f"FETCHING COMPLETE")
@@ -278,7 +315,7 @@ def main():
     
     args = parser.parse_args()
     
-    fetch_all_data(force_refresh=args.refresh, benchmark=args.benchmark)
+    fetch_all_data(force_refresh=args.refresh, benchmark=args.benchmark, watchlist_path=args.watchlist)
 
 
 if __name__ == "__main__":

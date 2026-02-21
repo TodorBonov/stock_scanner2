@@ -1,5 +1,5 @@
-# Full pipeline: fetch, report, ChatGPT validation, position suggestions, ChatGPT position suggestions, then commit & push
-# Runs: 01 -> 02 -> 03 -> 05 -> 06_chatgpt_position_suggestions.py -> commit_latest_reports.ps1
+# Full pipeline: fetch, report, position suggestions, ChatGPT validation, ChatGPT position suggestions, then commit & push
+# Runs: 01 -> 02 -> 03 -> 04 -> 06 -> commit_latest_reports.ps1 (optional: 05_chatgpt_validation_advanced, 07_retry_failed_stocks)
 
 $ErrorActionPreference = "Stop"
 
@@ -21,17 +21,17 @@ if ($LASTEXITCODE -ne 0) {
     exit 1
 }
 
-Write-Host "`n[3/6] Running ChatGPT validation..."
-python 03_chatgpt_validation.py
+Write-Host "`n[3/6] Running position suggestions..."
+python 03_position_suggestions.py
 if ($LASTEXITCODE -ne 0) {
-    Write-Host "[ERROR] ChatGPT validation failed!"
+    Write-Host "[ERROR] Position suggestions failed!"
     exit 1
 }
 
-Write-Host "`n[4/6] Running position suggestions..."
-python 05_position_suggestions.py
+Write-Host "`n[4/6] Running ChatGPT validation..."
+python 04_chatgpt_validation.py
 if ($LASTEXITCODE -ne 0) {
-    Write-Host "[ERROR] Position suggestions failed!"
+    Write-Host "[ERROR] ChatGPT validation failed!"
     exit 1
 }
 
