@@ -51,51 +51,71 @@ TRADING212_API_KEY=your_key_here
 TRADING212_API_SECRET=your_secret_here
 ```
 
+## Pipelines and branches
+
+- **main** (default): **New pipeline** (New1–New5) — recommended for ChatGPT-based position and new-stock analysis. See **PIPELINES.md** for full run order and data paths.
+- **pipeline/legacy-01-07**: **Legacy pipeline** (01–07) — preserved for reference. Check out this branch to run the old flow (`run_full_pipeline.ps1` or 01→02→03→04…). See **FLOW.md** for details.
+
+Full comparison and branch strategy: **PIPELINES.md**.
+
 ## Quick Start
 
-Two pipelines are available:
+**New pipeline (on main, recommended):**
+
+```powershell
+python New1_fetch_yahoo_watchlist.py
+python New2_fetch_positions_trading212.py
+python New3_prepare_chatgpt_data.py
+python New4_chatgpt_existing_positions.py
+python New5_chatgpt_new_positions.py
+```
+
+Optional 6-month OHLCV variant: run `New3_prepare_chatgpt_data_6mo.py` after New3, then `New4_chatgpt_existing_positions_6mo.py` and `New5_chatgpt_new_positions_6mo.py`. See `reports/new_pipeline/TOKEN_COMPARISON_ORIGINAL_VS_6MO.md`.
+
+**Legacy pipeline** (use on branch `pipeline/legacy-01-07`):
 
 | Pipeline | Command | What it does |
 |----------|---------|--------------|
-| **Full** | `.\run_full_pipeline.ps1` | Fetches fresh data (01), then report (02), ChatGPT validation (03), position suggestions (05). |
-| **Latest data** | `.\run_latest_data_pipeline.ps1` | Uses existing cache only: report (02), ChatGPT (03), position suggestions (05). No fetch. |
+| **Full** | `.\run_full_pipeline.ps1` | Fetches (01), report (02), position suggestions (03), ChatGPT (04, 06). |
+| **Latest data** | `.\run_latest_data_pipeline.ps1` | Uses existing cache: report (02), position suggestions (03), ChatGPT (04). |
 
 ```powershell
-# Full pipeline (fetch + report + ChatGPT + position suggestions)
+git checkout pipeline/legacy-01-07
 .\run_full_pipeline.ps1
-# If you get "running scripts is disabled", use instead:
-.\run_full_pipeline.cmd
-
-# Latest-data pipeline (report + ChatGPT + position suggestions; requires existing cache)
+# or: .\run_full_pipeline.cmd
 .\run_latest_data_pipeline.ps1
 ```
 
 ## Usage
 
-### Pipelines (recommended)
+### New pipeline (main branch, recommended)
 
-- **Full pipeline:** `01_fetch_stock_data.py` → `02_generate_full_report.py` → `03_chatgpt_validation.py` → `05_position_suggestions.py`. Run via `.\run_full_pipeline.ps1`.
-- **Latest-data pipeline:** `02_generate_full_report.py` → `03_chatgpt_validation.py` → `05_position_suggestions.py`. Uses `data/cached_stock_data.json`; run via `.\run_latest_data_pipeline.ps1`.
+Run in order: `New1_fetch_yahoo_watchlist.py` → `New2_fetch_positions_trading212.py` → `New3_prepare_chatgpt_data.py` → `New4_chatgpt_existing_positions.py` → `New5_chatgpt_new_positions.py`. Data: `data/cached_stock_data_new_pipeline.json`, `reports/new_pipeline/`. Full details: **PIPELINES.md**.
 
-### Run individual steps
+### Legacy pipeline (branch pipeline/legacy-01-07)
+
+- **Full pipeline:** `01_fetch_stock_data.py` → `02_generate_full_report.py` → `03_position_suggestions.py` → `04_chatgpt_validation.py` (then optionally `06_chatgpt_position_suggestions.py`). Run via `.\run_full_pipeline.ps1` when on the legacy branch.
+- **Latest-data pipeline:** `02_generate_full_report.py` → `03_position_suggestions.py` → `04_chatgpt_validation.py`. Uses `data/cached_stock_data.json`; run via `.\run_latest_data_pipeline.ps1`.
+
+### Run individual steps (legacy pipeline)
 
 ```bash
+# On branch pipeline/legacy-01-07:
+
 # 1. Fetch and cache data (watchlist.txt). Use --refresh to force refresh all; use --benchmark for RS (default ^GDAXI).
 python 01_fetch_stock_data.py
-# python 01_fetch_stock_data.py --refresh --benchmark ^GDAXI
 
-# 2. Generate Minervini report from cache. Use --refresh to fetch then report in one go; --ticker X for one stock; --benchmark for RS.
+# 2. Generate Minervini report from cache.
 python 02_generate_full_report.py
-# python 02_generate_full_report.py --refresh --benchmark ^GSPC
 
-# 3. ChatGPT validation (A-grade stocks)
-python 03_chatgpt_validation.py
+# 3. Position suggestions (Trading 212 positions + scan grades; requires TRADING212_API_KEY/SECRET in .env)
+python 03_position_suggestions.py
 
-# 4. Retry failed fetches (optional)
-python 04_retry_failed_stocks.py
+# 4. ChatGPT validation (A-grade stocks)
+python 04_chatgpt_validation.py
 
-# 5. Position suggestions (Trading 212 positions + scan grades; requires TRADING212_API_KEY/SECRET in .env)
-python 05_position_suggestions.py
+# 5. Retry failed fetches (optional)
+python 07_retry_failed_stocks.py
 ```
 
 ## Minervini SEPA Criteria Explained
@@ -187,27 +207,39 @@ Key files:
 
 ```
 .
-├── 01_fetch_stock_data.py      # Fetch and cache data from watchlist
-├── 02_generate_full_report.py  # Minervini scan + summary/detailed reports
-├── 03_chatgpt_validation.py    # ChatGPT validation of A-grade stocks
-├── 04_retry_failed_stocks.py   # Retry failed fetches
-├── 05_position_suggestions.py  # Position suggestions (Trading 212 + scan grades)
-├── run_full_pipeline.ps1       # Full pipeline (01 → 02 → 03 → 05)
-├── run_full_pipeline.cmd      # Same as above (use if PowerShell scripts disabled)
-├── run_latest_data_pipeline.ps1 # Latest-data pipeline (02 → 03 → 05)
+├── PIPELINES.md                # Branch strategy + new vs legacy pipeline reference
+├── FLOW.md                     # Legacy pipeline flow (01–07), currency, data stores
+├── New1_fetch_yahoo_watchlist.py       # [New pipeline] Fetch Yahoo → new_pipeline cache
+├── New2_fetch_positions_trading212.py  # [New pipeline] T212 positions
+├── New3_prepare_chatgpt_data.py        # [New pipeline] Prepare JSON for ChatGPT (existing + A+/A)
+├── New3_prepare_chatgpt_data_6mo.py   # [New pipeline] Same, 6 months OHLCV only
+├── New4_chatgpt_existing_positions.py # [New pipeline] ChatGPT existing positions
+├── New4_chatgpt_existing_positions_6mo.py
+├── New5_chatgpt_new_positions.py      # [New pipeline] ChatGPT new position candidates
+├── New5_chatgpt_new_positions_6mo.py
+├── 01_fetch_stock_data.py      # [Legacy] Fetch and cache from watchlist
+├── 02_generate_full_report.py  # Minervini scan (shared by both pipelines)
+├── 03_position_suggestions.py  # [Legacy] Position suggestions (T212 + scan)
+├── 04_chatgpt_validation.py    # [Legacy] ChatGPT validation
+├── 05_chatgpt_validation_advanced.py  # [Legacy] ChatGPT advanced
+├── 06_chatgpt_position_suggestions.py # [Legacy] ChatGPT position suggestions
+├── 07_retry_failed_stocks.py   # [Legacy] Retry failed fetches
+├── run_full_pipeline.ps1       # [Legacy] Full pipeline (01 → 02 → 03 → 04 → 06)
+├── run_full_pipeline.cmd       # [Legacy] Same
+├── run_latest_data_pipeline.ps1 # [Legacy] Latest-data only (02 → 03 → 04)
 ├── bot.py                      # Main bot interface
 ├── minervini_scanner.py        # Core Minervini SEPA scanner logic
 ├── data_provider.py            # Data fetching (yfinance, Alpha Vantage)
-├── trading212_client.py       # Trading 212 API client (positions, step 05)
+├── trading212_client.py        # Trading 212 API client
 ├── config.py                   # Configuration and paths
-├── cache_utils.py              # Cache load/save (used by 01, 02, 03, 04)
+├── cache_utils.py              # Cache load/save
 ├── benchmark_mapping.py        # Per-ticker benchmark for mixed watchlists
-├── position_suggestions_config.py # Position suggestion rules
+├── position_suggestions_config.py
 ├── config.example.env          # Example .env (copy to .env)
 ├── requirements.txt            # Python dependencies
 ├── watchlist.txt               # Ticker list for scanning
-├── data/                       # cached_stock_data.json (from step 01)
-├── reports/                    # Summary/detailed reports, scan results
+├── data/                       # cached_stock_data.json (legacy), cached_stock_data_new_pipeline.json (new)
+├── reports/                    # Legacy reports; reports/new_pipeline/ for new pipeline
 └── tests/                      # Unit tests
 ```
 
@@ -258,7 +290,7 @@ Key files:
    ```powershell
    .\run_full_pipeline.ps1
    ```
-   Or run individual steps: `01_fetch_stock_data.py`, then `02_generate_full_report.py`, etc.
+   Or run individual steps: `01_fetch_stock_data.py`, then `02_generate_full_report.py`, then `03_position_suggestions.py`, etc.
 
 4. **Review A+ and A graded stocks** for potential entries
 
@@ -282,7 +314,7 @@ PowerShell’s execution policy is blocking scripts. You can either:
 
 ### "Unauthorized" (401) when running the full pipeline
 
-The pipeline step **05_position_suggestions.py** calls the **Trading 212 API** to fetch your open positions. If you see `401 Unauthorized` or "Failed to fetch positions", the API is rejecting your credentials.
+The pipeline step **03_position_suggestions.py** calls the **Trading 212 API** to fetch your open positions. If you see `401 Unauthorized` or "Failed to fetch positions", the API is rejecting your credentials.
 
 **Common causes:**
 
@@ -300,7 +332,7 @@ The pipeline step **05_position_suggestions.py** calls the **Trading 212 API** t
    Run the script from the project root so that the `.env` file in that folder is found. The scripts load it automatically via `python-dotenv`.
 
 **To run the rest of the pipeline without Trading 212:**  
-Use the same steps but skip position suggestions: run `01_fetch_stock_data.py`, then `02_generate_full_report.py`, then `03_chatgpt_validation.py`. Step 05 is only needed for position suggestions based on your Trading 212 positions.
+Use the same steps but skip position suggestions: run `01_fetch_stock_data.py`, then `02_generate_full_report.py`, then `04_chatgpt_validation.py`. Step 03 is only needed for position suggestions based on your Trading 212 positions.
 
 ## License
 
