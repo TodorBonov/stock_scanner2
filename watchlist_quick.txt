@@ -1,0 +1,6 @@
+# Quick run: RWE, TXT, Pfizer (PFE)
+RWE
+TXT
+PFE
+TTWO
+WTAI

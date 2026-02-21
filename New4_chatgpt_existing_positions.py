@@ -1,29 +1,57 @@
 """
 New pipeline (4/5): ChatGPT analysis for existing positions (from prepared data).
-Reads prepared_existing_positions.json, sends raw OHLCV + position info to ChatGPT, writes report.
+Reads prepared_existing_positions.json (or _6mo with --use-6mo), sends raw OHLCV + position info to ChatGPT, writes report.
 """
-import os
 import json
-import time
 import argparse
 from pathlib import Path
 from datetime import datetime
-from typing import Optional, Dict, Tuple
+import re
+from typing import Optional, Dict, Tuple, List
 
-from dotenv import load_dotenv
-from openai import OpenAI
 from logger_config import setup_logging, get_logger
-from config import (
-    DEFAULT_ENV_PATH,
-    OPENAI_API_TIMEOUT,
-    OPENAI_CHATGPT_MODEL,
-    OPENAI_CHATGPT_MAX_COMPLETION_TOKENS,
-    OPENAI_CHATGPT_RETRY_ATTEMPTS,
-    OPENAI_CHATGPT_RETRY_BASE_SECONDS,
-)
+from config import OPENAI_CHATGPT_MODEL, OPENAI_CHATGPT_MAX_COMPLETION_TOKENS
+from openai_utils import require_openai_api_key, send_to_chatgpt as openai_send
 
 NEW_PIPELINE_REPORTS = Path("reports") / "new_pipeline"
-PREPARED_EXISTING = NEW_PIPELINE_REPORTS / "prepared_existing_positions.json"
+
+
+def _prepared_path(use_6mo: bool) -> Path:
+    return NEW_PIPELINE_REPORTS / ("prepared_existing_positions_6mo.json" if use_6mo else "prepared_existing_positions.json")
+
+
+def _parse_entry_quality_score(text: str) -> Optional[int]:
+    """Parse entry quality / position quality score (1-10) from ChatGPT response. Returns None if not found."""
+    if not text or not text.strip():
+        return None
+    # Try explicit "entry quality" or "position quality" patterns first
+    for pattern in [
+        r"[Ee]ntry\s+quality\s*[:\-]?\s*(\d+)",
+        r"[Pp]osition\s+quality\s*[:\-]?\s*(\d+)",
+        r"[Rr]ate\s+(?:overall\s+)?(?:position\s+)?quality\s*[:\-]?\s*(\d+)",
+        r"quality\s*(?:now|score)?\s*[:\-]?\s*(\d+)\s*/\s*10",
+        r"score\s*[:\-]?\s*(\d+)\s*[/\-]?\s*10",
+        r"(\d+)\s*/\s*10\s*(?:for\s+entry|for\s+position|entry\s+quality)",
+        r"(\d+)\s*/\s*10\s*$",  # line ending in "X/10"
+    ]:
+        m = re.search(pattern, text, re.IGNORECASE | re.MULTILINE)
+        if m:
+            v = int(m.group(1))
+            if 1 <= v <= 10:
+                return v
+    # Fallback: first "X/10" or "X out of 10" in the text
+    m = re.search(r"\b(\d+)\s*/\s*10\b", text)
+    if m:
+        v = int(m.group(1))
+        if 1 <= v <= 10:
+            return v
+    m = re.search(r"\b(\d+)\s+out\s+of\s+10\b", text, re.IGNORECASE)
+    if m:
+        v = int(m.group(1))
+        if 1 <= v <= 10:
+            return v
+    return None
+
 
 PROMPT_TEMPLATE = """Act as a professional institutional technical analyst using Mark Minervini, Stan Weinstein, and quantitative price/volume analysis.
 
@@ -115,53 +143,21 @@ Provide a brief institutional-grade review: HOLD / ADD / TRIM / EXIT with ration
 setup_logging(log_level="INFO", log_to_file=True)
 logger = get_logger(__name__)
 
-if Path(DEFAULT_ENV_PATH).exists():
-    load_dotenv(Path(DEFAULT_ENV_PATH))
-
-
-def send_to_chatgpt(prompt: str, api_key: str, model: str, max_tokens: int) -> Tuple[Optional[str], Optional[Dict]]:
-    last_error = None
-    for attempt in range(OPENAI_CHATGPT_RETRY_ATTEMPTS):
-        try:
-            client = OpenAI(api_key=api_key, timeout=max(OPENAI_API_TIMEOUT, 120))
-            response = client.chat.completions.create(
-                model=model,
-                messages=[
-                    {"role": "system", "content": "You are a professional institutional technical analyst. Provide precise price levels and clear action plans (HOLD/ADD/TRIM/EXIT)."},
-                    {"role": "user", "content": prompt},
-                ],
-                temperature=0.3,
-                max_completion_tokens=max_tokens,
-            )
-            usage = None
-            if getattr(response, "usage", None):
-                u = response.usage
-                usage = {"prompt_tokens": getattr(u, "prompt_tokens", None), "completion_tokens": getattr(u, "completion_tokens", None), "total_tokens": getattr(u, "total_tokens", None)}
-            return response.choices[0].message.content, usage
-        except Exception as e:
-            last_error = e
-            logger.warning("ChatGPT attempt %s failed: %s", attempt + 1, e)
-            if attempt < OPENAI_CHATGPT_RETRY_ATTEMPTS - 1:
-                time.sleep(OPENAI_CHATGPT_RETRY_BASE_SECONDS * (attempt + 1))
-    return None, None
-
 
 def main():
     parser = argparse.ArgumentParser(description="New4: ChatGPT existing position suggestions (new pipeline)")
     parser.add_argument("--model", default=None, help=f"OpenAI model (default: {OPENAI_CHATGPT_MODEL})")
     parser.add_argument("--api-key", default=None, help="OpenAI API key (default: OPENAI_API_KEY env)")
+    parser.add_argument("--use-6mo", dest="use_6mo", action="store_true", help="Use 6-month OHLCV prepared data (prepared_existing_positions_6mo.json)")
     args = parser.parse_args()
 
-    api_key = args.api_key or os.getenv("OPENAI_API_KEY")
-    if not api_key:
-        print("[ERROR] OPENAI_API_KEY not set. Set it in .env or use --api-key")
+    api_key = require_openai_api_key(args.api_key)
+    prepared_path = _prepared_path(args.use_6mo)
+    if not prepared_path.exists():
+        print(f"[ERROR] Prepared data not found: {prepared_path}. Run New3 (with --6mo if needed) first.")
         return
 
-    if not PREPARED_EXISTING.exists():
-        print(f"[ERROR] Prepared data not found: {PREPARED_EXISTING}. Run New3 first.")
-        return
-
-    with open(PREPARED_EXISTING, "r", encoding="utf-8") as f:
+    with open(prepared_path, "r", encoding="utf-8") as f:
         data = json.load(f)
     positions = data.get("positions", [])
     if not positions:
@@ -177,10 +173,9 @@ def main():
     print(f"Positions: {len(positions)}  Model: {model}")
     print(f"{'='*80}\n")
 
-    report_lines = ["=" * 80, "NEW4: CHATGPT EXISTING POSITION SUGGESTIONS", "=" * 80, f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}", f"Model: {model}", ""]
-    total_tokens = 0
-
     NO_OHLCV_PLACEHOLDER = "No OHLCV data available for this ticker (cache missing or ticker not in watchlist)."
+    results: List[Tuple[Dict, Optional[str], Optional[Dict], Optional[int]]] = []  # (pos, content, usage, score)
+
     for i, pos in enumerate(positions, 1):
         ticker = pos.get("ticker", "?")
         entry = pos.get("entry", 0)
@@ -209,26 +204,49 @@ def main():
                 ohlcv_csv=ohlcv,
             )
         print(f"[{i}/{len(positions)}] {ticker} ... ", end="", flush=True)
-        content, usage = send_to_chatgpt(prompt_text, api_key, model, max_tokens)
-        if usage and usage.get("total_tokens"):
-            total_tokens += usage["total_tokens"]
+        content, usage = openai_send(prompt_text, api_key, model=model, max_tokens=max_tokens)
+        score = _parse_entry_quality_score(content) if content else None
         if not content:
             print("FAILED")
-            report_lines.append(f"### {ticker} ({name})")
-            report_lines.append("(ChatGPT request failed.)")
-            report_lines.append("")
+            results.append((pos, None, usage, None))
             continue
-        print("OK")
+        print("OK" + (f" (score {score})" if score is not None else ""))
+        results.append((pos, content, usage, score))
+
+    # Sort by entry quality score high to low (no score last)
+    results.sort(key=lambda x: (x[3] if x[3] is not None else -1), reverse=True)
+
+    total_tokens = sum((u.get("total_tokens") or 0) for _, _, u, _ in results if u)
+    report_lines = ["=" * 80, "NEW4: CHATGPT EXISTING POSITION SUGGESTIONS", "=" * 80, f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}", f"Model: {model}", "Order: by entry quality score (high to low)", ""]
+    if total_tokens:
+        report_lines.append(f"Tokens used: {total_tokens:,}")
+        report_lines.append("")
+
+    report_lines.append("RANKING BY ENTRY QUALITY (high to low)")
+    report_lines.append("-" * 80)
+    for rank, (pos, content, _, score) in enumerate(results, 1):
+        ticker = pos.get("ticker", "?")
+        name = (pos.get("name") or ticker)[:50]
+        score_str = f"Score: {score}" if score is not None else "Score: —"
+        report_lines.append(f"  {rank}. {ticker} ({name}) — {score_str}")
+    report_lines.append("")
+    report_lines.append("=" * 80)
+    report_lines.append("DETAILED ANALYSIS (same order)")
+    report_lines.append("=" * 80)
+    report_lines.append("")
+
+    for pos, content, usage, _ in results:
+        ticker = pos.get("ticker", "?")
+        name = pos.get("name", ticker)
         report_lines.append(f"### {ticker} ({name})")
         report_lines.append("")
-        report_lines.append(content.strip())
+        if content:
+            report_lines.append(content.strip())
+        else:
+            report_lines.append("(ChatGPT request failed.)")
         report_lines.append("")
         report_lines.append("-" * 80)
         report_lines.append("")
-
-    if total_tokens:
-        report_lines.insert(5, f"Tokens used: {total_tokens:,}")
-        report_lines.insert(6, "")
 
     NEW_PIPELINE_REPORTS.mkdir(parents=True, exist_ok=True)
     ts = datetime.now().strftime("%Y%m%d_%H%M%S")

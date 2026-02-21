@@ -387,72 +387,6 @@ STOCKS TO ANALYZE (A+ / A grade):
     return prompt
 
 
-def send_to_chatgpt(
-    prompt: str,
-    api_key: str,
-    model: Optional[str] = None,
-    timeout: Optional[int] = None,
-    max_completion_tokens: Optional[int] = None,
-) -> tuple[Optional[str], Optional[dict]]:
-    """
-    Send prompt to ChatGPT and get response. Retries on rate limit / transient errors with backoff.
-    Returns (content, usage_dict). usage_dict has prompt_tokens, completion_tokens, total_tokens if available.
-    """
-    model = model or OPENAI_CHATGPT_MODEL
-    request_timeout = timeout or OPENAI_API_TIMEOUT
-    if len(prompt) > 50000:
-        request_timeout = max(request_timeout, 300)
-    max_tokens = max_completion_tokens if max_completion_tokens is not None else OPENAI_CHATGPT_MAX_COMPLETION_TOKENS
-    last_error = None
-    for attempt in range(OPENAI_CHATGPT_RETRY_ATTEMPTS):
-        try:
-            client = OpenAI(api_key=api_key, timeout=request_timeout)
-            logger.info(f"Sending request to ChatGPT (model: {model}, attempt {attempt + 1}/{OPENAI_CHATGPT_RETRY_ATTEMPTS})...")
-            response = client.chat.completions.create(
-                model=model,
-                messages=[
-                    {
-                        "role": "system",
-                        "content": "You are an expert stock analyst specializing in Mark Minervini's SEPA methodology. Provide detailed, accurate analysis of stocks based on technical analysis principles."
-                    },
-                    {
-                        "role": "user",
-                        "content": prompt
-                    }
-                ],
-                temperature=0.3,
-                max_completion_tokens=max_tokens,
-            )
-            usage = None
-            if getattr(response, "usage", None) is not None:
-                u = response.usage
-                usage = {
-                    "prompt_tokens": getattr(u, "prompt_tokens", None),
-                    "completion_tokens": getattr(u, "completion_tokens", None),
-                    "total_tokens": getattr(u, "total_tokens", None),
-                }
-            return response.choices[0].message.content, usage
-        except Exception as e:
-            last_error = e
-            logger.warning(f"ChatGPT API attempt {attempt + 1} failed: {e}")
-            if "rate_limit" in str(e).lower() or "429" in str(e):
-                wait = OPENAI_CHATGPT_RETRY_BASE_SECONDS * (attempt + 1)
-                if attempt < OPENAI_CHATGPT_RETRY_ATTEMPTS - 1:
-                    logger.info(f"Rate limited. Waiting {wait}s before retry...")
-                    import time
-                    time.sleep(wait)
-            elif "insufficient_quota" in str(e).lower():
-                logger.error("Insufficient API quota. Please check your OpenAI account.")
-                return None, None
-            elif attempt < OPENAI_CHATGPT_RETRY_ATTEMPTS - 1:
-                wait = OPENAI_CHATGPT_RETRY_BASE_SECONDS * (attempt + 1)
-                logger.info(f"Transient error. Waiting {wait}s before retry...")
-                import time
-                time.sleep(wait)
-    logger.error(f"ChatGPT API failed after {OPENAI_CHATGPT_RETRY_ATTEMPTS} attempts: {last_error}")
-    return None, None
-
-
 def load_scan_results_from_file() -> Optional[List[Dict]]:
     """
     Load scan results from the latest saved file (written by 02_generate_full_report.py).
@@ -524,11 +458,7 @@ def main():
     print("CHATGPT VALIDATION - MINERVINI SEPA ANALYSIS")
     print("="*80)
 
-    api_key = args.api_key or os.getenv("OPENAI_API_KEY")
-    if not api_key:
-        print("\n[ERROR] OPENAI_API_KEY not found. Set it in .env or use --api-key")
-        print("   Get your API key from: https://platform.openai.com/api-keys")
-        return
+    api_key = require_openai_api_key(args.api_key)
 
     print("\n[INFO] Loading scan results...")
     all_results = get_scan_results(benchmark=args.benchmark)
@@ -584,7 +514,13 @@ def main():
     print(f"\n[INFO] Sending to ChatGPT (model: {model})...")
     if estimated_tokens > 10000:
         print(f"   (Large request: ~{estimated_tokens:,.0f} tokens - may take several minutes...)")
-    analysis, usage = send_to_chatgpt(prompt, api_key, model=model)
+    request_timeout = OPENAI_API_TIMEOUT
+    if len(prompt) > 50000:
+        request_timeout = max(request_timeout, 300)
+    analysis, usage = openai_send(
+        prompt, api_key, model=model, timeout=request_timeout,
+        system_content="You are an expert stock analyst specializing in Mark Minervini's SEPA methodology. Provide detailed, accurate analysis of stocks based on technical analysis principles.",
+    )
 
     if not analysis:
         print("[ERROR] Failed to get analysis from ChatGPT. Check API key and quota.")

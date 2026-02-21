@@ -6,9 +6,10 @@ import os
 import json
 import time
 import argparse
+import re
 from pathlib import Path
 from datetime import datetime
-from typing import Optional, Dict, Tuple
+from typing import Optional, Dict, Tuple, List
 
 from dotenv import load_dotenv
 from openai import OpenAI
@@ -24,6 +25,54 @@ from config import (
 
 NEW_PIPELINE_REPORTS = Path("reports") / "new_pipeline"
 PREPARED_NEW = NEW_PIPELINE_REPORTS / "prepared_new_positions.json"
+
+
+def _parse_ticker_order_from_response(text: str, valid_tickers: set) -> List[str]:
+    """Extract tickers from ChatGPT response in order. Expects one ticker per line or numbered list."""
+    ordered: List[str] = []
+    seen: set = set()
+    for line in text.strip().splitlines():
+        line = line.strip()
+        line = re.sub(r"^\s*\d+[.)]\s*", "", line)
+        line = re.sub(r"^\s*[-*]\s*", "", line)
+        for part in line.replace(",", " ").split():
+            t = part.upper().strip(".:)")
+            if 1 <= len(t) <= 12 and t not in seen and t in valid_tickers:
+                ordered.append(t)
+                seen.add(t)
+    return ordered
+
+
+def _reorder_stocks_by_chatgpt(stocks: List[Dict], ordered_tickers: List[str]) -> List[Dict]:
+    """Reorder stocks to match ordered_tickers; any not in list stay at end in original order."""
+    by_ticker: Dict[str, Dict] = {}
+    for s in stocks:
+        t = str(s.get("ticker", "")).strip().upper()
+        by_ticker[t] = s
+        if t.endswith("D") and len(t) > 1:
+            by_ticker[t[:-1]] = s
+    result = []
+    seen_ids = set(id(s) for s in stocks)
+    for t in ordered_tickers:
+        t = t.upper().strip()
+        s = by_ticker.get(t)
+        if s and id(s) in seen_ids:
+            result.append(s)
+            seen_ids.discard(id(s))
+    for s in stocks:
+        if id(s) in seen_ids:
+            result.append(s)
+    return result
+
+
+ORDER_PROMPT_STOCKS = """You are a technical analyst. Below are candidate stocks for new positions (ticker, grade, meets Minervini criteria, distance to buy %).
+
+Rank them in the order you recommend for considering new entries: best opportunity first. One ticker per line, first line = best. Reply with nothing else than the list of tickers, one per line.
+
+STOCKS:
+{stocks_list}
+"""
+
 
 PROMPT_TEMPLATE = """Act as a professional institutional technical analyst using Mark Minervini, Stan Weinstein, and quantitative price/volume analysis.
 
@@ -100,65 +149,24 @@ Avoid generic advice. Prioritize price structure, moving averages, and volume be
 setup_logging(log_level="INFO", log_to_file=True)
 logger = get_logger(__name__)
 
-if Path(DEFAULT_ENV_PATH).exists():
-    load_dotenv(Path(DEFAULT_ENV_PATH))
-
-
-def send_to_chatgpt(prompt: str, api_key: str, model: str, max_tokens: int) -> Tuple[Optional[str], Optional[Dict]]:
-    last_error = None
-    for attempt in range(OPENAI_CHATGPT_RETRY_ATTEMPTS):
-        try:
-            client = OpenAI(api_key=api_key, timeout=max(OPENAI_API_TIMEOUT, 120))
-            response = client.chat.completions.create(
-                model=model,
-                messages=[
-                    {"role": "system", "content": "You are a professional institutional technical analyst. Provide precise entry levels and clear recommendations (STRONG BUY / BUY ON PULLBACK / WAIT / PASS)."},
-                    {"role": "user", "content": prompt},
-                ],
-                temperature=0.3,
-                max_completion_tokens=max_tokens,
-            )
-            usage = None
-            if getattr(response, "usage", None):
-                u = response.usage
-                usage = {"prompt_tokens": getattr(u, "prompt_tokens", None), "completion_tokens": getattr(u, "completion_tokens", None), "total_tokens": getattr(u, "total_tokens", None)}
-            return response.choices[0].message.content, usage
-        except Exception as e:
-            last_error = e
-            logger.warning("ChatGPT attempt %s failed: %s", attempt + 1, e)
-            if attempt < OPENAI_CHATGPT_RETRY_ATTEMPTS - 1:
-                time.sleep(OPENAI_CHATGPT_RETRY_BASE_SECONDS * (attempt + 1))
-    return None, None
-
 
 def main():
     parser = argparse.ArgumentParser(description="New5: ChatGPT new position suggestions (new pipeline)")
     parser.add_argument("--model", default=None, help=f"OpenAI model (default: {OPENAI_CHATGPT_MODEL})")
     parser.add_argument("--api-key", default=None, help="OpenAI API key (default: OPENAI_API_KEY env)")
+    parser.add_argument("--use-6mo", dest="use_6mo", action="store_true", help="Use 6-month OHLCV prepared data (prepared_new_positions_6mo.json)")
     parser.add_argument("--limit", type=int, default=50, help="Max A+/A stocks to analyze (default 50)")
     args = parser.parse_args()
 
-    api_key = args.api_key or os.getenv("OPENAI_API_KEY")
-    if not api_key:
-        print("[ERROR] OPENAI_API_KEY not set. Set it in .env or use --api-key")
+    api_key = require_openai_api_key(args.api_key)
+    prepared_path = _prepared_path(args.use_6mo)
+    if not prepared_path.exists():
+        print(f"[ERROR] Prepared data not found: {prepared_path}. Run New3 (with --use-6mo if needed) first.")
         return
 
-    if not PREPARED_NEW.exists():
-        print(f"[ERROR] Prepared data not found: {PREPARED_NEW}. Run New3 first.")
-        return
-
-    with open(PREPARED_NEW, "r", encoding="utf-8") as f:
+    with open(prepared_path, "r", encoding="utf-8") as f:
         data = json.load(f)
-    stocks = data.get("stocks", [])
-    # Sort best to worst: A+ first, then A; within grade: meets_criteria first, then closer to buy (lower distance_to_buy_pct)
-    def sort_key(s):
-        grade_rank = 0 if s.get("grade") == "A+" else 1
-        meets = 0 if s.get("meets_criteria") else 1
-        dist = s.get("distance_to_buy_pct")
-        if dist is None:
-            dist = 999
-        return (grade_rank, meets, dist)
-    stocks = sorted(stocks, key=sort_key)[: args.limit]
+    stocks = data.get("stocks", [])[: args.limit]
 
     if not stocks:
         print("No A+/A stocks in prepared data (run New1 and New3; ensure scan produces A+ or A).")
@@ -167,15 +175,39 @@ def main():
     model = args.model or OPENAI_CHATGPT_MODEL
     max_tokens = min(OPENAI_CHATGPT_MAX_COMPLETION_TOKENS, 8000)
 
+    # Ask ChatGPT for recommended order (best opportunity first)
+    valid_tickers = set()
+    for s in stocks:
+        t = str(s.get("ticker", "")).strip().upper()
+        valid_tickers.add(t)
+        if t.endswith("D") and len(t) > 1:
+            valid_tickers.add(t[:-1])
+    stocks_list = "\n".join(
+        f"  {s.get('ticker', '?')}  grade={s.get('grade')}  meets_criteria={s.get('meets_criteria')}  distance_to_buy_pct={s.get('distance_to_buy_pct')}"
+        for s in stocks
+    )
+    order_prompt = ORDER_PROMPT_STOCKS.format(stocks_list=stocks_list)
+    print("Asking ChatGPT for recommended order (best first)...")
+    order_resp, _ = openai_send(order_prompt, api_key, model=model, max_tokens=500)
+    if order_resp:
+        ordered_tickers = _parse_ticker_order_from_response(order_resp, valid_tickers)
+        if ordered_tickers:
+            stocks = _reorder_stocks_by_chatgpt(stocks, ordered_tickers)
+            print(f"Using ChatGPT order: {' → '.join(ordered_tickers[:15])}{' ...' if len(ordered_tickers) > 15 else ''}")
+        else:
+            print("Could not parse order from ChatGPT; using original order.")
+    else:
+        print("ChatGPT order request failed; using original order.")
+
     print(f"\n{'='*80}")
     print("NEW5: CHATGPT NEW POSITION SUGGESTIONS (A+/A)")
     print(f"{'='*80}")
     print(f"Stocks: {len(stocks)}  Model: {model}")
     print(f"{'='*80}\n")
 
-    report_lines = ["=" * 80, "NEW5: CHATGPT NEW POSITION SUGGESTIONS (A+/A)", "=" * 80, f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}", f"Model: {model}", ""]
+    report_lines = ["=" * 80, "NEW5: CHATGPT NEW POSITION SUGGESTIONS (A+/A)", "=" * 80, f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}", f"Model: {model}", "Order: ChatGPT recommended (best opportunity first)", ""]
 
-    # Ranking section: best to worst (same order as sorted stocks)
+    # Ranking section: same order as ChatGPT (best first)
     report_lines.append("RANKING (BEST TO WORST)")
     report_lines.append("-" * 80)
     for rank, s in enumerate(stocks, 1):
@@ -205,7 +237,7 @@ def main():
             ohlcv_csv=ohlcv,
         )
         print(f"[{i}/{len(stocks)}] {ticker} ({grade}) ... ", end="", flush=True)
-        content, usage = send_to_chatgpt(prompt_text, api_key, model, max_tokens)
+        content, usage = openai_send(prompt_text, api_key, model=model, max_tokens=max_tokens)
         if usage and usage.get("total_tokens"):
             total_tokens += usage["total_tokens"]
         if not content:

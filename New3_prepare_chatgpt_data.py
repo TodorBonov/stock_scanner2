@@ -12,7 +12,7 @@ from typing import Dict, List, Any, Optional
 from dotenv import load_dotenv
 from logger_config import setup_logging, get_logger
 from config import DEFAULT_ENV_PATH
-from currency_utils import get_eur_usd_rate_with_date, usd_to_eur
+from currency_utils import get_eur_usd_rate_with_date, usd_to_eur, warn_if_eur_rate_unavailable
 from ticker_utils import clean_ticker
 
 # New pipeline paths (match New1, New2)
@@ -22,6 +22,9 @@ NEW_PIPELINE_POSITIONS = NEW_PIPELINE_DIR / "positions_new_pipeline.json"
 NEW_PIPELINE_REPORTS = Path("reports") / "new_pipeline"
 PREPARED_EXISTING = NEW_PIPELINE_REPORTS / "prepared_existing_positions.json"
 PREPARED_NEW = NEW_PIPELINE_REPORTS / "prepared_new_positions.json"
+PREPARED_EXISTING_6MO = NEW_PIPELINE_REPORTS / "prepared_existing_positions_6mo.json"
+PREPARED_NEW_6MO = NEW_PIPELINE_REPORTS / "prepared_new_positions_6mo.json"
+MAX_OHLCV_DAYS_6MO = 126
 
 setup_logging(log_level="INFO", log_to_file=True)
 logger = get_logger(__name__)
@@ -65,12 +68,15 @@ def run_scan(cached_data: dict, benchmark: str = "^GDAXI") -> List[Dict]:
     return results
 
 
-def ohlcv_to_csv_rows(hist_dict: dict, to_eur: bool = False, eur_rate: Optional[float] = None) -> List[str]:
-    """Turn cache historical_data into 'Date, Open, High, Low, Close, Volume' lines (oldest first)."""
+def ohlcv_to_csv_rows(hist_dict: dict, to_eur: bool = False, eur_rate: Optional[float] = None, max_days: Optional[int] = None) -> List[str]:
+    """Turn cache historical_data into 'Date, Open, High, Low, Close, Volume' lines (oldest first). If max_days set, use only last max_days rows."""
     if not hist_dict or "data" not in hist_dict:
         return []
-    index = hist_dict.get("index") or []
-    data = hist_dict["data"]
+    index = list(hist_dict.get("index") or [])
+    data = list(hist_dict["data"])
+    if max_days and len(data) > max_days:
+        data = data[-max_days:]
+        index = index[-max_days:] if len(index) >= max_days else index[-len(data):]
     rows = []
     for i, rec in enumerate(data):
         date_str = index[i] if i < len(index) else ""
@@ -115,10 +121,16 @@ def resolve_cache_entry(ticker: str, stocks: Dict) -> Optional[Dict]:
 def main():
     parser = argparse.ArgumentParser(description="New3: Prepare ChatGPT data (new pipeline)")
     parser.add_argument("--benchmark", default="^GDAXI", help="Benchmark for scan (default: ^GDAXI)")
+    parser.add_argument("--use-6mo", dest="use_6mo", action="store_true", help="Limit OHLCV to last 6 months (126 days) and write *_6mo.json files")
     args = parser.parse_args()
 
+    use_6mo = getattr(args, "use_6mo", False)
+    max_days = MAX_OHLCV_DAYS_6MO if use_6mo else None
+    out_existing = PREPARED_EXISTING_6MO if use_6mo else PREPARED_EXISTING
+    out_new = PREPARED_NEW_6MO if use_6mo else PREPARED_NEW
+
     print(f"\n{'='*80}")
-    print("NEW3: PREPARE CHATGPT DATA")
+    print("NEW3: PREPARE CHATGPT DATA" + (" (6-month OHLCV)" if use_6mo else ""))
     print(f"{'='*80}")
 
     cached_data = load_new_pipeline_cache()
@@ -154,7 +166,7 @@ def main():
             hist = cached.get("historical_data", {})
             to_eur = currency == "EUR" and eur_usd_rate and eur_usd_rate > 0
             rate = eur_usd_rate if to_eur else None
-            ohlcv_lines = ohlcv_to_csv_rows(hist, to_eur=to_eur, eur_rate=rate)
+            ohlcv_lines = ohlcv_to_csv_rows(hist, to_eur=to_eur, eur_rate=rate, max_days=max_days)
             if ohlcv_lines:
                 ohlcv_csv = "Date, Open, High, Low, Close, Volume\n" + "\n".join(ohlcv_lines)
             else:
@@ -182,7 +194,7 @@ def main():
         if not cached or not cached.get("data_available"):
             continue
         hist = cached.get("historical_data", {})
-        ohlcv_lines = ohlcv_to_csv_rows(hist, to_eur=False)
+        ohlcv_lines = ohlcv_to_csv_rows(hist, to_eur=False, max_days=max_days)
         if not ohlcv_lines:
             continue
         detailed = r.get("detailed_analysis") or {}
@@ -203,15 +215,17 @@ def main():
         })
 
     NEW_PIPELINE_REPORTS.mkdir(parents=True, exist_ok=True)
-    meta = {"prepared_at": datetime.now().isoformat(), "eur_usd_rate": eur_usd_rate}
+    meta = {"prepared_at": datetime.now().isoformat(), "eur_usd_rate": eur_usd_rate, "eur_usd_rate_date": eur_usd_rate_date}
+    if use_6mo:
+        meta["max_ohlcv_days"] = MAX_OHLCV_DAYS_6MO
 
-    with open(PREPARED_EXISTING, "w", encoding="utf-8") as f:
+    with open(out_existing, "w", encoding="utf-8") as f:
         json.dump({"meta": meta, "positions": prepared_existing}, f, indent=2, default=str)
-    print(f"Wrote {PREPARED_EXISTING} ({len(prepared_existing)} positions)")
+    print(f"Wrote {out_existing} ({len(prepared_existing)} positions)")
 
-    with open(PREPARED_NEW, "w", encoding="utf-8") as f:
+    with open(out_new, "w", encoding="utf-8") as f:
         json.dump({"meta": meta, "stocks": prepared_new}, f, indent=2, default=str)
-    print(f"Wrote {PREPARED_NEW} ({len(prepared_new)} A+/A stocks)")
+    print(f"Wrote {out_new} ({len(prepared_new)} A+/A stocks)")
 
     print(f"{'='*80}\n")
 

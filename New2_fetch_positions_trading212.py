@@ -175,6 +175,12 @@ def main():
     print(f"{'='*80}")
 
     positions = fetch_positions()
+    has_eur = any(p.get("currency") == "EUR" for p in positions)
+    if has_eur:
+        eur_rate, eur_rate_date = get_eur_usd_rate_with_date()
+        warn_if_eur_rate_unavailable(True, eur_rate)
+        if eur_rate and eur_rate > 0:
+            logger.info("EUR/USD rate (Yahoo): %.4f (date: %s)", eur_rate, eur_rate_date or "N/A")
     if not positions:
         print("No open positions (or API not configured).")
         NEW_PIPELINE_DIR.mkdir(parents=True, exist_ok=True)

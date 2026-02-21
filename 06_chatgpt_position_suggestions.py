@@ -139,64 +139,6 @@ def load_chart_data_from_scan_results(tickers: list[str]) -> str:
     return "Chart/level data from scan (use for SEPA pivot/add and must-hold levels):\n\n" + "\n".join(lines)
 
 
-def send_to_chatgpt(prompt: str, api_key: str, *, model: str | None = None) -> tuple[str | None, dict | None]:
-    """Call OpenAI Chat Completions. Returns (content, usage_dict) or (None, None) on failure."""
-    model = model or OPENAI_CHATGPT_MODEL
-    last_error = None
-    for attempt in range(OPENAI_CHATGPT_RETRY_ATTEMPTS):
-        try:
-            client = OpenAI(api_key=api_key, timeout=OPENAI_API_TIMEOUT)
-            logger.info("Sending position suggestions to ChatGPT (model=%s, attempt %s/%s)", model, attempt + 1, OPENAI_CHATGPT_RETRY_ATTEMPTS)
-            response = client.chat.completions.create(
-                model=model,
-                messages=[
-                    {
-                        "role": "system",
-                        "content": (
-                            "You are an expert stock trader and risk manager. You use Mark Minervini-style "
-                            "SEPA principles (trend, base, volume, breakout). Given a list of open positions "
-                            "with rule-based suggestions (HOLD, ADD, REDUCE, EXIT), give your own clear "
-                            "recommendation for each position: agree or disagree with the rule, your reasoning, "
-                            "and what to watch (e.g. key levels, volume, or catalysts). Be concise but actionable. "
-                            "When the user provides chart/level data (e.g. 50/200 DMA location, base highs/lows, "
-                            "volume trend), use it to give SEPA-style pivot/add points and 'must-hold' levels "
-                            "for each position; otherwise you may note what data would allow that."
-                        ),
-                    },
-                    {"role": "user", "content": prompt},
-                ],
-                temperature=0.3,
-                max_completion_tokens=min(OPENAI_CHATGPT_MAX_COMPLETION_TOKENS, 8000),
-            )
-            usage = None
-            if getattr(response, "usage", None) is not None:
-                u = response.usage
-                usage = {
-                    "prompt_tokens": getattr(u, "prompt_tokens", None),
-                    "completion_tokens": getattr(u, "completion_tokens", None),
-                    "total_tokens": getattr(u, "total_tokens", None),
-                }
-            return response.choices[0].message.content, usage
-        except Exception as e:
-            last_error = e
-            logger.warning("ChatGPT API attempt %s failed: %s", attempt + 1, e)
-            if "rate_limit" in str(e).lower() or "429" in str(e):
-                wait = OPENAI_CHATGPT_RETRY_BASE_SECONDS * (attempt + 1)
-                if attempt < OPENAI_CHATGPT_RETRY_ATTEMPTS - 1:
-                    import time
-                    logger.info("Rate limited. Waiting %ss before retry...", wait)
-                    time.sleep(wait)
-            elif "insufficient_quota" in str(e).lower():
-                logger.error("Insufficient API quota. Check your OpenAI account.")
-                return None, None
-            elif attempt < OPENAI_CHATGPT_RETRY_ATTEMPTS - 1:
-                wait = OPENAI_CHATGPT_RETRY_BASE_SECONDS * (attempt + 1)
-                import time
-                time.sleep(wait)
-    logger.error("ChatGPT API failed after %s attempts: %s", OPENAI_CHATGPT_RETRY_ATTEMPTS, last_error)
-    return None, None
-
-
 def main() -> None:
     import argparse
     parser = argparse.ArgumentParser(description="Send position suggestions to ChatGPT for AI recommendations")
@@ -211,11 +153,7 @@ def main() -> None:
     )
     args = parser.parse_args()
 
-    api_key = args.api_key or os.getenv("OPENAI_API_KEY")
-    if not api_key:
-        print("\n[ERROR] OPENAI_API_KEY not set. Set it in .env or use --api-key")
-        print("   Get your API key from: https://platform.openai.com/api-keys")
-        return
+    api_key = require_openai_api_key(args.api_key)
 
     latest = get_latest_position_suggestions_file()
     if not latest or not latest.exists():
@@ -266,7 +204,19 @@ def main() -> None:
             print(f"[WARN] Extra file not found: {args.extra}")
 
     model = args.model or OPENAI_CHATGPT_MODEL
-    analysis, usage = send_to_chatgpt(prompt, api_key, model=model)
+    analysis, usage = openai_send(
+        prompt, api_key, model=model,
+        system_content=(
+            "You are an expert stock trader and risk manager. You use Mark Minervini-style "
+            "SEPA principles (trend, base, volume, breakout). Given a list of open positions "
+            "with rule-based suggestions (HOLD, ADD, REDUCE, EXIT), give your own clear "
+            "recommendation for each position: agree or disagree with the rule, your reasoning, "
+            "and what to watch (e.g. key levels, volume, or catalysts). Be concise but actionable. "
+            "When the user provides chart/level data (e.g. 50/200 DMA location, base highs/lows, "
+            "volume trend), use it to give SEPA-style pivot/add points and 'must-hold' levels "
+            "for each position; otherwise you may note what data would allow that."
+        ),
+    )
     if not analysis:
         print("[ERROR] Failed to get response from ChatGPT. Check API key and quota.")
         return

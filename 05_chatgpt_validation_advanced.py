@@ -12,18 +12,10 @@ from pathlib import Path
 from datetime import datetime
 from typing import Dict, List, Optional, Tuple, Any
 from dotenv import load_dotenv
-from openai import OpenAI
 
 from logger_config import get_logger
-from config import (
-    DEFAULT_ENV_PATH,
-    REPORTS_DIR,
-    OPENAI_API_TIMEOUT,
-    OPENAI_CHATGPT_MODEL,
-    OPENAI_CHATGPT_MAX_COMPLETION_TOKENS,
-    OPENAI_CHATGPT_RETRY_ATTEMPTS,
-    OPENAI_CHATGPT_RETRY_BASE_SECONDS,
-)
+from config import DEFAULT_ENV_PATH, REPORTS_DIR, OPENAI_CHATGPT_MODEL, OPENAI_CHATGPT_MAX_COMPLETION_TOKENS
+from openai_utils import require_openai_api_key, send_to_chatgpt as openai_send
 from ticker_utils import clean_ticker
 from currency_utils import get_eur_usd_rate_with_date, warn_if_eur_rate_unavailable
 
@@ -98,6 +90,29 @@ STRUCTURED DAILY CHART DATA (levels and metrics):
 ---
 {chart_data}
 """
+
+
+def _parse_entry_quality_score(text: str) -> Optional[int]:
+    """Parse entry quality / setup quality score (1-10) from ChatGPT response. Returns None if not found."""
+    if not text or not text.strip():
+        return None
+    for pattern in [
+        r"[Ee]ntry\s+quality\s*[:\-]?\s*(\d+)",
+        r"[Ss]etup\s+quality\s*[:\-]?\s*(\d+)",
+        r"[Pp]osition\s+quality\s*[:\-]?\s*(\d+)",
+        r"[Rr]ate\s+(?:overall\s+)?(?:position\s+)?quality\s*[:\-]?\s*(\d+)",
+        r"quality\s*(?:now|score)?\s*[:\-]?\s*(\d+)\s*/\s*10",
+        r"score\s*[:\-]?\s*(\d+)\s*[/\-]?\s*10",
+        r"(\d+)\s*/\s*10\s*(?:for\s+entry|for\s+position|entry\s+quality|setup)",
+        r"\b(\d+)\s*/\s*10\b",
+        r"\b(\d+)\s+out\s+of\s+10\b",
+    ]:
+        m = re.search(pattern, text, re.IGNORECASE | re.MULTILINE)
+        if m:
+            v = int(m.group(1))
+            if 1 <= v <= 10:
+                return v
+    return None
 
 
 def _safe_float(val: Any, default: float = 0.0) -> float:
@@ -334,42 +349,6 @@ def match_scan_to_ticker(ticker: str, scan_results: List[Dict]) -> Optional[Dict
     return None
 
 
-def send_to_chatgpt(prompt: str, api_key: str, model: str, max_tokens: int) -> Tuple[Optional[str], Optional[Dict]]:
-    """Call OpenAI; returns (content, usage_dict)."""
-    last_error = None
-    for attempt in range(OPENAI_CHATGPT_RETRY_ATTEMPTS):
-        try:
-            client = OpenAI(api_key=api_key, timeout=max(OPENAI_API_TIMEOUT, 120))
-            response = client.chat.completions.create(
-                model=model,
-                messages=[
-                    {
-                        "role": "system",
-                        "content": "You are a professional institutional technical analyst. Provide precise price levels, probabilities, and clear action plans. Use the structured data provided as your chart proxy."
-                    },
-                    {"role": "user", "content": prompt},
-                ],
-                temperature=0.3,
-                max_completion_tokens=max_tokens,
-            )
-            usage = None
-            if getattr(response, "usage", None):
-                u = response.usage
-                usage = {
-                    "prompt_tokens": getattr(u, "prompt_tokens", None),
-                    "completion_tokens": getattr(u, "completion_tokens", None),
-                    "total_tokens": getattr(u, "total_tokens", None),
-                }
-            return response.choices[0].message.content, usage
-        except Exception as e:
-            last_error = e
-            logger.warning("ChatGPT attempt %s failed: %s", attempt + 1, e)
-            if attempt < OPENAI_CHATGPT_RETRY_ATTEMPTS - 1:
-                import time
-                time.sleep(OPENAI_CHATGPT_RETRY_BASE_SECONDS * (attempt + 1))
-    return None, None
-
-
 def main() -> None:
     import argparse
     parser = argparse.ArgumentParser(description="ChatGPT Validation Advanced: positions first, then A+/A stocks with institutional analysis")
@@ -380,11 +359,7 @@ def main() -> None:
     parser.add_argument("--no-positions", action="store_true", help="Skip positions; analyze only A+/A stocks")
     args = parser.parse_args()
 
-    api_key = args.api_key or os.getenv("OPENAI_API_KEY")
-    if not api_key:
-        print("\n[ERROR] OPENAI_API_KEY not set. Set it in .env or use --api-key")
-        return
-
+    api_key = require_openai_api_key(args.api_key)
     model = args.model or OPENAI_CHATGPT_MODEL
     limit = max(1, args.limit)
 
@@ -480,48 +455,67 @@ def main() -> None:
     print(f"[INFO] Model: {model}")
     print()
 
-    report_lines = []
-    report_lines.append("=" * 80)
-    report_lines.append("CHATGPT VALIDATION ADVANCED")
-    report_lines.append("=" * 80)
-    report_lines.append(f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
-    report_lines.append(f"Model: {model}")
-    if eur_usd_rate is not None:
-        report_lines.append(f"EUR/USD rate (Yahoo): {eur_usd_rate:.4f} (used to convert USD to EUR for EUR positions)" + (f"  Rate date: {eur_usd_rate_date}" if eur_usd_rate_date else ""))
-    report_lines.append("")
-    total_tokens = 0
-
-    last_section = None
+    # Collect all results (item, content, usage, score)
+    results: List[Tuple[Any, Optional[str], Optional[Dict], Optional[int]]] = []
     for i, item in enumerate(items, 1):
         label, entry_price, stock_name, chart_data, ticker, scan, position_eur_info = (
             item[0], item[1], item[2], item[3], item[4], item[5], item[6] if len(item) > 6 else None
         )
-        section = "MY POSITIONS" if label == "POSITION" else "A+ / A STOCKS (by quality)"
-        if section != last_section:
-            last_section = section
-            report_lines.append("")
-            report_lines.append("=" * 80)
-            report_lines.append(section)
-            report_lines.append("=" * 80)
-            report_lines.append("")
-
         prompt_text = ADVANCED_PROMPT_TEMPLATE.format(
             entry_price=entry_price,
             stock_name=stock_name,
             chart_data=chart_data,
         )
         print(f"[{i}/{len(items)}] {ticker} ({stock_name[:40]}...) ... ", end="", flush=True)
-        content, usage = send_to_chatgpt(prompt_text, api_key, model, min(OPENAI_CHATGPT_MAX_COMPLETION_TOKENS, 8000))
-        if usage and usage.get("total_tokens"):
-            total_tokens += usage["total_tokens"]
+        content, usage = openai_send(
+            prompt_text, api_key, model=model, max_tokens=min(OPENAI_CHATGPT_MAX_COMPLETION_TOKENS, 8000),
+            system_content="You are a professional institutional technical analyst. Provide precise price levels, probabilities, and clear action plans. Use the structured data provided as your chart proxy.",
+        )
+        score = _parse_entry_quality_score(content) if content else None
         if not content:
             print("FAILED")
-            report_lines.append(f"### {ticker} ({stock_name})")
-            report_lines.append("[ERROR] No response from ChatGPT.")
-            report_lines.append("")
+            results.append((item, None, usage, None))
             continue
-        print("OK")
-        report_lines.append(f"### {ticker} ({stock_name})")
+        print("OK" + (f" (score {score})" if score is not None else ""))
+        results.append((item, content, usage, score))
+
+    # Sort by entry/setup quality score high to low (no score last)
+    results.sort(key=lambda x: (x[3] if x[3] is not None else -1), reverse=True)
+
+    total_tokens = sum((u.get("total_tokens") or 0) for _, _, u, _ in results if u)
+    report_lines = []
+    report_lines.append("=" * 80)
+    report_lines.append("CHATGPT VALIDATION ADVANCED")
+    report_lines.append("=" * 80)
+    report_lines.append(f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    report_lines.append(f"Model: {model}")
+    report_lines.append("Order: by entry/setup quality score (high to low)")
+    if eur_usd_rate is not None:
+        report_lines.append(f"EUR/USD rate (Yahoo): {eur_usd_rate:.4f} (used to convert USD to EUR for EUR positions)" + (f"  Rate date: {eur_usd_rate_date}" if eur_usd_rate_date else ""))
+    report_lines.append("")
+    if total_tokens:
+        report_lines.append(f"Tokens used (total this run): {total_tokens:,}")
+        report_lines.append("")
+
+    report_lines.append("RANKING BY ENTRY QUALITY (high to low)")
+    report_lines.append("-" * 80)
+    for rank, (item, content, _, score) in enumerate(results, 1):
+        ticker = item[4]
+        stock_name = item[2]
+        label = item[0]
+        score_str = f"Score: {score}" if score is not None else "Score: —"
+        report_lines.append(f"  {rank}. {ticker} ({stock_name[:40]}) [{label}] — {score_str}")
+    report_lines.append("")
+    report_lines.append("=" * 80)
+    report_lines.append("DETAILED ANALYSIS (same order)")
+    report_lines.append("=" * 80)
+    report_lines.append("")
+
+    for item, content, usage, _ in results:
+        label, entry_price, stock_name, chart_data, ticker, scan, position_eur_info = (
+            item[0], item[1], item[2], item[3], item[4], item[5], item[6] if len(item) > 6 else None
+        )
+        report_lines.append(f"### {ticker} ({stock_name}) [{label}]")
         if usage and (usage.get("total_tokens") or usage.get("prompt_tokens") is not None):
             pt, ct, tot = usage.get("prompt_tokens"), usage.get("completion_tokens"), usage.get("total_tokens")
             if tot is not None:
@@ -529,8 +523,10 @@ def main() -> None:
             else:
                 report_lines.append(f"Tokens used: prompt {pt or 0:,}, completion {ct or 0:,}")
         report_lines.append("")
-        report_lines.append(content.strip())
-        # For EUR positions: append conversion note (ChatGPT analysis is in USD)
+        if content:
+            report_lines.append(content.strip())
+        else:
+            report_lines.append("[ERROR] No response from ChatGPT.")
         if position_eur_info and eur_usd_rate and eur_usd_rate > 0:
             e = position_eur_info.get("entry_eur")
             c = position_eur_info.get("current_eur")
@@ -544,10 +540,6 @@ def main() -> None:
         report_lines.append("")
         report_lines.append("-" * 80)
         report_lines.append("")
-
-    if total_tokens:
-        report_lines.insert(5, f"Tokens used (total this run): {total_tokens:,}")
-        report_lines.insert(6, "")
 
     out_file = REPORTS_DIR / "summary_Chat_GPT_advanced.txt"
     ts_file = REPORTS_DIR / f"summary_Chat_GPT_advanced_{datetime.now().strftime('%Y%m%d_%H%M%S')}.txt"

@@ -191,12 +191,6 @@ class StockDataProvider:
             return {}
         except Exception as e:
             logger.debug(f"Alpha Vantage stock info error for {ticker}: {e}")
-            return {}
-    
-    def _get_historical_data_alpha_vantage(self, ticker: str, period: str = "1y", interval: str = "1d") -> pd.DataFrame:
-        """
-        Get historical data from Alpha Vantage
-        
         Args:
             ticker: Stock ticker symbol
             period: Time period (1d, 5d, 1mo, 3mo, 6mo, 1y, 2y, 5y, 10y, ytd, max)
@@ -308,8 +302,14 @@ class StockDataProvider:
                 return df[['Open', 'High', 'Low', 'Close', 'Volume']]
             
             return pd.DataFrame()
+        except requests.RequestException as e:
+            logger.warning("Alpha Vantage historical data request failed for %s: %s", ticker, e)
+            return pd.DataFrame()
+        except (ValueError, KeyError, TypeError) as e:
+            logger.warning("Alpha Vantage historical data error for %s: %s", ticker, e)
+            return pd.DataFrame()
         except Exception as e:
-            logger.debug(f"Alpha Vantage API error for {ticker}: {e}")
+            logger.debug("Alpha Vantage API error for %s: %s", ticker, e)
             return pd.DataFrame()
     
     def _try_ticker_formats(self, possible_tickers: List[str], func, *args, **kwargs):
