@@ -191,14 +191,10 @@ class StockDataProvider:
             return {}
         except Exception as e:
             logger.debug(f"Alpha Vantage stock info error for {ticker}: {e}")
-        Args:
-            ticker: Stock ticker symbol
-            period: Time period (1d, 5d, 1mo, 3mo, 6mo, 1y, 2y, 5y, 10y, ytd, max)
-            interval: Data interval (1d, 1w, 1m) - Alpha Vantage supports daily, weekly, monthly
-            
-        Returns:
-            DataFrame with OHLCV data or empty DataFrame
-        """
+            return {}
+
+    def _get_historical_data_alpha_vantage(self, ticker: str, period: str, interval: str) -> pd.DataFrame:
+        """Fetch OHLCV from Alpha Vantage. Returns DataFrame or empty DataFrame."""
         if not self.alpha_vantage_key:
             return pd.DataFrame()
         

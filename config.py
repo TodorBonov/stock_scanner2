@@ -39,9 +39,9 @@ OPENAI_API_TIMEOUT = 60  # seconds for OpenAI API calls
 # Used by: AI analysis features (if enabled)
 # Why important: AI calls can take longer, so timeout is more generous
 
-# ChatGPT validation (04_chatgpt_validation.py)
-# Confirm model name for your API: gpt-4o, gpt-4-turbo, gpt-4, etc. (gpt-5.2 used if available)
-OPENAI_CHATGPT_MODEL = "gpt-5.2"  # Model for validation (e.g. gpt-4o, gpt-4-turbo, gpt-5.2)
+# ChatGPT (New4, New5)
+# Model for ChatGPT analysis (see https://platform.openai.com/docs/models)
+OPENAI_CHATGPT_MODEL = "gpt-5.2"  # e.g. gpt-5.2, gpt-5.2-chat-latest, gpt-4o, gpt-4-turbo
 OPENAI_CHATGPT_MAX_COMPLETION_TOKENS = 64000  # Allow long analysis for many stocks (increase if output is truncated)
 OPENAI_CHATGPT_MAX_A_GRADE_STOCKS = 9999  # Max A+ and A stocks in one prompt (9999 = send all)
 OPENAI_CHATGPT_MAX_PRE_BREAKOUT_STOCKS = 9999  # Max pre-breakout setups in one prompt (9999 = send all)
@@ -94,14 +94,14 @@ DEFAULT_LOG_FILE = "trading212_bot.log"
 # Used by: Logger configuration
 # Why important: Standardizes log file naming
 
-# Cache and report paths (shared by 01, 02, 03, 04)
+# Cache and report paths
 CACHE_FILE = Path("data/cached_stock_data.json")
-# Purpose: Path to cached stock data from 01_fetch_stock_data.py
-# Used by: 01, 02, 03, 04 and cache_utils
+# Purpose: Legacy cache path (used by 02 --refresh via fetch_utils.fetch_all_data)
+# Used by: cache_utils, 02_generate_full_report.py
 
 FAILED_FETCH_LIST = Path("data/failed_fetch.txt")
 # Purpose: List of tickers that failed to fetch (one per line), updated after each fetch
-# Used by: 01_fetch_stock_data.py, list_failed_fetches.py
+# Used by: fetch_utils.py (when run standalone)
 
 # Ticker mapping: file-based mapping (T212 symbol -> Yahoo/data symbol) for manual resolution
 TICKER_MAPPING_FILE = Path("data/ticker_mapping.json")
@@ -111,7 +111,7 @@ TICKER_MAPPING_FILE = Path("data/ticker_mapping.json")
 # Ticker mapping errors: written each run that fetches; lists tickers that failed (possible mapping issues)
 TICKER_MAPPING_ERRORS_FILE = Path("reports/ticker_mapping_errors.txt")
 # Purpose: After each fetch, list tickers with no data/error so you can add them to data/ticker_mapping.json
-# Used by: 01_fetch_stock_data.py, 03_position_suggestions.py
+# Used by: fetch_utils.py
 
 REPORTS_DIR = Path("reports")
 # Purpose: Directory for summary/detailed reports and scan results
@@ -119,7 +119,7 @@ REPORTS_DIR = Path("reports")
 
 SCAN_RESULTS_LATEST = REPORTS_DIR / "scan_results_latest.json"
 # Purpose: Latest scan results JSON (written by 02, read by 03, 05)
-# Used by: 02, 03, 05 (via position_suggestions_config for 05)
+# Used by: 02_generate_full_report.py
 
 # ============================================================================
 # LOGGING CONFIGURATION

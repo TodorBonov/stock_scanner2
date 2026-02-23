@@ -849,7 +849,7 @@ def main():
     parser.add_argument(
         "--refresh",
         action="store_true",
-        help="Refresh data before analysis (runs fetch_stock_data.py)"
+        help="Refresh data before analysis (fetch_utils.fetch_all_data → legacy cache)"
     )
     parser.add_argument(
         "--benchmark",
@@ -870,23 +870,19 @@ def main():
     
     args = parser.parse_args()
     
-    # Refresh data if requested (load 01_fetch_stock_data via importlib - module name can't start with number)
+    # Refresh data if requested (writes to legacy cache for this run)
     if args.refresh:
         print("Refreshing stock data...")
-        _fetch_spec = importlib.util.spec_from_file_location(
-            "fetch_stock_data", Path(__file__).parent / "01_fetch_stock_data.py"
-        )
-        _fetch_module = importlib.util.module_from_spec(_fetch_spec)
-        _fetch_spec.loader.exec_module(_fetch_module)
-        _fetch_module.fetch_all_data(force_refresh=True, benchmark=args.benchmark)
+        from fetch_utils import fetch_all_data
+        fetch_all_data(force_refresh=True, benchmark=args.benchmark)
         print()
-    
+
     # Load cached data (shared cache_utils)
     cached_data = load_cached_data()
     if cached_data is None:
-        logger.error("Cache file not found or invalid. Run 01_fetch_stock_data.py first.")
+        logger.error("Cache file not found or invalid. Run New1_fetch_yahoo_watchlist.py first (or 02 with --refresh).")
         print("Error: Could not load cached data")
-        print("Please run: python 01_fetch_stock_data.py")
+        print("Please run: python New1_fetch_yahoo_watchlist.py  (or python 02_generate_full_report.py --refresh)")
         sys.exit(1)
     logger.info(f"Loaded {len(cached_data.get('stocks', {}))} stocks from cache")
     

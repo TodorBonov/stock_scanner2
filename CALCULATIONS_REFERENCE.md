@@ -176,7 +176,7 @@ This document describes how all scanner calculations are made, with formulas and
 | Pre-breakout config | pre_breakout_config.py | PRE_BREAKOUT_* only |
 | Pre-breakout filter/sort | pre_breakout_utils.py | get_pre_breakout_stocks(), pre_breakout_sort_key() |
 | Summary report (BEST SETUPS, PRE-BREAKOUT) | 02_generate_full_report.py | generate_summary_report(), pre-breakout section |
-| ChatGPT (A-grade + pre-breakout) | 04_chatgpt_validation.py | create_chatgpt_prompt(..., pre_breakout_data), main() |
+| ChatGPT (A-grade + pre-breakout) | New4/New5, legacy removed | prepared JSON from New3, prompts in New4/New5 |
 
 ---
 

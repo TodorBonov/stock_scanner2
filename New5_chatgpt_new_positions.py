@@ -12,8 +12,8 @@ from datetime import datetime
 from typing import Optional, Dict, Tuple, List
 
 from dotenv import load_dotenv
-from openai import OpenAI
 from logger_config import setup_logging, get_logger
+from openai_utils import require_openai_api_key, send_to_chatgpt as openai_send
 from config import (
     DEFAULT_ENV_PATH,
     OPENAI_API_TIMEOUT,
@@ -25,6 +25,10 @@ from config import (
 
 NEW_PIPELINE_REPORTS = Path("reports") / "new_pipeline"
 PREPARED_NEW = NEW_PIPELINE_REPORTS / "prepared_new_positions.json"
+
+
+def _prepared_path(use_6mo: bool) -> Path:
+    return NEW_PIPELINE_REPORTS / ("prepared_new_positions_6mo.json" if use_6mo else "prepared_new_positions.json")
 
 
 def _parse_ticker_order_from_response(text: str, valid_tickers: set) -> List[str]:

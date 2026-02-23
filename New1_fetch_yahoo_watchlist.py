@@ -19,15 +19,7 @@ from logger_config import setup_logging, get_logger
 if Path(DEFAULT_ENV_PATH).exists():
     load_dotenv(Path(DEFAULT_ENV_PATH))
 
-# Use 01's fetch logic but write to new pipeline cache
-import importlib.util
-_spec = importlib.util.spec_from_file_location("fetch_stock_data", Path(__file__).parent / "01_fetch_stock_data.py")
-_fetch_module = importlib.util.module_from_spec(_spec)
-_spec.loader.exec_module(_fetch_module)
-load_watchlist = _fetch_module.load_watchlist
-fetch_stock_data = _fetch_module.fetch_stock_data
-fetch_stock_data_with_retry = _fetch_module.fetch_stock_data_with_retry
-
+from fetch_utils import load_watchlist, fetch_stock_data_with_retry
 from bot import TradingBot
 
 # New pipeline: own cache file (do not overwrite main pipeline cache)

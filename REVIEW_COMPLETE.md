@@ -106,7 +106,7 @@
 
 ### 3.6 Dependencies and environment
 
-- **config.py:** `OPENAI_CHATGPT_MODEL = "gpt-5.2"` may be a typo (as of 2025, common models are gpt-4o, gpt-4, etc.). Confirm the model name for your API.
+- **config.py:** `OPENAI_CHATGPT_MODEL = "gpt-5.2"` is valid (OpenAI GPT-5.2, Dec 2025). See platform.openai.com/docs/models.
 - **yfinance:** Rate limiting and backoff are already in place in `data_provider`; same pattern could be used in `currency_utils.get_eur_usd_rate()` if you see rate limits on EURUSD=X.
 
 ---

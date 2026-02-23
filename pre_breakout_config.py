@@ -1,7 +1,7 @@
 """
 Pre-breakout view configuration (additive only).
 Used ONLY by the pre-breakout report section and ChatGPT pre-breakout block.
-NOT used by: 01_fetch_stock_data, 02 main report logic, 04 main A-grade list, 03_position_suggestions.
+NOT used by: fetch_utils, 02 main report logic, New4/New5 main lists.
 All existing pipeline behavior is unchanged.
 """
 

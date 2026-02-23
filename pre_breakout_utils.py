@@ -1,6 +1,6 @@
 """
 Pre-breakout view: filter and sort scan results for "setup ready, not yet broken out".
-Used by 02_generate_full_report.py (PRE-BREAKOUT SETUPS section) and 04_chatgpt_validation.py.
+Used by 02_generate_full_report.py (PRE-BREAKOUT SETUPS section).
 Config: pre_breakout_config.py only (no changes to config.py).
 """
 from typing import Dict, List
