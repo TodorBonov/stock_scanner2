@@ -39,9 +39,9 @@ OPENAI_API_TIMEOUT = 60  # seconds for OpenAI API calls
 # Used by: AI analysis features (if enabled)
 # Why important: AI calls can take longer, so timeout is more generous
 
-# ChatGPT (04, 05)
-# Model for ChatGPT analysis (see https://platform.openai.com/docs/models)
-OPENAI_CHATGPT_MODEL = "gpt-5.2"  # e.g. gpt-5.2, gpt-5.2-chat-latest, gpt-4o, gpt-4-turbo
+# ChatGPT (06, 07) – model for existing-positions and new-positions analysis
+# See https://platform.openai.com/docs/models (e.g. gpt-4o, gpt-4-turbo, gpt-4o-mini)
+OPENAI_CHATGPT_MODEL = "gpt-4o"
 OPENAI_CHATGPT_MAX_COMPLETION_TOKENS = 64000  # Allow long analysis for many stocks (increase if output is truncated)
 OPENAI_CHATGPT_MAX_A_GRADE_STOCKS = 9999  # Max A+ and A stocks in one prompt (9999 = send all)
 OPENAI_CHATGPT_MAX_PRE_BREAKOUT_STOCKS = 9999  # Max pre-breakout setups in one prompt (9999 = send all)
@@ -96,8 +96,8 @@ DEFAULT_LOG_FILE = "trading212_bot.log"
 
 # Cache and report paths
 CACHE_FILE = Path("data/cached_stock_data.json")
-# Purpose: Legacy cache path (used by 02 --refresh via fetch_utils.fetch_all_data)
-# Used by: cache_utils, 04_generate_full_report.py (fallback when prepared file missing)
+# Purpose: Legacy cache path (optional; pipeline uses cached_stock_data_new_pipeline.json)
+# Used by: cache_utils
 
 FAILED_FETCH_LIST = Path("data/failed_fetch.txt")
 # Purpose: List of tickers that failed to fetch (one per line), updated after each fetch
@@ -105,22 +105,30 @@ FAILED_FETCH_LIST = Path("data/failed_fetch.txt")
 
 # Ticker mapping: file-based mapping (T212 symbol -> Yahoo/data symbol) for manual resolution
 TICKER_MAPPING_FILE = Path("data/ticker_mapping.json")
-# Purpose: JSON file of ticker mappings; edit to fix mapping errors (see reports/ticker_mapping_errors.txt)
+# Purpose: JSON file of ticker mappings; edit to fix mapping errors (see reportsV2/ticker_mapping_errors.txt)
 # Used by: ticker_utils.py
 
 # Ticker mapping errors: written each run that fetches; lists tickers that failed (possible mapping issues)
-TICKER_MAPPING_ERRORS_FILE = Path("reports/ticker_mapping_errors.txt")
+TICKER_MAPPING_ERRORS_FILE = Path("reportsV2/ticker_mapping_errors.txt")
 # Purpose: After each fetch, list tickers with no data/error so you can add them to data/ticker_mapping.json
 # Used by: fetch_utils.py
 
-REPORTS_DIR = Path("reports")
-# Purpose: Directory for summary/detailed reports and scan results
-# Used by: 04, 05, 06, 07
+REPORTS_DIR = Path("reportsV2")
+# Purpose: Directory for all reports (Pipeline V2)
+# Used by: 03, 04, 05, 06, 07, position_sizing
 
 # Pipeline data (01→07)
 PREPARED_FOR_MINERVINI = Path("data/prepared_for_minervini.json")
 # Purpose: Output of step 03; input to step 04. Stored for testing.
 # Used by: 03_prepare_for_minervini.py (write), 04_generate_full_report.py (read)
+
+# Pipeline V2 cache inputs (steps 01, 02 write; step 03 reads)
+NEW_PIPELINE_CACHE = Path("data/cached_stock_data_new_pipeline.json")
+# Purpose: Yahoo OHLCV cache from step 01.
+# Used by: 01_fetch_yahoo_watchlist_V2.py (write), 03_prepare_for_minervini_V2.py (read)
+NEW_PIPELINE_POSITIONS = Path("data/positions_new_pipeline.json")
+# Purpose: Trading212 positions from step 02.
+# Used by: 02_fetch_positions_trading212_V2.py (write), 03_prepare_for_minervini_V2.py (read)
 
 PROBLEMS_WITH_TICKERS = REPORTS_DIR / "problems_with_tickers.txt"
 # Purpose: Report of ticker mismatches, unmapped symbols, missing data (step 03).
@@ -573,3 +581,149 @@ CRITICAL_FAILURE_GRADE = "F"  # Grade if trend & structure fails
 # Used by: Grade calculation
 # Why important: Trend & Structure is NON-NEGOTIABLE - if it fails, stock is F grade
 # Minervini's rule: Trend & Structure failure = WALK AWAY (F grade)
+
+# ============================================================================
+# MINERVINI V2 PIPELINE CONFIGURATION
+# ============================================================================
+# Scanner V2: structural eligibility, composite scoring, grade bands, report paths.
+# Used by: minervini_scanner_v2, minervini_report_v2, steps 04–07.
+
+# ----------------------------------------------------------------------------
+# STRUCTURAL ELIGIBILITY (V2)
+# ----------------------------------------------------------------------------
+MIN_AVG_DOLLAR_VOLUME_20D = 1_000_000.0  # $1M minimum liquidity
+MIN_PRICE_THRESHOLD = 5.0  # Avoid penny stocks
+
+# ----------------------------------------------------------------------------
+# PRIOR RUN (V2) – base must follow meaningful advance
+# ----------------------------------------------------------------------------
+MIN_PRIOR_RUN_PCT = 25.0  # prior_run_pct = (base_high - lowest_3m_before_base) / lowest_3m_before_base * 100
+PRIOR_RUN_LOOKBACK_TRADING_DAYS = 63   # ~3 months before base
+PRIOR_RUN_REQUIRED_FOR_ELIGIBILITY = True  # If True, prior_run < MIN_PRIOR_RUN_PCT → REJECT
+
+# ----------------------------------------------------------------------------
+# RS PERCENTILE (V2) – computed across universe after scan
+# ----------------------------------------------------------------------------
+RS_3M_LOOKBACK_DAYS = 63   # ~3 months for 3M return
+RS_6M_LOOKBACK_DAYS = 126  # Optional 6M return
+
+# ----------------------------------------------------------------------------
+# BASE TYPE CLASSIFICATION (V2)
+# ----------------------------------------------------------------------------
+BASE_TYPE_FLAT_MAX_DEPTH_PCT = 15.0       # depth ≤ 15% → flat_base
+BASE_TYPE_HIGH_TIGHT_PRIOR_RUN_PCT = 100.0  # prior_run ≥ 100%
+BASE_TYPE_HIGH_TIGHT_MAX_DEPTH_PCT = 25.0   # depth ≤ 25%
+BASE_TYPE_HIGH_TIGHT_MAX_WEEKS = 5.0        # base ≤ 5 weeks
+
+# ----------------------------------------------------------------------------
+# PIVOT BY BASE TYPE (V2)
+# ----------------------------------------------------------------------------
+PIVOT_SPIKE_FILTER_ENABLED = True
+PIVOT_SPIKE_STD_MULTIPLIER = 2.0
+PIVOT_IGNORE_SPIKE_WITHIN_LAST_N_DAYS = 5
+PIVOT_HANDLE_DAYS = 7  # For cup: handle = last N trading days
+
+# ----------------------------------------------------------------------------
+# TREND SCORE – graded by % above 200 SMA (V2)
+# ----------------------------------------------------------------------------
+TREND_PCT_ABOVE_200_TIER1 = 30.0   # ≥30% above 200 SMA → 100
+TREND_PCT_ABOVE_200_TIER2 = 15.0   # 15–30% → 70
+TREND_PCT_ABOVE_200_TIER3 = 5.0    # 5–15% → 40
+TREND_PCT_ABOVE_200_TIER4 = 0.0    # 0–5% → 15; below 0 → 0
+
+# ----------------------------------------------------------------------------
+# BASE QUALITY BONUSES (V2)
+# ----------------------------------------------------------------------------
+BASE_BONUS_RANGE_CONTRACTION_LAST_2W = 10
+BASE_BONUS_WEEKLY_CLOSES_UPPER_40 = 10
+BASE_RANGE_CONTRACTION_RATIO_MAX = 0.5
+
+# ----------------------------------------------------------------------------
+# POWER RANK
+# ----------------------------------------------------------------------------
+POWER_RANK_PRIOR_RUN_CAP = 100.0
+
+# ----------------------------------------------------------------------------
+# COMPOSITE SCORING WEIGHTS (V2)
+# ----------------------------------------------------------------------------
+WEIGHT_TREND_STRUCTURE = 0.20   # 20%
+WEIGHT_BASE_QUALITY = 0.25      # 25%
+WEIGHT_RELATIVE_STRENGTH = 0.25 # 25%
+WEIGHT_VOLUME_SIGNATURE = 0.15  # 15%
+WEIGHT_BREAKOUT_QUALITY = 0.15  # 15%
+
+# ----------------------------------------------------------------------------
+# COMPOSITE GRADE BANDS (V2)
+# ----------------------------------------------------------------------------
+GRADE_A_PLUS_MIN_SCORE = 85.0   # ≥85 → A+
+GRADE_A_MIN_SCORE = 75.0        # 75–84 → A
+GRADE_B_MIN_SCORE = 65.0        # 65–74 → B
+GRADE_C_MIN_SCORE = 55.0        # 55–64 → C
+MIN_RS_PERCENTILE_FOR_A_PLUS = 80.0
+MIN_RS_PERCENTILE_FOR_A = 70.0
+
+# ----------------------------------------------------------------------------
+# ATR STOP (V2)
+# ----------------------------------------------------------------------------
+USE_ATR_STOP_V2 = True
+ATR_PERIOD_V2 = 14
+ATR_STOP_MULTIPLIER_V2 = 1.5
+ATR_STOP_LOWEST_LOW_DAYS = 5
+
+# ----------------------------------------------------------------------------
+# EXTENDED / DISTANCE TO PIVOT (V2)
+# ----------------------------------------------------------------------------
+EXTENDED_DISTANCE_PCT = 8.0
+EXTENDED_RISK_WARNING_PCT = 15.0
+
+# ----------------------------------------------------------------------------
+# BREAKOUT SCORE BANDS (V2)
+# ----------------------------------------------------------------------------
+BREAKOUT_SCORE_TIGHT_LOW_PCT = -3
+BREAKOUT_SCORE_TIGHT_HIGH_PCT = 0
+BREAKOUT_SCORE_NEAR_LOW_PCT = -5
+BREAKOUT_SCORE_NEAR_HIGH_PCT = -3
+
+# ----------------------------------------------------------------------------
+# BASE QUALITY SCORE BANDS (V2)
+# ----------------------------------------------------------------------------
+BASE_SCORE_DEPTH_ELITE_PCT = 15
+BASE_SCORE_DEPTH_GOOD_PCT = 20
+BASE_SCORE_PRIOR_RUN_BONUS = 10
+BASE_SCORE_PRIOR_RUN_PENALTY = -20
+BASE_SCORE_LENGTH_IDEAL_MIN_WEEKS = 5.0
+BASE_SCORE_LENGTH_IDEAL_MAX_WEEKS = 8.0
+BASE_SCORE_LENGTH_SHORT_PENALTY_WEEKS = 4.0
+BASE_SCORE_LENGTH_IDEAL_BONUS = 5
+BASE_SCORE_LENGTH_SHORT_PENALTY = -5
+
+# ----------------------------------------------------------------------------
+# VOLUME SCORE BANDS (V2)
+# ----------------------------------------------------------------------------
+VOLUME_SCORE_STRONG_CONTRACTION = 0.8
+VOLUME_SCORE_MODERATE_CONTRACTION = 0.95
+
+# ----------------------------------------------------------------------------
+# BASE RECENCY (V2)
+# ----------------------------------------------------------------------------
+BASE_LAST_N_DAYS_RANGE_CONTRACTION = 10
+
+# ----------------------------------------------------------------------------
+# EARLY CANDIDATES (report section only)
+# ----------------------------------------------------------------------------
+EARLY_TREND_SCORE_MIN = 40.0
+EARLY_TREND_SCORE_MAX = 70.0
+EARLY_RS_PERCENTILE_MIN = 50.0
+EARLY_RS_PERCENTILE_MAX = 80.0
+EARLY_DIST_TO_PIVOT_MIN_PCT = -5.0
+EARLY_DIST_TO_PIVOT_MAX_PCT = 0.0
+EARLY_MAX_ROWS = 40
+
+# ----------------------------------------------------------------------------
+# V2 OUTPUT PATHS
+# ----------------------------------------------------------------------------
+REPORTS_DIR_V2 = Path("reportsV2")
+SCAN_RESULTS_V2_LATEST = REPORTS_DIR_V2 / "scan_results_v2_latest.json"
+USER_REPORT_SUBDIR_V2 = ""
+SEPA_USER_REPORT_PREFIX = "sepa_scan_user_report_"
+SEPA_CSV_PREFIX = "sepa_scan_summary_"

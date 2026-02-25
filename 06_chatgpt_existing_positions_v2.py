@@ -1,10 +1,10 @@
 """
 Pipeline step 06 V2: ChatGPT analysis for existing (opened) positions from Trading212.
-Reads reports/v2/prepared_existing_positions_v2.json (from 05_prepare_chatgpt_data_v2.py).
+Reads reportsV2/prepared_existing_positions_v2.json (from 05_prepare_chatgpt_data_v2.py).
 Uses full position data (entry, current, quantity, currency) + OHLCV; optionally enriches
 with V2 scan data (composite_score, grade, base type, pivot) when the ticker was in the scan.
 Output: institutional review and a clear suggestion per stock (HOLD / ADD / TRIM / EXIT).
-Writes reports/v2/chatgpt_existing_positions_v2_<ts>.txt
+Writes reportsV2/chatgpt_existing_positions_v2_<ts>.txt
 """
 import json
 import re
@@ -20,13 +20,14 @@ from config import (
     DEFAULT_ENV_PATH,
     OPENAI_CHATGPT_MODEL,
     OPENAI_CHATGPT_MAX_COMPLETION_TOKENS,
+    REPORTS_DIR_V2,
+    SCAN_RESULTS_V2_LATEST,
 )
-from minervini_config_v2 import REPORTS_DIR_V2, SCAN_RESULTS_V2_LATEST
 
 if Path(DEFAULT_ENV_PATH).exists():
     load_dotenv(Path(DEFAULT_ENV_PATH))
 
-V2_REPORTS = REPORTS_DIR_V2 / "v2"
+V2_REPORTS = REPORTS_DIR_V2  # reportsV2
 PREPARED_EXISTING_V2 = V2_REPORTS / "prepared_existing_positions_v2.json"
 
 setup_logging(log_level="INFO", log_to_file=True)
@@ -198,7 +199,7 @@ def main():
 
     api_key = require_openai_api_key(args.api_key)
     if not PREPARED_EXISTING_V2.exists():
-        print(f"[ERROR] {PREPARED_EXISTING_V2} not found. Run 02_fetch_positions_trading212.py then 05_prepare_chatgpt_data_v2.py.")
+        print(f"[ERROR] {PREPARED_EXISTING_V2} not found. Run 02_fetch_positions_trading212_V2.py then 05_prepare_chatgpt_data_v2.py.")
         return
 
     with open(PREPARED_EXISTING_V2, "r", encoding="utf-8") as f:

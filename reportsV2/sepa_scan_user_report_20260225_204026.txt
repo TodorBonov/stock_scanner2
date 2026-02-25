@@ -1,0 +1,183 @@
+Report run: 2026-02-25 20:40:26
+Data as of (Yahoo): 2026-02-25T20:39:39.531566
+
+============================================================
+PART 1 — RANK TABLE & DETAILED (PER STOCK)
+============================================================
+
+----- Executive Summary -----
+Universe: 4 stocks
+Eligible Stage 2: 1
+A+/A candidates: 1
+B candidates: 0
+In Breakout Now: 0
+Average RS Percentile (eligible): 75.0
+
+----- Ranked Table -----
+| Rank | Ticker | Grade | Score | Base Type | Depth % | RS %ile | Dist to Pivot | R/R | Stop | Note |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | RWE.DE | A | 83.2 | flat_base | 10.2 | 75.0 | -0.7 | 2.5 | 62.07 | — |
+| 2 | AAPL | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 3 | MSFT | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 4 | NVDA | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+
+----- Detailed (per stock) -----
+----- RWE.DE -----
+Grade: A
+Composite Score: 83.2
+  Score calculation: 0.2*100.0 + 0.25*100.0 + 0.25*75.0 + 0.15*50.0 + 0.15*80.0 = 83.2
+  Trend: 100.0   (>=30.0% above 200 SMA)
+  Base: 100.0    (depth 10.2% (<=15 +10, <=20 +5); prior 39.0% (>=25.0 +10 else -20); length 6.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 75.0     (rs_percentile 0-100; this stock 75.0)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0 (dist -0.73% in [-3%, 0%] -> 80)
+Base: flat_base (6.0 weeks, 10.2% deep)
+Prior Run: +39.0%
+RS Percentile: 75.0
+RSI: 57.0
+Pivot: 64.67  (source: flat_max_spike_filtered)
+Distance to Pivot: -0.7%
+Stop: 62.07 (ATR method)
+Reward/Risk: 2.5
+Power Rank: 57.1
+Status: Ready - Tight base, strong RS, not extended.
+
+----- AAPL -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- MSFT -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- NVDA -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+
+============================================================
+EARLY CANDIDATES (before extension)
+============================================================
+
+Stocks that are not yet extended (trend 40-70), building RS (50-80 %ile),
+and near pivot (-5% to 0%). Sorted by grade (A+ then A then B), then composite score.
+
+----- Early candidates table -----
+| Rank | Ticker | Grade | Score | Trend | RS %ile | Dist to Pivot | Base Type | Note |
+|---|---|---|---|---|---|---|---|---|
+
+  (none match the early thresholds this run)
+
+----- Risk Warnings (summary) -----
+  None
+
+============================================================
+PART 3 — SCORE BREAKDOWN & CONFIG THRESHOLDS
+============================================================
+
+How the composite score is computed: composite = 0.2*Trend + 0.25*Base + 0.25*RS + 0.15*Vol + 0.15*Breakout (each component 0–100).
+
+----- Config thresholds (config) -----
+Eligibility:
+  MIN_AVG_DOLLAR_VOLUME_20D = 1,000,000  MIN_PRICE_THRESHOLD = 5.0
+  MIN_PRIOR_RUN_PCT = 25.0%  PRIOR_RUN_LOOKBACK_TRADING_DAYS = 63
+
+Trend score (0–100 by % above 200 SMA):
+  ≥30.0% → 100  15.0–30.0% → 70  5.0–15.0% → 40  0.0–5.0% → 15  <0.0% → 0
+
+Composite weights:
+  WEIGHT_TREND_STRUCTURE = 0.2  WEIGHT_BASE_QUALITY = 0.25  WEIGHT_RELATIVE_STRENGTH = 0.25  WEIGHT_VOLUME_SIGNATURE = 0.15  WEIGHT_BREAKOUT_QUALITY = 0.15
+
+Grade bands (composite score):
+  ≥85.0 → A+  ≥75.0 → A  ≥65.0 → B  ≥55.0 → C  <55.0 → REJECT
+  MIN_RS_PERCENTILE_FOR_A_PLUS = 80.0  MIN_RS_PERCENTILE_FOR_A = 70.0 (downgrade if below)
+
+Base score (additions/penalties):
+  depth ≤15% → +10  ≤20% → +5  prior_run ≥25.0% → +10  else → -20
+  length 5.0–8.0 wks → +5  <4.0 wks → -5
+
+Breakout score (pre-breakout by distance to pivot):
+  dist [-3%, 0%] → 80  [-5%, -3%) → 60  >8.0% → 30  else 50  (in breakout → 100)
+
+Volume score (base contraction):
+  contraction <0.8 → 100  <0.95 → 70  else 50 (when passed); failed → 0/50/70 by band
+
+----- Per-stock score derivation (top 80) -----
+--- RWE.DE (A) ---
+  Composite = 0.2*100.0 + 0.25*100.0 + 0.25*75.0 + 0.15*50.0 + 0.15*80.0 = 83.2
+  Trend: 100.0  (>=30.0% above 200 SMA)
+  Base: 100.0  (depth 10.2%, prior_run 39.1%, length 6.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 75.0  (rs_percentile = 75.0)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0  (dist -0.73% in [-3%, 0%] -> 80)
+
+--- AAPL (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- MSFT (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- NVDA (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+===== END SEPA SCAN =====

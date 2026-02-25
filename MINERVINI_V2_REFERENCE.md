@@ -125,8 +125,8 @@ Each component is scored 0–100; composite = sum(weight × score).
 
 | Variable | Current value |
 |----------|----------------|
-| `REPORTS_DIR_V2` | `reports` |
-| `SCAN_RESULTS_V2_LATEST` | `reports/scan_results_v2_latest.json` |
+| `REPORTS_DIR_V2` | `reportsV2` |
+| `SCAN_RESULTS_V2_LATEST` | `reportsV2/scan_results_v2_latest.json` |
 | `USER_REPORT_SUBDIR_V2` | `v2` |
 | `SEPA_USER_REPORT_PREFIX` | `sepa_scan_user_report_` |
 | `SEPA_CSV_PREFIX` | `sepa_scan_summary_` |
@@ -270,7 +270,7 @@ Example from a live V2 run (RWE.DE in a small universe). Illustrates **graded tr
 
 ## 6. Full example: RWE.DE — LLM output and user report
 
-**LLM/engine output** (single ticker object in `reports/scan_results_v2_latest.json`):
+**LLM/engine output** (single ticker object in `reportsV2/scan_results_v2_latest.json`):
 
 ```json
 {
@@ -336,7 +336,7 @@ Status: Watch
   Scores: Trend 70.0  Base 100.0  RS 50.0  Vol 100.0  Breakout 50.0
 ```
 
-The full user report is written by `04_generate_full_report_v2.py` to `reports/v2/sepa_scan_user_report_<timestamp>.txt`. CSV (including `pivot_source` and `power_rank`) goes to `reports/v2/sepa_scan_summary_<timestamp>.csv`.
+The full user report is written by `04_generate_full_report_v2.py` to `reportsV2/sepa_scan_user_report_<timestamp>.txt`. CSV (including `pivot_source` and `power_rank`) goes to `reportsV2/sepa_scan_summary_<timestamp>.csv`.
 
 ---
 

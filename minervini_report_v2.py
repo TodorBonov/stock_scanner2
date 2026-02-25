@@ -6,7 +6,7 @@ Pure Python, deterministic, no LLM.
 from pathlib import Path
 from datetime import datetime
 from typing import List, Dict, Optional
-from minervini_config_v2 import (
+from config import (
     REPORTS_DIR_V2,
     USER_REPORT_SUBDIR_V2,
     SEPA_USER_REPORT_PREFIX,
@@ -20,7 +20,6 @@ from minervini_config_v2 import (
     EARLY_DIST_TO_PIVOT_MIN_PCT,
     EARLY_DIST_TO_PIVOT_MAX_PCT,
     EARLY_MAX_ROWS,
-    # For PART 3 – Score breakdown & config thresholds
     MIN_AVG_DOLLAR_VOLUME_20D,
     MIN_PRICE_THRESHOLD,
     MIN_PRIOR_RUN_PCT,
@@ -204,7 +203,7 @@ def _detailed_block(r: Dict) -> List[str]:
 
 
 def _config_thresholds_lines() -> List[str]:
-    """Config thresholds summary for PART 3 (from minervini_config_v2)."""
+    """Config thresholds summary for PART 3 (from config)."""
     return [
         "Eligibility:",
         f"  MIN_AVG_DOLLAR_VOLUME_20D = {MIN_AVG_DOLLAR_VOLUME_20D:,.0f}  MIN_PRICE_THRESHOLD = {MIN_PRICE_THRESHOLD}",
@@ -485,7 +484,7 @@ def generate_user_friendly_report(
                  f"{WEIGHT_TREND_STRUCTURE}*Trend + {WEIGHT_BASE_QUALITY}*Base + {WEIGHT_RELATIVE_STRENGTH}*RS + "
                  f"{WEIGHT_VOLUME_SIGNATURE}*Vol + {WEIGHT_BREAKOUT_QUALITY}*Breakout (each component 0–100).")
     lines.append("")
-    lines.append("----- Config thresholds (minervini_config_v2) -----")
+    lines.append("----- Config thresholds (config) -----")
     lines.extend(_config_thresholds_lines())
     lines.append("----- Per-stock score derivation (top 80) -----")
     for r in sorted_results[:80]:
@@ -503,7 +502,7 @@ def export_scan_summary_to_csv(scan_results: List[Dict], filepath: Optional[Path
     distance_to_pivot_pct, reward_to_risk, stop_price
     """
     if filepath is None:
-        filepath = REPORTS_DIR_V2 / "v2" / f"{SEPA_CSV_PREFIX}{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
+        filepath = REPORTS_DIR_V2 / f"{SEPA_CSV_PREFIX}{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
     filepath = Path(filepath)
     filepath.parent.mkdir(parents=True, exist_ok=True)
 

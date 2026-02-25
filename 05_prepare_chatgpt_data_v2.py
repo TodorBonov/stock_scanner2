@@ -1,9 +1,10 @@
 """
 Pipeline step 5 V2: Prepare ChatGPT data from V2 scan results.
-Reads reports/scan_results_v2_latest.json (from 04_generate_full_report_v2.py).
-Outputs reports/v2/prepared_existing_positions_v2.json and prepared_new_positions_v2.json.
+Reads reportsV2/scan_results_v2_latest.json (from 04_generate_full_report_v2.py).
+Outputs reportsV2/prepared_existing_positions_v2.json and prepared_new_positions_v2.json.
 A+/A from V2 grade (eligible + grade in A+, A). New positions payload includes V2 structured fields for LLM.
 """
+import argparse
 import json
 from pathlib import Path
 from datetime import datetime
@@ -11,18 +12,15 @@ from typing import Dict, List, Optional
 
 from dotenv import load_dotenv
 from logger_config import setup_logging, get_logger
-from config import DEFAULT_ENV_PATH
+from config import DEFAULT_ENV_PATH, PREPARED_FOR_MINERVINI, REPORTS_DIR_V2, SCAN_RESULTS_V2_LATEST
 from currency_utils import get_eur_usd_rate_with_date
 from ticker_utils import clean_ticker
 from watchlist_loader import load_watchlist, TRADING212_SYMBOL, YAHOO_SYMBOL
 
-from minervini_config_v2 import REPORTS_DIR_V2, SCAN_RESULTS_V2_LATEST
-from config import PREPARED_FOR_MINERVINI
-
 NEW_PIPELINE_DIR = Path("data")
 NEW_PIPELINE_CACHE = NEW_PIPELINE_DIR / "cached_stock_data_new_pipeline.json"
 NEW_PIPELINE_POSITIONS = NEW_PIPELINE_DIR / "positions_new_pipeline.json"
-V2_REPORTS = REPORTS_DIR_V2 / "v2"
+V2_REPORTS = REPORTS_DIR_V2  # All V2 reports in reportsV2
 PREPARED_EXISTING_V2 = V2_REPORTS / "prepared_existing_positions_v2.json"
 PREPARED_NEW_V2 = V2_REPORTS / "prepared_new_positions_v2.json"
 MAX_OHLCV_DAYS_6MO = 126
@@ -206,6 +204,10 @@ def build_t212_to_yahoo_map(watchlist_path: str = "watchlist.csv") -> Dict[str, 
 
 
 def main():
+    parser = argparse.ArgumentParser(description="05 V2: Prepare ChatGPT data from V2 scan")
+    parser.add_argument("--watchlist", default="watchlist.csv", help="Watchlist CSV (same as 01/03)")
+    args = parser.parse_args()
+
     print("\n" + "=" * 80)
     print("05 V2: PREPARE CHATGPT DATA (from V2 scan)")
     print("=" * 80)
@@ -219,7 +221,7 @@ def main():
     stocks = cached_data.get("stocks", {})
     positions = load_positions()
     eur_usd_rate, eur_usd_rate_date = get_eur_usd_rate_with_date()
-    t212_to_yahoo = build_t212_to_yahoo_map("watchlist.csv")
+    t212_to_yahoo = build_t212_to_yahoo_map(args.watchlist)
 
     V2_REPORTS.mkdir(parents=True, exist_ok=True)
 

@@ -1,7 +1,7 @@
 """
 Ticker Utility Module
 Centralized ticker cleaning and mapping logic for consistent handling across all modules.
-Mappings can be edited in data/ticker_mapping.json (see reports/ticker_mapping_errors.txt for failures).
+Mappings can be edited in data/ticker_mapping.json (see reportsV2/ticker_mapping_errors.txt for failures).
 """
 import json
 from typing import Dict, List

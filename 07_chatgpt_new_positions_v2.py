@@ -1,8 +1,8 @@
 """
-Pipeline step 8 (V2): ChatGPT analysis for new position candidates using V2 scan output.
-Reads reports/v2/prepared_new_positions_v2.json (from 05_prepare_chatgpt_data_v2.py).
+Pipeline step 7 (V2): ChatGPT analysis for new position candidates using V2 scan output.
+Reads reportsV2/prepared_new_positions_v2.json (from 05_prepare_chatgpt_data_v2.py).
 Uses the structured V2 fields (composite_score, base type, rs_percentile, pivot, stop_method) in the prompt.
-Writes reports/v2/chatgpt_new_positions_v2_<ts>.txt
+Writes reportsV2/chatgpt_new_positions_v2_<ts>.txt
 """
 import json
 import re
@@ -18,14 +18,16 @@ from config import (
     DEFAULT_ENV_PATH,
     OPENAI_CHATGPT_MODEL,
     OPENAI_CHATGPT_MAX_COMPLETION_TOKENS,
+    REPORTS_DIR_V2,
+    EXTENDED_DISTANCE_PCT,
+    BREAKOUT_SCORE_TIGHT_LOW_PCT,
+    BREAKOUT_SCORE_TIGHT_HIGH_PCT,
 )
-
-from minervini_config_v2 import REPORTS_DIR_V2, EXTENDED_DISTANCE_PCT, BREAKOUT_SCORE_TIGHT_LOW_PCT, BREAKOUT_SCORE_TIGHT_HIGH_PCT
 
 if Path(DEFAULT_ENV_PATH).exists():
     load_dotenv(Path(DEFAULT_ENV_PATH))
 
-V2_REPORTS = REPORTS_DIR_V2 / "v2"
+V2_REPORTS = REPORTS_DIR_V2  # reportsV2
 PREPARED_NEW_V2 = V2_REPORTS / "prepared_new_positions_v2.json"
 
 setup_logging(log_level="INFO", log_to_file=True)

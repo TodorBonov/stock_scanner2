@@ -1,15 +1,14 @@
 @echo off
 REM Run this AFTER the full pipeline has finished to commit and push the latest reports.
-REM Commits: summary_report_*.txt, summary_Chat_GPT_*.txt, position_suggestions_*.txt
-REM (detailed_report_*.txt are gitignored - too large)
+REM Commits: V2 reports (sepa_scan_user_report_*.txt, chatgpt_*_v2_*.txt, etc.)
 
 cd /d "%~dp0"
 
-git add reports/
-git status --short reports/
+git add reportsV2/
+git status --short reportsV2/
 if errorlevel 1 goto :eof
 
-git commit -m "Latest reports" -- reports/
+git commit -m "Latest reports" -- reportsV2/
 if errorlevel 1 (
     echo Nothing to commit or commit failed.
     exit /b 1
@@ -22,5 +21,5 @@ if errorlevel 1 (
 )
 
 echo.
-echo Done. Latest reports pushed to repo.
+echo Done. Latest reportsV2 pushed to repo.
 exit /b 0

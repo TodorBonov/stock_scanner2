@@ -1,7 +1,7 @@
 """
 Pipeline step 4 V2: Run Minervini SEPA V2 scan (eligibility + composite scoring + RS percentile).
 Reads from data/prepared_for_minervini.json (same as step 04). Does NOT overwrite scan_results_latest.json.
-Writes: reports/scan_results_v2_latest.json (LLM/engine output), reports/v2/sepa_scan_user_report_<ts>.txt,
+Writes: reportsV2/scan_results_v2_latest.json (LLM/engine output), reportsV2/sepa_scan_user_report_<ts>.txt,
         and optional CSV. Existing pipeline (04→05→06→07) is unchanged.
 """
 import json
@@ -15,9 +15,14 @@ import pandas as pd
 from bot import TradingBot
 from minervini_scanner_v2 import MinerviniScannerV2
 from minervini_report_v2 import generate_user_friendly_report, export_scan_summary_to_csv
-from minervini_config_v2 import REPORTS_DIR_V2, SCAN_RESULTS_V2_LATEST, USER_REPORT_SUBDIR_V2, SEPA_USER_REPORT_PREFIX
 from logger_config import setup_logging, get_logger
-from config import PREPARED_FOR_MINERVINI
+from config import (
+    PREPARED_FOR_MINERVINI,
+    REPORTS_DIR_V2,
+    SCAN_RESULTS_V2_LATEST,
+    USER_REPORT_SUBDIR_V2,
+    SEPA_USER_REPORT_PREFIX,
+)
 from cache_utils import load_cached_data
 
 setup_logging(log_level="INFO", log_to_file=True)
@@ -168,7 +173,7 @@ def main():
         report_run_timestamp=report_run_ts,
     )
     ts = datetime.now().strftime("%Y%m%d_%H%M%S")
-    report_dir = REPORTS_DIR_V2 / USER_REPORT_SUBDIR_V2
+    report_dir = REPORTS_DIR_V2 / USER_REPORT_SUBDIR_V2 if USER_REPORT_SUBDIR_V2 else REPORTS_DIR_V2
     report_dir.mkdir(parents=True, exist_ok=True)
     report_file = report_dir / f"{SEPA_USER_REPORT_PREFIX}{ts}.txt"
     report_file.write_text(report_txt, encoding="utf-8")

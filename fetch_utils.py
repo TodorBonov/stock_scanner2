@@ -1,39 +1,17 @@
 """
 Shared fetch logic for stock data from watchlist.
-Used by 01_fetch_yahoo_watchlist.py (new pipeline cache) and 04_generate_full_report.py (--refresh to legacy cache).
+Used by 01_fetch_yahoo_watchlist_V2.py (pipeline cache).
 """
 import time
-from pathlib import Path
 from datetime import datetime
-from typing import Dict, List
-from concurrent.futures import ThreadPoolExecutor, TimeoutError as FuturesTimeoutError
+from typing import Dict
 
 from bot import TradingBot
 from logger_config import get_logger
-from cache_utils import load_cached_data, save_cached_data
-from config import CACHE_FILE, FAILED_FETCH_LIST, TICKER_MAPPING_ERRORS_FILE
+from config import FAILED_FETCH_LIST, TICKER_MAPPING_ERRORS_FILE
 from currency_utils import get_eur_usd_rate
 
-DELAY_BETWEEN_FETCHES_SEC = 1.0
-FETCH_TIMEOUT_SEC = 60
-
 logger = get_logger(__name__)
-
-
-def load_watchlist(file_path: str = "watchlist.txt") -> List[str]:
-    """Load tickers from watchlist file."""
-    tickers = []
-    watchlist_path = Path(file_path)
-    if not watchlist_path.exists():
-        logger.error("Watchlist file not found: %s", file_path)
-        return []
-    with open(watchlist_path, "r", encoding="utf-8") as f:
-        for line in f:
-            ticker = line.strip()
-            if ticker and not ticker.startswith("#"):
-                tickers.append(ticker)
-    logger.info("Loaded %d tickers from %s", len(tickers), file_path)
-    return tickers
 
 
 def fetch_stock_data(ticker: str, bot: TradingBot) -> Dict:
@@ -113,79 +91,3 @@ def fetch_stock_data_with_retry(ticker: str, bot: TradingBot, max_retries: int =
         "data_available": False,
         "fetched_at": datetime.now().isoformat(),
     }
-
-
-def fetch_all_data(
-    force_refresh: bool = False,
-    benchmark: str = "^GDAXI",
-    watchlist_path: str = "watchlist.txt",
-) -> None:
-    """
-    Fetch data for all stocks in watchlist and save to legacy cache (CACHE_FILE).
-    Used by 04_generate_full_report.py --refresh.
-    """
-    tickers = load_watchlist(watchlist_path)
-    if not tickers:
-        print("No tickers found in watchlist")
-        return
-    cached_data = load_cached_data() or {"stocks": {}, "metadata": {}}
-    cached_stocks = cached_data.get("stocks", {})
-    bot = TradingBot(skip_trading212=True, benchmark=benchmark)
-    total = len(tickers)
-    fetched = skipped = errors = 0
-    print(f"\n{'='*80}\nFETCHING STOCK DATA\n{'='*80}")
-    print(f"Total tickers: {total}\nCache file: {CACHE_FILE}\n{'='*80}\n")
-    for i, ticker in enumerate(tickers, 1):
-        if not force_refresh and ticker in cached_stocks and cached_stocks[ticker].get("data_available", False):
-            print(f"[{i}/{total}] {ticker:12s} - Using cached data")
-            skipped += 1
-            continue
-        if not force_refresh and ticker in cached_stocks and cached_stocks[ticker].get("error"):
-            print(f"[{i}/{total}] {ticker:12s} - Retrying...")
-        print(f"[{i}/{total}] {ticker:12s} - Fetching...", end=" ", flush=True)
-        try:
-            with ThreadPoolExecutor(max_workers=1) as executor:
-                future = executor.submit(fetch_stock_data_with_retry, ticker, bot)
-                result = future.result(timeout=FETCH_TIMEOUT_SEC)
-        except FuturesTimeoutError:
-            result = {
-                "ticker": ticker,
-                "error": f"Timeout after {FETCH_TIMEOUT_SEC}s (skipped)",
-                "data_available": False,
-                "fetched_at": datetime.now().isoformat(),
-            }
-        cached_stocks[ticker] = result
-        if result.get("data_available", False):
-            fetched += 1
-            print(f"OK ({result.get('data_points', 0)} points)")
-        else:
-            errors += 1
-            print(f"Error: {(result.get('error') or 'Unknown')[:50]}")
-        time.sleep(DELAY_BETWEEN_FETCHES_SEC)
-    cached_data["stocks"] = cached_stocks
-    cached_data["metadata"] = {
-        "last_updated": datetime.now().isoformat(),
-        "total_stocks": len(cached_stocks),
-        "stocks_with_data": sum(1 for s in cached_stocks.values() if s.get("data_available", False)),
-        "benchmark": benchmark,
-    }
-    save_cached_data(cached_data)
-    failed = [t for t, s in cached_stocks.items() if not s.get("data_available", False)]
-    failed.sort()
-    if failed:
-        FAILED_FETCH_LIST.parent.mkdir(parents=True, exist_ok=True)
-        FAILED_FETCH_LIST.write_text("\n".join(failed) + "\n", encoding="utf-8")
-    elif FAILED_FETCH_LIST.exists():
-        FAILED_FETCH_LIST.write_text("", encoding="utf-8")
-    TICKER_MAPPING_ERRORS_FILE.parent.mkdir(parents=True, exist_ok=True)
-    lines = [
-        "# Tickers that failed to fetch (possible mapping issues).",
-        "# Generated: " + datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-        "",
-    ]
-    if failed:
-        lines.extend(failed)
-    else:
-        lines.append("(none)")
-    TICKER_MAPPING_ERRORS_FILE.write_text("\n".join(lines) + "\n", encoding="utf-8")
-    print(f"\n{'='*80}\nFetched: {fetched}  Skipped: {skipped}  Errors: {errors}\n{'='*80}\n")

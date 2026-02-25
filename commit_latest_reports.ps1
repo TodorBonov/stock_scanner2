@@ -1,14 +1,13 @@
 # Run this AFTER the full pipeline has finished to commit and push the latest reports.
-# Commits: summary_report_*.txt, summary_Chat_GPT_*.txt, position_suggestions_*.txt, position_suggestions_Chat_GPT_*.txt
-# (detailed_report_*.txt are gitignored - too large)
+# Commits: V2 reports (reportsV2/ – sepa_scan_user_report_*.txt, chatgpt_*_v2_*.txt, etc.)
 
 $ErrorActionPreference = "Stop"
 Set-Location $PSScriptRoot
 
-git add reports/
-git status --short reports/
+git add reportsV2/
+git status --short reportsV2/
 
-git commit -m "Latest reports" -- reports/
+git commit -m "Latest reports" -- reportsV2/
 if ($LASTEXITCODE -ne 0) {
     Write-Host "Nothing to commit or commit failed."
     exit 1
@@ -20,4 +19,4 @@ if ($LASTEXITCODE -ne 0) {
     exit 1
 }
 
-Write-Host "`nDone. Latest reports pushed to repo."
+Write-Host "`nDone. Latest reportsV2 pushed to repo."

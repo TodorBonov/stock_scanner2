@@ -1,5 +1,0 @@
-ticker,grade,composite_score,base_type,depth_pct,rs_percentile,distance_to_pivot_pct,reward_to_risk,stop_price
-AAPL,REJECT,0.0,standard_base,0.0,,0.0,,
-MSFT,REJECT,0.0,standard_base,0.0,,0.0,,
-NVDA,C,62.0,flat_base,12.1,50.0,-1.88,2.0,184.77
-RWE.DE,A+,87.5,flat_base,12.7,75.0,-5.62,2.0,61.44
