@@ -2,13 +2,13 @@
 
 **main** has only **Pipeline V2**. Run: `python run_pipeline_v2.py`. See **PIPELINE_V2.md**.
 
-The **original pipeline** (01 → 04 → 05 → 06 → 07) is on branch **V1**; its scripts are not on main. See **PIPELINE_ARCHIVE.md**.
+The **original pipeline** (01 → 04 → 05 → 06 → 07) is on branch **pipeline-v1**; its scripts are not on main. See **PIPELINE_ARCHIVE.md**.
 
 ---
 
-## Original pipeline (on branch V1 only)
+## Original pipeline (on branch pipeline-v1 only)
 
-Script order: **01 → 02 → 03 → 04 → 05 → 06 → 07**. Optional 6-month OHLCV: use `--use-6mo` on 05, 06, 07. Checkout branch **V1** to run it.
+Script order: **01 → 02 → 03 → 04 → 05 → 06 → 07**. Optional 6-month OHLCV: use `--use-6mo` on 05, 06, 07. Checkout branch **pipeline-v1** to run it.
 
 ---
 

@@ -36,11 +36,11 @@ So you never need to remember “04 vs 04_v2” or “07 vs 08” — the runner
 | `05_prepare_chatgpt_data_v2.py` | 05 V2 | Prep **new** candidates from V2 scan → `reports/v2/prepared_new_positions_v2.json` |
 | `08_chatgpt_new_positions_v2.py` | 08 | ChatGPT ranking of **new** candidates → `reports/v2/chatgpt_new_positions_v2_*.txt` |
 
-### Not on main (only on branch V1)
+### Not on main (only on branch pipeline-v1)
 
-These scripts were removed from main; they exist only on branch **V1** (original pipeline):
+These scripts were removed from main; they exist only on branch **pipeline-v1** (original pipeline):
 
-| Script | Role on V1 |
+| Script | Role on pipeline-v1 |
 |--------|------------|
 | `04_generate_full_report.py` | Original Minervini scan (writes `scan_results_latest.json`). |
 | `07_chatgpt_new_positions.py` | Original “new positions” ChatGPT. |
@@ -64,7 +64,7 @@ These scripts were removed from main; they exist only on branch **V1** (original
 |-------------|--------|----------------|
 | **config.py** | Almost everything | Main settings: API keys, paths, rate limits, OpenAI model, **original** scanner thresholds, cache paths. |
 | **minervini_config_v2.py** | V2 scan & V2 reports only | V2-only: prior run %, grade bands (A+/A/B/C), composite weights, ATR stop, paths for `reports/v2/` and `scan_results_v2_latest.json`. |
-| **pre_breakout_config.py** | Only on branch V1 | Pre-breakout view (add-on to original scan). Removed from main. |
+| **pre_breakout_config.py** | Only on branch pipeline-v1 | Pre-breakout view (add-on to original scan). Removed from main. |
 | **logger_config.py** | All scripts | Logging setup (not “business” config). |
 
 **In short:**  
@@ -79,4 +79,4 @@ These scripts were removed from main; they exist only on branch **V1** (original
 - **Run:** `python run_pipeline_v2.py` (optionally `--csv` or `--refresh`).
 - **Scripts that matter for V2:** 01, 02, 03, **04_generate_full_report_v2**, 05, **05_prepare_chatgpt_data_v2**, 06, **08_chatgpt_new_positions_v2** (the runner runs them in that order).
 - **Config that matters for V2:** **config.py** (main) + **minervini_config_v2.py** (V2 scan/report only).
-- **Not on main (branch V1 only):** Original pipeline scripts and pre_breakout_* were removed from main. See **PIPELINE_ARCHIVE.md**. On main you can ignore `06_chatgpt_existing_positions_v2.py` (runner uses 06).
+- **Not on main (branch pipeline-v1 only):** Original pipeline scripts and pre_breakout_* were removed from main. See **PIPELINE_ARCHIVE.md**. On main you can ignore `06_chatgpt_existing_positions_v2.py` (runner uses 06).

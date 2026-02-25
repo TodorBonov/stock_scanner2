@@ -1,19 +1,18 @@
 # Pipeline archive (original pipeline)
 
-**main** has only **Pipeline V2** and shared code; any script or config used only by the original pipeline has been removed from main.
+**main** has only **Pipeline V2** and the code needed to run it. Scripts and configs used only by the original pipeline have been removed from main.
 
-The **original pipeline** (01 → 04 → 05 → 06 → 07) lives on branch **V1**. Shared files (01, 02, 03, 05, 06, config, etc.) exist on both branches and can evolve separately.
+The **original pipeline** (01 → 04 → 05 → 06 → 07) lives on branch **pipeline-v1**. Shared files (01, 02, 03, 05, 06, config, etc.) exist on both branches and can evolve separately.
 
 ## Where the original pipeline lives
 
-- **Branch: `V1`** — full repo with everything the old pipeline needs (04_generate_full_report.py, 07_chatgpt_new_positions.py, pre_breakout_*, generate_full_report.py, etc.).
-- **Branch: `pipeline-v1`** / **Tag: `pipeline-v1-baseline`** — earlier snapshot with both pipelines in one tree (before we split).
+- **Branch: `pipeline-v1`** — full repo with everything the old pipeline needs (04_generate_full_report.py, 07_chatgpt_new_positions.py, pre_breakout_*, generate_full_report.py, etc.).
 
 ## How to run the original pipeline
 
-1. **Checkout V1:**
+1. **Checkout pipeline-v1:**
    ```powershell
-   git checkout V1
+   git checkout pipeline-v1
    ```
 
 2. **Run the original sequence** (in order):
@@ -36,7 +35,7 @@ The **original pipeline** (01 → 04 → 05 → 06 → 07) lives on branch **V1*
 
 | Branch | Contents |
 |--------|----------|
-| **main** | Pipeline V2 only + shared code. Run: `python run_pipeline_v2.py`. No 04_generate_full_report.py, 07_chatgpt_new_positions.py, pre_breakout_*, etc. |
-| **V1** | Everything the original pipeline needs. Same shared scripts (01, 02, 03, 05, 06) plus original scan, report, and ChatGPT scripts. |
+| **main** | Pipeline V2 only. Run: `python run_pipeline_v2.py`. No 04_generate_full_report.py, 07_chatgpt_new_positions.py, pre_breakout_*, etc. |
+| **pipeline-v1** | Everything the original pipeline needs. Same shared scripts (01, 02, 03, 05, 06) plus original scan, report, and ChatGPT scripts. |
 
-Shared files (e.g. 01, 02, 03, 05, 06, config.py) are present on both branches and can have their own life (fixes or changes on main vs V1).
+Shared files (e.g. 01, 02, 03, 05, 06, config.py) are on both branches and can have their own life (fixes on main vs pipeline-v1).

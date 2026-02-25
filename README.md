@@ -74,7 +74,7 @@ Optional: `python run_pipeline_v2.py --csv` (export CSV from scan), `--refresh` 
 
 **Confused by script names or the two configs?** See **SCRIPTS_AND_CONFIG_REFERENCE.md** — it maps every script and config to “what to run” and “what to ignore” when using Pipeline V2.
 
-*(Original pipeline 01→04→05→06→07 is preserved on branch `pipeline-v1`; see **PIPELINE_ARCHIVE.md**.)*
+*(Original pipeline 01→04→05→06→07 is on branch `pipeline-v1` only; see **PIPELINE_ARCHIVE.md**.)*
 
 ## Usage
 
