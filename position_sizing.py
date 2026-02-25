@@ -56,7 +56,7 @@ def main():
     if args.from_scan:
         path = Path(SCAN_RESULTS_LATEST)
         if not path.exists():
-            print(f"Scan results not found at {path}. Run 02_generate_full_report.py first.")
+            print(f"Scan results not found at {path}. Run 04_generate_full_report.py first.")
             return
         with open(path, encoding="utf-8") as f:
             results = json.load(f)

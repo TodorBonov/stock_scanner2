@@ -5,22 +5,26 @@ When scanning mixed US + EU watchlists, use this to pick the right benchmark per
 from typing import Optional
 
 # Ticker suffix or exchange -> benchmark symbol (Yahoo Finance)
-# US (no suffix or .US, NYSE/NASDAQ) -> S&P 500
-# Canadian (.TO, .V) -> TSX
-# European: .DE (Xetra), .PA (Paris), .MC (Madrid), .MI (Milan), .SW (Swiss), .AS (Amsterdam), .L (London) -> DAX or regional
+# Source: Yahoo Finance index symbols (widely used for relative strength).
+# US (no suffix or .US, NYSE/NASDAQ) -> S&P 500; Canadian -> TSX; European -> regional index.
 BENCHMARK_BY_SUFFIX = {
     ".TO": "^GSPTSE",   # Canada TSX
     ".V": "^GSPTSE",
     ".PA": "^FCHI",     # CAC 40
-    ".MC": "^IBEX",     # Madrid (or ^GDAXI for broad EU)
+    ".MC": "^IBEX",     # Madrid
     ".MI": "^FTMIB",    # Milan
     ".SW": "^SSMI",     # Swiss
     ".AS": "^AEX",      # Amsterdam
     ".DE": "^GDAXI",    # Xetra/DAX
-    ".L": "^FTSE",      # London
+    ".L": "^FTSE",      # London FTSE 100
     ".HA": "^GDAXI",    # Hamburg
     ".F": "^GDAXI",     # Frankfurt
     ".BR": "^BFX",      # Brussels
+    ".ST": "^OMX",      # Sweden OMX Stockholm 30
+    ".OL": "^OSEAX",    # Norway Oslo All Share
+    ".CO": "^OMXC25",   # Denmark Copenhagen 25
+    ".WA": "^WIG20",    # Poland WIG 20
+    ".VI": "^ATX",      # Austria ATX
 }
 
 # Default for no suffix (US-style tickers like AAPL, MSFT)

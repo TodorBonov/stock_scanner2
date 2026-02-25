@@ -1,5 +1,5 @@
 """Smoke tests: report generation produces expected output.
-Note: Loading 02_generate_full_report replaces sys.stdout/stderr on Windows and breaks pytest capture.
+Note: Loading 04_generate_full_report replaces sys.stdout/stderr on Windows and breaks pytest capture.
 Run ticker tests only: python -m pytest tests/test_ticker_utils.py -v
 """
 import importlib.util
@@ -14,10 +14,10 @@ _root = Path(__file__).resolve().parent.parent
 
 
 def _load_report_module():
-    """Load 02_generate_full_report (lazy to avoid side effects at collection)."""
-    _spec = importlib.util.spec_from_file_location("generate_full_report", _root / "02_generate_full_report.py")
+    """Load 04_generate_full_report (report logic; lazy to avoid side effects at collection)."""
+    _spec = importlib.util.spec_from_file_location("step04_report", _root / "04_generate_full_report.py")
     mod = importlib.util.module_from_spec(_spec)
-    sys.modules["generate_full_report"] = mod
+    sys.modules["step04_report"] = mod
     _spec.loader.exec_module(mod)
     return mod
 

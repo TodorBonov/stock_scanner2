@@ -47,7 +47,7 @@ This document describes how all scanner calculations are made, with formulas and
 
 **Code:** `minervini_scanner.py` → `_check_relative_strength()`
 
-**Benchmark:** Set per run via script args (e.g. `02_generate_full_report.py --benchmark ^GDAXI` or `^GSPC`). Not stored in config; default in bot is `^GDAXI`. (Script numbers match execution order.)
+**Benchmark:** Set per run via script args (e.g. `04_generate_full_report.py --benchmark ^GDAXI` or `^GSPC`). Per-ticker benchmark from watchlist CSV or `benchmark_mapping.py`. Default in bot is `^GDAXI`.
 
 | Metric | Formula / Rule | Config | Pass condition |
 |--------|----------------|--------|-----------------|
@@ -175,7 +175,7 @@ This document describes how all scanner calculations are made, with formulas and
 | Current pipeline config | config.py | All constants for above |
 | Pre-breakout config | pre_breakout_config.py | PRE_BREAKOUT_* only |
 | Pre-breakout filter/sort | pre_breakout_utils.py | get_pre_breakout_stocks(), pre_breakout_sort_key() |
-| Summary report (BEST SETUPS, PRE-BREAKOUT) | 02_generate_full_report.py | generate_summary_report(), pre-breakout section |
+| Summary report (BEST SETUPS, PRE-BREAKOUT) | 04_generate_full_report.py | generate_summary_report(), pre-breakout section |
 | ChatGPT (A-grade + pre-breakout) | New4/New5, legacy removed | prepared JSON from New3, prompts in New4/New5 |
 
 ---

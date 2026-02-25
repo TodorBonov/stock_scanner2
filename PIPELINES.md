@@ -1,41 +1,65 @@
 # Pipeline
 
-This repo has a single pipeline: **New1 → New2 → New3 → New4 → New5**. Optional 6-month OHLCV variants: New3_6mo, New4_6mo, New5_6mo.
+**Primary pipeline (from now on):** use **Pipeline V2** — `python run_pipeline_v2.py`. See **PIPELINE_V2.md**.
+
+The **original pipeline** (01 → 04 → 05 → 06 → 07, with `04_generate_full_report.py` and `07_chatgpt_new_positions.py`) is preserved on branch `pipeline-v1` and tag `pipeline-v1-baseline`. See **PIPELINE_ARCHIVE.md** for how to run it.
 
 ---
 
-## Scripts
+## Original pipeline (archived)
+
+Script order: **01 → 02 → 03 → 04 → 05 → 06 → 07**. Optional 6-month OHLCV: use `--use-6mo` on 05, 06, 07.
+
+---
+
+## Scripts (execution order)
 
 | Step | Script | Purpose |
 |------|--------|--------|
-| 1 | `New1_fetch_yahoo_watchlist.py` | Fetch OHLCV from Yahoo for watchlist → `data/cached_stock_data_new_pipeline.json` |
-| 2 | `New2_fetch_positions_trading212.py` | Fetch open positions from Trading212 → `data/positions_new_pipeline.json` |
-| 3 | `New3_prepare_chatgpt_data.py` | Load cache + positions, run Minervini scan (via 02), output prepared JSON for ChatGPT: `reports/new_pipeline/prepared_existing_positions.json`, `prepared_new_positions.json` (A+/A only) |
-| 3b | `New3_prepare_chatgpt_data_6mo.py` | Optional. Same as New3 but OHLCV limited to last 126 days → `*_6mo.json`. Run **after** New3. |
-| 4 | `New4_chatgpt_existing_positions.py` | ChatGPT analysis for **existing positions** → `reports/new_pipeline/chatgpt_existing_positions_<ts>.txt` |
-| 4b | `New4_chatgpt_existing_positions_6mo.py` | Same as New4 using 6mo prepared data → `chatgpt_existing_positions_6mo_<ts>.txt` |
-| 5 | `New5_chatgpt_new_positions.py` | ChatGPT analysis for **new position candidates** (A+/A) → `reports/new_pipeline/chatgpt_new_positions_<ts>.txt` (default `--limit 50`) |
-| 5b | `New5_chatgpt_new_positions_6mo.py` | Same as New5 using 6mo prepared data → `chatgpt_new_positions_6mo_<ts>.txt` |
+| 1 | `01_fetch_yahoo_watchlist.py` | Fetch OHLCV from Yahoo for watchlist (CSV or legacy .txt) → `data/cached_stock_data_new_pipeline.json` |
+| 2 | `02_fetch_positions_trading212.py` | Fetch open positions from Trading212 → `data/positions_new_pipeline.json` |
+| 3 | `03_prepare_for_minervini.py` | Load cache + positions + watchlist; build `data/prepared_for_minervini.json` (tickers with benchmark_index); write `reports/problems_with_tickers.txt` |
+| 4 | `04_generate_full_report.py` | Run Minervini scan (reads prepared file or legacy cache); per-stock benchmark when available; writes summary/detailed reports and `reports/scan_results_latest.json` |
+| 5 | `05_prepare_chatgpt_data.py` | Load scan results from 04 + cache + positions; output `reports/new_pipeline/prepared_existing_positions.json`, `prepared_new_positions.json` (A+/A only). Does not run scan. |
+| 5b | `05_prepare_chatgpt_data.py --use-6mo` | Same as 05 but OHLCV limited to last 126 days → `*_6mo.json`. |
+| 6 | `06_chatgpt_existing_positions.py` | ChatGPT analysis for **existing positions** → `reports/new_pipeline/chatgpt_existing_positions_<ts>.txt` |
+| 7 | `07_chatgpt_new_positions.py` | ChatGPT analysis for **new position candidates** (A+/A) → `reports/new_pipeline/chatgpt_new_positions_<ts>.txt` (default `--limit 50`) |
+
+## Watchlist
+
+- **CSV** (recommended): `watchlist.csv` with header `type,yahoo_symbol,trading212_symbol,benchmark_index`.
+  - `type`: `ticker` or `index`. Only tickers are scanned; indexes are fetched from Yahoo and used as benchmarks for relative strength.
+  - `yahoo_symbol`: Symbol for Yahoo (e.g. `AAPL`, `RWE.DE`, `^GSPC`).
+  - `trading212_symbol`: Symbol used by Trading212 (e.g. `AAPL`, `RWED`). Optional for indexes.
+  - `benchmark_index`: Benchmark for RS for that ticker (e.g. `^GSPC`, `^GDAXI`).
+- **Legacy**: `watchlist.txt` — one symbol per line (Yahoo symbol). Treated as tickers; benchmark from `benchmark_mapping.get_benchmark(symbol)`.
+
+01 uses `watchlist_loader.load_watchlist(path)` and fetches all symbols from the watchlist (tickers + indexes). Default watchlist: `watchlist.csv` (fallback to legacy if CSV not used).
 
 ## Data paths
 
 - Cache: `data/cached_stock_data_new_pipeline.json`
 - Positions: `data/positions_new_pipeline.json`
-- Prepared: `reports/new_pipeline/prepared_existing_positions.json`, `prepared_new_positions.json` (and `*_6mo.json` if using 6mo)
+- Prepared for Minervini: `data/prepared_for_minervini.json` (written by 03, read by 04)
+- Problems report: `reports/problems_with_tickers.txt` (written by 03)
+- Scan results: `reports/scan_results_latest.json` (written by 04, read by 05)
+- Prepared for ChatGPT: `reports/new_pipeline/prepared_existing_positions.json`, `prepared_new_positions.json` (and `*_6mo.json` if using 6mo)
 - Reports: `reports/new_pipeline/chatgpt_*.txt`
 
 ## Run order
 
-1. `python New1_fetch_yahoo_watchlist.py`
-2. `python New2_fetch_positions_trading212.py`   (optional if you only want new-position suggestions)
-3. `python New3_prepare_chatgpt_data.py`
-4. Optionally: `python New3_prepare_chatgpt_data_6mo.py`
-5. `python New4_chatgpt_existing_positions.py`  (and/or `New4_chatgpt_existing_positions_6mo.py`)
-6. `python New5_chatgpt_new_positions.py`       (and/or `New5_chatgpt_new_positions_6mo.py`)
+1. `python 01_fetch_yahoo_watchlist.py`   (optional: `--watchlist watchlist.csv`)
+2. `python 02_fetch_positions_trading212.py`   (optional if you only want new-position suggestions)
+3. `python 03_prepare_for_minervini.py`
+4. `python 04_generate_full_report.py`
+5. `python 05_prepare_chatgpt_data.py`   (optional: `--use-6mo`)
+6. `python 06_chatgpt_existing_positions.py`   (optional: `--use-6mo`)
+7. `python 07_chatgpt_new_positions.py`   (optional: `--use-6mo`)
 
-Token usage and 6mo vs full OHLCV comparison: see `reports/new_pipeline/TOKEN_COMPARISON_ORIGINAL_VS_6MO.md` and `TOKEN_RECORD_AND_IMPROVEMENTS.md` (if present).
+Token usage and 6mo vs full OHLCV: see `reports/new_pipeline/TOKEN_COMPARISON_ORIGINAL_VS_6MO.md` and `TOKEN_RECORD_AND_IMPROVEMENTS.md` (if present).
 
 ## Supporting scripts
 
-- **fetch_utils.py** – Shared fetch logic (load_watchlist, fetch_stock_data, fetch_stock_data_with_retry, fetch_all_data). Used by New1 and by 02 when run with `--refresh`.
-- **02_generate_full_report.py** – Minervini scan used by New3; can be run standalone for a full report. Use `--refresh` to fetch into the legacy cache first.
+- **watchlist_loader.py** – Load CSV or legacy watchlist; `get_yahoo_symbols_for_fetch(rows)`, `get_ticker_rows(rows)`.
+- **fetch_utils.py** – Shared fetch logic (fetch_stock_data_with_retry, etc.). Used by 01. `generate_full_report.py --refresh` uses fetch_utils to fill legacy cache.
+- **04_generate_full_report.py** / **generate_full_report.py** – Minervini scan. Prefers `data/prepared_for_minervini.json` if present; else legacy `data/cached_stock_data.json`. Use `--refresh` to fetch into legacy cache. Writes `reports/scan_results_latest.json` for step 05.

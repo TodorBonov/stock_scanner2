@@ -1,7 +1,7 @@
 """
-New pipeline (3/5): Prepare data for New4 (existing positions) and New5 (new position suggestions).
-Loads new pipeline cache + positions, runs Minervini scan on cache, converts to EUR for EUR positions,
-outputs prepared JSON files for ChatGPT scripts.
+Pipeline step 5/7: Prepare data for 06 (existing positions) and 07 (new position suggestions).
+Loads scan results from step 04 (SCAN_RESULTS_LATEST), pipeline cache + positions; converts to EUR for EUR positions;
+outputs prepared JSON for 06 and 07. Does not run Minervini scan (run 04 first).
 """
 import json
 import argparse
@@ -11,11 +11,12 @@ from typing import Dict, List, Any, Optional
 
 from dotenv import load_dotenv
 from logger_config import setup_logging, get_logger
-from config import DEFAULT_ENV_PATH
-from currency_utils import get_eur_usd_rate_with_date, usd_to_eur, warn_if_eur_rate_unavailable
+from config import DEFAULT_ENV_PATH, SCAN_RESULTS_LATEST
+from currency_utils import get_eur_usd_rate_with_date
 from ticker_utils import clean_ticker
+from watchlist_loader import load_watchlist, TRADING212_SYMBOL, YAHOO_SYMBOL
 
-# New pipeline paths (match New1, New2)
+# Pipeline paths (match 01, 02)
 NEW_PIPELINE_DIR = Path("data")
 NEW_PIPELINE_CACHE = NEW_PIPELINE_DIR / "cached_stock_data_new_pipeline.json"
 NEW_PIPELINE_POSITIONS = NEW_PIPELINE_DIR / "positions_new_pipeline.json"
@@ -31,6 +32,19 @@ logger = get_logger(__name__)
 
 if Path(DEFAULT_ENV_PATH).exists():
     load_dotenv(Path(DEFAULT_ENV_PATH))
+
+
+def load_scan_results() -> List[Dict]:
+    """Load scan results written by step 04. Exit if missing."""
+    if not SCAN_RESULTS_LATEST.exists():
+        return []
+    try:
+        with open(SCAN_RESULTS_LATEST, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        return data if isinstance(data, list) else []
+    except Exception as e:
+        logger.warning("Could not load scan results: %s", e)
+        return []
 
 
 def load_new_pipeline_cache() -> dict:
@@ -54,18 +68,6 @@ def load_positions() -> List[Dict]:
     except Exception as e:
         logger.warning("Could not load positions: %s", e)
         return []
-
-
-def run_scan(cached_data: dict, benchmark: str = "^GDAXI") -> List[Dict]:
-    """Run Minervini scan on new pipeline cache (reuse 02 logic)."""
-    import importlib.util
-    spec = importlib.util.spec_from_file_location(
-        "report_module", Path(__file__).parent / "02_generate_full_report.py"
-    )
-    report_module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(report_module)
-    results, _ = report_module.scan_all_stocks_from_cache(cached_data, benchmark=benchmark)
-    return results
 
 
 def ohlcv_to_csv_rows(hist_dict: dict, to_eur: bool = False, eur_rate: Optional[float] = None, max_days: Optional[int] = None) -> List[str]:
@@ -109,7 +111,6 @@ def resolve_cache_entry(ticker: str, stocks: Dict) -> Optional[Dict]:
     cleaned = clean_ticker(t) or t
     if cleaned in stocks:
         return stocks[cleaned]
-    # T212 often uses trailing D (e.g. RWED, PFED) for same as RWE, PFE
     if len(t) > 1 and t.endswith("D") and t[:-1] in stocks:
         return stocks[t[:-1]]
     for key in stocks:
@@ -118,9 +119,22 @@ def resolve_cache_entry(ticker: str, stocks: Dict) -> Optional[Dict]:
     return None
 
 
+def build_t212_to_yahoo_map(watchlist_path: str = "watchlist.csv") -> Dict[str, str]:
+    """Build Trading212 symbol -> Yahoo symbol from watchlist (cache is keyed by Yahoo)."""
+    rows = load_watchlist(watchlist_path)
+    out: Dict[str, str] = {}
+    for r in rows:
+        t212 = (r.get(TRADING212_SYMBOL) or "").strip().upper()
+        yahoo = (r.get(YAHOO_SYMBOL) or "").strip().upper()
+        if t212 and yahoo:
+            out[t212] = yahoo
+    return out
+
+
 def main():
-    parser = argparse.ArgumentParser(description="New3: Prepare ChatGPT data (new pipeline)")
-    parser.add_argument("--benchmark", default="^GDAXI", help="Benchmark for scan (default: ^GDAXI)")
+    parser = argparse.ArgumentParser(description="05: Prepare ChatGPT data (reads scan results from step 04)")
+    parser.add_argument("--benchmark", default="^GDAXI", help="Unused; kept for CLI compatibility")
+    parser.add_argument("--watchlist", default="watchlist.csv", help="Watchlist CSV (for T212->Yahoo symbol mapping)")
     parser.add_argument("--use-6mo", dest="use_6mo", action="store_true", help="Limit OHLCV to last 6 months (126 days) and write *_6mo.json files")
     args = parser.parse_args()
 
@@ -130,37 +144,42 @@ def main():
     out_new = PREPARED_NEW_6MO if use_6mo else PREPARED_NEW
 
     print(f"\n{'='*80}")
-    print("NEW3: PREPARE CHATGPT DATA" + (" (6-month OHLCV)" if use_6mo else ""))
+    print("05: PREPARE CHATGPT DATA" + (" (6-month OHLCV)" if use_6mo else ""))
     print(f"{'='*80}")
+
+    scan_results = load_scan_results()
+    if not scan_results:
+        print("No scan results found (04 not run or empty). Will write existing positions only; prepared_new will be empty.")
 
     cached_data = load_new_pipeline_cache()
     stocks = cached_data.get("stocks", {})
     if not stocks:
-        print("No cache found. Run New1 (and optionally New2 --refresh) first.")
+        print("No cache found. Run 01 (and optionally 02 --refresh) first.")
         return
 
+    # Map Trading212 ticker -> Yahoo symbol so we can find OHLCV (cache is keyed by Yahoo)
+    t212_to_yahoo = build_t212_to_yahoo_map(getattr(args, "watchlist", "watchlist.csv"))
+
     positions = load_positions()
-    eur_usd_rate, _ = get_eur_usd_rate_with_date()
+    eur_usd_rate, eur_usd_rate_date = get_eur_usd_rate_with_date()
     if positions and any(p.get("currency") == "EUR" for p in positions) and (not eur_usd_rate or eur_usd_rate <= 0):
         logger.warning("EUR/USD rate unavailable; EUR positions will be left in USD in prepared data.")
 
-    # Run scan for A+/A list
-    print("Running Minervini scan on new pipeline cache...")
-    scan_results = run_scan(cached_data, benchmark=args.benchmark)
-
-    # --- Prepared for New4 (existing positions): include every position from Trading212 ---
+    # --- Prepared for 06 (existing positions): include every position from Trading212 ---
     NO_OHLCV_PLACEHOLDER = "No OHLCV data available for this ticker (cache missing or ticker not in watchlist)."
     prepared_existing = []
     for pos in positions:
         ticker = pos.get("ticker") or pos.get("ticker_raw") or ""
         entry = float(pos.get("entry") or 0)
-        current = pos.get("current")  # current price from Trading212 at fetch time
+        current = pos.get("current")
         if current is not None:
             current = float(current)
         quantity = float(pos.get("quantity") or 0)
         currency = (pos.get("currency") or "USD").upper()
         name = pos.get("name") or ticker
-        cached = resolve_cache_entry(ticker, stocks)
+        # Resolve cache by Yahoo symbol when position uses Trading212 symbol (e.g. RWED -> RWE.DE)
+        cache_key = t212_to_yahoo.get(ticker.upper()) or ticker
+        cached = resolve_cache_entry(cache_key, stocks)
         ohlcv_csv = NO_OHLCV_PLACEHOLDER
         if cached and cached.get("data_available"):
             hist = cached.get("historical_data", {})
@@ -183,7 +202,7 @@ def main():
             "ohlcv_csv": ohlcv_csv,
         })
 
-    # --- Prepared for New5 (A+/A only) ---
+    # --- Prepared for 07 (A+/A only) from scan results ---
     a_plus_a = [r for r in scan_results if r.get("overall_grade") in ("A+", "A") and "error" not in str(r)]
     prepared_new = []
     for r in a_plus_a:

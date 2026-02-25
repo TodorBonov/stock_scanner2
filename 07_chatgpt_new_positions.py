@@ -1,6 +1,6 @@
 """
-New pipeline (5/5): ChatGPT analysis for new position candidates (A+/A from prepared data).
-Reads prepared_new_positions.json, sends raw OHLCV to ChatGPT, writes report.
+Pipeline step 7/7: ChatGPT analysis for new position candidates (A+/A from prepared data).
+Reads prepared_new_positions.json from step 05, sends OHLCV to ChatGPT, writes report.
 """
 import os
 import json
@@ -22,6 +22,9 @@ from config import (
     OPENAI_CHATGPT_RETRY_ATTEMPTS,
     OPENAI_CHATGPT_RETRY_BASE_SECONDS,
 )
+
+if Path(DEFAULT_ENV_PATH).exists():
+    load_dotenv(Path(DEFAULT_ENV_PATH))
 
 NEW_PIPELINE_REPORTS = Path("reports") / "new_pipeline"
 PREPARED_NEW = NEW_PIPELINE_REPORTS / "prepared_new_positions.json"
@@ -155,7 +158,7 @@ logger = get_logger(__name__)
 
 
 def main():
-    parser = argparse.ArgumentParser(description="New5: ChatGPT new position suggestions (new pipeline)")
+    parser = argparse.ArgumentParser(description="05: ChatGPT new position suggestions (pipeline)")
     parser.add_argument("--model", default=None, help=f"OpenAI model (default: {OPENAI_CHATGPT_MODEL})")
     parser.add_argument("--api-key", default=None, help="OpenAI API key (default: OPENAI_API_KEY env)")
     parser.add_argument("--use-6mo", dest="use_6mo", action="store_true", help="Use 6-month OHLCV prepared data (prepared_new_positions_6mo.json)")
@@ -165,7 +168,7 @@ def main():
     api_key = require_openai_api_key(args.api_key)
     prepared_path = _prepared_path(args.use_6mo)
     if not prepared_path.exists():
-        print(f"[ERROR] Prepared data not found: {prepared_path}. Run New3 (with --use-6mo if needed) first.")
+        print(f"[ERROR] Prepared data not found: {prepared_path}. Run 03 (with --use-6mo if needed) first.")
         return
 
     with open(prepared_path, "r", encoding="utf-8") as f:
@@ -173,7 +176,7 @@ def main():
     stocks = data.get("stocks", [])[: args.limit]
 
     if not stocks:
-        print("No A+/A stocks in prepared data (run New1 and New3; ensure scan produces A+ or A).")
+        print("No A+/A stocks in prepared data (run 01 and 03; ensure scan produces A+ or A).")
         return
 
     model = args.model or OPENAI_CHATGPT_MODEL
@@ -197,19 +200,19 @@ def main():
         ordered_tickers = _parse_ticker_order_from_response(order_resp, valid_tickers)
         if ordered_tickers:
             stocks = _reorder_stocks_by_chatgpt(stocks, ordered_tickers)
-            print(f"Using ChatGPT order: {' → '.join(ordered_tickers[:15])}{' ...' if len(ordered_tickers) > 15 else ''}")
+            print(f"Using ChatGPT order: {' -> '.join(ordered_tickers[:15])}{' ...' if len(ordered_tickers) > 15 else ''}")
         else:
             print("Could not parse order from ChatGPT; using original order.")
     else:
         print("ChatGPT order request failed; using original order.")
 
     print(f"\n{'='*80}")
-    print("NEW5: CHATGPT NEW POSITION SUGGESTIONS (A+/A)")
+    print("05: CHATGPT NEW POSITION SUGGESTIONS (A+/A)")
     print(f"{'='*80}")
     print(f"Stocks: {len(stocks)}  Model: {model}")
     print(f"{'='*80}\n")
 
-    report_lines = ["=" * 80, "NEW5: CHATGPT NEW POSITION SUGGESTIONS (A+/A)", "=" * 80, f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}", f"Model: {model}", "Order: ChatGPT recommended (best opportunity first)", ""]
+    report_lines = ["=" * 80, "05: CHATGPT NEW POSITION SUGGESTIONS (A+/A)", "=" * 80, f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}", f"Model: {model}", "Order: ChatGPT recommended (best opportunity first)", ""]
 
     # Ranking section: same order as ChatGPT (best first)
     report_lines.append("RANKING (BEST TO WORST)")

@@ -1,0 +1,1771 @@
+============================================================
+PART 1 — RANK TABLE & SHORT SUMMARY
+============================================================
+
+----- Executive Summary -----
+Universe: 1710 stocks
+Eligible Stage 2: 278
+A+/A candidates: 70
+B candidates: 19
+In Breakout Now: 0
+Average RS Percentile (eligible): 62.0
+
+----- Ranked Table -----
+| Rank | Ticker | Grade | Score | Base Type | Depth % | RS %ile | Dist to Pivot | R/R | Stop |
+|---|---|---|---|---|---|---|---|---|---|
+| 1 | NEOG | A+ | 96.9 | high_tight_flag | 15.3 | 99.5 | -2.3 | 2.1 | 10.81 |
+| 2 | FOLD | A+ | 95.6 | flat_base | 0.7 | 94.3 | -0.1 | 26.1 | 14.31 |
+| 3 | TTC | A+ | 95.4 | flat_base | 13.1 | 93.6 | -1.6 | 3.3 | 99.21 |
+| 4 | GEV | A+ | 95.3 | cup | 22.5 | 93.0 | -2.7 | 1.6 | 791.67 |
+| 5 | PLAB | A+ | 92.1 | cup | 17.7 | 98.5 | -7.0 | 1.1 | 36.06 |
+| 6 | JNJ | A+ | 89.6 | flat_base | 10.9 | 70.6 | -0.6 | 4.3 | 241.22 |
+| 7 | ALEX | A+ | 88.0 | flat_base | 0.6 | 87.9 | -0.0 | 41.6 | 20.76 |
+| 8 | BNP.PA | A+ | 87.8 | flat_base | 12.9 | 87.2 | -1.3 | 2.7 | 110.31 |
+| 9 | BMY | A+ | 87.5 | flat_base | 13.7 | 86.1 | -1.3 | 2.6 | 59.71 |
+| 10 | GVA | A+ | 86.9 | flat_base | 13.7 | 83.7 | -1.5 | 2.3 | 130.84 |
+| 11 | BTSG | A+ | 86.4 | flat_base | 10.9 | 69.6 | -4.1 | 1.5 | 38.67 |
+| 12 | ATCO-A.ST | A+ | 86.3 | flat_base | 9.6 | 81.3 | -0.8 | 3.7 | 191.08 |
+| 13 | GNL | A+ | 86.2 | flat_base | 13.5 | 80.9 | -2.4 | 3.5 | 9.75 |
+| 14 | GATX | A+ | 86.1 | flat_base | 12.8 | 80.5 | -1.0 | 2.8 | 191.99 |
+| 15 | LIVN | A+ | 85.8 | flat_base | 12.8 | 79.2 | -2.1 | 2.1 | 65.99 |
+| 16 | OUT | A+ | 85.8 | flat_base | 11.6 | 67.1 | -4.1 | 2.4 | 25.92 |
+| 17 | XLB | A+ | 85.3 | flat_base | 12.2 | 77.1 | -2.4 | 3.3 | 52.52 |
+| 18 | NOVN.SW | A+ | 85.1 | flat_base | 13.1 | 76.4 | -1.2 | 3.5 | 125.87 |
+| 19 | ROST | A+ | 85.1 | flat_base | 9.2 | 76.4 | -1.4 | 3.5 | 197.59 |
+| 20 | LHX | A+ | 85.0 | flat_base | 11.5 | 76.1 | -2.0 | 2.6 | 348.75 |
+| 21 | PH | A | 84.6 | flat_base | 11.2 | 74.4 | -1.0 | 3.0 | 990.47 |
+| 22 | SAN.MC | A | 84.5 | flat_base | 11.7 | 73.9 | -2.7 | 2.1 | 12.62 |
+| 23 | HSBA.L | A | 84.3 | flat_base | 9.0 | 73.3 | -2.2 | 2.8 | 1274.93 |
+| 24 | ATCO-B.ST | A | 84.3 | flat_base | 8.5 | 73.1 | -1.2 | 3.9 | 165.92 |
+| 25 | ENGI.PA | A | 84.1 | flat_base | 13.4 | 72.6 | -1.7 | 3.1 | 30.83 |
+| 26 | ASH | A | 84.1 | flat_base | 11.9 | 84.4 | -3.5 | 1.8 | 61.97 |
+| 27 | BC | A | 84.0 | flat_base | 13.4 | 89.9 | -7.5 | 1.8 | 85.13 |
+| 28 | ST | A | 84.0 | flat_base | 13.6 | 83.9 | -3.4 | 1.8 | 36.68 |
+| 29 | PCAR | A | 83.8 | flat_base | 11.7 | 83.0 | -4.1 | 2.8 | 126.78 |
+| 30 | BEN | A | 83.6 | flat_base | 12.9 | 82.3 | -4.3 | 2.2 | 27.05 |
+| 31 | CASY | A | 83.6 | flat_base | 13.4 | 70.3 | -1.4 | 2.8 | 654.36 |
+| 32 | IMI.L | A | 82.9 | flat_base | 11.6 | 67.8 | -2.0 | 3.4 | 2850.69 |
+| 33 | HUBB | A | 82.8 | flat_base | 13.4 | 79.3 | -3.3 | 2.6 | 512.94 |
+| 34 | XHR | A | 82.6 | flat_base | 11.4 | 66.5 | -2.1 | 2.6 | 15.6 |
+| 35 | EOAN.DE | A | 82.5 | flat_base | 12.4 | 66.0 | -2.1 | 3.5 | 21.64 |
+| 36 | CM | A | 82.5 | flat_base | 10.1 | 66.2 | -1.2 | 4.0 | 97.86 |
+| 37 | ROG.SW | A | 82.4 | flat_base | 11.1 | 65.8 | -0.5 | 3.8 | 362.7 |
+| 38 | RTX | A | 82.1 | flat_base | 11.0 | 64.3 | -1.4 | 2.8 | 198.99 |
+| 39 | TD | A | 81.8 | flat_base | 6.9 | 63.1 | -2.5 | 4.4 | 96.13 |
+| 40 | TM | A | 81.8 | flat_base | 12.6 | 75.1 | -4.4 | 3.1 | 240.79 |
+| 41 | ADM | A | 81.7 | flat_base | 13.1 | 62.9 | -2.6 | 2.3 | 66.55 |
+| 42 | PZU.WA | A | 81.5 | flat_base | 7.5 | 62.1 | -2.9 | 4.2 | 70.41 |
+| 43 | JOE | A | 81.5 | flat_base | 12.6 | 74.0 | -4.1 | 2.3 | 68.8 |
+| 44 | MNST | A | 81.4 | flat_base | 10.2 | 61.7 | -0.3 | 3.6 | 82.52 |
+| 45 | AME | A | 80.8 | flat_base | 12.9 | 71.2 | -3.6 | 3.0 | 231.9 |
+| 46 | FCFS | A | 80.8 | flat_base | 13.6 | 71.2 | -4.4 | 2.2 | 179.72 |
+| 47 | WSR | A | 80.8 | flat_base | 10.3 | 59.1 | -0.9 | 3.7 | 14.95 |
+| 48 | DVN | A | 80.6 | cup | 17.4 | 76.5 | -5.1 | 2.1 | 43.93 |
+| 49 | PLD | A | 80.3 | flat_base | 11.9 | 57.2 | -1.4 | 3.4 | 138.19 |
+| 50 | GEF | A | 80.2 | flat_base | 11.1 | 68.9 | -4.8 | 2.6 | 74.2 |
+| 51 | FITB | A | 80.1 | flat_base | 13.8 | 74.5 | -8.4 | 2.3 | 53.0 |
+| 52 | CBOE | A | 80.1 | flat_base | 12.9 | 56.5 | -0.5 | 2.5 | 281.82 |
+| 53 | AUB | A | 80.0 | flat_base | 13.4 | 74.1 | -7.0 | 2.3 | 39.99 |
+| 54 | EXAS | A | 79.9 | flat_base | 1.8 | 31.6 | -0.1 | 20.3 | 103.14 |
+| 55 | APG | A | 79.7 | flat_base | 11.0 | 67.0 | -4.5 | 2.4 | 44.17 |
+| 56 | USB | A | 79.1 | flat_base | 13.0 | 70.5 | -8.5 | 2.5 | 58.7 |
+| 57 | FR | A | 79.1 | flat_base | 9.0 | 52.4 | -0.8 | 3.0 | 60.29 |
+| 58 | XBI | A | 78.5 | flat_base | 8.9 | 49.9 | -2.6 | 2.3 | 124.38 |
+| 59 | VMI | A | 78.5 | flat_base | 13.5 | 68.1 | -6.6 | 2.0 | 462.69 |
+| 60 | DRH | A | 78.4 | flat_base | 11.9 | 61.4 | -3.2 | 2.3 | 9.79 |
+| 61 | BCO | A | 78.3 | flat_base | 9.1 | 61.3 | -4.7 | 2.6 | 128.53 |
+| 62 | ADAM | A | 77.7 | flat_base | 12.9 | 64.6 | -8.1 | 2.3 | 8.32 |
+| 63 | POR | A | 77.5 | flat_base | 11.1 | 45.8 | -1.7 | 2.9 | 52.53 |
+| 64 | ARR | A | 77.5 | flat_base | 11.8 | 58.0 | -3.1 | 3.0 | 18.04 |
+| 65 | EVN.VI | A | 77.4 | flat_base | 9.4 | 45.8 | -2.5 | 3.3 | 34.16 |
+| 66 | ECPG | A | 77.4 | flat_base | 10.3 | 63.7 | -5.3 | 2.4 | 57.14 |
+| 67 | INGA.AS | A | 76.6 | flat_base | 10.8 | 60.4 | -5.1 | 2.6 | 29.92 |
+| 68 | RWE.DE | A | 75.7 | flat_base | 12.7 | 56.8 | -5.6 | 2.5 | 62.06 |
+| 69 | UCB.BR | A | 75.6 | flat_base | 13.6 | 56.4 | -6.7 | 2.3 | 326.97 |
+| 70 | HCSG | A | 75.4 | cup | 20.5 | 65.6 | -10.2 | 1.6 | 21.54 |
+| 71 | COO | B | 74.7 | flat_base | 6.9 | 58.7 | -2.9 | 2.6 | 81.36 |
+| 72 | REGN | B | 73.0 | flat_base | 12.5 | 40.0 | -3.2 | 2.4 | 780.42 |
+| 73 | LOW | B | 72.6 | flat_base | 12.0 | 68.4 | -5.5 | 2.6 | 278.67 |
+| 74 | NWE | B | 72.5 | flat_base | 8.4 | 38.1 | -3.3 | 2.9 | 68.76 |
+| 75 | RF | B | 72.5 | flat_base | 13.6 | 68.1 | -9.0 | 2.4 | 30.22 |
+| 76 | UBSI | B | 71.8 | flat_base | 13.7 | 65.3 | -8.2 | 2.5 | 44.12 |
+| 77 | IBKR | B | 71.1 | flat_base | 12.8 | 62.2 | -8.9 | 1.5 | 73.96 |
+| 78 | PFG | B | 70.9 | flat_base | 11.0 | 55.7 | -4.9 | 2.3 | 93.64 |
+| 79 | DG | B | 70.7 | flat_base | 9.7 | 94.6 | -1.5 | 2.1 | 147.76 |
+| 80 | STBA | B | 70.6 | flat_base | 13.1 | 54.4 | -4.7 | 2.4 | 42.97 |
+
+----- Short Summary (per stock) -----
+  NEOG  [A+] Score 96.9  |  Base: high_tight_flag (15.3% deep)
+    Pivot: 11.35 (htf_flag)  Dist: -2.3%  |  Stop: 10.81  R/R: 2.1  |  Ready – Tight base, strong RS, not extended.
+
+  FOLD  [A+] Score 95.6  |  Base: flat_base (0.7% deep)
+    Pivot: 14.36 (flat_max_spike_filtered)  Dist: -0.1%  |  Stop: 14.31  R/R: 26.1  |  Ready – Tight base, strong RS, not extended.
+
+  TTC  [A+] Score 95.4  |  Base: flat_base (13.1% deep)
+    Pivot: 102.32 (flat_max_spike_filtered)  Dist: -1.6%  |  Stop: 99.21  R/R: 3.3  |  Ready – Tight base, strong RS, not extended.
+
+  GEV  [A+] Score 95.3  |  Base: cup (22.5% deep)
+    Pivot: 846.0 (cup_handle)  Dist: -2.7%  |  Stop: 791.67  R/R: 1.6  |  Ready – Tight base, strong RS, not extended.
+
+  PLAB  [A+] Score 92.1  |  Base: cup (17.7% deep)
+    Pivot: 39.48 (cup_handle)  Dist: -7.0%  |  Stop: 36.06  R/R: 1.1  |  Watch
+
+  JNJ  [A+] Score 89.6  |  Base: flat_base (10.9% deep)
+    Pivot: 246.96 (flat_max_spike_filtered)  Dist: -0.6%  |  Stop: 241.22  R/R: 4.3  |  Ready – Tight base, strong RS, not extended.
+
+  ALEX  [A+] Score 88.0  |  Base: flat_base (0.6% deep)
+    Pivot: 20.81 (flat_max_spike_filtered)  Dist: -0.0%  |  Stop: 20.76  R/R: 41.6  |  Ready – Tight base, strong RS, not extended.
+
+  BNP.PA  [A+] Score 87.8  |  Base: flat_base (12.9% deep)
+    Pivot: 114.6 (flat_max_spike_filtered)  Dist: -1.3%  |  Stop: 110.31  R/R: 2.7  |  Ready – Tight base, strong RS, not extended.
+
+  BMY  [A+] Score 87.5  |  Base: flat_base (13.7% deep)
+    Pivot: 62.05 (flat_max_spike_filtered)  Dist: -1.3%  |  Stop: 59.71  R/R: 2.6  |  Ready – Tight base, strong RS, not extended.
+
+  GVA  [A+] Score 86.9  |  Base: flat_base (13.7% deep)
+    Pivot: 136.79 (flat_max_spike_filtered)  Dist: -1.5%  |  Stop: 130.84  R/R: 2.3  |  Ready – Tight base, strong RS, not extended.
+
+  BTSG  [A+] Score 86.4  |  Base: flat_base (10.9% deep)
+    Pivot: 41.4 (flat_max_spike_filtered)  Dist: -4.1%  |  Stop: 38.67  R/R: 1.5  |  Watch
+
+  ATCO-A.ST  [A+] Score 86.3  |  Base: flat_base (9.6% deep)
+    Pivot: 196.35 (flat_max_spike_filtered)  Dist: -0.8%  |  Stop: 191.08  R/R: 3.7  |  Ready – Tight base, strong RS, not extended.
+
+  GNL  [A+] Score 86.2  |  Base: flat_base (13.5% deep)
+    Pivot: 10.03 (flat_max_spike_filtered)  Dist: -2.4%  |  Stop: 9.75  R/R: 3.5  |  Ready – Tight base, strong RS, not extended.
+
+  GATX  [A+] Score 86.1  |  Base: flat_base (12.8% deep)
+    Pivot: 199.0 (flat_max_spike_filtered)  Dist: -1.0%  |  Stop: 191.99  R/R: 2.8  |  Ready – Tight base, strong RS, not extended.
+
+  LIVN  [A+] Score 85.8  |  Base: flat_base (12.8% deep)
+    Pivot: 69.31 (flat_max_spike_filtered)  Dist: -2.1%  |  Stop: 65.99  R/R: 2.1  |  Ready – Tight base, strong RS, not extended.
+
+  OUT  [A+] Score 85.8  |  Base: flat_base (11.6% deep)
+    Pivot: 27.04 (flat_max_spike_filtered)  Dist: -4.1%  |  Stop: 25.92  R/R: 2.4  |  Watch
+
+  XLB  [A+] Score 85.3  |  Base: flat_base (12.2% deep)
+    Pivot: 54.14 (flat_max_spike_filtered)  Dist: -2.4%  |  Stop: 52.52  R/R: 3.3  |  Ready – Tight base, strong RS, not extended.
+
+  NOVN.SW  [A+] Score 85.1  |  Base: flat_base (13.1% deep)
+    Pivot: 129.54 (flat_max_spike_filtered)  Dist: -1.2%  |  Stop: 125.87  R/R: 3.5  |  Ready – Tight base, strong RS, not extended.
+
+  ROST  [A+] Score 85.1  |  Base: flat_base (9.2% deep)
+    Pivot: 203.31 (flat_max_spike_filtered)  Dist: -1.4%  |  Stop: 197.59  R/R: 3.5  |  Ready – Tight base, strong RS, not extended.
+
+  LHX  [A+] Score 85.0  |  Base: flat_base (11.5% deep)
+    Pivot: 362.42 (flat_max_spike_filtered)  Dist: -2.0%  |  Stop: 348.75  R/R: 2.6  |  Ready – Tight base, strong RS, not extended.
+
+  PH  [A] Score 84.6  |  Base: flat_base (11.2% deep)
+    Pivot: 1024.58 (flat_max_spike_filtered)  Dist: -1.0%  |  Stop: 990.47  R/R: 3.0  |  Ready – Tight base, strong RS, not extended.
+
+  SAN.MC  [A] Score 84.5  |  Base: flat_base (11.7% deep)
+    Pivot: 13.25 (flat_max_spike_filtered)  Dist: -2.7%  |  Stop: 12.62  R/R: 2.1  |  Ready – Tight base, strong RS, not extended.
+
+  HSBA.L  [A] Score 84.3  |  Base: flat_base (9.0% deep)
+    Pivot: 1322.6 (flat_max_spike_filtered)  Dist: -2.2%  |  Stop: 1274.93  R/R: 2.8  |  Ready – Tight base, strong RS, not extended.
+
+  ATCO-B.ST  [A] Score 84.3  |  Base: flat_base (8.5% deep)
+    Pivot: 170.3 (flat_max_spike_filtered)  Dist: -1.2%  |  Stop: 165.92  R/R: 3.9  |  Ready – Tight base, strong RS, not extended.
+
+  ENGI.PA  [A] Score 84.1  |  Base: flat_base (13.4% deep)
+    Pivot: 31.84 (flat_max_spike_filtered)  Dist: -1.7%  |  Stop: 30.83  R/R: 3.1  |  Ready – Tight base, strong RS, not extended.
+
+  ASH  [A] Score 84.1  |  Base: flat_base (11.9% deep)
+    Pivot: 65.65 (flat_max_spike_filtered)  Dist: -3.5%  |  Stop: 61.97  R/R: 1.8  |  Watch
+
+  BC  [A] Score 84.0  |  Base: flat_base (13.4% deep)
+    Pivot: 90.25 (flat_max_spike_filtered)  Dist: -7.5%  |  Stop: 85.13  R/R: 1.8  |  Watch
+
+  ST  [A] Score 84.0  |  Base: flat_base (13.6% deep)
+    Pivot: 38.82 (flat_max_spike_filtered)  Dist: -3.4%  |  Stop: 36.68  R/R: 1.8  |  Watch
+
+  PCAR  [A] Score 83.8  |  Base: flat_base (11.7% deep)
+    Pivot: 131.54 (flat_max_spike_filtered)  Dist: -4.1%  |  Stop: 126.78  R/R: 2.8  |  Watch
+
+  BEN  [A] Score 83.6  |  Base: flat_base (12.9% deep)
+    Pivot: 28.32 (flat_max_spike_filtered)  Dist: -4.3%  |  Stop: 27.05  R/R: 2.2  |  Watch
+
+  CASY  [A] Score 83.6  |  Base: flat_base (13.4% deep)
+    Pivot: 678.67 (flat_max_spike_filtered)  Dist: -1.4%  |  Stop: 654.36  R/R: 2.8  |  Ready – Tight base, strong RS, not extended.
+
+  IMI.L  [A] Score 82.9  |  Base: flat_base (11.6% deep)
+    Pivot: 2938.0 (flat_max_spike_filtered)  Dist: -2.0%  |  Stop: 2850.69  R/R: 3.4  |  Ready – Tight base, strong RS, not extended.
+
+  HUBB  [A] Score 82.8  |  Base: flat_base (13.4% deep)
+    Pivot: 533.8 (flat_max_spike_filtered)  Dist: -3.3%  |  Stop: 512.94  R/R: 2.6  |  Watch
+
+  XHR  [A] Score 82.6  |  Base: flat_base (11.4% deep)
+    Pivot: 16.23 (flat_max_spike_filtered)  Dist: -2.1%  |  Stop: 15.6  R/R: 2.6  |  Ready – Tight base, strong RS, not extended.
+
+  EOAN.DE  [A] Score 82.5  |  Base: flat_base (12.4% deep)
+    Pivot: 22.27 (flat_max_spike_filtered)  Dist: -2.1%  |  Stop: 21.64  R/R: 3.5  |  Ready – Tight base, strong RS, not extended.
+
+  CM  [A] Score 82.5  |  Base: flat_base (10.1% deep)
+    Pivot: 100.39 (flat_max_spike_filtered)  Dist: -1.2%  |  Stop: 97.86  R/R: 4.0  |  Ready – Tight base, strong RS, not extended.
+
+  ROG.SW  [A] Score 82.4  |  Base: flat_base (11.1% deep)
+    Pivot: 372.4 (flat_max_spike_filtered)  Dist: -0.5%  |  Stop: 362.7  R/R: 3.8  |  Ready – Tight base, strong RS, not extended.
+
+  RTX  [A] Score 82.1  |  Base: flat_base (11.0% deep)
+    Pivot: 206.36 (flat_max_spike_filtered)  Dist: -1.4%  |  Stop: 198.99  R/R: 2.8  |  Ready – Tight base, strong RS, not extended.
+
+  TD  [A] Score 81.8  |  Base: flat_base (6.9% deep)
+    Pivot: 98.36 (flat_max_spike_filtered)  Dist: -2.5%  |  Stop: 96.13  R/R: 4.4  |  Ready – Tight base, strong RS, not extended.
+
+  TM  [A] Score 81.8  |  Base: flat_base (12.6% deep)
+    Pivot: 248.9 (flat_max_spike_filtered)  Dist: -4.4%  |  Stop: 240.79  R/R: 3.1  |  Watch
+
+  ADM  [A] Score 81.7  |  Base: flat_base (13.1% deep)
+    Pivot: 69.57 (flat_max_spike_filtered)  Dist: -2.6%  |  Stop: 66.55  R/R: 2.3  |  Ready – Tight base, strong RS, not extended.
+
+  PZU.WA  [A] Score 81.5  |  Base: flat_base (7.5% deep)
+    Pivot: 72.12 (flat_max_spike_filtered)  Dist: -2.9%  |  Stop: 70.41  R/R: 4.2  |  Ready – Tight base, strong RS, not extended.
+
+  JOE  [A] Score 81.5  |  Base: flat_base (12.6% deep)
+    Pivot: 71.9 (flat_max_spike_filtered)  Dist: -4.1%  |  Stop: 68.8  R/R: 2.3  |  Watch
+
+  MNST  [A] Score 81.4  |  Base: flat_base (10.2% deep)
+    Pivot: 84.88 (flat_max_spike_filtered)  Dist: -0.3%  |  Stop: 82.52  R/R: 3.6  |  Ready – Tight base, strong RS, not extended.
+
+  AME  [A] Score 80.8  |  Base: flat_base (12.9% deep)
+    Pivot: 239.94 (flat_max_spike_filtered)  Dist: -3.6%  |  Stop: 231.9  R/R: 3.0  |  Watch
+
+  FCFS  [A] Score 80.8  |  Base: flat_base (13.6% deep)
+    Pivot: 188.32 (flat_max_spike_filtered)  Dist: -4.4%  |  Stop: 179.72  R/R: 2.2  |  Watch
+
+  WSR  [A] Score 80.8  |  Base: flat_base (10.3% deep)
+    Pivot: 15.36 (flat_max_spike_filtered)  Dist: -0.9%  |  Stop: 14.95  R/R: 3.7  |  Ready – Tight base, strong RS, not extended.
+
+  DVN  [A] Score 80.6  |  Base: cup (17.4% deep)
+    Pivot: 46.15 (cup_handle)  Dist: -5.1%  |  Stop: 43.93  R/R: 2.1  |  Watch
+
+  PLD  [A] Score 80.3  |  Base: flat_base (11.9% deep)
+    Pivot: 142.4 (flat_max_spike_filtered)  Dist: -1.4%  |  Stop: 138.19  R/R: 3.4  |  Ready – Tight base, strong RS, not extended.
+
+  GEF  [A] Score 80.2  |  Base: flat_base (11.1% deep)
+    Pivot: 77.14 (flat_max_spike_filtered)  Dist: -4.8%  |  Stop: 74.2  R/R: 2.6  |  Watch
+
+  FITB  [A] Score 80.1  |  Base: flat_base (13.8% deep)
+    Pivot: 55.44 (flat_max_spike_filtered)  Dist: -8.4%  |  Stop: 53.0  R/R: 2.3  |  Watch
+
+  CBOE  [A] Score 80.1  |  Base: flat_base (12.9% deep)
+    Pivot: 293.58 (flat_max_spike_filtered)  Dist: -0.5%  |  Stop: 281.82  R/R: 2.5  |  Ready – Tight base, strong RS, not extended.
+
+  AUB  [A] Score 80.0  |  Base: flat_base (13.4% deep)
+    Pivot: 41.79 (flat_max_spike_filtered)  Dist: -7.0%  |  Stop: 39.99  R/R: 2.3  |  Watch
+
+  EXAS  [A] Score 79.9  |  Base: flat_base (1.8% deep)
+    Pivot: 103.65 (flat_max_spike_filtered)  Dist: -0.1%  |  Stop: 103.14  R/R: 20.3  |  Ready – Tight base, strong RS, not extended.
+
+  APG  [A] Score 79.7  |  Base: flat_base (11.0% deep)
+    Pivot: 46.11 (flat_max_spike_filtered)  Dist: -4.5%  |  Stop: 44.17  R/R: 2.4  |  Watch
+
+  USB  [A] Score 79.1  |  Base: flat_base (13.0% deep)
+    Pivot: 61.19 (flat_max_spike_filtered)  Dist: -8.5%  |  Stop: 58.7  R/R: 2.5  |  Watch
+
+  FR  [A] Score 79.1  |  Base: flat_base (9.0% deep)
+    Pivot: 62.33 (flat_max_spike_filtered)  Dist: -0.8%  |  Stop: 60.29  R/R: 3.0  |  Ready – Tight base, strong RS, not extended.
+
+  XBI  [A] Score 78.5  |  Base: flat_base (8.9% deep)
+    Pivot: 129.93 (flat_max_spike_filtered)  Dist: -2.6%  |  Stop: 124.38  R/R: 2.3  |  Ready – Tight base, strong RS, not extended.
+
+  VMI  [A] Score 78.5  |  Base: flat_base (13.5% deep)
+    Pivot: 487.58 (flat_max_spike_filtered)  Dist: -6.6%  |  Stop: 462.69  R/R: 2.0  |  Watch
+
+  DRH  [A] Score 78.4  |  Base: flat_base (11.9% deep)
+    Pivot: 10.24 (flat_max_spike_filtered)  Dist: -3.2%  |  Stop: 9.79  R/R: 2.3  |  Watch
+
+  BCO  [A] Score 78.3  |  Base: flat_base (9.1% deep)
+    Pivot: 133.62 (flat_max_spike_filtered)  Dist: -4.7%  |  Stop: 128.53  R/R: 2.6  |  Watch
+
+  ADAM  [A] Score 77.7  |  Base: flat_base (12.9% deep)
+    Pivot: 8.7 (flat_max_spike_filtered)  Dist: -8.1%  |  Stop: 8.32  R/R: 2.3  |  Watch
+
+  POR  [A] Score 77.5  |  Base: flat_base (11.1% deep)
+    Pivot: 54.39 (flat_max_spike_filtered)  Dist: -1.7%  |  Stop: 52.53  R/R: 2.9  |  Ready – Tight base, strong RS, not extended.
+
+  ARR  [A] Score 77.5  |  Base: flat_base (11.8% deep)
+    Pivot: 18.65 (flat_max_spike_filtered)  Dist: -3.1%  |  Stop: 18.04  R/R: 3.0  |  Watch
+
+  EVN.VI  [A] Score 77.4  |  Base: flat_base (9.4% deep)
+    Pivot: 35.22 (flat_max_spike_filtered)  Dist: -2.5%  |  Stop: 34.16  R/R: 3.3  |  Ready – Tight base, strong RS, not extended.
+
+  ECPG  [A] Score 77.4  |  Base: flat_base (10.3% deep)
+    Pivot: 59.59 (flat_max_spike_filtered)  Dist: -5.3%  |  Stop: 57.14  R/R: 2.4  |  Watch
+
+  INGA.AS  [A] Score 76.6  |  Base: flat_base (10.8% deep)
+    Pivot: 31.12 (flat_max_spike_filtered)  Dist: -5.1%  |  Stop: 29.92  R/R: 2.6  |  Watch
+
+  RWE.DE  [A] Score 75.7  |  Base: flat_base (12.7% deep)
+    Pivot: 64.67 (flat_max_spike_filtered)  Dist: -5.6%  |  Stop: 62.06  R/R: 2.5  |  Watch
+
+  UCB.BR  [A] Score 75.6  |  Base: flat_base (13.6% deep)
+    Pivot: 341.59 (flat_max_spike_filtered)  Dist: -6.7%  |  Stop: 326.97  R/R: 2.3  |  Watch
+
+  HCSG  [A] Score 75.4  |  Base: cup (20.5% deep)
+    Pivot: 22.98 (cup_handle)  Dist: -10.2%  |  Stop: 21.54  R/R: 1.6  |  Watch
+
+  COO  [B] Score 74.7  |  Base: flat_base (6.9% deep)
+    Pivot: 84.62 (flat_max_spike_filtered)  Dist: -2.9%  |  Stop: 81.36  R/R: 2.6  |  Developing
+
+  REGN  [B] Score 73.0  |  Base: flat_base (12.5% deep)
+    Pivot: 814.02 (flat_max_spike_filtered)  Dist: -3.2%  |  Stop: 780.42  R/R: 2.4  |  Developing
+
+  LOW  [B] Score 72.6  |  Base: flat_base (12.0% deep)
+    Pivot: 289.87 (flat_max_spike_filtered)  Dist: -5.5%  |  Stop: 278.67  R/R: 2.6  |  Developing
+
+  NWE  [B] Score 72.5  |  Base: flat_base (8.4% deep)
+    Pivot: 71.26 (flat_max_spike_filtered)  Dist: -3.3%  |  Stop: 68.76  R/R: 2.9  |  Developing
+
+  RF  [B] Score 72.5  |  Base: flat_base (13.6% deep)
+    Pivot: 31.53 (flat_max_spike_filtered)  Dist: -9.0%  |  Stop: 30.22  R/R: 2.4  |  Developing
+
+  UBSI  [B] Score 71.8  |  Base: flat_base (13.7% deep)
+    Pivot: 45.93 (flat_max_spike_filtered)  Dist: -8.2%  |  Stop: 44.12  R/R: 2.5  |  Developing
+
+  IBKR  [B] Score 71.1  |  Base: flat_base (12.8% deep)
+    Pivot: 79.18 (flat_max_spike_filtered)  Dist: -8.9%  |  Stop: 73.96  R/R: 1.5  |  Developing
+
+  PFG  [B] Score 70.9  |  Base: flat_base (11.0% deep)
+    Pivot: 97.88 (flat_max_spike_filtered)  Dist: -4.9%  |  Stop: 93.64  R/R: 2.3  |  Developing
+
+  DG  [B] Score 70.7  |  Base: flat_base (9.7% deep)
+    Pivot: 155.0 (flat_max_spike_filtered)  Dist: -1.5%  |  Stop: 147.76  R/R: 2.1  |  Developing
+
+  STBA  [B] Score 70.6  |  Base: flat_base (13.1% deep)
+    Pivot: 44.87 (flat_max_spike_filtered)  Dist: -4.7%  |  Stop: 42.97  R/R: 2.4  |  Developing
+
+
+============================================================
+PART 2 — DETAILED INFO PER STOCK
+============================================================
+
+----- NEOG -----
+Grade: A+
+Composite Score: 96.9
+Base: high_tight_flag (4.0 weeks, 15.3% deep)
+Prior Run: +111.0%
+RS Percentile: 100.0
+RSI: 71.0
+Pivot: 11.35  (source: htf_flag)
+Distance to Pivot: -2.3%
+Stop: 10.81 (ATR method)
+Reward/Risk: 2.1
+Power Rank: 99.7
+Status: Ready – Tight base, strong RS, not extended.
+  Scores: Trend 100.0  Base 100.0  RS 100.0  Vol 100.0  Breakout 80.0
+
+----- FOLD -----
+Grade: A+
+Composite Score: 95.6
+Base: flat_base (4.0 weeks, 0.7% deep)
+Prior Run: +72.0%
+RS Percentile: 94.0
+RSI: 66.0
+Pivot: 14.36  (source: flat_max_spike_filtered)
+Distance to Pivot: -0.1%
+Stop: 14.31 (ATR method)
+Reward/Risk: 26.1
+Power Rank: 83.4
+Status: Ready – Tight base, strong RS, not extended.
+  Scores: Trend 100.0  Base 100.0  RS 94.0  Vol 100.0  Breakout 80.0
+
+----- TTC -----
+Grade: A+
+Composite Score: 95.4
+Base: flat_base (4.0 weeks, 13.1% deep)
+Prior Run: +52.0%
+RS Percentile: 94.0
+RSI: 77.0
+Pivot: 102.32  (source: flat_max_spike_filtered)
+Distance to Pivot: -1.6%
+Stop: 99.21 (ATR method)
+Reward/Risk: 3.3
+Power Rank: 72.8
+Status: Ready – Tight base, strong RS, not extended.
+  Scores: Trend 100.0  Base 100.0  RS 94.0  Vol 100.0  Breakout 80.0
+
+----- GEV -----
+Grade: A+
+Composite Score: 95.3
+Base: cup (4.0 weeks, 22.5% deep)
+Prior Run: +60.0%
+RS Percentile: 93.0
+RSI: 64.0
+Pivot: 846.0  (source: cup_handle)
+Distance to Pivot: -2.7%
+Stop: 791.67 (ATR method)
+Reward/Risk: 1.6
+Power Rank: 76.4
+Status: Ready – Tight base, strong RS, not extended.
+  Scores: Trend 100.0  Base 100.0  RS 93.0  Vol 100.0  Breakout 80.0
+
+----- PLAB -----
+Grade: A+
+Composite Score: 92.1
+Base: cup (4.0 weeks, 17.7% deep)
+Prior Run: +97.0%
+RS Percentile: 98.0
+RSI: 53.0
+Pivot: 39.48  (source: cup_handle)
+Distance to Pivot: -7.0%
+Stop: 36.06 (ATR method)
+Reward/Risk: 1.1
+Power Rank: 97.7
+Status: Watch
+  Scores: Trend 100.0  Base 100.0  RS 98.0  Vol 100.0  Breakout 50.0
+
+----- JNJ -----
+Grade: A+
+Composite Score: 89.6
+Base: flat_base (4.0 weeks, 10.9% deep)
+Prior Run: +35.0%
+RS Percentile: 71.0
+RSI: 75.0
+Pivot: 246.96  (source: flat_max_spike_filtered)
+Distance to Pivot: -0.6%
+Stop: 241.22 (ATR method)
+Reward/Risk: 4.3
+Power Rank: 52.6
+Status: Ready – Tight base, strong RS, not extended.
+  Scores: Trend 100.0  Base 100.0  RS 71.0  Vol 100.0  Breakout 80.0
+
+----- ALEX -----
+Grade: A+
+Composite Score: 88.0
+Base: flat_base (4.0 weeks, 0.6% deep)
+Prior Run: +40.0%
+RS Percentile: 88.0
+RSI: 68.0
+Pivot: 20.81  (source: flat_max_spike_filtered)
+Distance to Pivot: -0.0%
+Stop: 20.76 (ATR method)
+Reward/Risk: 41.6
+Power Rank: 64.2
+Status: Ready – Tight base, strong RS, not extended.
+  Scores: Trend 70.0  Base 100.0  RS 88.0  Vol 100.0  Breakout 80.0
+
+----- BNP.PA -----
+Grade: A+
+Composite Score: 87.8
+Base: flat_base (6.0 weeks, 12.9% deep)
+Prior Run: +49.0%
+RS Percentile: 87.0
+RSI: 62.0
+Pivot: 114.6  (source: flat_max_spike_filtered)
+Distance to Pivot: -1.3%
+Stop: 110.31 (ATR method)
+Reward/Risk: 2.7
+Power Rank: 68.2
+Status: Ready – Tight base, strong RS, not extended.
+  Scores: Trend 70.0  Base 100.0  RS 87.0  Vol 100.0  Breakout 80.0
+
+----- BMY -----
+Grade: A+
+Composite Score: 87.5
+Base: flat_base (6.0 weeks, 13.7% deep)
+Prior Run: +48.0%
+RS Percentile: 86.0
+RSI: 73.0
+Pivot: 62.05  (source: flat_max_spike_filtered)
+Distance to Pivot: -1.3%
+Stop: 59.71 (ATR method)
+Reward/Risk: 2.6
+Power Rank: 66.9
+Status: Ready – Tight base, strong RS, not extended.
+  Scores: Trend 70.0  Base 100.0  RS 86.0  Vol 100.0  Breakout 80.0
+
+----- GVA -----
+Grade: A+
+Composite Score: 86.9
+Base: flat_base (6.0 weeks, 13.7% deep)
+Prior Run: +41.0%
+RS Percentile: 84.0
+RSI: 69.0
+Pivot: 136.79  (source: flat_max_spike_filtered)
+Distance to Pivot: -1.5%
+Stop: 130.84 (ATR method)
+Reward/Risk: 2.3
+Power Rank: 62.2
+Status: Ready – Tight base, strong RS, not extended.
+  Scores: Trend 70.0  Base 100.0  RS 84.0  Vol 100.0  Breakout 80.0
+
+----- BTSG -----
+Grade: A+
+Composite Score: 86.4
+Base: flat_base (6.0 weeks, 10.9% deep)
+Prior Run: +52.0%
+RS Percentile: 70.0
+RSI: 47.0
+Pivot: 41.4  (source: flat_max_spike_filtered)
+Distance to Pivot: -4.1%
+Stop: 38.67 (ATR method)
+Reward/Risk: 1.5
+Power Rank: 60.6
+Status: Watch
+  Scores: Trend 100.0  Base 100.0  RS 70.0  Vol 100.0  Breakout 60.0
+
+----- ATCO-A.ST -----
+Grade: A+
+Composite Score: 86.3
+Base: flat_base (6.0 weeks, 9.6% deep)
+Prior Run: +31.0%
+RS Percentile: 81.0
+RSI: 71.0
+Pivot: 196.35  (source: flat_max_spike_filtered)
+Distance to Pivot: -0.8%
+Stop: 191.08 (ATR method)
+Reward/Risk: 3.7
+Power Rank: 56.3
+Status: Ready – Tight base, strong RS, not extended.
+  Scores: Trend 70.0  Base 100.0  RS 81.0  Vol 100.0  Breakout 80.0
+
+----- GNL -----
+Grade: A+
+Composite Score: 86.2
+Base: flat_base (6.0 weeks, 13.5% deep)
+Prior Run: +37.0%
+RS Percentile: 81.0
+RSI: 68.0
+Pivot: 10.03  (source: flat_max_spike_filtered)
+Distance to Pivot: -2.4%
+Stop: 9.75 (ATR method)
+Reward/Risk: 3.5
+Power Rank: 59.0
+Status: Ready – Tight base, strong RS, not extended.
+  Scores: Trend 70.0  Base 100.0  RS 81.0  Vol 100.0  Breakout 80.0
+
+----- GATX -----
+Grade: A+
+Composite Score: 86.1
+Base: flat_base (6.0 weeks, 12.8% deep)
+Prior Run: +33.0%
+RS Percentile: 80.0
+RSI: 76.0
+Pivot: 199.0  (source: flat_max_spike_filtered)
+Distance to Pivot: -1.0%
+Stop: 191.99 (ATR method)
+Reward/Risk: 2.8
+Power Rank: 56.7
+Status: Ready – Tight base, strong RS, not extended.
+  Scores: Trend 70.0  Base 100.0  RS 80.0  Vol 100.0  Breakout 80.0
+
+----- LIVN -----
+Grade: A+
+Composite Score: 85.8
+Base: flat_base (6.0 weeks, 12.8% deep)
+Prior Run: +42.0%
+RS Percentile: 79.0
+RSI: 54.0
+Pivot: 69.31  (source: flat_max_spike_filtered)
+Distance to Pivot: -2.1%
+Stop: 65.99 (ATR method)
+Reward/Risk: 2.1
+Power Rank: 60.6
+Status: Ready – Tight base, strong RS, not extended.
+  Scores: Trend 70.0  Base 100.0  RS 79.0  Vol 100.0  Breakout 80.0
+
+----- OUT -----
+Grade: A+
+Composite Score: 85.8
+Base: flat_base (6.0 weeks, 11.6% deep)
+Prior Run: +61.0%
+RS Percentile: 67.0
+RSI: 57.0
+Pivot: 27.04  (source: flat_max_spike_filtered)
+Distance to Pivot: -4.1%
+Stop: 25.92 (ATR method)
+Reward/Risk: 2.4
+Power Rank: 64.2
+Status: Watch
+  Scores: Trend 100.0  Base 100.0  RS 67.0  Vol 100.0  Breakout 60.0
+
+----- XLB -----
+Grade: A+
+Composite Score: 85.3
+Base: flat_base (6.0 weeks, 12.2% deep)
+Prior Run: +30.0%
+RS Percentile: 77.0
+RSI: 67.0
+Pivot: 54.14  (source: flat_max_spike_filtered)
+Distance to Pivot: -2.4%
+Stop: 52.52 (ATR method)
+Reward/Risk: 3.3
+Power Rank: 53.3
+Status: Ready – Tight base, strong RS, not extended.
+  Scores: Trend 70.0  Base 100.0  RS 77.0  Vol 100.0  Breakout 80.0
+
+----- NOVN.SW -----
+Grade: A+
+Composite Score: 85.1
+Base: flat_base (6.0 weeks, 13.1% deep)
+Prior Run: +34.0%
+RS Percentile: 76.0
+RSI: 87.0
+Pivot: 129.54  (source: flat_max_spike_filtered)
+Distance to Pivot: -1.2%
+Stop: 125.87 (ATR method)
+Reward/Risk: 3.5
+Power Rank: 54.9
+Status: Ready – Tight base, strong RS, not extended.
+  Scores: Trend 70.0  Base 100.0  RS 76.0  Vol 100.0  Breakout 80.0
+
+----- ROST -----
+Grade: A+
+Composite Score: 85.1
+Base: flat_base (6.0 weeks, 9.2% deep)
+Prior Run: +38.0%
+RS Percentile: 76.0
+RSI: 76.0
+Pivot: 203.31  (source: flat_max_spike_filtered)
+Distance to Pivot: -1.4%
+Stop: 197.59 (ATR method)
+Reward/Risk: 3.5
+Power Rank: 57.3
+Status: Ready – Tight base, strong RS, not extended.
+  Scores: Trend 70.0  Base 100.0  RS 76.0  Vol 100.0  Breakout 80.0
+
+----- LHX -----
+Grade: A+
+Composite Score: 85.0
+Base: flat_base (6.0 weeks, 11.5% deep)
+Prior Run: +36.0%
+RS Percentile: 76.0
+RSI: 61.0
+Pivot: 362.42  (source: flat_max_spike_filtered)
+Distance to Pivot: -2.0%
+Stop: 348.75 (ATR method)
+Reward/Risk: 2.6
+Power Rank: 55.9
+Status: Ready – Tight base, strong RS, not extended.
+  Scores: Trend 70.0  Base 100.0  RS 76.0  Vol 100.0  Breakout 80.0
+
+----- PH -----
+Grade: A
+Composite Score: 84.6
+Base: flat_base (6.0 weeks, 11.2% deep)
+Prior Run: +44.0%
+RS Percentile: 74.0
+RSI: 74.0
+Pivot: 1024.58  (source: flat_max_spike_filtered)
+Distance to Pivot: -1.0%
+Stop: 990.47 (ATR method)
+Reward/Risk: 3.0
+Power Rank: 59.1
+Status: Ready – Tight base, strong RS, not extended.
+  Scores: Trend 70.0  Base 100.0  RS 74.0  Vol 100.0  Breakout 80.0
+
+----- SAN.MC -----
+Grade: A
+Composite Score: 84.5
+Base: flat_base (6.0 weeks, 11.7% deep)
+Prior Run: +41.0%
+RS Percentile: 74.0
+RSI: 47.0
+Pivot: 13.25  (source: flat_max_spike_filtered)
+Distance to Pivot: -2.7%
+Stop: 12.62 (ATR method)
+Reward/Risk: 2.1
+Power Rank: 57.3
+Status: Ready – Tight base, strong RS, not extended.
+  Scores: Trend 70.0  Base 100.0  RS 74.0  Vol 100.0  Breakout 80.0
+
+----- HSBA.L -----
+Grade: A
+Composite Score: 84.3
+Base: flat_base (6.0 weeks, 9.0% deep)
+Prior Run: +38.0%
+RS Percentile: 73.0
+RSI: 48.0
+Pivot: 1322.6  (source: flat_max_spike_filtered)
+Distance to Pivot: -2.2%
+Stop: 1274.93 (ATR method)
+Reward/Risk: 2.8
+Power Rank: 55.6
+Status: Ready – Tight base, strong RS, not extended.
+  Scores: Trend 70.0  Base 100.0  RS 73.0  Vol 100.0  Breakout 80.0
+
+----- ATCO-B.ST -----
+Grade: A
+Composite Score: 84.3
+Base: flat_base (6.0 weeks, 8.5% deep)
+Prior Run: +27.0%
+RS Percentile: 73.0
+RSI: 64.0
+Pivot: 170.3  (source: flat_max_spike_filtered)
+Distance to Pivot: -1.2%
+Stop: 165.92 (ATR method)
+Reward/Risk: 3.9
+Power Rank: 50.1
+Status: Ready – Tight base, strong RS, not extended.
+  Scores: Trend 70.0  Base 100.0  RS 73.0  Vol 100.0  Breakout 80.0
+
+----- ENGI.PA -----
+Grade: A
+Composite Score: 84.1
+Base: flat_base (6.0 weeks, 13.4% deep)
+Prior Run: +43.0%
+RS Percentile: 73.0
+RSI: 60.0
+Pivot: 31.84  (source: flat_max_spike_filtered)
+Distance to Pivot: -1.7%
+Stop: 30.83 (ATR method)
+Reward/Risk: 3.1
+Power Rank: 57.7
+Status: Ready – Tight base, strong RS, not extended.
+  Scores: Trend 70.0  Base 100.0  RS 73.0  Vol 100.0  Breakout 80.0
+
+----- ASH -----
+Grade: A
+Composite Score: 84.1
+Base: flat_base (6.0 weeks, 11.9% deep)
+Prior Run: +40.0%
+RS Percentile: 84.0
+RSI: 55.0
+Pivot: 65.65  (source: flat_max_spike_filtered)
+Distance to Pivot: -3.5%
+Stop: 61.97 (ATR method)
+Reward/Risk: 1.8
+Power Rank: 62.4
+Status: Watch
+  Scores: Trend 70.0  Base 100.0  RS 84.0  Vol 100.0  Breakout 60.0
+
+----- BC -----
+Grade: A
+Composite Score: 84.0
+Base: flat_base (6.0 weeks, 13.4% deep)
+Prior Run: +55.0%
+RS Percentile: 90.0
+RSI: 53.0
+Pivot: 90.25  (source: flat_max_spike_filtered)
+Distance to Pivot: -7.5%
+Stop: 85.13 (ATR method)
+Reward/Risk: 1.8
+Power Rank: 72.5
+Status: Watch
+  Scores: Trend 70.0  Base 100.0  RS 90.0  Vol 100.0  Breakout 50.0
+
+----- ST -----
+Grade: A
+Composite Score: 84.0
+Base: flat_base (6.0 weeks, 13.6% deep)
+Prior Run: +38.0%
+RS Percentile: 84.0
+RSI: 61.0
+Pivot: 38.82  (source: flat_max_spike_filtered)
+Distance to Pivot: -3.4%
+Stop: 36.68 (ATR method)
+Reward/Risk: 1.8
+Power Rank: 61.1
+Status: Watch
+  Scores: Trend 70.0  Base 100.0  RS 84.0  Vol 100.0  Breakout 60.0
+
+----- PCAR -----
+Grade: A
+Composite Score: 83.8
+Base: flat_base (6.0 weeks, 11.7% deep)
+Prior Run: +45.0%
+RS Percentile: 83.0
+RSI: 54.0
+Pivot: 131.54  (source: flat_max_spike_filtered)
+Distance to Pivot: -4.1%
+Stop: 126.78 (ATR method)
+Reward/Risk: 2.8
+Power Rank: 64.2
+Status: Watch
+  Scores: Trend 70.0  Base 100.0  RS 83.0  Vol 100.0  Breakout 60.0
+
+----- BEN -----
+Grade: A
+Composite Score: 83.6
+Base: flat_base (6.0 weeks, 12.9% deep)
+Prior Run: +36.0%
+RS Percentile: 82.0
+RSI: 50.0
+Pivot: 28.32  (source: flat_max_spike_filtered)
+Distance to Pivot: -4.3%
+Stop: 27.05 (ATR method)
+Reward/Risk: 2.2
+Power Rank: 59.1
+Status: Watch
+  Scores: Trend 70.0  Base 100.0  RS 82.0  Vol 100.0  Breakout 60.0
+
+----- CASY -----
+Grade: A
+Composite Score: 83.6
+Base: flat_base (6.0 weeks, 13.4% deep)
+Prior Run: +37.0%
+RS Percentile: 70.0
+RSI: 76.0
+Pivot: 678.67  (source: flat_max_spike_filtered)
+Distance to Pivot: -1.4%
+Stop: 654.36 (ATR method)
+Reward/Risk: 2.8
+Power Rank: 53.4
+Status: Ready – Tight base, strong RS, not extended.
+  Scores: Trend 70.0  Base 100.0  RS 70.0  Vol 100.0  Breakout 80.0
+
+----- IMI.L -----
+Grade: A
+Composite Score: 82.9
+Base: flat_base (6.0 weeks, 11.6% deep)
+Prior Run: +31.0%
+RS Percentile: 68.0
+RSI: 57.0
+Pivot: 2938.0  (source: flat_max_spike_filtered)
+Distance to Pivot: -2.0%
+Stop: 2850.69 (ATR method)
+Reward/Risk: 3.4
+Power Rank: 49.4
+Status: Ready – Tight base, strong RS, not extended.
+  Scores: Trend 70.0  Base 100.0  RS 68.0  Vol 100.0  Breakout 80.0
+
+----- HUBB -----
+Grade: A
+Composite Score: 82.8
+Base: flat_base (6.0 weeks, 13.4% deep)
+Prior Run: +33.0%
+RS Percentile: 79.0
+RSI: 62.0
+Pivot: 533.8  (source: flat_max_spike_filtered)
+Distance to Pivot: -3.3%
+Stop: 512.94 (ATR method)
+Reward/Risk: 2.6
+Power Rank: 56.0
+Status: Watch
+  Scores: Trend 70.0  Base 100.0  RS 79.0  Vol 100.0  Breakout 60.0
+
+----- XHR -----
+Grade: A
+Composite Score: 82.6
+Base: flat_base (6.0 weeks, 11.4% deep)
+Prior Run: +39.0%
+RS Percentile: 66.0
+RSI: 65.0
+Pivot: 16.23  (source: flat_max_spike_filtered)
+Distance to Pivot: -2.1%
+Stop: 15.6 (ATR method)
+Reward/Risk: 2.6
+Power Rank: 53.0
+Status: Ready – Tight base, strong RS, not extended.
+  Scores: Trend 70.0  Base 100.0  RS 66.0  Vol 100.0  Breakout 80.0
+
+----- EOAN.DE -----
+Grade: A
+Composite Score: 82.5
+Base: flat_base (6.0 weeks, 12.4% deep)
+Prior Run: +26.0%
+RS Percentile: 66.0
+RSI: 62.0
+Pivot: 22.27  (source: flat_max_spike_filtered)
+Distance to Pivot: -2.1%
+Stop: 21.64 (ATR method)
+Reward/Risk: 3.5
+Power Rank: 46.0
+Status: Ready – Tight base, strong RS, not extended.
+  Scores: Trend 70.0  Base 100.0  RS 66.0  Vol 100.0  Breakout 80.0
+
+----- CM -----
+Grade: A
+Composite Score: 82.5
+Base: flat_base (6.0 weeks, 10.1% deep)
+Prior Run: +27.0%
+RS Percentile: 66.0
+RSI: 69.0
+Pivot: 100.39  (source: flat_max_spike_filtered)
+Distance to Pivot: -1.2%
+Stop: 97.86 (ATR method)
+Reward/Risk: 4.0
+Power Rank: 46.4
+Status: Ready – Tight base, strong RS, not extended.
+  Scores: Trend 70.0  Base 100.0  RS 66.0  Vol 100.0  Breakout 80.0
+
+----- ROG.SW -----
+Grade: A
+Composite Score: 82.4
+Base: flat_base (6.0 weeks, 11.1% deep)
+Prior Run: +44.0%
+RS Percentile: 66.0
+RSI: 72.0
+Pivot: 372.4  (source: flat_max_spike_filtered)
+Distance to Pivot: -0.5%
+Stop: 362.7 (ATR method)
+Reward/Risk: 3.8
+Power Rank: 55.0
+Status: Ready – Tight base, strong RS, not extended.
+  Scores: Trend 70.0  Base 100.0  RS 66.0  Vol 100.0  Breakout 80.0
+
+----- RTX -----
+Grade: A
+Composite Score: 82.1
+Base: flat_base (6.0 weeks, 11.0% deep)
+Prior Run: +34.0%
+RS Percentile: 64.0
+RSI: 55.0
+Pivot: 206.36  (source: flat_max_spike_filtered)
+Distance to Pivot: -1.4%
+Stop: 198.99 (ATR method)
+Reward/Risk: 2.8
+Power Rank: 48.9
+Status: Ready – Tight base, strong RS, not extended.
+  Scores: Trend 70.0  Base 100.0  RS 64.0  Vol 100.0  Breakout 80.0
+
+----- TD -----
+Grade: A
+Composite Score: 81.8
+Base: flat_base (6.0 weeks, 6.9% deep)
+Prior Run: +27.0%
+RS Percentile: 63.0
+RSI: 56.0
+Pivot: 98.36  (source: flat_max_spike_filtered)
+Distance to Pivot: -2.5%
+Stop: 96.13 (ATR method)
+Reward/Risk: 4.4
+Power Rank: 45.1
+Status: Ready – Tight base, strong RS, not extended.
+  Scores: Trend 70.0  Base 100.0  RS 63.0  Vol 100.0  Breakout 80.0
+
+----- TM -----
+Grade: A
+Composite Score: 81.8
+Base: flat_base (6.0 weeks, 12.6% deep)
+Prior Run: +34.0%
+RS Percentile: 75.0
+RSI: 56.0
+Pivot: 248.9  (source: flat_max_spike_filtered)
+Distance to Pivot: -4.4%
+Stop: 240.79 (ATR method)
+Reward/Risk: 3.1
+Power Rank: 54.8
+Status: Watch
+  Scores: Trend 70.0  Base 100.0  RS 75.0  Vol 100.0  Breakout 60.0
+
+----- ADM -----
+Grade: A
+Composite Score: 81.7
+Base: flat_base (6.0 weeks, 13.1% deep)
+Prior Run: +27.0%
+RS Percentile: 63.0
+RSI: 51.0
+Pivot: 69.57  (source: flat_max_spike_filtered)
+Distance to Pivot: -2.6%
+Stop: 66.55 (ATR method)
+Reward/Risk: 2.3
+Power Rank: 45.0
+Status: Ready – Tight base, strong RS, not extended.
+  Scores: Trend 70.0  Base 100.0  RS 63.0  Vol 100.0  Breakout 80.0
+
+----- PZU.WA -----
+Grade: A
+Composite Score: 81.5
+Base: flat_base (6.0 weeks, 7.5% deep)
+Prior Run: +35.0%
+RS Percentile: 62.0
+RSI: 34.0
+Pivot: 72.12  (source: flat_max_spike_filtered)
+Distance to Pivot: -2.9%
+Stop: 70.41 (ATR method)
+Reward/Risk: 4.2
+Power Rank: 48.5
+Status: Ready – Tight base, strong RS, not extended.
+  Scores: Trend 70.0  Base 100.0  RS 62.0  Vol 100.0  Breakout 80.0
+
+----- JOE -----
+Grade: A
+Composite Score: 81.5
+Base: flat_base (6.0 weeks, 12.6% deep)
+Prior Run: +56.0%
+RS Percentile: 74.0
+RSI: 59.0
+Pivot: 71.9  (source: flat_max_spike_filtered)
+Distance to Pivot: -4.1%
+Stop: 68.8 (ATR method)
+Reward/Risk: 2.3
+Power Rank: 64.7
+Status: Watch
+  Scores: Trend 70.0  Base 100.0  RS 74.0  Vol 100.0  Breakout 60.0
+
+----- MNST -----
+Grade: A
+Composite Score: 81.4
+Base: flat_base (6.0 weeks, 10.2% deep)
+Prior Run: +29.0%
+RS Percentile: 62.0
+RSI: 65.0
+Pivot: 84.88  (source: flat_max_spike_filtered)
+Distance to Pivot: -0.3%
+Stop: 82.52 (ATR method)
+Reward/Risk: 3.6
+Power Rank: 45.3
+Status: Ready – Tight base, strong RS, not extended.
+  Scores: Trend 70.0  Base 100.0  RS 62.0  Vol 100.0  Breakout 80.0
+
+----- AME -----
+Grade: A
+Composite Score: 80.8
+Base: flat_base (6.0 weeks, 12.9% deep)
+Prior Run: +34.0%
+RS Percentile: 71.0
+RSI: 57.0
+Pivot: 239.94  (source: flat_max_spike_filtered)
+Distance to Pivot: -3.6%
+Stop: 231.9 (ATR method)
+Reward/Risk: 3.0
+Power Rank: 52.7
+Status: Watch
+  Scores: Trend 70.0  Base 100.0  RS 71.0  Vol 100.0  Breakout 60.0
+
+----- FCFS -----
+Grade: A
+Composite Score: 80.8
+Base: flat_base (6.0 weeks, 13.6% deep)
+Prior Run: +29.0%
+RS Percentile: 71.0
+RSI: 69.0
+Pivot: 188.32  (source: flat_max_spike_filtered)
+Distance to Pivot: -4.4%
+Stop: 179.72 (ATR method)
+Reward/Risk: 2.2
+Power Rank: 50.1
+Status: Watch
+  Scores: Trend 70.0  Base 100.0  RS 71.0  Vol 100.0  Breakout 60.0
+
+----- WSR -----
+Grade: A
+Composite Score: 80.8
+Base: flat_base (6.0 weeks, 10.3% deep)
+Prior Run: +35.0%
+RS Percentile: 59.0
+RSI: 72.0
+Pivot: 15.36  (source: flat_max_spike_filtered)
+Distance to Pivot: -0.9%
+Stop: 14.95 (ATR method)
+Reward/Risk: 3.7
+Power Rank: 47.2
+Status: Ready – Tight base, strong RS, not extended.
+  Scores: Trend 70.0  Base 100.0  RS 59.0  Vol 100.0  Breakout 80.0
+
+----- DVN -----
+Grade: A
+Composite Score: 80.6
+Base: cup (4.0 weeks, 17.4% deep)
+Prior Run: +47.0%
+RS Percentile: 76.0
+RSI: 69.0
+Pivot: 46.15  (source: cup_handle)
+Distance to Pivot: -5.1%
+Stop: 43.93 (ATR method)
+Reward/Risk: 2.1
+Power Rank: 61.7
+Status: Watch
+  Scores: Trend 70.0  Base 100.0  RS 76.0  Vol 100.0  Breakout 50.0
+
+----- PLD -----
+Grade: A
+Composite Score: 80.3
+Base: flat_base (6.0 weeks, 11.9% deep)
+Prior Run: +29.0%
+RS Percentile: 57.0
+RSI: 70.0
+Pivot: 142.4  (source: flat_max_spike_filtered)
+Distance to Pivot: -1.4%
+Stop: 138.19 (ATR method)
+Reward/Risk: 3.4
+Power Rank: 43.2
+Status: Ready – Tight base, strong RS, not extended.
+  Scores: Trend 70.0  Base 100.0  RS 57.0  Vol 100.0  Breakout 80.0
+
+----- GEF -----
+Grade: A
+Composite Score: 80.2
+Base: flat_base (6.0 weeks, 11.1% deep)
+Prior Run: +40.0%
+RS Percentile: 69.0
+RSI: 56.0
+Pivot: 77.14  (source: flat_max_spike_filtered)
+Distance to Pivot: -4.8%
+Stop: 74.2 (ATR method)
+Reward/Risk: 2.6
+Power Rank: 54.2
+Status: Watch
+  Scores: Trend 70.0  Base 100.0  RS 69.0  Vol 100.0  Breakout 60.0
+
+----- FITB -----
+Grade: A
+Composite Score: 80.1
+Base: flat_base (6.0 weeks, 13.8% deep)
+Prior Run: +40.0%
+RS Percentile: 74.0
+RSI: 45.0
+Pivot: 55.44  (source: flat_max_spike_filtered)
+Distance to Pivot: -8.4%
+Stop: 53.0 (ATR method)
+Reward/Risk: 2.3
+Power Rank: 57.1
+Status: Watch
+  Scores: Trend 70.0  Base 100.0  RS 74.0  Vol 100.0  Breakout 50.0
+
+----- CBOE -----
+Grade: A
+Composite Score: 80.1
+Base: flat_base (6.0 weeks, 12.9% deep)
+Prior Run: +27.0%
+RS Percentile: 56.0
+RSI: 75.0
+Pivot: 293.58  (source: flat_max_spike_filtered)
+Distance to Pivot: -0.5%
+Stop: 281.82 (ATR method)
+Reward/Risk: 2.5
+Power Rank: 41.6
+Status: Ready – Tight base, strong RS, not extended.
+  Scores: Trend 70.0  Base 100.0  RS 56.0  Vol 100.0  Breakout 80.0
+
+----- AUB -----
+Grade: A
+Composite Score: 80.0
+Base: flat_base (6.0 weeks, 13.4% deep)
+Prior Run: +37.0%
+RS Percentile: 74.0
+RSI: 48.0
+Pivot: 41.79  (source: flat_max_spike_filtered)
+Distance to Pivot: -7.0%
+Stop: 39.99 (ATR method)
+Reward/Risk: 2.3
+Power Rank: 55.4
+Status: Watch
+  Scores: Trend 70.0  Base 100.0  RS 74.0  Vol 100.0  Breakout 50.0
+
+----- EXAS -----
+Grade: A
+Composite Score: 79.9
+Base: flat_base (6.0 weeks, 1.8% deep)
+Prior Run: +80.0%
+RS Percentile: 32.0
+RSI: 75.0
+Pivot: 103.65  (source: flat_max_spike_filtered)
+Distance to Pivot: -0.1%
+Stop: 103.14 (ATR method)
+Reward/Risk: 20.3
+Power Rank: 55.6
+Status: Ready – Tight base, strong RS, not extended.
+  Scores: Trend 100.0  Base 100.0  RS 32.0  Vol 100.0  Breakout 80.0
+
+----- APG -----
+Grade: A
+Composite Score: 79.7
+Base: flat_base (4.0 weeks, 11.0% deep)
+Prior Run: +38.0%
+RS Percentile: 67.0
+RSI: 64.0
+Pivot: 46.11  (source: flat_max_spike_filtered)
+Distance to Pivot: -4.5%
+Stop: 44.17 (ATR method)
+Reward/Risk: 2.4
+Power Rank: 52.3
+Status: Watch
+  Scores: Trend 70.0  Base 100.0  RS 67.0  Vol 100.0  Breakout 60.0
+
+----- USB -----
+Grade: A
+Composite Score: 79.1
+Base: flat_base (6.0 weeks, 13.0% deep)
+Prior Run: +37.0%
+RS Percentile: 70.0
+RSI: 45.0
+Pivot: 61.19  (source: flat_max_spike_filtered)
+Distance to Pivot: -8.5%
+Stop: 58.7 (ATR method)
+Reward/Risk: 2.5
+Power Rank: 53.9
+Status: Watch
+  Scores: Trend 70.0  Base 100.0  RS 70.0  Vol 100.0  Breakout 50.0
+
+----- FR -----
+Grade: A
+Composite Score: 79.1
+Base: flat_base (6.0 weeks, 9.0% deep)
+Prior Run: +25.0%
+RS Percentile: 52.0
+RSI: 73.0
+Pivot: 62.33  (source: flat_max_spike_filtered)
+Distance to Pivot: -0.8%
+Stop: 60.29 (ATR method)
+Reward/Risk: 3.0
+Power Rank: 38.7
+Status: Ready – Tight base, strong RS, not extended.
+  Scores: Trend 70.0  Base 100.0  RS 52.0  Vol 100.0  Breakout 80.0
+
+----- XBI -----
+Grade: A
+Composite Score: 78.5
+Base: flat_base (6.0 weeks, 8.9% deep)
+Prior Run: +28.0%
+RS Percentile: 50.0
+RSI: 48.0
+Pivot: 129.93  (source: flat_max_spike_filtered)
+Distance to Pivot: -2.6%
+Stop: 124.38 (ATR method)
+Reward/Risk: 2.3
+Power Rank: 39.0
+Status: Ready – Tight base, strong RS, not extended.
+  Scores: Trend 70.0  Base 100.0  RS 50.0  Vol 100.0  Breakout 80.0
+
+----- VMI -----
+Grade: A
+Composite Score: 78.5
+Base: flat_base (6.0 weeks, 13.5% deep)
+Prior Run: +29.0%
+RS Percentile: 68.0
+RSI: 51.0
+Pivot: 487.58  (source: flat_max_spike_filtered)
+Distance to Pivot: -6.6%
+Stop: 462.69 (ATR method)
+Reward/Risk: 2.0
+Power Rank: 48.6
+Status: Watch
+  Scores: Trend 70.0  Base 100.0  RS 68.0  Vol 100.0  Breakout 50.0
+
+----- DRH -----
+Grade: A
+Composite Score: 78.4
+Base: flat_base (6.0 weeks, 11.9% deep)
+Prior Run: +39.0%
+RS Percentile: 61.0
+RSI: 69.0
+Pivot: 10.24  (source: flat_max_spike_filtered)
+Distance to Pivot: -3.2%
+Stop: 9.79 (ATR method)
+Reward/Risk: 2.3
+Power Rank: 50.1
+Status: Watch
+  Scores: Trend 70.0  Base 100.0  RS 61.0  Vol 100.0  Breakout 60.0
+
+----- BCO -----
+Grade: A
+Composite Score: 78.3
+Base: flat_base (6.0 weeks, 9.1% deep)
+Prior Run: +27.0%
+RS Percentile: 61.0
+RSI: 47.0
+Pivot: 133.62  (source: flat_max_spike_filtered)
+Distance to Pivot: -4.7%
+Stop: 128.53 (ATR method)
+Reward/Risk: 2.6
+Power Rank: 44.3
+Status: Watch
+  Scores: Trend 70.0  Base 100.0  RS 61.0  Vol 100.0  Breakout 60.0
+
+----- ADAM -----
+Grade: A
+Composite Score: 77.7
+Base: flat_base (6.0 weeks, 12.9% deep)
+Prior Run: +40.0%
+RS Percentile: 65.0
+RSI: 51.0
+Pivot: 8.7  (source: flat_max_spike_filtered)
+Distance to Pivot: -8.1%
+Stop: 8.32 (ATR method)
+Reward/Risk: 2.3
+Power Rank: 52.4
+Status: Watch
+  Scores: Trend 70.0  Base 100.0  RS 65.0  Vol 100.0  Breakout 50.0
+
+----- POR -----
+Grade: A
+Composite Score: 77.5
+Base: flat_base (6.0 weeks, 11.1% deep)
+Prior Run: +28.0%
+RS Percentile: 46.0
+RSI: 66.0
+Pivot: 54.39  (source: flat_max_spike_filtered)
+Distance to Pivot: -1.7%
+Stop: 52.53 (ATR method)
+Reward/Risk: 2.9
+Power Rank: 36.6
+Status: Ready – Tight base, strong RS, not extended.
+  Scores: Trend 70.0  Base 100.0  RS 46.0  Vol 100.0  Breakout 80.0
+
+----- ARR -----
+Grade: A
+Composite Score: 77.5
+Base: flat_base (6.0 weeks, 11.8% deep)
+Prior Run: +32.0%
+RS Percentile: 58.0
+RSI: 76.0
+Pivot: 18.65  (source: flat_max_spike_filtered)
+Distance to Pivot: -3.1%
+Stop: 18.04 (ATR method)
+Reward/Risk: 3.0
+Power Rank: 45.2
+Status: Watch
+  Scores: Trend 70.0  Base 100.0  RS 58.0  Vol 100.0  Breakout 60.0
+
+----- EVN.VI -----
+Grade: A
+Composite Score: 77.4
+Base: flat_base (6.0 weeks, 9.4% deep)
+Prior Run: +27.0%
+RS Percentile: 46.0
+RSI: 53.0
+Pivot: 35.22  (source: flat_max_spike_filtered)
+Distance to Pivot: -2.5%
+Stop: 34.16 (ATR method)
+Reward/Risk: 3.3
+Power Rank: 36.5
+Status: Ready – Tight base, strong RS, not extended.
+  Scores: Trend 70.0  Base 100.0  RS 46.0  Vol 100.0  Breakout 80.0
+
+----- ECPG -----
+Grade: A
+Composite Score: 77.4
+Base: flat_base (6.0 weeks, 10.3% deep)
+Prior Run: +49.0%
+RS Percentile: 64.0
+RSI: 54.0
+Pivot: 59.59  (source: flat_max_spike_filtered)
+Distance to Pivot: -5.3%
+Stop: 57.14 (ATR method)
+Reward/Risk: 2.4
+Power Rank: 56.5
+Status: Watch
+  Scores: Trend 70.0  Base 100.0  RS 64.0  Vol 100.0  Breakout 50.0
+
+----- INGA.AS -----
+Grade: A
+Composite Score: 76.6
+Base: flat_base (6.0 weeks, 10.8% deep)
+Prior Run: +32.0%
+RS Percentile: 60.0
+RSI: 40.0
+Pivot: 31.12  (source: flat_max_spike_filtered)
+Distance to Pivot: -5.1%
+Stop: 29.92 (ATR method)
+Reward/Risk: 2.6
+Power Rank: 46.0
+Status: Watch
+  Scores: Trend 70.0  Base 100.0  RS 60.0  Vol 100.0  Breakout 50.0
+
+----- RWE.DE -----
+Grade: A
+Composite Score: 75.7
+Base: flat_base (6.0 weeks, 12.7% deep)
+Prior Run: +39.0%
+RS Percentile: 57.0
+RSI: 39.0
+Pivot: 64.67  (source: flat_max_spike_filtered)
+Distance to Pivot: -5.6%
+Stop: 62.06 (ATR method)
+Reward/Risk: 2.5
+Power Rank: 48.0
+Status: Watch
+  Scores: Trend 70.0  Base 100.0  RS 57.0  Vol 100.0  Breakout 50.0
+
+----- UCB.BR -----
+Grade: A
+Composite Score: 75.6
+Base: flat_base (6.0 weeks, 13.6% deep)
+Prior Run: +36.0%
+RS Percentile: 56.0
+RSI: 58.0
+Pivot: 341.59  (source: flat_max_spike_filtered)
+Distance to Pivot: -6.7%
+Stop: 326.97 (ATR method)
+Reward/Risk: 2.3
+Power Rank: 46.2
+Status: Watch
+  Scores: Trend 70.0  Base 100.0  RS 56.0  Vol 100.0  Breakout 50.0
+
+----- HCSG -----
+Grade: A
+Composite Score: 75.4
+Base: cup (4.0 weeks, 20.5% deep)
+Prior Run: +37.0%
+RS Percentile: 66.0
+RSI: 60.0
+Pivot: 22.98  (source: cup_handle)
+Distance to Pivot: -10.2%
+Stop: 21.54 (ATR method)
+Reward/Risk: 1.6
+Power Rank: 51.3
+Status: Watch
+  Scores: Trend 70.0  Base 90.0  RS 66.0  Vol 100.0  Breakout 50.0
+
+----- COO -----
+Grade: B
+Composite Score: 74.7
+Base: flat_base (6.0 weeks, 6.9% deep)
+Prior Run: +26.0%
+RS Percentile: 59.0
+RSI: 55.0
+Pivot: 84.62  (source: flat_max_spike_filtered)
+Distance to Pivot: -2.9%
+Stop: 81.36 (ATR method)
+Reward/Risk: 2.6
+Power Rank: 42.3
+Status: Developing
+  Scores: Trend 40.0  Base 100.0  RS 59.0  Vol 100.0  Breakout 80.0
+
+----- REGN -----
+Grade: B
+Composite Score: 73.0
+Base: flat_base (6.0 weeks, 12.5% deep)
+Prior Run: +52.0%
+RS Percentile: 40.0
+RSI: 61.0
+Pivot: 814.02  (source: flat_max_spike_filtered)
+Distance to Pivot: -3.2%
+Stop: 780.42 (ATR method)
+Reward/Risk: 2.4
+Power Rank: 46.0
+Status: Developing
+  Scores: Trend 70.0  Base 100.0  RS 40.0  Vol 100.0  Breakout 60.0
+
+----- LOW -----
+Grade: B
+Composite Score: 72.6
+Base: flat_base (6.0 weeks, 12.0% deep)
+Prior Run: +34.0%
+RS Percentile: 68.0
+RSI: 55.0
+Pivot: 289.87  (source: flat_max_spike_filtered)
+Distance to Pivot: -5.5%
+Stop: 278.67 (ATR method)
+Reward/Risk: 2.6
+Power Rank: 51.5
+Status: Developing
+  Scores: Trend 40.0  Base 100.0  RS 68.0  Vol 100.0  Breakout 50.0
+
+----- NWE -----
+Grade: B
+Composite Score: 72.5
+Base: flat_base (6.0 weeks, 8.4% deep)
+Prior Run: +26.0%
+RS Percentile: 38.0
+RSI: 57.0
+Pivot: 71.26  (source: flat_max_spike_filtered)
+Distance to Pivot: -3.3%
+Stop: 68.76 (ATR method)
+Reward/Risk: 2.9
+Power Rank: 32.0
+Status: Developing
+  Scores: Trend 70.0  Base 100.0  RS 38.0  Vol 100.0  Breakout 60.0
+
+----- RF -----
+Grade: B
+Composite Score: 72.5
+Base: flat_base (6.0 weeks, 13.6% deep)
+Prior Run: +40.0%
+RS Percentile: 68.0
+RSI: 46.0
+Pivot: 31.53  (source: flat_max_spike_filtered)
+Distance to Pivot: -9.0%
+Stop: 30.22 (ATR method)
+Reward/Risk: 2.4
+Power Rank: 54.2
+Status: Developing
+  Scores: Trend 40.0  Base 100.0  RS 68.0  Vol 100.0  Breakout 50.0
+
+----- UBSI -----
+Grade: B
+Composite Score: 71.8
+Base: flat_base (6.0 weeks, 13.7% deep)
+Prior Run: +36.0%
+RS Percentile: 65.0
+RSI: 44.0
+Pivot: 45.93  (source: flat_max_spike_filtered)
+Distance to Pivot: -8.2%
+Stop: 44.12 (ATR method)
+Reward/Risk: 2.5
+Power Rank: 50.7
+Status: Developing
+  Scores: Trend 40.0  Base 100.0  RS 65.0  Vol 100.0  Breakout 50.0
+
+----- IBKR -----
+Grade: B
+Composite Score: 71.1
+Base: flat_base (6.0 weeks, 12.8% deep)
+Prior Run: +34.0%
+RS Percentile: 62.0
+RSI: 44.0
+Pivot: 79.18  (source: flat_max_spike_filtered)
+Distance to Pivot: -8.9%
+Stop: 73.96 (ATR method)
+Reward/Risk: 1.5
+Power Rank: 48.4
+Status: Developing
+  Scores: Trend 40.0  Base 100.0  RS 62.0  Vol 100.0  Breakout 50.0
+
+----- PFG -----
+Grade: B
+Composite Score: 70.9
+Base: flat_base (6.0 weeks, 11.0% deep)
+Prior Run: +27.0%
+RS Percentile: 56.0
+RSI: 43.0
+Pivot: 97.88  (source: flat_max_spike_filtered)
+Distance to Pivot: -4.9%
+Stop: 93.64 (ATR method)
+Reward/Risk: 2.3
+Power Rank: 41.3
+Status: Developing
+  Scores: Trend 40.0  Base 100.0  RS 56.0  Vol 100.0  Breakout 60.0
+
+----- DG -----
+Grade: B
+Composite Score: 70.7
+Base: flat_base (4.0 weeks, 9.7% deep)
+Prior Run: +64.0%
+RS Percentile: 95.0
+RSI: 65.0
+Pivot: 155.0  (source: flat_max_spike_filtered)
+Distance to Pivot: -1.5%
+Stop: 147.76 (ATR method)
+Reward/Risk: 2.1
+Power Rank: 79.1
+Status: Developing
+  Scores: Trend 100.0  Base 0.0  RS 95.0  Vol 100.0  Breakout 80.0
+
+----- STBA -----
+Grade: B
+Composite Score: 70.6
+Base: flat_base (6.0 weeks, 13.1% deep)
+Prior Run: +33.0%
+RS Percentile: 54.0
+RSI: 49.0
+Pivot: 44.87  (source: flat_max_spike_filtered)
+Distance to Pivot: -4.7%
+Stop: 42.97 (ATR method)
+Reward/Risk: 2.4
+Power Rank: 43.6
+Status: Developing
+  Scores: Trend 40.0  Base 100.0  RS 54.0  Vol 100.0  Breakout 60.0
+
+----- Risk Warnings -----
+  Late-stage base: GEV (>20% depth)
+  Late-stage base: HCSG (>20% depth)
+  Late-stage base: TPH (>20% depth)
+  Late-stage base: MRNA (>20% depth)
+  Late-stage base: REP.MC (>20% depth)
+  Late-stage base: CMI (>20% depth)
+  Late-stage base: WBS (>20% depth)
+  Late-stage base: MAC (>20% depth)
+  Late-stage base: CRUS (>20% depth)
+  Late-stage base: WMB (>20% depth)
+  Late-stage base: BDX (>20% depth)
+  Late-stage base: THC (>20% depth)
+  Late-stage base: AES (>20% depth)
+  Late-stage base: NG.L (>20% depth)
+  Late-stage base: FDP (>20% depth)
+  Late-stage base: KPN.AS (>20% depth)
+  Late-stage base: FANG (>20% depth)
+  Late-stage base: BIIB (>20% depth)
+  Late-stage base: ITW (>20% depth)
+  Late-stage base: PEP (>20% depth)
+  Late-stage base: SMP (>20% depth)
+  Late-stage base: VLY (>20% depth)
+  Late-stage base: ACA (>20% depth)
+  Late-stage base: WMS (>20% depth)
+  Late-stage base: PFS (>20% depth)
+  Late-stage base: FBNC (>20% depth)
+  Late-stage base: HST (>20% depth)
+  Late-stage base: DGX (>20% depth)
+  Late-stage base: MTB (>20% depth)
+  Late-stage base: HFWA (>20% depth)
+  Late-stage base: MTH (>20% depth)
+  Late-stage base: TDS (>20% depth)
+  Low RS percentile: BTSG (69.6)
+  Low RS percentile: OUT (67.1)
+  Low RS percentile: IMI.L (67.8)
+  Low RS percentile: XHR (66.5)
+  Low RS percentile: EOAN.DE (66.0)
+  Low RS percentile: CM (66.2)
+  Low RS percentile: ROG.SW (65.8)
+  Low RS percentile: RTX (64.3)
+  Low RS percentile: TD (63.1)
+  Low RS percentile: ADM (62.9)
+  Low RS percentile: PZU.WA (62.1)
+  Low RS percentile: MNST (61.7)
+  Low RS percentile: WSR (59.1)
+  Low RS percentile: PLD (57.2)
+  Low RS percentile: GEF (68.9)
+  Low RS percentile: CBOE (56.5)
+  Low RS percentile: EXAS (31.6)
+  Low RS percentile: APG (67.0)
+  Low RS percentile: FR (52.4)
+  Low RS percentile: XBI (49.9)
+  Low RS percentile: VMI (68.1)
+  Low RS percentile: DRH (61.4)
+  Low RS percentile: BCO (61.3)
+  Low RS percentile: ADAM (64.6)
+  Low RS percentile: POR (45.8)
+  Low RS percentile: ARR (58.0)
+  Low RS percentile: EVN.VI (45.8)
+  Low RS percentile: ECPG (63.7)
+  Low RS percentile: INGA.AS (60.4)
+  Low RS percentile: RWE.DE (56.8)
+  Low RS percentile: UCB.BR (56.4)
+  Low RS percentile: HCSG (65.6)
+  Low RS percentile: COO (58.7)
+  Low RS percentile: REGN (40.0)
+  Low RS percentile: LOW (68.4)
+  Low RS percentile: NWE (38.1)
+  Low RS percentile: RF (68.1)
+  Low RS percentile: UBSI (65.3)
+  Low RS percentile: IBKR (62.2)
+  Low RS percentile: PFG (55.7)
+  Low RS percentile: STBA (54.4)
+  Low RS percentile: TRMK (56.4)
+  Low RS percentile: BURL (45.4)
+  Low RS percentile: WES (42.5)
+  Low RS percentile: IONS (58.9)
+  Low RS percentile: KW (58.8)
+  Low RS percentile: GMED (54.1)
+  Low RS percentile: FDP (69.9)
+  Low RS percentile: HEN3.DE (68.7)
+  Low RS percentile: UNP (68.2)
+  Low RS percentile: CURB (67.9)
+  Low RS percentile: TTE.PA (67.5)
+  Low RS percentile: O (66.9)
+  Low RS percentile: KRG (66.7)
+  Low RS percentile: KPN.AS (66.1)
+  Low RS percentile: BMO (65.1)
+  Low RS percentile: LLOY.L (64.8)
+  Low RS percentile: FANG (64.7)
+  Low RS percentile: DTM (64.7)
+  Low RS percentile: JHG (63.6)
+  Low RS percentile: SNA (61.9)
+  Low RS percentile: GE (61.1)
+  Low RS percentile: BIIB (60.5)
+  Low RS percentile: ENI.MI (60.4)
+  Low RS percentile: PEP (59.8)
+  Low RS percentile: RY (60.1)
+  Low RS percentile: TRP (59.8)
+  Low RS percentile: AMGN (56.9)
+  Low RS percentile: BNS (57.0)
+  Low RS percentile: UCG.MI (67.4)
+  Low RS percentile: ITT (55.4)
+  Low RS percentile: BKU (67.6)
+  Low RS percentile: WMS (65.8)
+  Low RS percentile: HCA (53.7)
+  Low RS percentile: CTRE (53.5)
+  Low RS percentile: ENEL.MI (53.3)
+  Low RS percentile: SPG (53.0)
+  Low RS percentile: CABK.MC (64.1)
+  Low RS percentile: ETR (51.5)
+  Low RS percentile: MCK (51.0)
+  Low RS percentile: IBE.MC (50.2)
+  Low RS percentile: NEE (50.1)
+  Low RS percentile: FBNC (68.0)
+  Low RS percentile: INDB (67.8)
+  Low RS percentile: TSCO.L (49.5)
+  Low RS percentile: HST (67.7)
+  Low RS percentile: DGX (48.7)
+  Low RS percentile: CFFN (66.3)
+  Low RS percentile: RNR (59.0)
+  Low RS percentile: AZN.L (46.5)
+  Low RS percentile: AEP (45.6)
+  Low RS percentile: CAH (44.3)
+  Low RS percentile: VTR (44.4)
+  Low RS percentile: FE (44.0)
+  Low RS percentile: COLB (60.2)
+  Low RS percentile: CMA (59.5)
+  Low RS percentile: XLI (64.2)
+  Low RS percentile: OHI (40.6)
+  Low RS percentile: SUPN (51.9)
+  Low RS percentile: ES (63.7)
+  Low RS percentile: ELAN (57.7)
+  Low RS percentile: NWN (38.7)
+  Low RS percentile: ECL (61.5)
+  Low RS percentile: BKH (37.3)
+  Low RS percentile: MUR (48.6)
+  Low RS percentile: BRX (59.2)
+  Low RS percentile: MLM (57.4)
+  Low RS percentile: SXI (50.9)
+  Low RS percentile: RL (50.2)
+  Low RS percentile: TRST (50.5)
+  Low RS percentile: UE (55.8)
+  Low RS percentile: FRT (55.3)
+  Low RS percentile: IDA (54.2)
+  Low RS percentile: HI (29.5)
+  Low RS percentile: NSC (53.1)
+  Low RS percentile: COR (28.5)
+  Low RS percentile: FUL (64.4)
+  Low RS percentile: NNN (51.2)
+  Low RS percentile: SBRA (51.3)
+  Low RS percentile: WPC (51.1)
+  Low RS percentile: BOH (68.9)
+  Low RS percentile: LTC (50.5)
+  Low RS percentile: SMIN.L (49.9)
+  Low RS percentile: CDP (49.3)
+  Low RS percentile: DEA (60.1)
+  Low RS percentile: FRE.DE (47.7)
+  Low RS percentile: ONB (65.6)
+  Low RS percentile: TRNO (47.4)
+  Low RS percentile: FHI (59.3)
+  Low RS percentile: CFR (65.0)
+  Low RS percentile: EGP (46.4)
+  Low RS percentile: SWX (46.3)
+  Low RS percentile: AS (63.3)
+  Low RS percentile: ENB (45.1)
+  Low RS percentile: NI (45.4)
+  Low RS percentile: WSM (63.2)
+  Low RS percentile: MTH (62.5)
+  Low RS percentile: BAS.DE (56.1)
+  Low RS percentile: SSB (61.8)
+  Low RS percentile: UFCS (38.0)
+  Low RS percentile: HLT (61.8)
+  Low RS percentile: CNP (43.3)
+  Low RS percentile: CR (55.1)
+  Low RS percentile: EVRG (43.2)
+  Low RS percentile: PK (61.2)
+  Low RS percentile: PEB (60.8)
+  Low RS percentile: WTFC (60.6)
+  Low RS percentile: RNST (60.2)
+  Low RS percentile: ICUI (53.5)
+  Low RS percentile: NATL (59.4)
+  Low RS percentile: PFE (52.3)
+  Low RS percentile: CBU (58.5)
+  Low RS percentile: TDS (58.4)
+  Low RS percentile: EWBC (58.1)
+  Low RS percentile: SHEL.L (39.7)
+  Low RS percentile: AIT (57.7)
+  Low RS percentile: GEHC (51.6)
+  Low RS percentile: SR (39.8)
+  Low RS percentile: TRV (39.6)
+  Low RS percentile: FCF (57.1)
+  Low RS percentile: TJX (38.8)
+  Low RS percentile: XLU (38.2)
+  Low RS percentile: HTH (55.7)
+  Low RS percentile: NVDA (37.4)
+  Low RS percentile: BOOT (49.2)
+  Low RS percentile: F (48.8)
+  Low RS percentile: AHCO (54.8)
+  Low RS percentile: GIII (54.6)
+  Low RS percentile: PHIA.AS (47.8)
+  Low RS percentile: HIG (36.0)
+  Low RS percentile: GL (47.5)
+  Low RS percentile: BP.L (35.1)
+  Low RS percentile: CSGS (32.5)
+  Low RS percentile: MSM (49.4)
+  Low RS percentile: PRSU (48.7)
+  Low RS percentile: SNX (48.5)
+  Low RS percentile: AL (30.6)
+  Low RS percentile: GTLS (29.8)
+  Low RS percentile: ARI (48.1)
+  Low RS percentile: NTCT (48.2)
+  Low RS percentile: HOLX (29.6)
+  Low RS percentile: DAY (29.2)
+  Low RS percentile: WINA (47.2)
+  Low RS percentile: ZWS (47.1)
+  Low RS percentile: ACT (43.5)
+  Low RS percentile: VMC (41.6)
+  Low RS percentile: AWI (41.7)
+  Low RS percentile: LAMR (35.3)
+  Low RS percentile: L (34.0)
+  Low RS percentile: D (39.1)
+  Low RS percentile: CNX (33.7)
+  Low RS percentile: PRA (29.2)
+  Low RS percentile: FBP (46.8)
+  Low RS percentile: BTG.L (40.4)
+
+===== END SEPA SCAN =====

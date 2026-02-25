@@ -1,6 +1,8 @@
 """
-Generate full Minervini SEPA analysis report from cached data
-Produces: Summary report + Detailed list of all stocks
+Pipeline step 4/7: Run Minervini SEPA analysis.
+Reads from data/prepared_for_minervini.json (from step 03) if present, else legacy cache.
+Uses per-stock benchmark_index when available. Writes SCAN_RESULTS_LATEST for step 05.
+Produces: Summary report + Detailed list of all stocks.
 """
 import importlib.util
 import json
@@ -26,7 +28,7 @@ if sys.platform == 'win32' and 'pytest' not in sys.modules:
 setup_logging(log_level="INFO", log_to_file=True)
 logger = get_logger(__name__)
 
-from config import CACHE_FILE, REPORTS_DIR, SCAN_RESULTS_LATEST, REQUIRE_MARKET_ABOVE_200SMA, USE_ATR_STOP
+from config import CACHE_FILE, REPORTS_DIR, SCAN_RESULTS_LATEST, PREPARED_FOR_MINERVINI, REQUIRE_MARKET_ABOVE_200SMA, USE_ATR_STOP
 from cache_utils import load_cached_data
 from pre_breakout_utils import get_pre_breakout_stocks, actionability_sort_key
 from pre_breakout_config import PRE_BREAKOUT_MAX_DISTANCE_PCT, PRE_BREAKOUT_MIN_GRADE, PRE_BREAKOUT_NEAR_PIVOT_PCT
@@ -201,9 +203,9 @@ def scan_all_stocks_from_cache(cached_data: Dict, benchmark: str = "^GDAXI", sin
         
         print(f"[{i}/{total}] Scanning {ticker:12s}...", end=" ", flush=True)
         
-        # Scan using cached data (per-ticker benchmark when mapping available)
+        # Scan using cached data (per-stock benchmark_index from prepared data, or mapping/global)
         try:
-            benchmark_override = get_benchmark(ticker, benchmark)
+            benchmark_override = cached_stock.get("benchmark_index") or get_benchmark(ticker, benchmark)
             result = scanner.scan_stock(ticker, benchmark_override=benchmark_override)
             # Add company name from cached stock_info if available
             cached_stock_info = cached_stock.get("stock_info", {})
@@ -849,7 +851,7 @@ def main():
     parser.add_argument(
         "--refresh",
         action="store_true",
-        help="Refresh data before analysis (fetch_utils.fetch_all_data → legacy cache)"
+        help="Refresh data before analysis (fetch_utils.fetch_all_data, writes to legacy cache)"
     )
     parser.add_argument(
         "--benchmark",
@@ -877,12 +879,22 @@ def main():
         fetch_all_data(force_refresh=True, benchmark=args.benchmark)
         print()
 
-    # Load cached data (shared cache_utils)
-    cached_data = load_cached_data()
+    # Load data: prefer pipeline prepared file (from step 03), else legacy cache
+    cached_data = None
+    if PREPARED_FOR_MINERVINI.exists():
+        try:
+            with open(PREPARED_FOR_MINERVINI, "r", encoding="utf-8") as f:
+                cached_data = json.load(f)
+            logger.info(f"Loaded {len(cached_data.get('stocks', {}))} stocks from {PREPARED_FOR_MINERVINI}")
+        except Exception as e:
+            logger.warning("Could not load prepared data: %s; falling back to legacy cache", e)
     if cached_data is None:
-        logger.error("Cache file not found or invalid. Run New1_fetch_yahoo_watchlist.py first (or 02 with --refresh).")
-        print("Error: Could not load cached data")
-        print("Please run: python New1_fetch_yahoo_watchlist.py  (or python 02_generate_full_report.py --refresh)")
+        cached_data = load_cached_data()
+    if cached_data is None or not cached_data.get("stocks"):
+        logger.error("No cache. Run 01 (and 03) first, or use --refresh with legacy watchlist.")
+        print("Error: No cached data")
+        print("Pipeline: run 01_fetch_yahoo_watchlist.py then 03_prepare_for_minervini.py")
+        print("Legacy: python 04_generate_full_report.py --refresh")
         sys.exit(1)
     logger.info(f"Loaded {len(cached_data.get('stocks', {}))} stocks from cache")
     

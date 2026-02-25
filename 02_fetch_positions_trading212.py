@@ -1,6 +1,6 @@
 """
-New pipeline (2/5): Fetch open positions from Trading212 and optionally refresh OHLCV for them.
-Writes positions to new pipeline data dir; merges OHLCV into the same cache used by New1.
+Pipeline step 2/5: Fetch open positions from Trading212 and optionally refresh OHLCV for them.
+Writes positions to pipeline data dir; merges OHLCV into the same cache used by 01.
 """
 import os
 import json
@@ -14,9 +14,9 @@ from logger_config import setup_logging, get_logger
 from config import DEFAULT_ENV_PATH
 from ticker_utils import clean_ticker
 from trading212_client import Trading212Client
-from currency_utils import get_eur_usd_rate
+from currency_utils import get_eur_usd_rate, get_eur_usd_rate_with_date, warn_if_eur_rate_unavailable
 
-# New pipeline paths (must match New1)
+# Pipeline paths (must match 01)
 NEW_PIPELINE_DIR = Path("data")
 NEW_PIPELINE_CACHE = NEW_PIPELINE_DIR / "cached_stock_data_new_pipeline.json"
 NEW_PIPELINE_POSITIONS = NEW_PIPELINE_DIR / "positions_new_pipeline.json"
@@ -166,12 +166,12 @@ def refresh_ohlcv_for_tickers(tickers: List[str]) -> None:
 
 
 def main():
-    parser = argparse.ArgumentParser(description="New2: Fetch Trading212 positions (new pipeline)")
+    parser = argparse.ArgumentParser(description="02: Fetch Trading212 positions (pipeline)")
     parser.add_argument("--refresh", action="store_true", help="Fetch OHLCV for position tickers into new pipeline cache")
     args = parser.parse_args()
 
     print(f"\n{'='*80}")
-    print("NEW2: FETCH POSITIONS (Trading212)")
+    print("02: FETCH POSITIONS (Trading212)")
     print(f"{'='*80}")
 
     positions = fetch_positions()

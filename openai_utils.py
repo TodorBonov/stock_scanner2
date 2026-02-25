@@ -1,6 +1,6 @@
 """
 Shared OpenAI API helpers for ChatGPT validation and position scripts.
-Used by: New4_chatgpt_existing_positions.py, New5_chatgpt_new_positions.py.
+Used by: 06_chatgpt_existing_positions.py, 07_chatgpt_new_positions.py.
 """
 import os
 import time
@@ -59,10 +59,11 @@ def send_to_chatgpt(
 
     for attempt in range(OPENAI_CHATGPT_RETRY_ATTEMPTS):
         try:
+            # gpt-5.x and newer require max_completion_tokens; older models use max_tokens
             resp = client.chat.completions.create(
                 model=model,
                 messages=messages,
-                max_tokens=max_tokens,
+                max_completion_tokens=max_tokens,
                 timeout=timeout,
             )
             choice = resp.choices[0] if resp.choices else None

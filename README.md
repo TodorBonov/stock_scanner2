@@ -56,26 +56,32 @@ TRADING212_API_SECRET=your_secret_here
 Run the pipeline in order (see **PIPELINES.md** for details):
 
 ```powershell
-python New1_fetch_yahoo_watchlist.py
-python New2_fetch_positions_trading212.py
-python New3_prepare_chatgpt_data.py
-python New4_chatgpt_existing_positions.py
-python New5_chatgpt_new_positions.py
+python 01_fetch_yahoo_watchlist.py
+python 02_fetch_positions_trading212.py
+python 03_prepare_for_minervini.py
+python 04_generate_full_report.py
+python 05_prepare_chatgpt_data.py
+python 06_chatgpt_existing_positions.py
+python 07_chatgpt_new_positions.py
 ```
 
-- **New1** fetches OHLCV from Yahoo for your watchlist → `data/cached_stock_data_new_pipeline.json`
-- **New2** fetches open positions from Trading 212 → `data/positions_new_pipeline.json` (optional if you only want new-position suggestions)
-- **New3** runs the Minervini scan and prepares JSON for ChatGPT → `reports/new_pipeline/prepared_*.json`
-- **New4** sends existing positions to ChatGPT for hold/add/trim/exit analysis
-- **New5** sends A+/A new-position candidates to ChatGPT for entry evaluation
+- **01** fetches OHLCV from Yahoo for watchlist (CSV or legacy .txt) → `data/cached_stock_data_new_pipeline.json`
+- **02** fetches open positions from Trading 212 → `data/positions_new_pipeline.json` (optional if you only want new-position suggestions)
+- **03** prepares data for Minervini (watchlist + cache + positions) → `data/prepared_for_minervini.json`, `reports/problems_with_tickers.txt`
+- **04** runs Minervini scan (reads prepared file or legacy cache), writes summary/detailed reports and `reports/scan_results_latest.json`
+- **05** prepares JSON for ChatGPT from scan results + positions (no scan) → `reports/new_pipeline/prepared_*.json`
+- **06** sends existing positions to ChatGPT for hold/add/trim/exit analysis
+- **07** sends A+/A new-position candidates to ChatGPT for entry evaluation
 
-Optional 6-month OHLCV variant: run `New3_prepare_chatgpt_data_6mo.py` after New3, then `New4_chatgpt_existing_positions_6mo.py` and `New5_chatgpt_new_positions_6mo.py`. See `reports/new_pipeline/TOKEN_COMPARISON_ORIGINAL_VS_6MO.md`.
+**Watchlist**: Use `watchlist.csv` with columns `type,yahoo_symbol,trading212_symbol,benchmark_index` (or legacy `watchlist.txt`, one symbol per line). See **PIPELINES.md**.
+
+Optional 6-month OHLCV variant: run **05** with `--use-6mo`, then **06** and **07** with `--use-6mo`. See `reports/new_pipeline/TOKEN_COMPARISON_ORIGINAL_VS_6MO.md`.
 
 ## Usage
 
-Run in order: New1 → New2 → New3 → New4 → New5. Data paths: `data/cached_stock_data_new_pipeline.json`, `data/positions_new_pipeline.json`, `reports/new_pipeline/`. Full details: **PIPELINES.md**.
+Run in order: 01 → 02 → 03 → 04 → 05 → 06 → 07. Data paths: `data/cached_stock_data_new_pipeline.json`, `data/prepared_for_minervini.json`, `reports/scan_results_latest.json`, `reports/new_pipeline/`. Full details: **PIPELINES.md**.
 
-You can also run **02_generate_full_report.py** standalone for a Minervini report (it uses `data/cached_stock_data.json`; use `--refresh` to fetch into that cache, or run **New1** which writes to `data/cached_stock_data_new_pipeline.json` for the pipeline).
+You can also run **04_generate_full_report.py** (or **generate_full_report.py**) standalone for a Minervini report; it prefers `data/prepared_for_minervini.json` from step 03, else legacy `data/cached_stock_data.json`. Use `--refresh` to fetch into the legacy cache.
 
 ## Minervini SEPA Criteria Explained
 
@@ -167,16 +173,16 @@ Key files:
 ```
 .
 ├── PIPELINES.md                # Pipeline run order and data paths
-├── New1_fetch_yahoo_watchlist.py       # Fetch Yahoo → new_pipeline cache
-├── New2_fetch_positions_trading212.py  # T212 positions
-├── New3_prepare_chatgpt_data.py        # Prepare JSON for ChatGPT (existing + A+/A)
-├── New3_prepare_chatgpt_data_6mo.py    # Same, 6 months OHLCV only
-├── New4_chatgpt_existing_positions.py  # ChatGPT existing positions
-├── New4_chatgpt_existing_positions_6mo.py
-├── New5_chatgpt_new_positions.py       # ChatGPT new position candidates
-├── New5_chatgpt_new_positions_6mo.py
-├── fetch_utils.py              # Shared fetch logic (load_watchlist, fetch_stock_data, fetch_all_data)
-├── 02_generate_full_report.py  # Minervini scan (used by New3; can run standalone, --refresh uses fetch_utils)
+├── 01_fetch_yahoo_watchlist.py         # Step 1: Fetch Yahoo → new_pipeline cache
+├── 02_fetch_positions_trading212.py    # Step 2: T212 positions
+├── 03_prepare_for_minervini.py         # Step 3: Prepare for Minervini + problems report
+├── 04_generate_full_report.py         # Step 4: Minervini scan (reads prepared or legacy cache)
+├── 05_prepare_chatgpt_data.py         # Step 5: Prepare JSON for ChatGPT (from 04 results)
+├── 06_chatgpt_existing_positions.py   # Step 6: ChatGPT existing positions
+├── 07_chatgpt_new_positions.py        # Step 7: ChatGPT new position candidates
+├── fetch_utils.py                      # Shared fetch logic
+├── generate_full_report.py             # Backward compat: delegates to 04
+├── watchlist.csv                       # Watchlist CSV (type, yahoo_symbol, trading212_symbol, benchmark_index)
 ├── bot.py                      # Main bot interface
 ├── minervini_scanner.py        # Core Minervini SEPA scanner logic
 ├── data_provider.py            # Data fetching (yfinance, Alpha Vantage)
@@ -184,7 +190,7 @@ Key files:
 ├── config.py                   # Configuration and paths
 ├── cache_utils.py              # Cache load/save
 ├── benchmark_mapping.py        # Per-ticker benchmark for mixed watchlists
-├── openai_utils.py             # OpenAI API helpers (New4, New5)
+├── openai_utils.py             # OpenAI API helpers (06, 07)
 ├── config.example.env          # Example .env (copy to .env)
 ├── requirements.txt            # Python dependencies
 ├── watchlist.txt               # Ticker list for scanning
@@ -236,13 +242,15 @@ Key files:
 
 2. **Export ticker list** from your screener
 
-3. **Run the pipeline** (after adding tickers to `watchlist.txt`):
+3. **Run the pipeline** (after adding tickers to `watchlist.csv` or `watchlist.txt`):
    ```powershell
-   python New1_fetch_yahoo_watchlist.py
-   python New2_fetch_positions_trading212.py
-   python New3_prepare_chatgpt_data.py
-   python New4_chatgpt_existing_positions.py
-   python New5_chatgpt_new_positions.py
+   python 01_fetch_yahoo_watchlist.py
+   python 02_fetch_positions_trading212.py
+   python 03_prepare_for_minervini.py
+   python 04_generate_full_report.py
+   python 05_prepare_chatgpt_data.py
+   python 06_chatgpt_existing_positions.py
+   python 07_chatgpt_new_positions.py
    ```
 
 4. **Review A+ and A graded stocks** for potential entries
@@ -265,9 +273,9 @@ PowerShell’s execution policy is blocking scripts. You can either:
   ```
   Then `.\run_full_pipeline.ps1` will work.
 
-### "Unauthorized" (401) when running New2
+### "Unauthorized" (401) when running 02
 
-**New2_fetch_positions_trading212.py** calls the **Trading 212 API** to fetch your open positions. If you see `401 Unauthorized` or "Failed to fetch positions", the API is rejecting your credentials.
+**02_fetch_positions_trading212.py** calls the **Trading 212 API** to fetch your open positions. If you see `401 Unauthorized` or "Failed to fetch positions", the API is rejecting your credentials.
 
 **Common causes:**
 
@@ -285,7 +293,7 @@ PowerShell’s execution policy is blocking scripts. You can either:
    Run the script from the project root so that the `.env` file in that folder is found. The scripts load it automatically via `python-dotenv`.
 
 **To run the rest of the pipeline without Trading 212:**  
-Skip New2 and run New1 → New3 → New4 → New5. New4 will have no existing positions; New5 will still analyze A+/A new-position candidates.
+Skip 02 and run 01 → 03 → 04 → 05. New4 will have no existing positions; New5 will still analyze A+/A new-position candidates.
 
 ## License
 

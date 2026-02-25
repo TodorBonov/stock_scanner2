@@ -1,7 +1,6 @@
 """
-New pipeline (1/5): Fetch and cache OHLCV from Yahoo for watchlist.
-Uses a dedicated cache so the new pipeline is separate from 01/02/03.
-Run with watchlist_quick.txt for quick runs, or any watchlist path.
+Pipeline step 1/5: Fetch and cache OHLCV from Yahoo for watchlist.
+Run with watchlist_quick.txt for quick runs, or any watchlist path (e.g. watchlist.txt).
 """
 import sys
 import io
@@ -19,7 +18,8 @@ from logger_config import setup_logging, get_logger
 if Path(DEFAULT_ENV_PATH).exists():
     load_dotenv(Path(DEFAULT_ENV_PATH))
 
-from fetch_utils import load_watchlist, fetch_stock_data_with_retry
+from watchlist_loader import load_watchlist, get_yahoo_symbols_for_fetch
+from fetch_utils import fetch_stock_data_with_retry
 from bot import TradingBot
 
 # New pipeline: own cache file (do not overwrite main pipeline cache)
@@ -57,15 +57,16 @@ def save_new_pipeline_cache(data: dict) -> None:
 
 
 def main():
-    parser = argparse.ArgumentParser(description="New1: Fetch Yahoo watchlist data (new pipeline cache)")
-    parser.add_argument("--watchlist", default="watchlist_quick.txt", help="Watchlist file (default: watchlist_quick.txt)")
+    parser = argparse.ArgumentParser(description="01: Fetch Yahoo watchlist data (pipeline cache)")
+    parser.add_argument("--watchlist", default="watchlist.csv", help="Watchlist CSV or legacy .txt (default: watchlist.csv)")
     parser.add_argument("--refresh", action="store_true", help="Force refresh (ignore cache)")
     parser.add_argument("--benchmark", default="^GDAXI", help="Benchmark for RS (default: ^GDAXI)")
     args = parser.parse_args()
 
-    tickers = load_watchlist(args.watchlist)
+    rows = load_watchlist(args.watchlist)
+    tickers = get_yahoo_symbols_for_fetch(rows)
     if not tickers:
-        print(f"No tickers in {args.watchlist}")
+        print(f"No symbols in {args.watchlist}")
         return
 
     cached_data = load_new_pipeline_cache()
@@ -78,7 +79,7 @@ def main():
     errors = 0
 
     print(f"\n{'='*80}")
-    print("NEW1: FETCH YAHOO WATCHLIST (new pipeline)")
+    print("01: FETCH YAHOO WATCHLIST")
     print(f"{'='*80}")
     print(f"Watchlist: {args.watchlist}")
     print(f"Tickers: {total}")
@@ -119,7 +120,7 @@ def main():
     save_new_pipeline_cache(cached_data)
 
     print(f"\n{'='*80}")
-    print("NEW1 COMPLETE")
+    print("01 COMPLETE")
     print(f"Fetched: {fetched}  Skipped: {skipped}  Errors: {errors}")
     print(f"{'='*80}\n")
 

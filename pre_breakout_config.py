@@ -1,7 +1,7 @@
 """
 Pre-breakout view configuration (additive only).
 Used ONLY by the pre-breakout report section and ChatGPT pre-breakout block.
-NOT used by: fetch_utils, 02 main report logic, New4/New5 main lists.
+NOT used by: fetch_utils, 04_generate_full_report main logic, 06/07 main lists.
 All existing pipeline behavior is unchanged.
 """
 

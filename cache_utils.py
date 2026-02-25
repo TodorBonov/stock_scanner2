@@ -1,6 +1,6 @@
 """
 Shared cache helpers for stock data.
-Used by fetch_utils.py, 02_generate_full_report.py.
+Used by fetch_utils.py, 04_generate_full_report.py.
 """
 import json
 import logging

@@ -1,5 +1,5 @@
 """Tests for summary report actionability sort.
-Note: These tests load 02_generate_full_report which replaces sys.stdout/stderr (Windows).
+Note: These tests load 04_generate_full_report which replaces sys.stdout/stderr (Windows).
 Run with: python -m pytest tests/test_ticker_utils.py -v  (ticker tests only, no 02 load).
 """
 import importlib.util
@@ -12,11 +12,11 @@ import pytest
 
 
 def _get_actionability_sort_key():
-    """Load 02_generate_full_report and return actionability_sort_key (lazy to avoid side effects at import)."""
+    """Load 04_generate_full_report and return actionability_sort_key (lazy to avoid side effects at import)."""
     _root = Path(__file__).resolve().parent.parent
-    _spec = importlib.util.spec_from_file_location("generate_full_report", _root / "02_generate_full_report.py")
+    _spec = importlib.util.spec_from_file_location("step04_report", _root / "04_generate_full_report.py")
     _report = importlib.util.module_from_spec(_spec)
-    sys.modules["generate_full_report"] = _report
+    sys.modules["step04_report"] = _report
     _spec.loader.exec_module(_report)
     return _report.actionability_sort_key
 

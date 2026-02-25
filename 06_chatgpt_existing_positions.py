@@ -1,6 +1,6 @@
 """
-New pipeline (4/5): ChatGPT analysis for existing positions (from prepared data).
-Reads prepared_existing_positions.json (or _6mo with --use-6mo), sends raw OHLCV + position info to ChatGPT, writes report.
+Pipeline step 6/7: ChatGPT analysis for existing positions (from prepared data).
+Reads prepared_existing_positions.json from step 05 (or _6mo with --use-6mo), sends OHLCV + position info to ChatGPT, writes report.
 """
 import json
 import argparse
@@ -9,9 +9,13 @@ from datetime import datetime
 import re
 from typing import Optional, Dict, Tuple, List
 
+from dotenv import load_dotenv
 from logger_config import setup_logging, get_logger
-from config import OPENAI_CHATGPT_MODEL, OPENAI_CHATGPT_MAX_COMPLETION_TOKENS
+from config import DEFAULT_ENV_PATH, OPENAI_CHATGPT_MODEL, OPENAI_CHATGPT_MAX_COMPLETION_TOKENS
 from openai_utils import require_openai_api_key, send_to_chatgpt as openai_send
+
+if Path(DEFAULT_ENV_PATH).exists():
+    load_dotenv(Path(DEFAULT_ENV_PATH))
 
 NEW_PIPELINE_REPORTS = Path("reports") / "new_pipeline"
 
@@ -145,7 +149,7 @@ logger = get_logger(__name__)
 
 
 def main():
-    parser = argparse.ArgumentParser(description="New4: ChatGPT existing position suggestions (new pipeline)")
+    parser = argparse.ArgumentParser(description="04: ChatGPT existing position suggestions (pipeline)")
     parser.add_argument("--model", default=None, help=f"OpenAI model (default: {OPENAI_CHATGPT_MODEL})")
     parser.add_argument("--api-key", default=None, help="OpenAI API key (default: OPENAI_API_KEY env)")
     parser.add_argument("--use-6mo", dest="use_6mo", action="store_true", help="Use 6-month OHLCV prepared data (prepared_existing_positions_6mo.json)")
@@ -154,21 +158,21 @@ def main():
     api_key = require_openai_api_key(args.api_key)
     prepared_path = _prepared_path(args.use_6mo)
     if not prepared_path.exists():
-        print(f"[ERROR] Prepared data not found: {prepared_path}. Run New3 (with --6mo if needed) first.")
+        print(f"[ERROR] Prepared data not found: {prepared_path}. Run 03 (with --use-6mo if needed) first.")
         return
 
     with open(prepared_path, "r", encoding="utf-8") as f:
         data = json.load(f)
     positions = data.get("positions", [])
     if not positions:
-        print("No positions in prepared data (run New2 to fetch positions, then New3).")
+        print("No positions in prepared data (run 02 to fetch positions, then 03).")
         return
 
     model = args.model or OPENAI_CHATGPT_MODEL
     max_tokens = min(OPENAI_CHATGPT_MAX_COMPLETION_TOKENS, 8000)
 
     print(f"\n{'='*80}")
-    print("NEW4: CHATGPT EXISTING POSITIONS")
+    print("04: CHATGPT EXISTING POSITIONS")
     print(f"{'='*80}")
     print(f"Positions: {len(positions)}  Model: {model}")
     print(f"{'='*80}\n")
@@ -217,7 +221,7 @@ def main():
     results.sort(key=lambda x: (x[3] if x[3] is not None else -1), reverse=True)
 
     total_tokens = sum((u.get("total_tokens") or 0) for _, _, u, _ in results if u)
-    report_lines = ["=" * 80, "NEW4: CHATGPT EXISTING POSITION SUGGESTIONS", "=" * 80, f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}", f"Model: {model}", "Order: by entry quality score (high to low)", ""]
+    report_lines = ["=" * 80, "04: CHATGPT EXISTING POSITION SUGGESTIONS", "=" * 80, f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}", f"Model: {model}", "Order: by entry quality score (high to low)", ""]
     if total_tokens:
         report_lines.append(f"Tokens used: {total_tokens:,}")
         report_lines.append("")

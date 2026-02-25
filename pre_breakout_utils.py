@@ -1,6 +1,6 @@
 """
 Pre-breakout view: filter and sort scan results for "setup ready, not yet broken out".
-Used by 02_generate_full_report.py (PRE-BREAKOUT SETUPS section).
+Used by 04_generate_full_report.py (PRE-BREAKOUT SETUPS section).
 Config: pre_breakout_config.py only (no changes to config.py).
 """
 from typing import Dict, List
@@ -26,7 +26,7 @@ def _grade_rank(grade: str) -> int:
 def actionability_sort_key(r: Dict) -> tuple:
     """
     Sort key for best setups and pre-breakout list: tighter base, drier volume, closer to pivot, higher RS.
-    Lower key = better setup. Shared by 02_generate_full_report (BEST SETUPS) and pre-breakout section.
+    Lower key = better setup. Shared by 04_generate_full_report (BEST SETUPS) and pre-breakout section.
     """
     bq = r.get("checklist", {}).get("base_quality", {}).get("details") or {}
     buy_sell = r.get("buy_sell_prices") or {}

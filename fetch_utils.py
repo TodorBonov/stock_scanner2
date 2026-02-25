@@ -1,6 +1,6 @@
 """
 Shared fetch logic for stock data from watchlist.
-Used by New1_fetch_yahoo_watchlist.py (new pipeline cache) and 02_generate_full_report.py (--refresh to legacy cache).
+Used by 01_fetch_yahoo_watchlist.py (new pipeline cache) and 04_generate_full_report.py (--refresh to legacy cache).
 """
 import time
 from pathlib import Path
@@ -122,7 +122,7 @@ def fetch_all_data(
 ) -> None:
     """
     Fetch data for all stocks in watchlist and save to legacy cache (CACHE_FILE).
-    Used by 02_generate_full_report.py --refresh.
+    Used by 04_generate_full_report.py --refresh.
     """
     tickers = load_watchlist(watchlist_path)
     if not tickers:

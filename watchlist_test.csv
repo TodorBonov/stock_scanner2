@@ -1,0 +1,7 @@
+type,yahoo_symbol,trading212_symbol,benchmark_index
+ticker,AAPL,AAPL,^GSPC
+ticker,MSFT,MSFT,^GSPC
+ticker,NVDA,NVDA,^GSPC
+index,^GSPC,,^GSPC
+ticker,RWE.DE,RWED,^GDAXI
+index,^GDAXI,,^GDAXI

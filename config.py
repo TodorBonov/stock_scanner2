@@ -39,7 +39,7 @@ OPENAI_API_TIMEOUT = 60  # seconds for OpenAI API calls
 # Used by: AI analysis features (if enabled)
 # Why important: AI calls can take longer, so timeout is more generous
 
-# ChatGPT (New4, New5)
+# ChatGPT (04, 05)
 # Model for ChatGPT analysis (see https://platform.openai.com/docs/models)
 OPENAI_CHATGPT_MODEL = "gpt-5.2"  # e.g. gpt-5.2, gpt-5.2-chat-latest, gpt-4o, gpt-4-turbo
 OPENAI_CHATGPT_MAX_COMPLETION_TOKENS = 64000  # Allow long analysis for many stocks (increase if output is truncated)
@@ -97,7 +97,7 @@ DEFAULT_LOG_FILE = "trading212_bot.log"
 # Cache and report paths
 CACHE_FILE = Path("data/cached_stock_data.json")
 # Purpose: Legacy cache path (used by 02 --refresh via fetch_utils.fetch_all_data)
-# Used by: cache_utils, 02_generate_full_report.py
+# Used by: cache_utils, 04_generate_full_report.py (fallback when prepared file missing)
 
 FAILED_FETCH_LIST = Path("data/failed_fetch.txt")
 # Purpose: List of tickers that failed to fetch (one per line), updated after each fetch
@@ -115,11 +115,20 @@ TICKER_MAPPING_ERRORS_FILE = Path("reports/ticker_mapping_errors.txt")
 
 REPORTS_DIR = Path("reports")
 # Purpose: Directory for summary/detailed reports and scan results
-# Used by: 02, 03
+# Used by: 04, 05, 06, 07
+
+# Pipeline data (01→07)
+PREPARED_FOR_MINERVINI = Path("data/prepared_for_minervini.json")
+# Purpose: Output of step 03; input to step 04. Stored for testing.
+# Used by: 03_prepare_for_minervini.py (write), 04_generate_full_report.py (read)
+
+PROBLEMS_WITH_TICKERS = REPORTS_DIR / "problems_with_tickers.txt"
+# Purpose: Report of ticker mismatches, unmapped symbols, missing data (step 03).
+# Used by: 03_prepare_for_minervini.py
 
 SCAN_RESULTS_LATEST = REPORTS_DIR / "scan_results_latest.json"
-# Purpose: Latest scan results JSON (written by 02, read by 03, 05)
-# Used by: 02_generate_full_report.py
+# Purpose: Scan results JSON (written by 04, read by 05)
+# Used by: 04_generate_full_report.py, 05_prepare_chatgpt_data.py
 
 # ============================================================================
 # LOGGING CONFIGURATION
