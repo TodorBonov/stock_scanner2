@@ -14,6 +14,7 @@ from logger_config import setup_logging, get_logger
 from config import DEFAULT_ENV_PATH
 from currency_utils import get_eur_usd_rate_with_date
 from ticker_utils import clean_ticker
+from watchlist_loader import load_watchlist, TRADING212_SYMBOL, YAHOO_SYMBOL
 
 from minervini_config_v2 import REPORTS_DIR_V2, SCAN_RESULTS_V2_LATEST
 from config import PREPARED_FOR_MINERVINI
@@ -192,6 +193,18 @@ def resolve_cache_entry(ticker: str, stocks: Dict) -> Optional[Dict]:
     return None
 
 
+def build_t212_to_yahoo_map(watchlist_path: str = "watchlist.csv") -> Dict[str, str]:
+    """Build Trading212 symbol -> Yahoo symbol from watchlist (cache is keyed by Yahoo)."""
+    rows = load_watchlist(watchlist_path)
+    out: Dict[str, str] = {}
+    for r in rows:
+        t212 = (r.get(TRADING212_SYMBOL) or "").strip().upper()
+        yahoo = (r.get(YAHOO_SYMBOL) or "").strip().upper()
+        if t212 and yahoo:
+            out[t212] = yahoo
+    return out
+
+
 def main():
     print("\n" + "=" * 80)
     print("05 V2: PREPARE CHATGPT DATA (from V2 scan)")
@@ -206,15 +219,17 @@ def main():
     stocks = cached_data.get("stocks", {})
     positions = load_positions()
     eur_usd_rate, eur_usd_rate_date = get_eur_usd_rate_with_date()
+    t212_to_yahoo = build_t212_to_yahoo_map("watchlist.csv")
 
     V2_REPORTS.mkdir(parents=True, exist_ok=True)
 
-    # --- Existing positions (same as 05, for 06-style analysis if needed) ---
+    # --- Existing positions (for 06 V2); resolve cache by Yahoo symbol when position uses T212 symbol (e.g. RWED -> RWE.DE) ---
     NO_OHLCV = "No OHLCV data available for this ticker."
     prepared_existing = []
     for pos in positions:
         ticker = pos.get("ticker") or pos.get("ticker_raw") or ""
-        cached = resolve_cache_entry(ticker, stocks)
+        cache_key = t212_to_yahoo.get(ticker.upper()) or ticker
+        cached = resolve_cache_entry(cache_key, stocks)
         hist = cached.get("historical_data", {}) if cached else {}
         to_eur = (pos.get("currency") or "USD").upper() == "EUR" and eur_usd_rate and eur_usd_rate > 0
         ohlcv_lines = ohlcv_to_csv_rows(hist, to_eur=to_eur, eur_rate=eur_usd_rate)

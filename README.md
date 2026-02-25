@@ -67,7 +67,7 @@ Optional: `python run_pipeline_v2.py --csv` (export CSV from scan), `--refresh` 
 - **04 V2** → V2 Minervini scan → `reports/v2/sepa_scan_user_report_*.txt`  
 - **05** → Prep existing positions for ChatGPT  
 - **05 V2** → Prep new candidates from V2 scan  
-- **06** → ChatGPT analysis for existing positions → `reports/new_pipeline/chatgpt_existing_positions_*.txt`  
+- **06 V2** → ChatGPT analysis for existing positions → `reports/v2/chatgpt_existing_positions_v2_*.txt`  
 - **08** → ChatGPT ranking of new candidates → `reports/v2/chatgpt_new_positions_v2_*.txt`  
 
 **Watchlist:** `watchlist.csv` with columns `type,yahoo_symbol,trading212_symbol,benchmark_index`. See **PIPELINES.md**.

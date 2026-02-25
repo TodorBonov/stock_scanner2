@@ -18,23 +18,17 @@ So you never need to remember “04 vs 04_v2” or “07 vs 08” — the runner
 
 ## Scripts: name → role
 
-### Shared (used by Pipeline V2)
+### Scripts on main (Pipeline V2 only)
 
 | Script | Step | What it does |
 |--------|------|--------------|
 | `01_fetch_yahoo_watchlist.py` | 01 | Fetch/cache Yahoo OHLCV for watchlist |
 | `02_fetch_positions_trading212.py` | 02 | Fetch open positions from Trading212 |
 | `03_prepare_for_minervini.py` | 03 | Build prepared data for the scanner |
-| `05_prepare_chatgpt_data.py` | 05 | Prep existing positions for ChatGPT (watchlist → cache mapping, etc.) |
-| `06_chatgpt_existing_positions.py` | 06 | ChatGPT analysis for **existing** positions → `reports/new_pipeline/chatgpt_existing_positions_*.txt` |
-
-### V2-only (Pipeline V2 uses these)
-
-| Script | Step | What it does |
-|--------|------|--------------|
-| `04_generate_full_report_v2.py` | 04 V2 | V2 Minervini scan → `reports/v2/sepa_scan_user_report_*.txt`, `scan_results_v2_latest.json` |
-| `05_prepare_chatgpt_data_v2.py` | 05 V2 | Prep **new** candidates from V2 scan → `reports/v2/prepared_new_positions_v2.json` |
-| `08_chatgpt_new_positions_v2.py` | 08 | ChatGPT ranking of **new** candidates → `reports/v2/chatgpt_new_positions_v2_*.txt` |
+| `04_generate_full_report_v2.py` | 04 V2 | V2 scan → `reports/v2/sepa_scan_user_report_*.txt`, `scan_results_v2_latest.json` |
+| `05_prepare_chatgpt_data_v2.py` | 05 V2 | Prep existing + new from V2 scan → `reports/v2/prepared_*_v2.json` |
+| `06_chatgpt_existing_positions_v2.py` | 06 V2 | ChatGPT for existing positions → `reports/v2/chatgpt_existing_positions_v2_*.txt` |
+| `08_chatgpt_new_positions_v2.py` | 08 | ChatGPT for new candidates → `reports/v2/chatgpt_new_positions_v2_*.txt` |
 
 ### Not on main (only on branch pipeline-v1)
 
@@ -50,12 +44,6 @@ These scripts were removed from main; they exist only on branch **pipeline-v1** 
 | `pre_breakout_config.py` | Config for pre-breakout view (used by original 04). |
 | `pre_breakout_utils.py` | Pre-breakout logic (used by original 04). |
 
-### Other (on main)
-
-| Script | Note |
-|--------|------|
-| `06_chatgpt_existing_positions_v2.py` | V2 variant of 06; **not** used by `run_pipeline_v2.py`. You can ignore it. |
-
 ---
 
 ## Config files: which is which
@@ -70,13 +58,13 @@ These scripts were removed from main; they exist only on branch **pipeline-v1** 
 **In short:**  
 - Change **config.py** for API keys, OpenAI model, and general paths.  
 - Change **minervini_config_v2.py** for V2 scan rules (grades, weights, thresholds).  
-- **pre_breakout_config.py** exists only on branch V1 (removed from main).
+- **pre_breakout_config.py** exists only on branch pipeline-v1 (removed from main).
 
 ---
 
 ## One-page summary
 
 - **Run:** `python run_pipeline_v2.py` (optionally `--csv` or `--refresh`).
-- **Scripts that matter for V2:** 01, 02, 03, **04_generate_full_report_v2**, 05, **05_prepare_chatgpt_data_v2**, 06, **08_chatgpt_new_positions_v2** (the runner runs them in that order).
-- **Config that matters for V2:** **config.py** (main) + **minervini_config_v2.py** (V2 scan/report only).
-- **Not on main (branch pipeline-v1 only):** Original pipeline scripts and pre_breakout_* were removed from main. See **PIPELINE_ARCHIVE.md**. On main you can ignore `06_chatgpt_existing_positions_v2.py` (runner uses 06).
+- **Scripts on main:** 01, 02, 03, 04_generate_full_report_v2, 05_prepare_chatgpt_data_v2, 06_chatgpt_existing_positions_v2, 08_chatgpt_new_positions_v2. Nothing for pipeline 1.
+- **Config:** **config.py** + **minervini_config_v2.py**.
+- **Original pipeline:** Only on branch **pipeline-v1**; see **PIPELINE_ARCHIVE.md**.
