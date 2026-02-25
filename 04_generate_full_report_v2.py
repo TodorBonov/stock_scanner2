@@ -63,7 +63,14 @@ def convert_cached_data_to_dataframe(cached_stock: Dict) -> Optional[pd.DataFram
         required_cols = ["Open", "High", "Low", "Close", "Volume"]
         if any(c not in df.columns for c in required_cols):
             return None
-        return df[required_cols]
+        df = df[required_cols].copy()
+        # Drop rows with NaN in OHLCV (e.g. from Yahoo); otherwise rolling(SMA) and trend checks fail
+        df = df.dropna(subset=required_cols)
+        if len(df) < 200:
+            return None
+        # Ensure chronological order (oldest first) so iloc[-1] = latest and SMAs are correct
+        df = df.sort_index(ascending=True)
+        return df
     except Exception as e:
         logger.debug("Convert cached to DataFrame failed: %s", e)
         return None

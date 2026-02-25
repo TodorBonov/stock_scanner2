@@ -1,0 +1,3459 @@
+Report run: 2026-02-25 23:52:46
+Data as of (Yahoo): 2026-02-25T23:17:28.287087
+
+============================================================
+PART 1 — RANK TABLE & DETAILED (PER STOCK)
+============================================================
+
+----- Executive Summary -----
+Universe: 1726 stocks
+Eligible Stage 2: 279
+A+/A candidates: 81
+B candidates: 85
+In Breakout Now: 0
+Average RS Percentile (eligible): 70.0
+
+----- Ranked Table -----
+| Rank | Ticker | Grade | Score | Base Type | Depth % | RS %ile | Dist to Pivot | R/R | Stop | Note |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | NEOG | A+ | 96.8 | flat_base | 13.0 | 99.3 | -1.1 | 2.0 | 10.86 | — |
+| 2 | TPR | A+ | 95.6 | cup | 21.5 | 94.4 | -0.6 | 1.9 | 149.64 | Late |
+| 3 | ADEA | A+ | 95.2 | cup | 20.0 | 97.8 | -0.4 | 1.5 | 19.35 | — |
+| 4 | VSCO | A+ | 93.4 | cup | 22.2 | 97.7 | -4.3 | 1.3 | 59.86 | Late |
+| 5 | GEV | A+ | 91.3 | cup | 24.7 | 95.1 | -2.1 | 1.8 | 845.45 | Late |
+| 6 | EGBN | A+ | 90.7 | flat_base | 13.3 | 92.9 | -6.9 | 1.9 | 26.9 | — |
+| 7 | FIVE | A+ | 90.5 | cup | 18.3 | 91.9 | -0.8 | 1.8 | 212.61 | — |
+| 8 | ROG | A+ | 90.1 | cup | 19.5 | 90.4 | -2.5 | 1.6 | 105.78 | — |
+| 9 | MATX | A+ | 88.7 | flat_base | 13.0 | 96.7 | -3.8 | 2.2 | 168.55 | — |
+| 10 | ASO | A+ | 88.4 | flat_base | 13.0 | 89.6 | -1.2 | 1.6 | 58.02 | — |
+| 11 | BTSG | A | 88.4 | flat_base | 10.9 | 65.5 | -1.4 | 1.9 | 39.26 | LowRS |
+| 12 | ENGI.PA | A+ | 88.2 | cup | 19.4 | 82.7 | -0.3 | 3.3 | 31.65 | — |
+| 13 | BNP.PA | A+ | 88.0 | flat_base | 12.9 | 88.0 | -0.8 | 2.8 | 110.66 | — |
+| 14 | FOLD | A+ | 87.8 | flat_base | 0.8 | 93.1 | -0.3 | 24.0 | 14.32 | — |
+| 15 | SLB | A+ | 87.7 | flat_base | 13.3 | 92.9 | -1.4 | 2.2 | 50.07 | — |
+| 16 | RIO | A+ | 87.6 | cup | 21.2 | 92.3 | -0.7 | 2.2 | 96.87 | Late |
+| 17 | AA | A+ | 87.6 | cup | 21.9 | 97.4 | -2.0 | 1.2 | 60.88 | Late |
+| 18 | ASML.AS | A+ | 87.5 | flat_base | 14.9 | 91.8 | -1.9 | 2.3 | 1482.49 | — |
+| 19 | HAL | A+ | 87.1 | flat_base | 11.9 | 90.5 | -2.5 | 2.3 | 34.59 | — |
+| 20 | RIO.L | A+ | 87.0 | cup | 21.1 | 90.1 | -1.3 | 1.7 | 7122.87 | Late |
+| 21 | MWA | A+ | 86.7 | cup | 22.3 | 83.0 | -1.9 | 2.8 | 29.36 | Late |
+| 22 | BBT | A+ | 86.3 | cup | 18.8 | 81.3 | -2.2 | 2.1 | 30.36 | — |
+| 23 | RBC | A+ | 86.2 | cup | 22.2 | 86.9 | -1.7 | 2.4 | 550.9 | Late |
+| 24 | HSBA.L | A+ | 86.1 | flat_base | 13.0 | 86.4 | 0.0 | 2.6 | 1340.76 | — |
+| 25 | TTC | A+ | 86.0 | flat_base | 13.1 | 92.0 | -3.3 | 3.3 | 99.23 | — |
+| 26 | GLE.PA | A+ | 85.7 | flat_base | 14.8 | 84.7 | -1.4 | 1.9 | 86.5 | — |
+| 27 | INSW | A+ | 85.5 | cup | 18.0 | 84.1 | -1.2 | 2.5 | 67.56 | — |
+| 28 | OUT | A | 85.1 | flat_base | 11.6 | 70.3 | -0.7 | 2.3 | 25.88 | — |
+| 29 | FDP | A | 85.0 | cup | 20.4 | 76.1 | -1.8 | 2.1 | 40.9 | Late |
+| 30 | INTC | A | 84.9 | cup | 16.7 | 86.5 | -0.2 | 1.2 | 43.21 | — |
+| 31 | VOD.L | A | 84.9 | cup | 19.0 | 81.6 | -2.6 | 2.9 | 116.79 | — |
+| 32 | GMED | B | 84.6 | flat_base | 10.7 | 50.5 | -0.1 | 2.5 | 92.39 | LowRS |
+| 33 | NVT | B | 84.5 | cup | 16.9 | 67.9 | -0.7 | 1.7 | 115.52 | LowRS |
+| 34 | RWE.DE | A | 84.3 | flat_base | 10.2 | 79.2 | -0.7 | 2.5 | 62.07 | — |
+| 35 | ECPG | A | 84.2 | flat_base | 10.4 | 72.7 | -0.8 | 2.3 | 57.12 | — |
+| 36 | LEA | A | 84.0 | cup | 20.0 | 84.0 | -3.7 | 2.5 | 133.1 | — |
+| 37 | CLH | A | 83.5 | flat_base | 12.6 | 87.8 | -1.0 | 2.3 | 276.08 | — |
+| 38 | GVA | A | 82.9 | cup | 15.9 | 85.7 | -1.2 | 2.4 | 131.37 | — |
+| 39 | BMY | A | 82.7 | flat_base | 13.8 | 85.0 | -1.3 | 2.8 | 59.87 | — |
+| 40 | AAMI | A | 82.4 | cup | 19.5 | 83.7 | -1.1 | 1.6 | 53.47 | — |
+| 41 | JNJ | A | 82.3 | flat_base | 8.9 | 71.4 | -0.8 | 4.4 | 241.66 | — |
+| 42 | ROST | B | 82.3 | flat_base | 9.8 | 65.2 | -1.6 | 3.8 | 199.4 | LowRS |
+| 43 | BDX | A | 81.6 | cup | 19.2 | 74.5 | -3.4 | 2.3 | 179.35 | — |
+| 44 | WMB | A | 81.6 | cup | 21.1 | 80.5 | -0.2 | 3.0 | 71.65 | Late |
+| 45 | TDY | A | 81.1 | flat_base | 12.4 | 90.6 | -2.1 | 2.7 | 665.86 | — |
+| 46 | BWXT | A | 81.0 | cup | 21.7 | 71.8 | -3.5 | 1.6 | 202.06 | Late |
+| 47 | TRN | A | 80.8 | cup | 21.5 | 89.0 | -2.4 | 2.2 | 33.75 | Late |
+| 48 | SUPN | A | 80.5 | cup | 20.8 | 81.1 | -5.6 | 1.9 | 56.47 | Late |
+| 49 | MUFG | A | 80.3 | flat_base | 13.4 | 75.3 | -5.9 | 2.6 | 19.03 | — |
+| 50 | ACA | A | 80.3 | cup | 19.3 | 75.3 | -2.3 | 2.3 | 124.03 | — |
+| 51 | SMFG | A | 80.1 | cup | 20.7 | 86.5 | -4.6 | 2.4 | 22.55 | Late |
+| 52 | VOLV-B.ST | A | 80.0 | cup | 17.4 | 85.9 | -1.2 | 4.6 | 346.25 | — |
+| 53 | R | A | 80.0 | cup | 19.7 | 86.1 | -2.8 | 2.1 | 216.25 | — |
+| 54 | CM | A | 79.8 | flat_base | 10.7 | 73.2 | -0.2 | 3.7 | 98.28 | — |
+| 55 | ATCO-A.ST | A | 79.7 | flat_base | 9.3 | 84.7 | -1.5 | 3.9 | 193.6 | — |
+| 56 | JBSS | B | 79.6 | cup | 19.1 | 66.4 | -3.2 | 2.7 | 82.04 | LowRS |
+| 57 | EOAN.DE | A | 79.3 | flat_base | 13.4 | 83.3 | -0.1 | 3.2 | 22.22 | — |
+| 58 | NOVN.SW | A | 79.2 | flat_base | 13.2 | 82.8 | -0.0 | 4.2 | 126.77 | — |
+| 59 | FLEX | B | 79.1 | cup | 18.8 | 64.5 | -3.0 | 1.4 | 62.83 | LowRS |
+| 60 | CASY | A | 78.9 | flat_base | 12.5 | 81.4 | -1.4 | 2.9 | 661.93 | — |
+| 61 | SMP | B | 78.9 | cup | 21.3 | 63.8 | -3.9 | 2.7 | 43.2 | Late,LowRS |
+| 62 | TD | B | 78.8 | flat_base | 6.6 | 69.0 | -1.2 | 4.1 | 95.97 | LowRS |
+| 63 | MAC | A | 78.8 | cup | 15.5 | 81.2 | -1.1 | 2.0 | 19.83 | — |
+| 64 | HUBB | A | 78.7 | flat_base | 12.4 | 80.7 | -1.1 | 2.6 | 512.96 | — |
+| 65 | VCTR | A | 78.7 | cup | 19.0 | 80.7 | -0.3 | 2.0 | 73.7 | — |
+| 66 | ROG.SW | B | 78.4 | flat_base | 11.7 | 67.7 | -1.6 | 4.2 | 365.97 | LowRS |
+| 67 | ATCO-B.ST | A | 78.4 | flat_base | 9.0 | 79.6 | -1.3 | 4.1 | 168.18 | — |
+| 68 | CVX | A | 78.2 | flat_base | 13.1 | 78.6 | -1.9 | 3.8 | 182.96 | — |
+| 69 | XLE | A | 78.2 | cup | 20.8 | 78.7 | -1.9 | 3.4 | 54.27 | Late |
+| 70 | ALFA.ST | A | 78.0 | flat_base | 9.1 | 77.9 | -1.6 | 4.4 | 526.63 | — |
+| 71 | XLB | A | 78.0 | flat_base | 11.3 | 78.0 | -2.0 | 3.6 | 52.65 | — |
+| 72 | WTS | A | 77.8 | cup | 20.3 | 77.2 | -1.0 | 2.2 | 318.7 | Late |
+| 73 | TILE | B | 77.7 | cup | 20.8 | 69.9 | -6.7 | 1.7 | 32.07 | Late,LowRS |
+| 74 | WSR | B | 77.6 | flat_base | 10.3 | 64.3 | -1.3 | 3.8 | 14.97 | LowRS |
+| 75 | TM | A | 77.5 | flat_base | 12.6 | 76.0 | -3.0 | 3.4 | 241.66 | — |
+| 76 | GNL | A | 77.5 | flat_base | 10.7 | 76.2 | -2.5 | 3.4 | 9.74 | — |
+| 77 | SAN.MC | A | 77.4 | flat_base | 11.7 | 75.6 | -0.6 | 2.1 | 12.64 | — |
+| 78 | FCFS | A | 77.4 | flat_base | 13.6 | 75.8 | -1.4 | 2.0 | 179.23 | — |
+| 79 | PH | A | 77.0 | flat_base | 11.9 | 74.0 | -2.3 | 3.0 | 1000.26 | — |
+| 80 | REP.MC | A | 76.9 | cup | 18.7 | 73.5 | -0.1 | 2.8 | 21.47 | — |
+
+----- Detailed (per stock) -----
+----- NEOG -----
+Grade: A+
+Composite Score: 96.8
+  Score calculation: 0.2*100.0 + 0.25*100.0 + 0.25*99.3 + 0.15*100.0 + 0.15*80.0 = 96.8
+  Trend: 100.0   (>=30.0% above 200 SMA)
+  Base: 100.0    (depth 13.0% (<=15 +10, <=20 +5); prior 113.0% (>=25.0 +10 else -20); length 4.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 99.3     (rs_percentile 0-100; this stock 99.3)
+  Volume: 100.0  (contraction <0.8 -> 100)
+  Breakout: 80.0 (dist -1.09% in [-3%, 0%] -> 80)
+Base: flat_base (4.0 weeks, 13.0% deep)
+Prior Run: +113.0%
+RS Percentile: 99.0
+RSI: 69.0
+Pivot: 11.43  (source: flat_max_spike_filtered)
+Distance to Pivot: -1.1%
+Stop: 10.86 (ATR method)
+Reward/Risk: 2.0
+Power Rank: 99.7
+Status: Ready - Tight base, strong RS, not extended.
+
+----- TPR -----
+Grade: A+
+Important note: Late-stage base (>20% depth)
+Composite Score: 95.6
+  Score calculation: 0.2*100.0 + 0.25*100.0 + 0.25*94.4 + 0.15*100.0 + 0.15*80.0 = 95.6
+  Trend: 100.0   (>=30.0% above 200 SMA)
+  Base: 100.0    (depth 21.5% (<=15 +10, <=20 +5); prior 70.0% (>=25.0 +10 else -20); length 8.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 94.4     (rs_percentile 0-100; this stock 94.4)
+  Volume: 100.0  (contraction <0.8 -> 100)
+  Breakout: 80.0 (dist -0.62% in [-3%, 0%] -> 80)
+Base: cup (8.0 weeks, 21.5% deep)
+Prior Run: +70.0%
+RS Percentile: 94.0
+RSI: 78.0
+Pivot: 157.91  (source: cup_handle)
+Distance to Pivot: -0.6%
+Stop: 149.64 (ATR method)
+Reward/Risk: 1.9
+Power Rank: 82.3
+Status: Ready - Tight base, strong RS, not extended.
+
+----- ADEA -----
+Grade: A+
+Composite Score: 95.2
+  Score calculation: 0.2*100.0 + 0.25*95.0 + 0.25*97.8 + 0.15*100.0 + 0.15*80.0 = 95.2
+  Trend: 100.0   (>=30.0% above 200 SMA)
+  Base: 95.0    (depth 20.0% (<=15 +10, <=20 +5); prior 79.0% (>=25.0 +10 else -20); length 8.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 95.0)
+  RS: 97.8     (rs_percentile 0-100; this stock 97.8)
+  Volume: 100.0  (contraction <0.8 -> 100)
+  Breakout: 80.0 (dist -0.39% in [-3%, 0%] -> 80)
+Base: cup (8.0 weeks, 20.0% deep)
+Prior Run: +79.0%
+RS Percentile: 98.0
+RSI: 72.0
+Pivot: 20.75  (source: cup_handle)
+Distance to Pivot: -0.4%
+Stop: 19.35 (ATR method)
+Reward/Risk: 1.5
+Power Rank: 88.3
+Status: Ready - Tight base, strong RS, not extended.
+
+----- VSCO -----
+Grade: A+
+Important note: Late-stage base (>20% depth)
+Composite Score: 93.4
+  Score calculation: 0.2*100.0 + 0.25*100.0 + 0.25*97.7 + 0.15*100.0 + 0.15*60.0 = 93.4
+  Trend: 100.0   (>=30.0% above 200 SMA)
+  Base: 100.0    (depth 22.2% (<=15 +10, <=20 +5); prior 158.0% (>=25.0 +10 else -20); length 8.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 97.7     (rs_percentile 0-100; this stock 97.7)
+  Volume: 100.0  (contraction <0.8 -> 100)
+  Breakout: 60.0 (dist -4.32% in [-5%, -3%) -> 60)
+Base: cup (8.0 weeks, 22.2% deep)
+Prior Run: +158.0%
+RS Percentile: 98.0
+RSI: 52.0
+Pivot: 64.96  (source: cup_handle)
+Distance to Pivot: -4.3%
+Stop: 59.86 (ATR method)
+Reward/Risk: 1.3
+Power Rank: 98.9
+Status: Watch
+
+----- GEV -----
+Grade: A+
+Important note: Late-stage base (>20% depth)
+Composite Score: 91.3
+  Score calculation: 0.2*100.0 + 0.25*100.0 + 0.25*95.1 + 0.15*70.0 + 0.15*80.0 = 91.3
+  Trend: 100.0   (>=30.0% above 200 SMA)
+  Base: 100.0    (depth 24.7% (<=15 +10, <=20 +5); prior 69.0% (>=25.0 +10 else -20); length 4.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 95.1     (rs_percentile 0-100; this stock 95.1)
+  Volume: 70.0  (contraction <0.95 -> 70)
+  Breakout: 80.0 (dist -2.11% in [-3%, 0%] -> 80)
+Base: cup (4.0 weeks, 24.7% deep)
+Prior Run: +69.0%
+RS Percentile: 95.0
+RSI: 78.0
+Pivot: 894.93  (source: cup_handle)
+Distance to Pivot: -2.1%
+Stop: 845.45 (ATR method)
+Reward/Risk: 1.8
+Power Rank: 82.0
+Status: Ready - Tight base, strong RS, not extended.
+
+----- EGBN -----
+Grade: A+
+Composite Score: 90.7
+  Score calculation: 0.2*100.0 + 0.25*100.0 + 0.25*92.9 + 0.15*100.0 + 0.15*50.0 = 90.7
+  Trend: 100.0   (>=30.0% above 200 SMA)
+  Base: 100.0    (depth 13.3% (<=15 +10, <=20 +5); prior 89.0% (>=25.0 +10 else -20); length 4.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 92.9     (rs_percentile 0-100; this stock 92.9)
+  Volume: 100.0  (contraction <0.8 -> 100)
+  Breakout: 50.0 (dist -6.9% -> 50)
+Base: flat_base (4.0 weeks, 13.3% deep)
+Prior Run: +89.0%
+RS Percentile: 93.0
+RSI: 42.0
+Pivot: 28.41  (source: flat_max_spike_filtered)
+Distance to Pivot: -6.9%
+Stop: 26.9 (ATR method)
+Reward/Risk: 1.9
+Power Rank: 91.0
+Status: Watch
+
+----- FIVE -----
+Grade: A+
+Composite Score: 90.5
+  Score calculation: 0.2*100.0 + 0.25*100.0 + 0.25*91.9 + 0.15*70.0 + 0.15*80.0 = 90.5
+  Trend: 100.0   (>=30.0% above 200 SMA)
+  Base: 100.0    (depth 18.3% (<=15 +10, <=20 +5); prior 63.0% (>=25.0 +10 else -20); length 8.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 91.9     (rs_percentile 0-100; this stock 91.9)
+  Volume: 70.0  (contraction <0.95 -> 70)
+  Breakout: 80.0 (dist -0.76% in [-3%, 0%] -> 80)
+Base: cup (8.0 weeks, 18.3% deep)
+Prior Run: +63.0%
+RS Percentile: 92.0
+RSI: 81.0
+Pivot: 224.8  (source: cup_handle)
+Distance to Pivot: -0.8%
+Stop: 212.61 (ATR method)
+Reward/Risk: 1.8
+Power Rank: 77.5
+Status: Ready - Tight base, strong RS, not extended.
+
+----- ROG -----
+Grade: A+
+Composite Score: 90.1
+  Score calculation: 0.2*100.0 + 0.25*100.0 + 0.25*90.4 + 0.15*70.0 + 0.15*80.0 = 90.1
+  Trend: 100.0   (>=30.0% above 200 SMA)
+  Base: 100.0    (depth 19.5% (<=15 +10, <=20 +5); prior 50.0% (>=25.0 +10 else -20); length 8.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 90.4     (rs_percentile 0-100; this stock 90.4)
+  Volume: 70.0  (contraction <0.95 -> 70)
+  Breakout: 80.0 (dist -2.53% in [-3%, 0%] -> 80)
+Base: cup (8.0 weeks, 19.5% deep)
+Prior Run: +50.0%
+RS Percentile: 90.0
+RSI: 61.0
+Pivot: 112.59  (source: cup_handle)
+Distance to Pivot: -2.5%
+Stop: 105.78 (ATR method)
+Reward/Risk: 1.6
+Power Rank: 70.3
+Status: Ready - Tight base, strong RS, not extended.
+
+----- MATX -----
+Grade: A+
+Composite Score: 88.7
+  Score calculation: 0.2*100.0 + 0.25*100.0 + 0.25*96.7 + 0.15*70.0 + 0.15*60.0 = 88.7
+  Trend: 100.0   (>=30.0% above 200 SMA)
+  Base: 100.0    (depth 13.0% (<=15 +10, <=20 +5); prior 88.0% (>=25.0 +10 else -20); length 4.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 96.7     (rs_percentile 0-100; this stock 96.7)
+  Volume: 70.0  (contraction <0.95 -> 70)
+  Breakout: 60.0 (dist -3.79% in [-5%, -3%) -> 60)
+Base: flat_base (4.0 weeks, 13.0% deep)
+Prior Run: +88.0%
+RS Percentile: 97.0
+RSI: 59.0
+Pivot: 176.73  (source: flat_max_spike_filtered)
+Distance to Pivot: -3.8%
+Stop: 168.55 (ATR method)
+Reward/Risk: 2.2
+Power Rank: 92.2
+Status: Watch
+
+----- ASO -----
+Grade: A+
+Composite Score: 88.4
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*89.6 + 0.15*100.0 + 0.15*80.0 = 88.4
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 13.0% (<=15 +10, <=20 +5); prior 50.0% (>=25.0 +10 else -20); length 6.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 89.6     (rs_percentile 0-100; this stock 89.6)
+  Volume: 100.0  (contraction <0.8 -> 100)
+  Breakout: 80.0 (dist -1.23% in [-3%, 0%] -> 80)
+Base: flat_base (6.0 weeks, 13.0% deep)
+Prior Run: +50.0%
+RS Percentile: 90.0
+RSI: 55.0
+Pivot: 61.95  (source: flat_max_spike_filtered)
+Distance to Pivot: -1.2%
+Stop: 58.02 (ATR method)
+Reward/Risk: 1.6
+Power Rank: 69.8
+Status: Ready - Tight base, strong RS, not extended.
+
+----- BTSG -----
+Grade: A
+Important note: Low RS percentile (<70)
+Composite Score: 88.4
+  Score calculation: 0.2*100.0 + 0.25*100.0 + 0.25*65.5 + 0.15*100.0 + 0.15*80.0 = 88.4
+  Trend: 100.0   (>=30.0% above 200 SMA)
+  Base: 100.0    (depth 10.9% (<=15 +10, <=20 +5); prior 48.0% (>=25.0 +10 else -20); length 6.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 65.5     (rs_percentile 0-100; this stock 65.5)
+  Volume: 100.0  (contraction <0.8 -> 100)
+  Breakout: 80.0 (dist -1.45% in [-3%, 0%] -> 80)
+Base: flat_base (6.0 weeks, 10.9% deep)
+Prior Run: +48.0%
+RS Percentile: 66.0
+RSI: 64.0
+Pivot: 41.4  (source: flat_max_spike_filtered)
+Distance to Pivot: -1.4%
+Stop: 39.26 (ATR method)
+Reward/Risk: 1.9
+Power Rank: 57.0
+Status: Ready - Tight base, strong RS, not extended.
+
+----- ENGI.PA -----
+Grade: A+
+Composite Score: 88.2
+  Score calculation: 0.2*100.0 + 0.25*100.0 + 0.25*82.7 + 0.15*70.0 + 0.15*80.0 = 88.2
+  Trend: 100.0   (>=30.0% above 200 SMA)
+  Base: 100.0    (depth 19.4% (<=15 +10, <=20 +5); prior 55.0% (>=25.0 +10 else -20); length 8.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 82.7     (rs_percentile 0-100; this stock 82.7)
+  Volume: 70.0  (contraction <0.95 -> 70)
+  Breakout: 80.0 (dist -0.33% in [-3%, 0%] -> 80)
+Base: cup (8.0 weeks, 19.4% deep)
+Prior Run: +55.0%
+RS Percentile: 83.0
+RSI: 74.0
+Pivot: 32.63  (source: cup_handle)
+Distance to Pivot: -0.3%
+Stop: 31.65 (ATR method)
+Reward/Risk: 3.3
+Power Rank: 69.0
+Status: Ready - Tight base, strong RS, not extended.
+
+----- BNP.PA -----
+Grade: A+
+Composite Score: 88.0
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*88.0 + 0.15*100.0 + 0.15*80.0 = 88.0
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 12.9% (<=15 +10, <=20 +5); prior 49.0% (>=25.0 +10 else -20); length 6.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 88.0     (rs_percentile 0-100; this stock 88.0)
+  Volume: 100.0  (contraction <0.8 -> 100)
+  Breakout: 80.0 (dist -0.76% in [-3%, 0%] -> 80)
+Base: flat_base (6.0 weeks, 12.9% deep)
+Prior Run: +49.0%
+RS Percentile: 88.0
+RSI: 62.0
+Pivot: 114.69  (source: flat_max_spike_filtered)
+Distance to Pivot: -0.8%
+Stop: 110.66 (ATR method)
+Reward/Risk: 2.8
+Power Rank: 68.6
+Status: Ready - Tight base, strong RS, not extended.
+
+----- FOLD -----
+Grade: A+
+Composite Score: 87.8
+  Score calculation: 0.2*100.0 + 0.25*100.0 + 0.25*93.1 + 0.15*50.0 + 0.15*80.0 = 87.8
+  Trend: 100.0   (>=30.0% above 200 SMA)
+  Base: 100.0    (depth 0.8% (<=15 +10, <=20 +5); prior 83.0% (>=25.0 +10 else -20); length 6.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 93.1     (rs_percentile 0-100; this stock 93.1)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0 (dist -0.28% in [-3%, 0%] -> 80)
+Base: flat_base (6.0 weeks, 0.8% deep)
+Prior Run: +83.0%
+RS Percentile: 93.0
+RSI: 68.0
+Pivot: 14.38  (source: flat_max_spike_filtered)
+Distance to Pivot: -0.3%
+Stop: 14.32 (ATR method)
+Reward/Risk: 24.0
+Power Rank: 87.9
+Status: Ready - Tight base, strong RS, not extended.
+
+----- SLB -----
+Grade: A+
+Composite Score: 87.7
+  Score calculation: 0.2*100.0 + 0.25*100.0 + 0.25*92.9 + 0.15*50.0 + 0.15*80.0 = 87.7
+  Trend: 100.0   (>=30.0% above 200 SMA)
+  Base: 100.0    (depth 13.3% (<=15 +10, <=20 +5); prior 66.0% (>=25.0 +10 else -20); length 6.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 92.9     (rs_percentile 0-100; this stock 92.9)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0 (dist -1.43% in [-3%, 0%] -> 80)
+Base: flat_base (6.0 weeks, 13.3% deep)
+Prior Run: +66.0%
+RS Percentile: 93.0
+RSI: 52.0
+Pivot: 52.4  (source: flat_max_spike_filtered)
+Distance to Pivot: -1.4%
+Stop: 50.07 (ATR method)
+Reward/Risk: 2.2
+Power Rank: 79.2
+Status: Ready - Tight base, strong RS, not extended.
+
+----- RIO -----
+Grade: A+
+Important note: Late-stage base (>20% depth)
+Composite Score: 87.6
+  Score calculation: 0.2*100.0 + 0.25*100.0 + 0.25*92.3 + 0.15*50.0 + 0.15*80.0 = 87.6
+  Trend: 100.0   (>=30.0% above 200 SMA)
+  Base: 100.0    (depth 21.2% (<=15 +10, <=20 +5); prior 55.0% (>=25.0 +10 else -20); length 8.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 92.3     (rs_percentile 0-100; this stock 92.3)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0 (dist -0.68% in [-3%, 0%] -> 80)
+Base: cup (8.0 weeks, 21.2% deep)
+Prior Run: +55.0%
+RS Percentile: 92.0
+RSI: 58.0
+Pivot: 101.44  (source: cup_handle)
+Distance to Pivot: -0.7%
+Stop: 96.87 (ATR method)
+Reward/Risk: 2.2
+Power Rank: 73.8
+Status: Ready - Tight base, strong RS, not extended.
+
+----- AA -----
+Grade: A+
+Important note: Late-stage base (>20% depth)
+Composite Score: 87.6
+  Score calculation: 0.2*100.0 + 0.25*95.0 + 0.25*97.4 + 0.15*50.0 + 0.15*80.0 = 87.6
+  Trend: 100.0   (>=30.0% above 200 SMA)
+  Base: 95.0    (depth 21.9% (<=15 +10, <=20 +5); prior 109.0% (>=25.0 +10 else -20); length 8.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 95.0)
+  RS: 97.4     (rs_percentile 0-100; this stock 97.4)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0 (dist -1.99% in [-3%, 0%] -> 80)
+Base: cup (8.0 weeks, 21.9% deep)
+Prior Run: +109.0%
+RS Percentile: 97.0
+RSI: 63.0
+Pivot: 66.22  (source: cup_handle)
+Distance to Pivot: -2.0%
+Stop: 60.88 (ATR method)
+Reward/Risk: 1.2
+Power Rank: 98.7
+Status: Ready - Tight base, strong RS, not extended.
+
+----- ASML.AS -----
+Grade: A+
+Composite Score: 87.5
+  Score calculation: 0.2*100.0 + 0.25*100.0 + 0.25*91.8 + 0.15*50.0 + 0.15*80.0 = 87.5
+  Trend: 100.0   (>=30.0% above 200 SMA)
+  Base: 100.0    (depth 14.9% (<=15 +10, <=20 +5); prior 60.0% (>=25.0 +10 else -20); length 4.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 91.8     (rs_percentile 0-100; this stock 91.8)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0 (dist -1.86% in [-3%, 0%] -> 80)
+Base: flat_base (4.0 weeks, 14.9% deep)
+Prior Run: +60.0%
+RS Percentile: 92.0
+RSI: 78.0
+Pivot: 1550.49  (source: flat_max_spike_filtered)
+Distance to Pivot: -1.9%
+Stop: 1482.49 (ATR method)
+Reward/Risk: 2.3
+Power Rank: 75.7
+Status: Ready - Tight base, strong RS, not extended.
+
+----- HAL -----
+Grade: A+
+Composite Score: 87.1
+  Score calculation: 0.2*100.0 + 0.25*100.0 + 0.25*90.5 + 0.15*50.0 + 0.15*80.0 = 87.1
+  Trend: 100.0   (>=30.0% above 200 SMA)
+  Base: 100.0    (depth 11.9% (<=15 +10, <=20 +5); prior 69.0% (>=25.0 +10 else -20); length 6.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 90.5     (rs_percentile 0-100; this stock 90.5)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0 (dist -2.54% in [-3%, 0%] -> 80)
+Base: flat_base (6.0 weeks, 11.9% deep)
+Prior Run: +69.0%
+RS Percentile: 90.0
+RSI: 56.0
+Pivot: 36.18  (source: flat_max_spike_filtered)
+Distance to Pivot: -2.5%
+Stop: 34.59 (ATR method)
+Reward/Risk: 2.3
+Power Rank: 79.6
+Status: Ready - Tight base, strong RS, not extended.
+
+----- RIO.L -----
+Grade: A+
+Important note: Late-stage base (>20% depth)
+Composite Score: 87.0
+  Score calculation: 0.2*100.0 + 0.25*100.0 + 0.25*90.1 + 0.15*50.0 + 0.15*80.0 = 87.0
+  Trend: 100.0   (>=30.0% above 200 SMA)
+  Base: 100.0    (depth 21.1% (<=15 +10, <=20 +5); prior 56.0% (>=25.0 +10 else -20); length 8.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 90.1     (rs_percentile 0-100; this stock 90.1)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0 (dist -1.27% in [-3%, 0%] -> 80)
+Base: cup (8.0 weeks, 21.1% deep)
+Prior Run: +56.0%
+RS Percentile: 90.0
+RSI: 71.0
+Pivot: 7557.0  (source: cup_handle)
+Distance to Pivot: -1.3%
+Stop: 7122.87 (ATR method)
+Reward/Risk: 1.7
+Power Rank: 73.2
+Status: Ready - Tight base, strong RS, not extended.
+
+----- MWA -----
+Grade: A+
+Important note: Late-stage base (>20% depth)
+Composite Score: 86.7
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*83.0 + 0.15*100.0 + 0.15*80.0 = 86.7
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 22.3% (<=15 +10, <=20 +5); prior 34.0% (>=25.0 +10 else -20); length 8.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 83.0     (rs_percentile 0-100; this stock 83.0)
+  Volume: 100.0  (contraction <0.8 -> 100)
+  Breakout: 80.0 (dist -1.93% in [-3%, 0%] -> 80)
+Base: cup (8.0 weeks, 22.3% deep)
+Prior Run: +34.0%
+RS Percentile: 83.0
+RSI: 77.0
+Pivot: 30.47  (source: cup_handle)
+Distance to Pivot: -1.9%
+Stop: 29.36 (ATR method)
+Reward/Risk: 2.8
+Power Rank: 58.5
+Status: Ready - Tight base, strong RS, not extended.
+
+----- BBT -----
+Grade: A+
+Composite Score: 86.3
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*81.3 + 0.15*100.0 + 0.15*80.0 = 86.3
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 18.8% (<=15 +10, <=20 +5); prior 40.0% (>=25.0 +10 else -20); length 8.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 81.3     (rs_percentile 0-100; this stock 81.3)
+  Volume: 100.0  (contraction <0.8 -> 100)
+  Breakout: 80.0 (dist -2.21% in [-3%, 0%] -> 80)
+Base: cup (8.0 weeks, 18.8% deep)
+Prior Run: +40.0%
+RS Percentile: 81.0
+RSI: 56.0
+Pivot: 31.89  (source: cup_handle)
+Distance to Pivot: -2.2%
+Stop: 30.36 (ATR method)
+Reward/Risk: 2.1
+Power Rank: 60.7
+Status: Ready - Tight base, strong RS, not extended.
+
+----- RBC -----
+Grade: A+
+Important note: Late-stage base (>20% depth)
+Composite Score: 86.2
+  Score calculation: 0.2*100.0 + 0.25*100.0 + 0.25*86.9 + 0.15*50.0 + 0.15*80.0 = 86.2
+  Trend: 100.0   (>=30.0% above 200 SMA)
+  Base: 100.0    (depth 22.2% (<=15 +10, <=20 +5); prior 58.0% (>=25.0 +10 else -20); length 8.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 86.9     (rs_percentile 0-100; this stock 86.9)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0 (dist -1.67% in [-3%, 0%] -> 80)
+Base: cup (8.0 weeks, 22.2% deep)
+Prior Run: +58.0%
+RS Percentile: 87.0
+RSI: 87.0
+Pivot: 574.68  (source: cup_handle)
+Distance to Pivot: -1.7%
+Stop: 550.9 (ATR method)
+Reward/Risk: 2.4
+Power Rank: 72.3
+Status: Ready - Tight base, strong RS, not extended.
+
+----- HSBA.L -----
+Grade: A+
+Composite Score: 86.1
+  Score calculation: 0.2*100.0 + 0.25*100.0 + 0.25*86.4 + 0.15*50.0 + 0.15*80.0 = 86.1
+  Trend: 100.0   (>=30.0% above 200 SMA)
+  Base: 100.0    (depth 13.0% (<=15 +10, <=20 +5); prior 45.0% (>=25.0 +10 else -20); length 6.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 86.4     (rs_percentile 0-100; this stock 86.4)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0 (dist 0.0% in [-3%, 0%] -> 80)
+Base: flat_base (6.0 weeks, 13.0% deep)
+Prior Run: +45.0%
+RS Percentile: 86.0
+RSI: 69.0
+Pivot: 1394.0  (source: flat_max_spike_filtered)
+Distance to Pivot: 0.0%
+Stop: 1340.76 (ATR method)
+Reward/Risk: 2.6
+Power Rank: 65.9
+Status: Ready - Tight base, strong RS, not extended.
+
+----- TTC -----
+Grade: A+
+Composite Score: 86.0
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*92.0 + 0.15*100.0 + 0.15*60.0 = 86.0
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 13.1% (<=15 +10, <=20 +5); prior 51.0% (>=25.0 +10 else -20); length 4.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 92.0     (rs_percentile 0-100; this stock 92.0)
+  Volume: 100.0  (contraction <0.8 -> 100)
+  Breakout: 60.0 (dist -3.26% in [-5%, -3%) -> 60)
+Base: flat_base (4.0 weeks, 13.1% deep)
+Prior Run: +51.0%
+RS Percentile: 92.0
+RSI: 61.0
+Pivot: 102.32  (source: flat_max_spike_filtered)
+Distance to Pivot: -3.3%
+Stop: 99.23 (ATR method)
+Reward/Risk: 3.3
+Power Rank: 71.6
+Status: Watch
+
+----- GLE.PA -----
+Grade: A+
+Composite Score: 85.7
+  Score calculation: 0.2*100.0 + 0.25*100.0 + 0.25*84.7 + 0.15*50.0 + 0.15*80.0 = 85.7
+  Trend: 100.0   (>=30.0% above 200 SMA)
+  Base: 100.0    (depth 14.8% (<=15 +10, <=20 +5); prior 49.0% (>=25.0 +10 else -20); length 8.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 84.7     (rs_percentile 0-100; this stock 84.7)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0 (dist -1.42% in [-3%, 0%] -> 80)
+Base: flat_base (8.0 weeks, 14.8% deep)
+Prior Run: +49.0%
+RS Percentile: 85.0
+RSI: 54.0
+Pivot: 91.34  (source: flat_max_spike_filtered)
+Distance to Pivot: -1.4%
+Stop: 86.5 (ATR method)
+Reward/Risk: 1.9
+Power Rank: 66.8
+Status: Ready - Tight base, strong RS, not extended.
+
+----- INSW -----
+Grade: A+
+Composite Score: 85.5
+  Score calculation: 0.2*100.0 + 0.25*100.0 + 0.25*84.1 + 0.15*50.0 + 0.15*80.0 = 85.5
+  Trend: 100.0   (>=30.0% above 200 SMA)
+  Base: 100.0    (depth 18.0% (<=15 +10, <=20 +5); prior 53.0% (>=25.0 +10 else -20); length 4.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 84.1     (rs_percentile 0-100; this stock 84.1)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0 (dist -1.19% in [-3%, 0%] -> 80)
+Base: cup (4.0 weeks, 18.0% deep)
+Prior Run: +53.0%
+RS Percentile: 84.0
+RSI: 85.0
+Pivot: 70.37  (source: cup_handle)
+Distance to Pivot: -1.2%
+Stop: 67.56 (ATR method)
+Reward/Risk: 2.5
+Power Rank: 68.4
+Status: Ready - Tight base, strong RS, not extended.
+
+----- OUT -----
+Grade: A
+Composite Score: 85.1
+  Score calculation: 0.2*100.0 + 0.25*100.0 + 0.25*70.3 + 0.15*70.0 + 0.15*80.0 = 85.1
+  Trend: 100.0   (>=30.0% above 200 SMA)
+  Base: 100.0    (depth 11.6% (<=15 +10, <=20 +5); prior 59.0% (>=25.0 +10 else -20); length 6.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 70.3     (rs_percentile 0-100; this stock 70.3)
+  Volume: 70.0  (contraction <0.95 -> 70)
+  Breakout: 80.0 (dist -0.65% in [-3%, 0%] -> 80)
+Base: flat_base (6.0 weeks, 11.6% deep)
+Prior Run: +59.0%
+RS Percentile: 70.0
+RSI: 58.0
+Pivot: 27.04  (source: flat_max_spike_filtered)
+Distance to Pivot: -0.7%
+Stop: 25.88 (ATR method)
+Reward/Risk: 2.3
+Power Rank: 64.8
+Status: Ready - Tight base, strong RS, not extended.
+
+----- FDP -----
+Grade: A
+Important note: Late-stage base (>20% depth)
+Composite Score: 85.0
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*76.1 + 0.15*100.0 + 0.15*80.0 = 85.0
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 20.4% (<=15 +10, <=20 +5); prior 35.0% (>=25.0 +10 else -20); length 8.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 76.1     (rs_percentile 0-100; this stock 76.1)
+  Volume: 100.0  (contraction <0.8 -> 100)
+  Breakout: 80.0 (dist -1.79% in [-3%, 0%] -> 80)
+Base: cup (8.0 weeks, 20.4% deep)
+Prior Run: +35.0%
+RS Percentile: 76.0
+RSI: 68.0
+Pivot: 42.98  (source: cup_handle)
+Distance to Pivot: -1.8%
+Stop: 40.9 (ATR method)
+Reward/Risk: 2.1
+Power Rank: 55.4
+Status: Ready - Tight base, strong RS, not extended.
+
+----- INTC -----
+Grade: A
+Composite Score: 84.9
+  Score calculation: 0.2*100.0 + 0.25*95.0 + 0.25*86.5 + 0.15*50.0 + 0.15*80.0 = 84.9
+  Trend: 100.0   (>=30.0% above 200 SMA)
+  Base: 95.0    (depth 16.7% (<=15 +10, <=20 +5); prior 57.0% (>=25.0 +10 else -20); length 4.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 95.0)
+  RS: 86.5     (rs_percentile 0-100; this stock 86.5)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0 (dist -0.19% in [-3%, 0%] -> 80)
+Base: cup (4.0 weeks, 16.7% deep)
+Prior Run: +57.0%
+RS Percentile: 86.0
+RSI: 45.0
+Pivot: 46.97  (source: cup_handle)
+Distance to Pivot: -0.2%
+Stop: 43.21 (ATR method)
+Reward/Risk: 1.2
+Power Rank: 71.5
+Status: Ready - Tight base, strong RS, not extended.
+
+----- VOD.L -----
+Grade: A
+Composite Score: 84.9
+  Score calculation: 0.2*100.0 + 0.25*100.0 + 0.25*81.6 + 0.15*50.0 + 0.15*80.0 = 84.9
+  Trend: 100.0   (>=30.0% above 200 SMA)
+  Base: 100.0    (depth 19.0% (<=15 +10, <=20 +5); prior 45.0% (>=25.0 +10 else -20); length 8.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 81.6     (rs_percentile 0-100; this stock 81.6)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0 (dist -2.65% in [-3%, 0%] -> 80)
+Base: cup (8.0 weeks, 19.0% deep)
+Prior Run: +45.0%
+RS Percentile: 82.0
+RSI: 79.0
+Pivot: 120.95  (source: cup_handle)
+Distance to Pivot: -2.6%
+Stop: 116.79 (ATR method)
+Reward/Risk: 2.9
+Power Rank: 63.3
+Status: Ready - Tight base, strong RS, not extended.
+
+----- GMED -----
+Grade: B
+Important note: Low RS percentile (<70)
+Composite Score: 84.6
+  Score calculation: 0.2*100.0 + 0.25*100.0 + 0.25*50.5 + 0.15*100.0 + 0.15*80.0 = 84.6
+  Trend: 100.0   (>=30.0% above 200 SMA)
+  Base: 100.0    (depth 10.7% (<=15 +10, <=20 +5); prior 70.0% (>=25.0 +10 else -20); length 6.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 50.5     (rs_percentile 0-100; this stock 50.5)
+  Volume: 100.0  (contraction <0.8 -> 100)
+  Breakout: 80.0 (dist -0.07% in [-3%, 0%] -> 80)
+Base: flat_base (6.0 weeks, 10.7% deep)
+Prior Run: +70.0%
+RS Percentile: 50.0
+RSI: 78.0
+Pivot: 96.32  (source: flat_max_spike_filtered)
+Distance to Pivot: -0.1%
+Stop: 92.39 (ATR method)
+Reward/Risk: 2.5
+Power Rank: 60.2
+Status: Developing
+
+----- NVT -----
+Grade: B
+Important note: Low RS percentile (<70)
+Composite Score: 84.5
+  Score calculation: 0.2*100.0 + 0.25*100.0 + 0.25*67.9 + 0.15*70.0 + 0.15*80.0 = 84.5
+  Trend: 100.0   (>=30.0% above 200 SMA)
+  Base: 100.0    (depth 16.9% (<=15 +10, <=20 +5); prior 32.0% (>=25.0 +10 else -20); length 8.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 67.9     (rs_percentile 0-100; this stock 67.9)
+  Volume: 70.0  (contraction <0.95 -> 70)
+  Breakout: 80.0 (dist -0.69% in [-3%, 0%] -> 80)
+Base: cup (8.0 weeks, 16.9% deep)
+Prior Run: +32.0%
+RS Percentile: 68.0
+RSI: 61.0
+Pivot: 122.67  (source: cup_handle)
+Distance to Pivot: -0.7%
+Stop: 115.52 (ATR method)
+Reward/Risk: 1.7
+Power Rank: 49.7
+Status: Developing
+
+----- RWE.DE -----
+Grade: A
+Composite Score: 84.3
+  Score calculation: 0.2*100.0 + 0.25*100.0 + 0.25*79.2 + 0.15*50.0 + 0.15*80.0 = 84.3
+  Trend: 100.0   (>=30.0% above 200 SMA)
+  Base: 100.0    (depth 10.2% (<=15 +10, <=20 +5); prior 39.0% (>=25.0 +10 else -20); length 6.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 79.2     (rs_percentile 0-100; this stock 79.2)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0 (dist -0.73% in [-3%, 0%] -> 80)
+Base: flat_base (6.0 weeks, 10.2% deep)
+Prior Run: +39.0%
+RS Percentile: 79.0
+RSI: 57.0
+Pivot: 64.67  (source: flat_max_spike_filtered)
+Distance to Pivot: -0.7%
+Stop: 62.07 (ATR method)
+Reward/Risk: 2.5
+Power Rank: 59.1
+Status: Ready - Tight base, strong RS, not extended.
+
+----- ECPG -----
+Grade: A
+Composite Score: 84.2
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*72.7 + 0.15*100.0 + 0.15*80.0 = 84.2
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 10.4% (<=15 +10, <=20 +5); prior 49.0% (>=25.0 +10 else -20); length 6.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 72.7     (rs_percentile 0-100; this stock 72.7)
+  Volume: 100.0  (contraction <0.8 -> 100)
+  Breakout: 80.0 (dist -0.85% in [-3%, 0%] -> 80)
+Base: flat_base (6.0 weeks, 10.4% deep)
+Prior Run: +49.0%
+RS Percentile: 73.0
+RSI: 66.0
+Pivot: 59.67  (source: flat_max_spike_filtered)
+Distance to Pivot: -0.8%
+Stop: 57.12 (ATR method)
+Reward/Risk: 2.3
+Power Rank: 61.0
+Status: Ready - Tight base, strong RS, not extended.
+
+----- LEA -----
+Grade: A
+Composite Score: 84.0
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*84.0 + 0.15*100.0 + 0.15*60.0 = 84.0
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 20.0% (<=15 +10, <=20 +5); prior 49.0% (>=25.0 +10 else -20); length 8.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 84.0     (rs_percentile 0-100; this stock 84.0)
+  Volume: 100.0  (contraction <0.8 -> 100)
+  Breakout: 60.0 (dist -3.69% in [-5%, -3%) -> 60)
+Base: cup (8.0 weeks, 20.0% deep)
+Prior Run: +49.0%
+RS Percentile: 84.0
+RSI: 53.0
+Pivot: 138.75  (source: cup_handle)
+Distance to Pivot: -3.7%
+Stop: 133.1 (ATR method)
+Reward/Risk: 2.5
+Power Rank: 66.4
+Status: Watch
+
+----- CLH -----
+Grade: A
+Composite Score: 83.5
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*87.8 + 0.15*70.0 + 0.15*80.0 = 83.5
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 12.6% (<=15 +10, <=20 +5); prior 43.0% (>=25.0 +10 else -20); length 6.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 87.8     (rs_percentile 0-100; this stock 87.8)
+  Volume: 70.0  (contraction <0.95 -> 70)
+  Breakout: 80.0 (dist -1.01% in [-3%, 0%] -> 80)
+Base: flat_base (6.0 weeks, 12.6% deep)
+Prior Run: +43.0%
+RS Percentile: 88.0
+RSI: 72.0
+Pivot: 288.81  (source: flat_max_spike_filtered)
+Distance to Pivot: -1.0%
+Stop: 276.08 (ATR method)
+Reward/Risk: 2.3
+Power Rank: 65.6
+Status: Ready - Tight base, strong RS, not extended.
+
+----- GVA -----
+Grade: A
+Composite Score: 82.9
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*85.7 + 0.15*70.0 + 0.15*80.0 = 82.9
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 15.9% (<=15 +10, <=20 +5); prior 41.0% (>=25.0 +10 else -20); length 8.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 85.7     (rs_percentile 0-100; this stock 85.7)
+  Volume: 70.0  (contraction <0.95 -> 70)
+  Breakout: 80.0 (dist -1.23% in [-3%, 0%] -> 80)
+Base: cup (8.0 weeks, 15.9% deep)
+Prior Run: +41.0%
+RS Percentile: 86.0
+RSI: 72.0
+Pivot: 137.2  (source: cup_handle)
+Distance to Pivot: -1.2%
+Stop: 131.37 (ATR method)
+Reward/Risk: 2.4
+Power Rank: 63.4
+Status: Ready - Tight base, strong RS, not extended.
+
+----- BMY -----
+Grade: A
+Composite Score: 82.7
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*85.0 + 0.15*70.0 + 0.15*80.0 = 82.7
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 13.8% (<=15 +10, <=20 +5); prior 46.0% (>=25.0 +10 else -20); length 6.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 85.0     (rs_percentile 0-100; this stock 85.0)
+  Volume: 70.0  (contraction <0.95 -> 70)
+  Breakout: 80.0 (dist -1.29% in [-3%, 0%] -> 80)
+Base: flat_base (6.0 weeks, 13.8% deep)
+Prior Run: +46.0%
+RS Percentile: 85.0
+RSI: 67.0
+Pivot: 62.12  (source: flat_max_spike_filtered)
+Distance to Pivot: -1.3%
+Stop: 59.87 (ATR method)
+Reward/Risk: 2.8
+Power Rank: 65.5
+Status: Ready - Tight base, strong RS, not extended.
+
+----- AAMI -----
+Grade: A
+Composite Score: 82.4
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*83.7 + 0.15*70.0 + 0.15*80.0 = 82.4
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 19.5% (<=15 +10, <=20 +5); prior 37.0% (>=25.0 +10 else -20); length 8.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 83.7     (rs_percentile 0-100; this stock 83.7)
+  Volume: 70.0  (contraction <0.95 -> 70)
+  Breakout: 80.0 (dist -1.07% in [-3%, 0%] -> 80)
+Base: cup (8.0 weeks, 19.5% deep)
+Prior Run: +37.0%
+RS Percentile: 84.0
+RSI: 63.0
+Pivot: 56.97  (source: cup_handle)
+Distance to Pivot: -1.1%
+Stop: 53.47 (ATR method)
+Reward/Risk: 1.6
+Power Rank: 60.6
+Status: Ready - Tight base, strong RS, not extended.
+
+----- JNJ -----
+Grade: A
+Composite Score: 82.3
+  Score calculation: 0.2*100.0 + 0.25*100.0 + 0.25*71.4 + 0.15*50.0 + 0.15*80.0 = 82.3
+  Trend: 100.0   (>=30.0% above 200 SMA)
+  Base: 100.0    (depth 8.9% (<=15 +10, <=20 +5); prior 34.0% (>=25.0 +10 else -20); length 4.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 71.4     (rs_percentile 0-100; this stock 71.4)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0 (dist -0.83% in [-3%, 0%] -> 80)
+Base: flat_base (4.0 weeks, 8.9% deep)
+Prior Run: +34.0%
+RS Percentile: 71.0
+RSI: 70.0
+Pivot: 247.25  (source: flat_max_spike_filtered)
+Distance to Pivot: -0.8%
+Stop: 241.66 (ATR method)
+Reward/Risk: 4.4
+Power Rank: 52.6
+Status: Ready - Tight base, strong RS, not extended.
+
+----- ROST -----
+Grade: B
+Important note: Low RS percentile (<70)
+Composite Score: 82.3
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*65.2 + 0.15*100.0 + 0.15*80.0 = 82.3
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 9.8% (<=15 +10, <=20 +5); prior 38.0% (>=25.0 +10 else -20); length 6.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 65.2     (rs_percentile 0-100; this stock 65.2)
+  Volume: 100.0  (contraction <0.8 -> 100)
+  Breakout: 80.0 (dist -1.62% in [-3%, 0%] -> 80)
+Base: flat_base (6.0 weeks, 9.8% deep)
+Prior Run: +38.0%
+RS Percentile: 65.0
+RSI: 82.0
+Pivot: 204.85  (source: flat_max_spike_filtered)
+Distance to Pivot: -1.6%
+Stop: 199.4 (ATR method)
+Reward/Risk: 3.8
+Power Rank: 51.5
+Status: Developing
+
+----- BDX -----
+Grade: A
+Composite Score: 81.6
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*74.5 + 0.15*100.0 + 0.15*60.0 = 81.6
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 19.2% (<=15 +10, <=20 +5); prior 47.0% (>=25.0 +10 else -20); length 8.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 74.5     (rs_percentile 0-100; this stock 74.5)
+  Volume: 100.0  (contraction <0.8 -> 100)
+  Breakout: 60.0 (dist -3.42% in [-5%, -3%) -> 60)
+Base: cup (8.0 weeks, 19.2% deep)
+Prior Run: +47.0%
+RS Percentile: 74.0
+RSI: 71.0
+Pivot: 187.35  (source: cup_handle)
+Distance to Pivot: -3.4%
+Stop: 179.35 (ATR method)
+Reward/Risk: 2.3
+Power Rank: 60.7
+Status: Watch
+
+----- WMB -----
+Grade: A
+Important note: Late-stage base (>20% depth)
+Composite Score: 81.6
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*80.5 + 0.15*70.0 + 0.15*80.0 = 81.6
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 21.1% (<=15 +10, <=20 +5); prior 32.0% (>=25.0 +10 else -20); length 8.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 80.5     (rs_percentile 0-100; this stock 80.5)
+  Volume: 70.0  (contraction <0.95 -> 70)
+  Breakout: 80.0 (dist -0.16% in [-3%, 0%] -> 80)
+Base: cup (8.0 weeks, 21.1% deep)
+Prior Run: +32.0%
+RS Percentile: 80.0
+RSI: 91.0
+Pivot: 74.08  (source: cup_handle)
+Distance to Pivot: -0.2%
+Stop: 71.65 (ATR method)
+Reward/Risk: 3.0
+Power Rank: 56.2
+Status: Ready - Tight base, strong RS, not extended.
+
+----- TDY -----
+Grade: A
+Composite Score: 81.1
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*90.6 + 0.15*50.0 + 0.15*80.0 = 81.1
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 12.4% (<=15 +10, <=20 +5); prior 43.0% (>=25.0 +10 else -20); length 4.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 90.6     (rs_percentile 0-100; this stock 90.6)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0 (dist -2.15% in [-3%, 0%] -> 80)
+Base: flat_base (4.0 weeks, 12.4% deep)
+Prior Run: +43.0%
+RS Percentile: 91.0
+RSI: 71.0
+Pivot: 691.87  (source: flat_max_spike_filtered)
+Distance to Pivot: -2.1%
+Stop: 665.86 (ATR method)
+Reward/Risk: 2.7
+Power Rank: 66.9
+Status: Ready - Tight base, strong RS, not extended.
+
+----- BWXT -----
+Grade: A
+Important note: Late-stage base (>20% depth)
+Composite Score: 81.0
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*71.8 + 0.15*100.0 + 0.15*60.0 = 81.0
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 21.7% (<=15 +10, <=20 +5); prior 34.0% (>=25.0 +10 else -20); length 8.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 71.8     (rs_percentile 0-100; this stock 71.8)
+  Volume: 100.0  (contraction <0.8 -> 100)
+  Breakout: 60.0 (dist -3.54% in [-5%, -3%) -> 60)
+Base: cup (8.0 weeks, 21.7% deep)
+Prior Run: +34.0%
+RS Percentile: 72.0
+RSI: 66.0
+Pivot: 215.81  (source: cup_handle)
+Distance to Pivot: -3.5%
+Stop: 202.06 (ATR method)
+Reward/Risk: 1.6
+Power Rank: 53.2
+Status: Watch
+
+----- TRN -----
+Grade: A
+Important note: Late-stage base (>20% depth)
+Composite Score: 80.8
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*89.0 + 0.15*50.0 + 0.15*80.0 = 80.8
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 21.5% (<=15 +10, <=20 +5); prior 44.0% (>=25.0 +10 else -20); length 4.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 89.0     (rs_percentile 0-100; this stock 89.0)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0 (dist -2.38% in [-3%, 0%] -> 80)
+Base: cup (4.0 weeks, 21.5% deep)
+Prior Run: +44.0%
+RS Percentile: 89.0
+RSI: 77.0
+Pivot: 35.32  (source: cup_handle)
+Distance to Pivot: -2.4%
+Stop: 33.75 (ATR method)
+Reward/Risk: 2.2
+Power Rank: 66.4
+Status: Ready - Tight base, strong RS, not extended.
+
+----- SUPN -----
+Grade: A
+Important note: Late-stage base (>20% depth)
+Composite Score: 80.5
+  Score calculation: 0.2*70.0 + 0.25*95.0 + 0.25*81.1 + 0.15*100.0 + 0.15*50.0 = 80.5
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 95.0    (depth 20.8% (<=15 +10, <=20 +5); prior 38.0% (>=25.0 +10 else -20); length 8.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 95.0)
+  RS: 81.1     (rs_percentile 0-100; this stock 81.1)
+  Volume: 100.0  (contraction <0.8 -> 100)
+  Breakout: 50.0 (dist -5.63% -> 50)
+Base: cup (8.0 weeks, 20.8% deep)
+Prior Run: +38.0%
+RS Percentile: 81.0
+RSI: 74.0
+Pivot: 59.68  (source: cup_handle)
+Distance to Pivot: -5.6%
+Stop: 56.47 (ATR method)
+Reward/Risk: 1.9
+Power Rank: 59.8
+Status: Watch
+
+----- MUFG -----
+Grade: A
+Composite Score: 80.3
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*75.3 + 0.15*100.0 + 0.15*50.0 = 80.3
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 13.4% (<=15 +10, <=20 +5); prior 37.0% (>=25.0 +10 else -20); length 6.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 75.3     (rs_percentile 0-100; this stock 75.3)
+  Volume: 100.0  (contraction <0.8 -> 100)
+  Breakout: 50.0 (dist -5.91% -> 50)
+Base: flat_base (6.0 weeks, 13.4% deep)
+Prior Run: +37.0%
+RS Percentile: 75.0
+RSI: 51.0
+Pivot: 19.79  (source: flat_max_spike_filtered)
+Distance to Pivot: -5.9%
+Stop: 19.03 (ATR method)
+Reward/Risk: 2.6
+Power Rank: 56.1
+Status: Watch
+
+----- ACA -----
+Grade: A
+Composite Score: 80.3
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*75.3 + 0.15*70.0 + 0.15*80.0 = 80.3
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 19.3% (<=15 +10, <=20 +5); prior 47.0% (>=25.0 +10 else -20); length 8.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 75.3     (rs_percentile 0-100; this stock 75.3)
+  Volume: 70.0  (contraction <0.95 -> 70)
+  Breakout: 80.0 (dist -2.31% in [-3%, 0%] -> 80)
+Base: cup (8.0 weeks, 19.3% deep)
+Prior Run: +47.0%
+RS Percentile: 75.0
+RSI: 64.0
+Pivot: 129.68  (source: cup_handle)
+Distance to Pivot: -2.3%
+Stop: 124.03 (ATR method)
+Reward/Risk: 2.3
+Power Rank: 61.2
+Status: Ready - Tight base, strong RS, not extended.
+
+----- SMFG -----
+Grade: A
+Important note: Late-stage base (>20% depth)
+Composite Score: 80.1
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*86.5 + 0.15*70.0 + 0.15*60.0 = 80.1
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 20.7% (<=15 +10, <=20 +5); prior 60.0% (>=25.0 +10 else -20); length 8.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 86.5     (rs_percentile 0-100; this stock 86.5)
+  Volume: 70.0  (contraction <0.95 -> 70)
+  Breakout: 60.0 (dist -4.57% in [-5%, -3%) -> 60)
+Base: cup (8.0 weeks, 20.7% deep)
+Prior Run: +60.0%
+RS Percentile: 86.0
+RSI: 58.0
+Pivot: 23.54  (source: cup_handle)
+Distance to Pivot: -4.6%
+Stop: 22.55 (ATR method)
+Reward/Risk: 2.4
+Power Rank: 73.4
+Status: Watch
+
+----- VOLV-B.ST -----
+Grade: A
+Composite Score: 80.0
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*85.9 + 0.15*50.0 + 0.15*80.0 = 80.0
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 17.4% (<=15 +10, <=20 +5); prior 44.0% (>=25.0 +10 else -20); length 8.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 85.9     (rs_percentile 0-100; this stock 85.9)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0 (dist -1.16% in [-3%, 0%] -> 80)
+Base: cup (8.0 weeks, 17.4% deep)
+Prior Run: +44.0%
+RS Percentile: 86.0
+RSI: 55.0
+Pivot: 353.9  (source: cup_handle)
+Distance to Pivot: -1.2%
+Stop: 346.25 (ATR method)
+Reward/Risk: 4.6
+Power Rank: 65.2
+Status: Ready - Tight base, strong RS, not extended.
+
+----- R -----
+Grade: A
+Composite Score: 80.0
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*86.1 + 0.15*50.0 + 0.15*80.0 = 80.0
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 19.7% (<=15 +10, <=20 +5); prior 46.0% (>=25.0 +10 else -20); length 8.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 86.1     (rs_percentile 0-100; this stock 86.1)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0 (dist -2.81% in [-3%, 0%] -> 80)
+Base: cup (8.0 weeks, 19.7% deep)
+Prior Run: +46.0%
+RS Percentile: 86.0
+RSI: 57.0
+Pivot: 227.24  (source: cup_handle)
+Distance to Pivot: -2.8%
+Stop: 216.25 (ATR method)
+Reward/Risk: 2.1
+Power Rank: 66.1
+Status: Ready - Tight base, strong RS, not extended.
+
+----- CM -----
+Grade: A
+Composite Score: 79.8
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*73.2 + 0.15*70.0 + 0.15*80.0 = 79.8
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 10.7% (<=15 +10, <=20 +5); prior 27.0% (>=25.0 +10 else -20); length 6.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 73.2     (rs_percentile 0-100; this stock 73.2)
+  Volume: 70.0  (contraction <0.95 -> 70)
+  Breakout: 80.0 (dist -0.22% in [-3%, 0%] -> 80)
+Base: flat_base (6.0 weeks, 10.7% deep)
+Prior Run: +27.0%
+RS Percentile: 73.0
+RSI: 69.0
+Pivot: 100.98  (source: flat_max_spike_filtered)
+Distance to Pivot: -0.2%
+Stop: 98.28 (ATR method)
+Reward/Risk: 3.7
+Power Rank: 50.3
+Status: Ready - Tight base, strong RS, not extended.
+
+----- ATCO-A.ST -----
+Grade: A
+Composite Score: 79.7
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*84.7 + 0.15*50.0 + 0.15*80.0 = 79.7
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 9.3% (<=15 +10, <=20 +5); prior 33.0% (>=25.0 +10 else -20); length 6.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 84.7     (rs_percentile 0-100; this stock 84.7)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0 (dist -1.46% in [-3%, 0%] -> 80)
+Base: flat_base (6.0 weeks, 9.3% deep)
+Prior Run: +33.0%
+RS Percentile: 85.0
+RSI: 75.0
+Pivot: 198.75  (source: flat_max_spike_filtered)
+Distance to Pivot: -1.5%
+Stop: 193.6 (ATR method)
+Reward/Risk: 3.9
+Power Rank: 58.8
+Status: Ready - Tight base, strong RS, not extended.
+
+----- JBSS -----
+Grade: B
+Important note: Low RS percentile (<70)
+Composite Score: 79.6
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*66.4 + 0.15*100.0 + 0.15*60.0 = 79.6
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 19.1% (<=15 +10, <=20 +5); prior 44.0% (>=25.0 +10 else -20); length 8.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 66.4     (rs_percentile 0-100; this stock 66.4)
+  Volume: 100.0  (contraction <0.8 -> 100)
+  Breakout: 60.0 (dist -3.25% in [-5%, -3%) -> 60)
+Base: cup (8.0 weeks, 19.1% deep)
+Prior Run: +44.0%
+RS Percentile: 66.0
+RSI: 65.0
+Pivot: 85.15  (source: cup_handle)
+Distance to Pivot: -3.2%
+Stop: 82.04 (ATR method)
+Reward/Risk: 2.7
+Power Rank: 55.3
+Status: Developing
+
+----- EOAN.DE -----
+Grade: A
+Composite Score: 79.3
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*83.3 + 0.15*50.0 + 0.15*80.0 = 79.3
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 13.4% (<=15 +10, <=20 +5); prior 30.0% (>=25.0 +10 else -20); length 6.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 83.3     (rs_percentile 0-100; this stock 83.3)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0 (dist -0.13% in [-3%, 0%] -> 80)
+Base: flat_base (6.0 weeks, 13.4% deep)
+Prior Run: +30.0%
+RS Percentile: 83.0
+RSI: 86.0
+Pivot: 22.94  (source: flat_max_spike_filtered)
+Distance to Pivot: -0.1%
+Stop: 22.22 (ATR method)
+Reward/Risk: 3.2
+Power Rank: 56.5
+Status: Ready - Tight base, strong RS, not extended.
+
+----- NOVN.SW -----
+Grade: A
+Composite Score: 79.2
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*82.8 + 0.15*50.0 + 0.15*80.0 = 79.2
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 13.2% (<=15 +10, <=20 +5); prior 34.0% (>=25.0 +10 else -20); length 6.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 82.8     (rs_percentile 0-100; this stock 82.8)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0 (dist -0.03% in [-3%, 0%] -> 80)
+Base: flat_base (6.0 weeks, 13.2% deep)
+Prior Run: +34.0%
+RS Percentile: 83.0
+RSI: 87.0
+Pivot: 129.84  (source: flat_max_spike_filtered)
+Distance to Pivot: -0.0%
+Stop: 126.77 (ATR method)
+Reward/Risk: 4.2
+Power Rank: 58.3
+Status: Ready - Tight base, strong RS, not extended.
+
+----- FLEX -----
+Grade: B
+Important note: Low RS percentile (<70)
+Composite Score: 79.1
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*64.5 + 0.15*100.0 + 0.15*60.0 = 79.1
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 18.8% (<=15 +10, <=20 +5); prior 28.0% (>=25.0 +10 else -20); length 8.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 64.5     (rs_percentile 0-100; this stock 64.5)
+  Volume: 100.0  (contraction <0.8 -> 100)
+  Breakout: 60.0 (dist -3.01% in [-5%, -3%) -> 60)
+Base: cup (8.0 weeks, 18.8% deep)
+Prior Run: +28.0%
+RS Percentile: 64.0
+RSI: 66.0
+Pivot: 67.71  (source: cup_handle)
+Distance to Pivot: -3.0%
+Stop: 62.83 (ATR method)
+Reward/Risk: 1.4
+Power Rank: 46.3
+Status: Developing
+
+----- CASY -----
+Grade: A
+Composite Score: 78.9
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*81.4 + 0.15*50.0 + 0.15*80.0 = 78.9
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 12.5% (<=15 +10, <=20 +5); prior 38.0% (>=25.0 +10 else -20); length 6.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 81.4     (rs_percentile 0-100; this stock 81.4)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0 (dist -1.43% in [-3%, 0%] -> 80)
+Base: flat_base (6.0 weeks, 12.5% deep)
+Prior Run: +38.0%
+RS Percentile: 81.0
+RSI: 68.0
+Pivot: 685.54  (source: flat_max_spike_filtered)
+Distance to Pivot: -1.4%
+Stop: 661.93 (ATR method)
+Reward/Risk: 2.9
+Power Rank: 59.6
+Status: Ready - Tight base, strong RS, not extended.
+
+----- SMP -----
+Grade: B
+Important note: Late-stage base (>20% depth); Low RS percentile (<70)
+Composite Score: 78.9
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*63.8 + 0.15*100.0 + 0.15*60.0 = 78.9
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 21.3% (<=15 +10, <=20 +5); prior 28.0% (>=25.0 +10 else -20); length 8.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 63.8     (rs_percentile 0-100; this stock 63.8)
+  Volume: 100.0  (contraction <0.8 -> 100)
+  Breakout: 60.0 (dist -3.94% in [-5%, -3%) -> 60)
+Base: cup (8.0 weeks, 21.3% deep)
+Prior Run: +28.0%
+RS Percentile: 64.0
+RSI: 47.0
+Pivot: 44.88  (source: cup_handle)
+Distance to Pivot: -3.9%
+Stop: 43.2 (ATR method)
+Reward/Risk: 2.7
+Power Rank: 45.8
+Status: Developing
+
+----- TD -----
+Grade: B
+Important note: Low RS percentile (<70)
+Composite Score: 78.8
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*69.0 + 0.15*70.0 + 0.15*80.0 = 78.8
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 6.6% (<=15 +10, <=20 +5); prior 27.0% (>=25.0 +10 else -20); length 6.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 69.0     (rs_percentile 0-100; this stock 69.0)
+  Volume: 70.0  (contraction <0.95 -> 70)
+  Breakout: 80.0 (dist -1.23% in [-3%, 0%] -> 80)
+Base: flat_base (6.0 weeks, 6.6% deep)
+Prior Run: +27.0%
+RS Percentile: 69.0
+RSI: 56.0
+Pivot: 98.36  (source: flat_max_spike_filtered)
+Distance to Pivot: -1.2%
+Stop: 95.97 (ATR method)
+Reward/Risk: 4.1
+Power Rank: 48.1
+Status: Developing
+
+----- MAC -----
+Grade: A
+Composite Score: 78.8
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*81.2 + 0.15*50.0 + 0.15*80.0 = 78.8
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 15.5% (<=15 +10, <=20 +5); prior 30.0% (>=25.0 +10 else -20); length 8.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 81.2     (rs_percentile 0-100; this stock 81.2)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0 (dist -1.15% in [-3%, 0%] -> 80)
+Base: cup (8.0 weeks, 15.5% deep)
+Prior Run: +30.0%
+RS Percentile: 81.0
+RSI: 61.0
+Pivot: 20.85  (source: cup_handle)
+Distance to Pivot: -1.1%
+Stop: 19.83 (ATR method)
+Reward/Risk: 2.0
+Power Rank: 55.6
+Status: Ready - Tight base, strong RS, not extended.
+
+----- HUBB -----
+Grade: A
+Composite Score: 78.7
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*80.7 + 0.15*50.0 + 0.15*80.0 = 78.7
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 12.4% (<=15 +10, <=20 +5); prior 32.0% (>=25.0 +10 else -20); length 6.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 80.7     (rs_percentile 0-100; this stock 80.7)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0 (dist -1.05% in [-3%, 0%] -> 80)
+Base: flat_base (6.0 weeks, 12.4% deep)
+Prior Run: +32.0%
+RS Percentile: 81.0
+RSI: 79.0
+Pivot: 533.8  (source: flat_max_spike_filtered)
+Distance to Pivot: -1.1%
+Stop: 512.96 (ATR method)
+Reward/Risk: 2.6
+Power Rank: 56.5
+Status: Ready - Tight base, strong RS, not extended.
+
+----- VCTR -----
+Grade: A
+Composite Score: 78.7
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*80.7 + 0.15*50.0 + 0.15*80.0 = 78.7
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 19.0% (<=15 +10, <=20 +5); prior 36.0% (>=25.0 +10 else -20); length 8.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 80.7     (rs_percentile 0-100; this stock 80.7)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0 (dist -0.26% in [-3%, 0%] -> 80)
+Base: cup (8.0 weeks, 19.0% deep)
+Prior Run: +36.0%
+RS Percentile: 81.0
+RSI: 69.0
+Pivot: 77.47  (source: cup_handle)
+Distance to Pivot: -0.3%
+Stop: 73.7 (ATR method)
+Reward/Risk: 2.0
+Power Rank: 58.5
+Status: Ready - Tight base, strong RS, not extended.
+
+----- ROG.SW -----
+Grade: B
+Important note: Low RS percentile (<70)
+Composite Score: 78.4
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*67.7 + 0.15*70.0 + 0.15*80.0 = 78.4
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 11.7% (<=15 +10, <=20 +5); prior 45.0% (>=25.0 +10 else -20); length 6.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 67.7     (rs_percentile 0-100; this stock 67.7)
+  Volume: 70.0  (contraction <0.95 -> 70)
+  Breakout: 80.0 (dist -1.55% in [-3%, 0%] -> 80)
+Base: flat_base (6.0 weeks, 11.7% deep)
+Prior Run: +45.0%
+RS Percentile: 68.0
+RSI: 64.0
+Pivot: 374.9  (source: flat_max_spike_filtered)
+Distance to Pivot: -1.6%
+Stop: 365.97 (ATR method)
+Reward/Risk: 4.2
+Power Rank: 56.4
+Status: Developing
+
+----- ATCO-B.ST -----
+Grade: A
+Composite Score: 78.4
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*79.6 + 0.15*50.0 + 0.15*80.0 = 78.4
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 9.0% (<=15 +10, <=20 +5); prior 29.0% (>=25.0 +10 else -20); length 6.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 79.6     (rs_percentile 0-100; this stock 79.6)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0 (dist -1.33% in [-3%, 0%] -> 80)
+Base: flat_base (6.0 weeks, 9.0% deep)
+Prior Run: +29.0%
+RS Percentile: 80.0
+RSI: 71.0
+Pivot: 172.35  (source: flat_max_spike_filtered)
+Distance to Pivot: -1.3%
+Stop: 168.18 (ATR method)
+Reward/Risk: 4.1
+Power Rank: 54.1
+Status: Ready - Tight base, strong RS, not extended.
+
+----- CVX -----
+Grade: A
+Composite Score: 78.2
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*78.6 + 0.15*50.0 + 0.15*80.0 = 78.2
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 13.1% (<=15 +10, <=20 +5); prior 28.0% (>=25.0 +10 else -20); length 6.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 78.6     (rs_percentile 0-100; this stock 78.6)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0 (dist -1.95% in [-3%, 0%] -> 80)
+Base: flat_base (6.0 weeks, 13.1% deep)
+Prior Run: +28.0%
+RS Percentile: 79.0
+RSI: 56.0
+Pivot: 187.9  (source: flat_max_spike_filtered)
+Distance to Pivot: -1.9%
+Stop: 182.96 (ATR method)
+Reward/Risk: 3.8
+Power Rank: 53.4
+Status: Ready - Tight base, strong RS, not extended.
+
+----- XLE -----
+Grade: A
+Important note: Late-stage base (>20% depth)
+Composite Score: 78.2
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*78.7 + 0.15*50.0 + 0.15*80.0 = 78.2
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 20.8% (<=15 +10, <=20 +5); prior 32.0% (>=25.0 +10 else -20); length 8.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 78.7     (rs_percentile 0-100; this stock 78.7)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0 (dist -1.9% in [-3%, 0%] -> 80)
+Base: cup (8.0 weeks, 20.8% deep)
+Prior Run: +32.0%
+RS Percentile: 79.0
+RSI: 63.0
+Pivot: 55.93  (source: cup_handle)
+Distance to Pivot: -1.9%
+Stop: 54.27 (ATR method)
+Reward/Risk: 3.4
+Power Rank: 55.4
+Status: Ready - Tight base, strong RS, not extended.
+
+----- ALFA.ST -----
+Grade: A
+Composite Score: 78.0
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*77.9 + 0.15*50.0 + 0.15*80.0 = 78.0
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 9.1% (<=15 +10, <=20 +5); prior 26.0% (>=25.0 +10 else -20); length 6.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 77.9     (rs_percentile 0-100; this stock 77.9)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0 (dist -1.6% in [-3%, 0%] -> 80)
+Base: flat_base (6.0 weeks, 9.1% deep)
+Prior Run: +26.0%
+RS Percentile: 78.0
+RSI: 76.0
+Pivot: 538.8  (source: flat_max_spike_filtered)
+Distance to Pivot: -1.6%
+Stop: 526.63 (ATR method)
+Reward/Risk: 4.4
+Power Rank: 52.1
+Status: Ready - Tight base, strong RS, not extended.
+
+----- XLB -----
+Grade: A
+Composite Score: 78.0
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*78.0 + 0.15*50.0 + 0.15*80.0 = 78.0
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 11.3% (<=15 +10, <=20 +5); prior 29.0% (>=25.0 +10 else -20); length 6.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 78.0     (rs_percentile 0-100; this stock 78.0)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0 (dist -2.0% in [-3%, 0%] -> 80)
+Base: flat_base (6.0 weeks, 11.3% deep)
+Prior Run: +29.0%
+RS Percentile: 78.0
+RSI: 58.0
+Pivot: 54.14  (source: flat_max_spike_filtered)
+Distance to Pivot: -2.0%
+Stop: 52.65 (ATR method)
+Reward/Risk: 3.6
+Power Rank: 53.4
+Status: Ready - Tight base, strong RS, not extended.
+
+----- WTS -----
+Grade: A
+Important note: Late-stage base (>20% depth)
+Composite Score: 77.8
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*77.2 + 0.15*50.0 + 0.15*80.0 = 77.8
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 20.3% (<=15 +10, <=20 +5); prior 33.0% (>=25.0 +10 else -20); length 8.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 77.2     (rs_percentile 0-100; this stock 77.2)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0 (dist -1.02% in [-3%, 0%] -> 80)
+Base: cup (8.0 weeks, 20.3% deep)
+Prior Run: +33.0%
+RS Percentile: 77.0
+RSI: 69.0
+Pivot: 333.71  (source: cup_handle)
+Distance to Pivot: -1.0%
+Stop: 318.7 (ATR method)
+Reward/Risk: 2.2
+Power Rank: 55.0
+Status: Ready - Tight base, strong RS, not extended.
+
+----- TILE -----
+Grade: B
+Important note: Late-stage base (>20% depth); Low RS percentile (<70)
+Composite Score: 77.7
+  Score calculation: 0.2*70.0 + 0.25*95.0 + 0.25*69.9 + 0.15*100.0 + 0.15*50.0 = 77.7
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 95.0    (depth 20.8% (<=15 +10, <=20 +5); prior 43.0% (>=25.0 +10 else -20); length 8.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 95.0)
+  RS: 69.9     (rs_percentile 0-100; this stock 69.9)
+  Volume: 100.0  (contraction <0.8 -> 100)
+  Breakout: 50.0 (dist -6.72% -> 50)
+Base: cup (8.0 weeks, 20.8% deep)
+Prior Run: +43.0%
+RS Percentile: 70.0
+RSI: 39.0
+Pivot: 34.08  (source: cup_handle)
+Distance to Pivot: -6.7%
+Stop: 32.07 (ATR method)
+Reward/Risk: 1.7
+Power Rank: 56.6
+Status: Developing
+
+----- WSR -----
+Grade: B
+Important note: Low RS percentile (<70)
+Composite Score: 77.6
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*64.3 + 0.15*70.0 + 0.15*80.0 = 77.6
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 10.3% (<=15 +10, <=20 +5); prior 34.0% (>=25.0 +10 else -20); length 6.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 64.3     (rs_percentile 0-100; this stock 64.3)
+  Volume: 70.0  (contraction <0.95 -> 70)
+  Breakout: 80.0 (dist -1.33% in [-3%, 0%] -> 80)
+Base: flat_base (6.0 weeks, 10.3% deep)
+Prior Run: +34.0%
+RS Percentile: 64.0
+RSI: 63.0
+Pivot: 15.37  (source: flat_max_spike_filtered)
+Distance to Pivot: -1.3%
+Stop: 14.97 (ATR method)
+Reward/Risk: 3.8
+Power Rank: 49.3
+Status: Developing
+
+----- TM -----
+Grade: A
+Composite Score: 77.5
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*76.0 + 0.15*50.0 + 0.15*80.0 = 77.5
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 12.6% (<=15 +10, <=20 +5); prior 33.0% (>=25.0 +10 else -20); length 6.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 76.0     (rs_percentile 0-100; this stock 76.0)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0 (dist -2.95% in [-3%, 0%] -> 80)
+Base: flat_base (6.0 weeks, 12.6% deep)
+Prior Run: +33.0%
+RS Percentile: 76.0
+RSI: 50.0
+Pivot: 248.9  (source: flat_max_spike_filtered)
+Distance to Pivot: -3.0%
+Stop: 241.66 (ATR method)
+Reward/Risk: 3.4
+Power Rank: 54.5
+Status: Ready - Tight base, strong RS, not extended.
+
+----- GNL -----
+Grade: A
+Composite Score: 77.5
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*76.2 + 0.15*50.0 + 0.15*80.0 = 77.5
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 10.7% (<=15 +10, <=20 +5); prior 34.0% (>=25.0 +10 else -20); length 6.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 76.2     (rs_percentile 0-100; this stock 76.2)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0 (dist -2.54% in [-3%, 0%] -> 80)
+Base: flat_base (6.0 weeks, 10.7% deep)
+Prior Run: +34.0%
+RS Percentile: 76.0
+RSI: 62.0
+Pivot: 10.03  (source: flat_max_spike_filtered)
+Distance to Pivot: -2.5%
+Stop: 9.74 (ATR method)
+Reward/Risk: 3.4
+Power Rank: 55.2
+Status: Ready - Tight base, strong RS, not extended.
+
+----- SAN.MC -----
+Grade: A
+Composite Score: 77.4
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*75.6 + 0.15*50.0 + 0.15*80.0 = 77.4
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 11.7% (<=15 +10, <=20 +5); prior 39.0% (>=25.0 +10 else -20); length 6.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 75.6     (rs_percentile 0-100; this stock 75.6)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0 (dist -0.59% in [-3%, 0%] -> 80)
+Base: flat_base (6.0 weeks, 11.7% deep)
+Prior Run: +39.0%
+RS Percentile: 76.0
+RSI: 61.0
+Pivot: 13.26  (source: flat_max_spike_filtered)
+Distance to Pivot: -0.6%
+Stop: 12.64 (ATR method)
+Reward/Risk: 2.1
+Power Rank: 57.3
+Status: Ready - Tight base, strong RS, not extended.
+
+----- FCFS -----
+Grade: A
+Composite Score: 77.4
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*75.8 + 0.15*50.0 + 0.15*80.0 = 77.4
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 13.6% (<=15 +10, <=20 +5); prior 29.0% (>=25.0 +10 else -20); length 6.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 75.8     (rs_percentile 0-100; this stock 75.8)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0 (dist -1.39% in [-3%, 0%] -> 80)
+Base: flat_base (6.0 weeks, 13.6% deep)
+Prior Run: +29.0%
+RS Percentile: 76.0
+RSI: 79.0
+Pivot: 188.75  (source: flat_max_spike_filtered)
+Distance to Pivot: -1.4%
+Stop: 179.23 (ATR method)
+Reward/Risk: 2.0
+Power Rank: 52.2
+Status: Ready - Tight base, strong RS, not extended.
+
+----- PH -----
+Grade: A
+Composite Score: 77.0
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*74.0 + 0.15*50.0 + 0.15*80.0 = 77.0
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 11.9% (<=15 +10, <=20 +5); prior 44.0% (>=25.0 +10 else -20); length 6.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 74.0     (rs_percentile 0-100; this stock 74.0)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0 (dist -2.29% in [-3%, 0%] -> 80)
+Base: flat_base (6.0 weeks, 11.9% deep)
+Prior Run: +44.0%
+RS Percentile: 74.0
+RSI: 65.0
+Pivot: 1034.96  (source: flat_max_spike_filtered)
+Distance to Pivot: -2.3%
+Stop: 1000.26 (ATR method)
+Reward/Risk: 3.0
+Power Rank: 59.2
+Status: Ready - Tight base, strong RS, not extended.
+
+----- REP.MC -----
+Grade: A
+Composite Score: 76.9
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*73.5 + 0.15*50.0 + 0.15*80.0 = 76.9
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 18.7% (<=15 +10, <=20 +5); prior 35.0% (>=25.0 +10 else -20); length 8.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 73.5     (rs_percentile 0-100; this stock 73.5)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0 (dist -0.11% in [-3%, 0%] -> 80)
+Base: cup (8.0 weeks, 18.7% deep)
+Prior Run: +35.0%
+RS Percentile: 74.0
+RSI: 83.0
+Pivot: 22.27  (source: cup_handle)
+Distance to Pivot: -0.1%
+Stop: 21.47 (ATR method)
+Reward/Risk: 2.8
+Power Rank: 54.3
+Status: Ready - Tight base, strong RS, not extended.
+
+
+============================================================
+EARLY CANDIDATES (before extension)
+============================================================
+
+Stocks that are not yet extended (trend 40-70), building RS (50-80 %ile),
+and near pivot (-5% to 0%). Sorted by grade (A+ then A then B), then composite score.
+
+----- Early candidates table -----
+| Rank | Ticker | Grade | Score | Trend | RS %ile | Dist to Pivot | Base Type | Note |
+|---|---|---|---|---|---|---|---|---|
+| 1 | FDP | A | 85.0 | 70.0 | 76.1 | -1.8 | cup | Late |
+| 2 | ECPG | A | 84.2 | 70.0 | 72.7 | -0.8 | flat_base | — |
+| 3 | BDX | A | 81.6 | 70.0 | 74.5 | -3.4 | cup | — |
+| 4 | BWXT | A | 81.0 | 70.0 | 71.8 | -3.5 | cup | Late |
+| 5 | ACA | A | 80.3 | 70.0 | 75.3 | -2.3 | cup | — |
+| 6 | CM | A | 79.8 | 70.0 | 73.2 | -0.2 | flat_base | — |
+| 7 | ATCO-B.ST | A | 78.4 | 70.0 | 79.6 | -1.3 | flat_base | — |
+| 8 | XLE | A | 78.2 | 70.0 | 78.7 | -1.9 | cup | Late |
+| 9 | CVX | A | 78.2 | 70.0 | 78.6 | -1.9 | flat_base | — |
+| 10 | ALFA.ST | A | 78.0 | 70.0 | 77.9 | -1.6 | flat_base | — |
+| 11 | XLB | A | 78.0 | 70.0 | 78.0 | -2.0 | flat_base | — |
+| 12 | WTS | A | 77.8 | 70.0 | 77.2 | -1.0 | cup | Late |
+| 13 | GNL | A | 77.5 | 70.0 | 76.2 | -2.5 | flat_base | — |
+| 14 | TM | A | 77.5 | 70.0 | 76.0 | -3.0 | flat_base | — |
+| 15 | SAN.MC | A | 77.4 | 70.0 | 75.6 | -0.6 | flat_base | — |
+| 16 | FCFS | A | 77.4 | 70.0 | 75.8 | -1.4 | flat_base | — |
+| 17 | PH | A | 77.0 | 70.0 | 74.0 | -2.3 | flat_base | — |
+| 18 | REP.MC | A | 76.9 | 70.0 | 73.5 | -0.1 | cup | — |
+| 19 | BOH | A | 76.9 | 70.0 | 73.4 | -2.9 | cup | — |
+| 20 | IMI.L | A | 76.6 | 70.0 | 72.6 | -2.5 | flat_base | — |
+| 21 | AME | A | 76.6 | 70.0 | 72.2 | -2.9 | flat_base | — |
+| 22 | TTE.PA | A | 76.3 | 70.0 | 71.3 | -0.7 | cup | Late |
+| 23 | JOE | A | 76.3 | 70.0 | 71.2 | -4.2 | flat_base | — |
+| 24 | VLY | A | 76.2 | 70.0 | 70.6 | -4.0 | cup | — |
+| 25 | PRY.MI | A | 75.8 | 70.0 | 74.3 | -1.5 | cup | Late |
+| 26 | DOV | A | 75.5 | 70.0 | 80.0 | -4.2 | cup | — |
+| 27 | ROST | B | 82.3 | 70.0 | 65.2 | -1.6 | flat_base | LowRS |
+| 28 | JBSS | B | 79.6 | 70.0 | 66.4 | -3.2 | cup | LowRS |
+| 29 | FLEX | B | 79.1 | 70.0 | 64.5 | -3.0 | cup | LowRS |
+| 30 | SMP | B | 78.9 | 70.0 | 63.8 | -3.9 | cup | Late,LowRS |
+| 31 | TD | B | 78.8 | 70.0 | 69.0 | -1.2 | flat_base | LowRS |
+| 32 | ROG.SW | B | 78.4 | 70.0 | 67.7 | -1.6 | flat_base | LowRS |
+| 33 | WSR | B | 77.6 | 70.0 | 64.3 | -1.3 | flat_base | LowRS |
+| 34 | DRH | B | 76.6 | 70.0 | 60.6 | -1.9 | flat_base | LowRS |
+| 35 | TRP | B | 76.0 | 70.0 | 69.9 | -0.6 | cup | LowRS |
+| 36 | SCHL | B | 75.9 | 70.0 | 69.7 | -1.9 | cup | LowRS |
+| 37 | CTRE | B | 75.7 | 70.0 | 57.0 | -1.1 | cup | LowRS |
+| 38 | MNST | B | 75.3 | 70.0 | 67.2 | -0.4 | flat_base | LowRS |
+| 39 | BCO | B | 75.3 | 70.0 | 67.2 | -3.0 | flat_base | LowRS |
+| 40 | LIVN | B | 75.1 | 70.0 | 66.3 | -0.7 | flat_base | LowRS |
+
+----- Early candidates detailed (per stock) -----
+----- FDP -----
+Grade: A
+Important note: Late-stage base (>20% depth)
+Composite Score: 85.0
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*76.1 + 0.15*100.0 + 0.15*80.0 = 85.0
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 20.4% (<=15 +10, <=20 +5); prior 35.0% (>=25.0 +10 else -20); length 8.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 76.1     (rs_percentile 0-100; this stock 76.1)
+  Volume: 100.0  (contraction <0.8 -> 100)
+  Breakout: 80.0 (dist -1.79% in [-3%, 0%] -> 80)
+Base: cup (8.0 weeks, 20.4% deep)
+Prior Run: +35.0%
+RS Percentile: 76.0
+RSI: 68.0
+Pivot: 42.98  (source: cup_handle)
+Distance to Pivot: -1.8%
+Stop: 40.9 (ATR method)
+Reward/Risk: 2.1
+Power Rank: 55.4
+Status: Ready - Tight base, strong RS, not extended.
+
+----- ECPG -----
+Grade: A
+Composite Score: 84.2
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*72.7 + 0.15*100.0 + 0.15*80.0 = 84.2
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 10.4% (<=15 +10, <=20 +5); prior 49.0% (>=25.0 +10 else -20); length 6.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 72.7     (rs_percentile 0-100; this stock 72.7)
+  Volume: 100.0  (contraction <0.8 -> 100)
+  Breakout: 80.0 (dist -0.85% in [-3%, 0%] -> 80)
+Base: flat_base (6.0 weeks, 10.4% deep)
+Prior Run: +49.0%
+RS Percentile: 73.0
+RSI: 66.0
+Pivot: 59.67  (source: flat_max_spike_filtered)
+Distance to Pivot: -0.8%
+Stop: 57.12 (ATR method)
+Reward/Risk: 2.3
+Power Rank: 61.0
+Status: Ready - Tight base, strong RS, not extended.
+
+----- BDX -----
+Grade: A
+Composite Score: 81.6
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*74.5 + 0.15*100.0 + 0.15*60.0 = 81.6
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 19.2% (<=15 +10, <=20 +5); prior 47.0% (>=25.0 +10 else -20); length 8.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 74.5     (rs_percentile 0-100; this stock 74.5)
+  Volume: 100.0  (contraction <0.8 -> 100)
+  Breakout: 60.0 (dist -3.42% in [-5%, -3%) -> 60)
+Base: cup (8.0 weeks, 19.2% deep)
+Prior Run: +47.0%
+RS Percentile: 74.0
+RSI: 71.0
+Pivot: 187.35  (source: cup_handle)
+Distance to Pivot: -3.4%
+Stop: 179.35 (ATR method)
+Reward/Risk: 2.3
+Power Rank: 60.7
+Status: Watch
+
+----- BWXT -----
+Grade: A
+Important note: Late-stage base (>20% depth)
+Composite Score: 81.0
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*71.8 + 0.15*100.0 + 0.15*60.0 = 81.0
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 21.7% (<=15 +10, <=20 +5); prior 34.0% (>=25.0 +10 else -20); length 8.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 71.8     (rs_percentile 0-100; this stock 71.8)
+  Volume: 100.0  (contraction <0.8 -> 100)
+  Breakout: 60.0 (dist -3.54% in [-5%, -3%) -> 60)
+Base: cup (8.0 weeks, 21.7% deep)
+Prior Run: +34.0%
+RS Percentile: 72.0
+RSI: 66.0
+Pivot: 215.81  (source: cup_handle)
+Distance to Pivot: -3.5%
+Stop: 202.06 (ATR method)
+Reward/Risk: 1.6
+Power Rank: 53.2
+Status: Watch
+
+----- ACA -----
+Grade: A
+Composite Score: 80.3
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*75.3 + 0.15*70.0 + 0.15*80.0 = 80.3
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 19.3% (<=15 +10, <=20 +5); prior 47.0% (>=25.0 +10 else -20); length 8.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 75.3     (rs_percentile 0-100; this stock 75.3)
+  Volume: 70.0  (contraction <0.95 -> 70)
+  Breakout: 80.0 (dist -2.31% in [-3%, 0%] -> 80)
+Base: cup (8.0 weeks, 19.3% deep)
+Prior Run: +47.0%
+RS Percentile: 75.0
+RSI: 64.0
+Pivot: 129.68  (source: cup_handle)
+Distance to Pivot: -2.3%
+Stop: 124.03 (ATR method)
+Reward/Risk: 2.3
+Power Rank: 61.2
+Status: Ready - Tight base, strong RS, not extended.
+
+----- CM -----
+Grade: A
+Composite Score: 79.8
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*73.2 + 0.15*70.0 + 0.15*80.0 = 79.8
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 10.7% (<=15 +10, <=20 +5); prior 27.0% (>=25.0 +10 else -20); length 6.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 73.2     (rs_percentile 0-100; this stock 73.2)
+  Volume: 70.0  (contraction <0.95 -> 70)
+  Breakout: 80.0 (dist -0.22% in [-3%, 0%] -> 80)
+Base: flat_base (6.0 weeks, 10.7% deep)
+Prior Run: +27.0%
+RS Percentile: 73.0
+RSI: 69.0
+Pivot: 100.98  (source: flat_max_spike_filtered)
+Distance to Pivot: -0.2%
+Stop: 98.28 (ATR method)
+Reward/Risk: 3.7
+Power Rank: 50.3
+Status: Ready - Tight base, strong RS, not extended.
+
+----- ATCO-B.ST -----
+Grade: A
+Composite Score: 78.4
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*79.6 + 0.15*50.0 + 0.15*80.0 = 78.4
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 9.0% (<=15 +10, <=20 +5); prior 29.0% (>=25.0 +10 else -20); length 6.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 79.6     (rs_percentile 0-100; this stock 79.6)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0 (dist -1.33% in [-3%, 0%] -> 80)
+Base: flat_base (6.0 weeks, 9.0% deep)
+Prior Run: +29.0%
+RS Percentile: 80.0
+RSI: 71.0
+Pivot: 172.35  (source: flat_max_spike_filtered)
+Distance to Pivot: -1.3%
+Stop: 168.18 (ATR method)
+Reward/Risk: 4.1
+Power Rank: 54.1
+Status: Ready - Tight base, strong RS, not extended.
+
+----- XLE -----
+Grade: A
+Important note: Late-stage base (>20% depth)
+Composite Score: 78.2
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*78.7 + 0.15*50.0 + 0.15*80.0 = 78.2
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 20.8% (<=15 +10, <=20 +5); prior 32.0% (>=25.0 +10 else -20); length 8.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 78.7     (rs_percentile 0-100; this stock 78.7)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0 (dist -1.9% in [-3%, 0%] -> 80)
+Base: cup (8.0 weeks, 20.8% deep)
+Prior Run: +32.0%
+RS Percentile: 79.0
+RSI: 63.0
+Pivot: 55.93  (source: cup_handle)
+Distance to Pivot: -1.9%
+Stop: 54.27 (ATR method)
+Reward/Risk: 3.4
+Power Rank: 55.4
+Status: Ready - Tight base, strong RS, not extended.
+
+----- CVX -----
+Grade: A
+Composite Score: 78.2
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*78.6 + 0.15*50.0 + 0.15*80.0 = 78.2
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 13.1% (<=15 +10, <=20 +5); prior 28.0% (>=25.0 +10 else -20); length 6.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 78.6     (rs_percentile 0-100; this stock 78.6)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0 (dist -1.95% in [-3%, 0%] -> 80)
+Base: flat_base (6.0 weeks, 13.1% deep)
+Prior Run: +28.0%
+RS Percentile: 79.0
+RSI: 56.0
+Pivot: 187.9  (source: flat_max_spike_filtered)
+Distance to Pivot: -1.9%
+Stop: 182.96 (ATR method)
+Reward/Risk: 3.8
+Power Rank: 53.4
+Status: Ready - Tight base, strong RS, not extended.
+
+----- ALFA.ST -----
+Grade: A
+Composite Score: 78.0
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*77.9 + 0.15*50.0 + 0.15*80.0 = 78.0
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 9.1% (<=15 +10, <=20 +5); prior 26.0% (>=25.0 +10 else -20); length 6.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 77.9     (rs_percentile 0-100; this stock 77.9)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0 (dist -1.6% in [-3%, 0%] -> 80)
+Base: flat_base (6.0 weeks, 9.1% deep)
+Prior Run: +26.0%
+RS Percentile: 78.0
+RSI: 76.0
+Pivot: 538.8  (source: flat_max_spike_filtered)
+Distance to Pivot: -1.6%
+Stop: 526.63 (ATR method)
+Reward/Risk: 4.4
+Power Rank: 52.1
+Status: Ready - Tight base, strong RS, not extended.
+
+----- XLB -----
+Grade: A
+Composite Score: 78.0
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*78.0 + 0.15*50.0 + 0.15*80.0 = 78.0
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 11.3% (<=15 +10, <=20 +5); prior 29.0% (>=25.0 +10 else -20); length 6.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 78.0     (rs_percentile 0-100; this stock 78.0)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0 (dist -2.0% in [-3%, 0%] -> 80)
+Base: flat_base (6.0 weeks, 11.3% deep)
+Prior Run: +29.0%
+RS Percentile: 78.0
+RSI: 58.0
+Pivot: 54.14  (source: flat_max_spike_filtered)
+Distance to Pivot: -2.0%
+Stop: 52.65 (ATR method)
+Reward/Risk: 3.6
+Power Rank: 53.4
+Status: Ready - Tight base, strong RS, not extended.
+
+----- WTS -----
+Grade: A
+Important note: Late-stage base (>20% depth)
+Composite Score: 77.8
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*77.2 + 0.15*50.0 + 0.15*80.0 = 77.8
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 20.3% (<=15 +10, <=20 +5); prior 33.0% (>=25.0 +10 else -20); length 8.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 77.2     (rs_percentile 0-100; this stock 77.2)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0 (dist -1.02% in [-3%, 0%] -> 80)
+Base: cup (8.0 weeks, 20.3% deep)
+Prior Run: +33.0%
+RS Percentile: 77.0
+RSI: 69.0
+Pivot: 333.71  (source: cup_handle)
+Distance to Pivot: -1.0%
+Stop: 318.7 (ATR method)
+Reward/Risk: 2.2
+Power Rank: 55.0
+Status: Ready - Tight base, strong RS, not extended.
+
+----- GNL -----
+Grade: A
+Composite Score: 77.5
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*76.2 + 0.15*50.0 + 0.15*80.0 = 77.5
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 10.7% (<=15 +10, <=20 +5); prior 34.0% (>=25.0 +10 else -20); length 6.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 76.2     (rs_percentile 0-100; this stock 76.2)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0 (dist -2.54% in [-3%, 0%] -> 80)
+Base: flat_base (6.0 weeks, 10.7% deep)
+Prior Run: +34.0%
+RS Percentile: 76.0
+RSI: 62.0
+Pivot: 10.03  (source: flat_max_spike_filtered)
+Distance to Pivot: -2.5%
+Stop: 9.74 (ATR method)
+Reward/Risk: 3.4
+Power Rank: 55.2
+Status: Ready - Tight base, strong RS, not extended.
+
+----- TM -----
+Grade: A
+Composite Score: 77.5
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*76.0 + 0.15*50.0 + 0.15*80.0 = 77.5
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 12.6% (<=15 +10, <=20 +5); prior 33.0% (>=25.0 +10 else -20); length 6.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 76.0     (rs_percentile 0-100; this stock 76.0)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0 (dist -2.95% in [-3%, 0%] -> 80)
+Base: flat_base (6.0 weeks, 12.6% deep)
+Prior Run: +33.0%
+RS Percentile: 76.0
+RSI: 50.0
+Pivot: 248.9  (source: flat_max_spike_filtered)
+Distance to Pivot: -3.0%
+Stop: 241.66 (ATR method)
+Reward/Risk: 3.4
+Power Rank: 54.5
+Status: Ready - Tight base, strong RS, not extended.
+
+----- SAN.MC -----
+Grade: A
+Composite Score: 77.4
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*75.6 + 0.15*50.0 + 0.15*80.0 = 77.4
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 11.7% (<=15 +10, <=20 +5); prior 39.0% (>=25.0 +10 else -20); length 6.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 75.6     (rs_percentile 0-100; this stock 75.6)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0 (dist -0.59% in [-3%, 0%] -> 80)
+Base: flat_base (6.0 weeks, 11.7% deep)
+Prior Run: +39.0%
+RS Percentile: 76.0
+RSI: 61.0
+Pivot: 13.26  (source: flat_max_spike_filtered)
+Distance to Pivot: -0.6%
+Stop: 12.64 (ATR method)
+Reward/Risk: 2.1
+Power Rank: 57.3
+Status: Ready - Tight base, strong RS, not extended.
+
+----- FCFS -----
+Grade: A
+Composite Score: 77.4
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*75.8 + 0.15*50.0 + 0.15*80.0 = 77.4
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 13.6% (<=15 +10, <=20 +5); prior 29.0% (>=25.0 +10 else -20); length 6.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 75.8     (rs_percentile 0-100; this stock 75.8)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0 (dist -1.39% in [-3%, 0%] -> 80)
+Base: flat_base (6.0 weeks, 13.6% deep)
+Prior Run: +29.0%
+RS Percentile: 76.0
+RSI: 79.0
+Pivot: 188.75  (source: flat_max_spike_filtered)
+Distance to Pivot: -1.4%
+Stop: 179.23 (ATR method)
+Reward/Risk: 2.0
+Power Rank: 52.2
+Status: Ready - Tight base, strong RS, not extended.
+
+----- PH -----
+Grade: A
+Composite Score: 77.0
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*74.0 + 0.15*50.0 + 0.15*80.0 = 77.0
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 11.9% (<=15 +10, <=20 +5); prior 44.0% (>=25.0 +10 else -20); length 6.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 74.0     (rs_percentile 0-100; this stock 74.0)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0 (dist -2.29% in [-3%, 0%] -> 80)
+Base: flat_base (6.0 weeks, 11.9% deep)
+Prior Run: +44.0%
+RS Percentile: 74.0
+RSI: 65.0
+Pivot: 1034.96  (source: flat_max_spike_filtered)
+Distance to Pivot: -2.3%
+Stop: 1000.26 (ATR method)
+Reward/Risk: 3.0
+Power Rank: 59.2
+Status: Ready - Tight base, strong RS, not extended.
+
+----- REP.MC -----
+Grade: A
+Composite Score: 76.9
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*73.5 + 0.15*50.0 + 0.15*80.0 = 76.9
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 18.7% (<=15 +10, <=20 +5); prior 35.0% (>=25.0 +10 else -20); length 8.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 73.5     (rs_percentile 0-100; this stock 73.5)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0 (dist -0.11% in [-3%, 0%] -> 80)
+Base: cup (8.0 weeks, 18.7% deep)
+Prior Run: +35.0%
+RS Percentile: 74.0
+RSI: 83.0
+Pivot: 22.27  (source: cup_handle)
+Distance to Pivot: -0.1%
+Stop: 21.47 (ATR method)
+Reward/Risk: 2.8
+Power Rank: 54.3
+Status: Ready - Tight base, strong RS, not extended.
+
+----- BOH -----
+Grade: A
+Composite Score: 76.9
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*73.4 + 0.15*50.0 + 0.15*80.0 = 76.9
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 16.8% (<=15 +10, <=20 +5); prior 36.0% (>=25.0 +10 else -20); length 8.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 73.4     (rs_percentile 0-100; this stock 73.4)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0 (dist -2.94% in [-3%, 0%] -> 80)
+Base: cup (8.0 weeks, 16.8% deep)
+Prior Run: +36.0%
+RS Percentile: 73.0
+RSI: 57.0
+Pivot: 80.61  (source: cup_handle)
+Distance to Pivot: -2.9%
+Stop: 77.42 (ATR method)
+Reward/Risk: 2.5
+Power Rank: 54.6
+Status: Ready - Tight base, strong RS, not extended.
+
+----- IMI.L -----
+Grade: A
+Composite Score: 76.6
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*72.6 + 0.15*50.0 + 0.15*80.0 = 76.6
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 11.6% (<=15 +10, <=20 +5); prior 31.0% (>=25.0 +10 else -20); length 6.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 72.6     (rs_percentile 0-100; this stock 72.6)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0 (dist -2.45% in [-3%, 0%] -> 80)
+Base: flat_base (6.0 weeks, 11.6% deep)
+Prior Run: +31.0%
+RS Percentile: 73.0
+RSI: 58.0
+Pivot: 2938.0  (source: flat_max_spike_filtered)
+Distance to Pivot: -2.5%
+Stop: 2852.0 (ATR method)
+Reward/Risk: 3.4
+Power Rank: 51.8
+Status: Ready - Tight base, strong RS, not extended.
+
+----- AME -----
+Grade: A
+Composite Score: 76.6
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*72.2 + 0.15*50.0 + 0.15*80.0 = 76.6
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 12.9% (<=15 +10, <=20 +5); prior 34.0% (>=25.0 +10 else -20); length 6.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 72.2     (rs_percentile 0-100; this stock 72.2)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0 (dist -2.87% in [-3%, 0%] -> 80)
+Base: flat_base (6.0 weeks, 12.9% deep)
+Prior Run: +34.0%
+RS Percentile: 72.0
+RSI: 58.0
+Pivot: 239.94  (source: flat_max_spike_filtered)
+Distance to Pivot: -2.9%
+Stop: 232.75 (ATR method)
+Reward/Risk: 3.3
+Power Rank: 52.8
+Status: Ready - Tight base, strong RS, not extended.
+
+----- TTE.PA -----
+Grade: A
+Important note: Late-stage base (>20% depth)
+Composite Score: 76.3
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*71.3 + 0.15*50.0 + 0.15*80.0 = 76.3
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 21.4% (<=15 +10, <=20 +5); prior 38.0% (>=25.0 +10 else -20); length 8.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 71.3     (rs_percentile 0-100; this stock 71.3)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0 (dist -0.66% in [-3%, 0%] -> 80)
+Base: cup (8.0 weeks, 21.4% deep)
+Prior Run: +38.0%
+RS Percentile: 71.0
+RSI: 83.0
+Pivot: 80.1  (source: cup_handle)
+Distance to Pivot: -0.7%
+Stop: 78.06 (ATR method)
+Reward/Risk: 3.9
+Power Rank: 54.5
+Status: Ready - Tight base, strong RS, not extended.
+
+----- JOE -----
+Grade: A
+Composite Score: 76.3
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*71.2 + 0.15*70.0 + 0.15*60.0 = 76.3
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 12.0% (<=15 +10, <=20 +5); prior 54.0% (>=25.0 +10 else -20); length 6.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 71.2     (rs_percentile 0-100; this stock 71.2)
+  Volume: 70.0  (contraction <0.95 -> 70)
+  Breakout: 60.0 (dist -4.16% in [-5%, -3%) -> 60)
+Base: flat_base (6.0 weeks, 12.0% deep)
+Prior Run: +54.0%
+RS Percentile: 71.0
+RSI: 57.0
+Pivot: 71.9  (source: flat_max_spike_filtered)
+Distance to Pivot: -4.2%
+Stop: 68.82 (ATR method)
+Reward/Risk: 2.3
+Power Rank: 62.7
+Status: Watch
+
+----- VLY -----
+Grade: A
+Composite Score: 76.2
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*70.6 + 0.15*70.0 + 0.15*60.0 = 76.2
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 16.8% (<=15 +10, <=20 +5); prior 44.0% (>=25.0 +10 else -20); length 8.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 70.6     (rs_percentile 0-100; this stock 70.6)
+  Volume: 70.0  (contraction <0.95 -> 70)
+  Breakout: 60.0 (dist -4.01% in [-5%, -3%) -> 60)
+Base: cup (8.0 weeks, 16.8% deep)
+Prior Run: +44.0%
+RS Percentile: 71.0
+RSI: 45.0
+Pivot: 13.72  (source: cup_handle)
+Distance to Pivot: -4.0%
+Stop: 13.11 (ATR method)
+Reward/Risk: 2.2
+Power Rank: 57.2
+Status: Watch
+
+----- PRY.MI -----
+Grade: A
+Important note: Late-stage base (>20% depth)
+Composite Score: 75.8
+  Score calculation: 0.2*70.0 + 0.25*95.0 + 0.25*74.3 + 0.15*50.0 + 0.15*80.0 = 75.8
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 95.0    (depth 20.6% (<=15 +10, <=20 +5); prior 35.0% (>=25.0 +10 else -20); length 8.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 95.0)
+  RS: 74.3     (rs_percentile 0-100; this stock 74.3)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0 (dist -1.48% in [-3%, 0%] -> 80)
+Base: cup (8.0 weeks, 20.6% deep)
+Prior Run: +35.0%
+RS Percentile: 74.0
+RSI: 51.0
+Pivot: 119.88  (source: cup_handle)
+Distance to Pivot: -1.5%
+Stop: 113.07 (ATR method)
+Reward/Risk: 1.8
+Power Rank: 54.5
+Status: Ready - Tight base, strong RS, not extended.
+
+----- DOV -----
+Grade: A
+Composite Score: 75.5
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*80.0 + 0.15*50.0 + 0.15*60.0 = 75.5
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 18.4% (<=15 +10, <=20 +5); prior 49.0% (>=25.0 +10 else -20); length 8.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 80.0     (rs_percentile 0-100; this stock 80.0)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 60.0 (dist -4.19% in [-5%, -3%) -> 60)
+Base: cup (8.0 weeks, 18.4% deep)
+Prior Run: +49.0%
+RS Percentile: 80.0
+RSI: 60.0
+Pivot: 236.69  (source: cup_handle)
+Distance to Pivot: -4.2%
+Stop: 228.73 (ATR method)
+Reward/Risk: 3.0
+Power Rank: 64.7
+Status: Watch
+
+----- ROST -----
+Grade: B
+Important note: Low RS percentile (<70)
+Composite Score: 82.3
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*65.2 + 0.15*100.0 + 0.15*80.0 = 82.3
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 9.8% (<=15 +10, <=20 +5); prior 38.0% (>=25.0 +10 else -20); length 6.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 65.2     (rs_percentile 0-100; this stock 65.2)
+  Volume: 100.0  (contraction <0.8 -> 100)
+  Breakout: 80.0 (dist -1.62% in [-3%, 0%] -> 80)
+Base: flat_base (6.0 weeks, 9.8% deep)
+Prior Run: +38.0%
+RS Percentile: 65.0
+RSI: 82.0
+Pivot: 204.85  (source: flat_max_spike_filtered)
+Distance to Pivot: -1.6%
+Stop: 199.4 (ATR method)
+Reward/Risk: 3.8
+Power Rank: 51.5
+Status: Developing
+
+----- JBSS -----
+Grade: B
+Important note: Low RS percentile (<70)
+Composite Score: 79.6
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*66.4 + 0.15*100.0 + 0.15*60.0 = 79.6
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 19.1% (<=15 +10, <=20 +5); prior 44.0% (>=25.0 +10 else -20); length 8.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 66.4     (rs_percentile 0-100; this stock 66.4)
+  Volume: 100.0  (contraction <0.8 -> 100)
+  Breakout: 60.0 (dist -3.25% in [-5%, -3%) -> 60)
+Base: cup (8.0 weeks, 19.1% deep)
+Prior Run: +44.0%
+RS Percentile: 66.0
+RSI: 65.0
+Pivot: 85.15  (source: cup_handle)
+Distance to Pivot: -3.2%
+Stop: 82.04 (ATR method)
+Reward/Risk: 2.7
+Power Rank: 55.3
+Status: Developing
+
+----- FLEX -----
+Grade: B
+Important note: Low RS percentile (<70)
+Composite Score: 79.1
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*64.5 + 0.15*100.0 + 0.15*60.0 = 79.1
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 18.8% (<=15 +10, <=20 +5); prior 28.0% (>=25.0 +10 else -20); length 8.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 64.5     (rs_percentile 0-100; this stock 64.5)
+  Volume: 100.0  (contraction <0.8 -> 100)
+  Breakout: 60.0 (dist -3.01% in [-5%, -3%) -> 60)
+Base: cup (8.0 weeks, 18.8% deep)
+Prior Run: +28.0%
+RS Percentile: 64.0
+RSI: 66.0
+Pivot: 67.71  (source: cup_handle)
+Distance to Pivot: -3.0%
+Stop: 62.83 (ATR method)
+Reward/Risk: 1.4
+Power Rank: 46.3
+Status: Developing
+
+----- SMP -----
+Grade: B
+Important note: Late-stage base (>20% depth); Low RS percentile (<70)
+Composite Score: 78.9
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*63.8 + 0.15*100.0 + 0.15*60.0 = 78.9
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 21.3% (<=15 +10, <=20 +5); prior 28.0% (>=25.0 +10 else -20); length 8.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 63.8     (rs_percentile 0-100; this stock 63.8)
+  Volume: 100.0  (contraction <0.8 -> 100)
+  Breakout: 60.0 (dist -3.94% in [-5%, -3%) -> 60)
+Base: cup (8.0 weeks, 21.3% deep)
+Prior Run: +28.0%
+RS Percentile: 64.0
+RSI: 47.0
+Pivot: 44.88  (source: cup_handle)
+Distance to Pivot: -3.9%
+Stop: 43.2 (ATR method)
+Reward/Risk: 2.7
+Power Rank: 45.8
+Status: Developing
+
+----- TD -----
+Grade: B
+Important note: Low RS percentile (<70)
+Composite Score: 78.8
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*69.0 + 0.15*70.0 + 0.15*80.0 = 78.8
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 6.6% (<=15 +10, <=20 +5); prior 27.0% (>=25.0 +10 else -20); length 6.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 69.0     (rs_percentile 0-100; this stock 69.0)
+  Volume: 70.0  (contraction <0.95 -> 70)
+  Breakout: 80.0 (dist -1.23% in [-3%, 0%] -> 80)
+Base: flat_base (6.0 weeks, 6.6% deep)
+Prior Run: +27.0%
+RS Percentile: 69.0
+RSI: 56.0
+Pivot: 98.36  (source: flat_max_spike_filtered)
+Distance to Pivot: -1.2%
+Stop: 95.97 (ATR method)
+Reward/Risk: 4.1
+Power Rank: 48.1
+Status: Developing
+
+----- ROG.SW -----
+Grade: B
+Important note: Low RS percentile (<70)
+Composite Score: 78.4
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*67.7 + 0.15*70.0 + 0.15*80.0 = 78.4
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 11.7% (<=15 +10, <=20 +5); prior 45.0% (>=25.0 +10 else -20); length 6.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 67.7     (rs_percentile 0-100; this stock 67.7)
+  Volume: 70.0  (contraction <0.95 -> 70)
+  Breakout: 80.0 (dist -1.55% in [-3%, 0%] -> 80)
+Base: flat_base (6.0 weeks, 11.7% deep)
+Prior Run: +45.0%
+RS Percentile: 68.0
+RSI: 64.0
+Pivot: 374.9  (source: flat_max_spike_filtered)
+Distance to Pivot: -1.6%
+Stop: 365.97 (ATR method)
+Reward/Risk: 4.2
+Power Rank: 56.4
+Status: Developing
+
+----- WSR -----
+Grade: B
+Important note: Low RS percentile (<70)
+Composite Score: 77.6
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*64.3 + 0.15*70.0 + 0.15*80.0 = 77.6
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 10.3% (<=15 +10, <=20 +5); prior 34.0% (>=25.0 +10 else -20); length 6.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 64.3     (rs_percentile 0-100; this stock 64.3)
+  Volume: 70.0  (contraction <0.95 -> 70)
+  Breakout: 80.0 (dist -1.33% in [-3%, 0%] -> 80)
+Base: flat_base (6.0 weeks, 10.3% deep)
+Prior Run: +34.0%
+RS Percentile: 64.0
+RSI: 63.0
+Pivot: 15.37  (source: flat_max_spike_filtered)
+Distance to Pivot: -1.3%
+Stop: 14.97 (ATR method)
+Reward/Risk: 3.8
+Power Rank: 49.3
+Status: Developing
+
+----- DRH -----
+Grade: B
+Important note: Low RS percentile (<70)
+Composite Score: 76.6
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*60.6 + 0.15*70.0 + 0.15*80.0 = 76.6
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 11.9% (<=15 +10, <=20 +5); prior 37.0% (>=25.0 +10 else -20); length 6.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 60.6     (rs_percentile 0-100; this stock 60.6)
+  Volume: 70.0  (contraction <0.95 -> 70)
+  Breakout: 80.0 (dist -1.86% in [-3%, 0%] -> 80)
+Base: flat_base (6.0 weeks, 11.9% deep)
+Prior Run: +37.0%
+RS Percentile: 61.0
+RSI: 64.0
+Pivot: 10.24  (source: flat_max_spike_filtered)
+Distance to Pivot: -1.9%
+Stop: 9.81 (ATR method)
+Reward/Risk: 2.4
+Power Rank: 48.7
+Status: Developing
+
+----- TRP -----
+Grade: B
+Important note: Low RS percentile (<70)
+Composite Score: 76.0
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*69.9 + 0.15*50.0 + 0.15*80.0 = 76.0
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 17.6% (<=15 +10, <=20 +5); prior 30.0% (>=25.0 +10 else -20); length 8.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 69.9     (rs_percentile 0-100; this stock 69.9)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0 (dist -0.63% in [-3%, 0%] -> 80)
+Base: cup (8.0 weeks, 17.6% deep)
+Prior Run: +30.0%
+RS Percentile: 70.0
+RSI: 71.0
+Pivot: 63.63  (source: cup_handle)
+Distance to Pivot: -0.6%
+Stop: 61.62 (ATR method)
+Reward/Risk: 3.2
+Power Rank: 49.8
+Status: Developing
+
+----- SCHL -----
+Grade: B
+Important note: Low RS percentile (<70)
+Composite Score: 75.9
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*69.7 + 0.15*50.0 + 0.15*80.0 = 75.9
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 19.5% (<=15 +10, <=20 +5); prior 36.0% (>=25.0 +10 else -20); length 8.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 69.7     (rs_percentile 0-100; this stock 69.7)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0 (dist -1.88% in [-3%, 0%] -> 80)
+Base: cup (8.0 weeks, 19.5% deep)
+Prior Run: +36.0%
+RS Percentile: 70.0
+RSI: 46.0
+Pivot: 34.6  (source: cup_handle)
+Distance to Pivot: -1.9%
+Stop: 32.59 (ATR method)
+Reward/Risk: 1.7
+Power Rank: 53.1
+Status: Developing
+
+----- CTRE -----
+Grade: B
+Important note: Low RS percentile (<70)
+Composite Score: 75.7
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*57.0 + 0.15*70.0 + 0.15*80.0 = 75.7
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 16.0% (<=15 +10, <=20 +5); prior 26.0% (>=25.0 +10 else -20); length 8.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 57.0     (rs_percentile 0-100; this stock 57.0)
+  Volume: 70.0  (contraction <0.95 -> 70)
+  Breakout: 80.0 (dist -1.09% in [-3%, 0%] -> 80)
+Base: cup (8.0 weeks, 16.0% deep)
+Prior Run: +26.0%
+RS Percentile: 57.0
+RSI: 78.0
+Pivot: 41.36  (source: cup_handle)
+Distance to Pivot: -1.1%
+Stop: 39.89 (ATR method)
+Reward/Risk: 2.8
+Power Rank: 41.6
+Status: Developing
+
+----- MNST -----
+Grade: B
+Important note: Low RS percentile (<70)
+Composite Score: 75.3
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*67.2 + 0.15*50.0 + 0.15*80.0 = 75.3
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 10.4% (<=15 +10, <=20 +5); prior 30.0% (>=25.0 +10 else -20); length 6.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 67.2     (rs_percentile 0-100; this stock 67.2)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0 (dist -0.42% in [-3%, 0%] -> 80)
+Base: flat_base (6.0 weeks, 10.4% deep)
+Prior Run: +30.0%
+RS Percentile: 67.0
+RSI: 68.0
+Pivot: 85.77  (source: flat_max_spike_filtered)
+Distance to Pivot: -0.4%
+Stop: 83.5 (ATR method)
+Reward/Risk: 3.8
+Power Rank: 48.7
+Status: Developing
+
+----- BCO -----
+Grade: B
+Important note: Low RS percentile (<70)
+Composite Score: 75.3
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*67.2 + 0.15*70.0 + 0.15*60.0 = 75.3
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 8.9% (<=15 +10, <=20 +5); prior 27.0% (>=25.0 +10 else -20); length 6.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 67.2     (rs_percentile 0-100; this stock 67.2)
+  Volume: 70.0  (contraction <0.95 -> 70)
+  Breakout: 60.0 (dist -3.02% in [-5%, -3%) -> 60)
+Base: flat_base (6.0 weeks, 8.9% deep)
+Prior Run: +27.0%
+RS Percentile: 67.0
+RSI: 53.0
+Pivot: 133.62  (source: flat_max_spike_filtered)
+Distance to Pivot: -3.0%
+Stop: 128.76 (ATR method)
+Reward/Risk: 2.8
+Power Rank: 47.1
+Status: Developing
+
+----- LIVN -----
+Grade: B
+Important note: Low RS percentile (<70)
+Composite Score: 75.1
+  Score calculation: 0.2*70.0 + 0.25*100.0 + 0.25*66.3 + 0.15*50.0 + 0.15*80.0 = 75.1
+  Trend: 70.0   (15.0-30.0% above 200 SMA)
+  Base: 100.0    (depth 14.7% (<=15 +10, <=20 +5); prior 45.0% (>=25.0 +10 else -20); length 8.0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 100.0)
+  RS: 66.3     (rs_percentile 0-100; this stock 66.3)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0 (dist -0.69% in [-3%, 0%] -> 80)
+Base: flat_base (8.0 weeks, 14.7% deep)
+Prior Run: +45.0%
+RS Percentile: 66.0
+RSI: 69.0
+Pivot: 70.78  (source: flat_max_spike_filtered)
+Distance to Pivot: -0.7%
+Stop: 67.13 (ATR method)
+Reward/Risk: 1.9
+Power Rank: 55.6
+Status: Developing
+
+
+----- Risk Warnings (summary) -----
+  Late-stage base: TPR (>20% depth)
+  Late-stage base: VSCO (>20% depth)
+  Late-stage base: GEV (>20% depth)
+  Late-stage base: RIO (>20% depth)
+  Late-stage base: AA (>20% depth)
+  Late-stage base: RIO.L (>20% depth)
+  Late-stage base: MWA (>20% depth)
+  Late-stage base: RBC (>20% depth)
+  Late-stage base: FDP (>20% depth)
+  Late-stage base: WMB (>20% depth)
+  Late-stage base: BWXT (>20% depth)
+  Late-stage base: TRN (>20% depth)
+  Late-stage base: SUPN (>20% depth)
+  Late-stage base: SMFG (>20% depth)
+  Late-stage base: SMP (>20% depth)
+  Late-stage base: XLE (>20% depth)
+  Late-stage base: WTS (>20% depth)
+  Late-stage base: TILE (>20% depth)
+  Late-stage base: TTE.PA (>20% depth)
+  Late-stage base: PRG (>20% depth)
+  Late-stage base: PRY.MI (>20% depth)
+  Late-stage base: NXST (>20% depth)
+  Late-stage base: SBH (>20% depth)
+  Late-stage base: SWK (>20% depth)
+  Late-stage base: FBNC (>20% depth)
+  Late-stage base: LDO.MI (>20% depth)
+  Late-stage base: FFBC (>20% depth)
+  Late-stage base: BRC (>20% depth)
+  Late-stage base: DCI (>20% depth)
+  Late-stage base: PLAB (>20% depth)
+  Late-stage base: SSE.L (>20% depth)
+  Late-stage base: KEYS (>20% depth)
+  Late-stage base: HXL (>20% depth)
+  Late-stage base: MPW (>20% depth)
+  Late-stage base: TPH (>20% depth)
+  Late-stage base: MRNA (>20% depth)
+  Late-stage base: CMI (>20% depth)
+  Late-stage base: MSGS (>20% depth)
+  Late-stage base: WAB (>20% depth)
+  Late-stage base: NVAX (>20% depth)
+  Late-stage base: ELAN (>20% depth)
+  Late-stage base: KRYS (>20% depth)
+  Late-stage base: CRUS (>20% depth)
+  Late-stage base: NG.L (>20% depth)
+  Late-stage base: CURB (>20% depth)
+  Late-stage base: STLD (>20% depth)
+  Late-stage base: AES (>20% depth)
+  Late-stage base: NDSN (>20% depth)
+  Late-stage base: OSIS (>20% depth)
+  Late-stage base: VLO (>20% depth)
+  Late-stage base: TOL (>20% depth)
+  Late-stage base: AMG (>20% depth)
+  Late-stage base: WMS (>20% depth)
+  Late-stage base: BIIB (>20% depth)
+  Late-stage base: GBCI (>20% depth)
+  Late-stage base: FANG (>20% depth)
+  Low RS percentile: BTSG (65.5)
+  Low RS percentile: GMED (50.5)
+  Low RS percentile: NVT (67.9)
+  Low RS percentile: ROST (65.2)
+  Low RS percentile: JBSS (66.4)
+  Low RS percentile: FLEX (64.5)
+  Low RS percentile: SMP (63.8)
+  Low RS percentile: TD (69.0)
+  Low RS percentile: ROG.SW (67.7)
+  Low RS percentile: TILE (69.9)
+  Low RS percentile: WSR (64.3)
+  Low RS percentile: DRH (60.6)
+  Low RS percentile: UCB.BR (60.2)
+  Low RS percentile: TRP (69.9)
+  Low RS percentile: SCHL (69.7)
+  Low RS percentile: CTRE (57.0)
+  Low RS percentile: BCO (67.2)
+  Low RS percentile: MNST (67.2)
+  Low RS percentile: REGN (36.3)
+  Low RS percentile: LIVN (66.3)
+  Low RS percentile: PLD (53.9)
+  Low RS percentile: SBH (35.8)
+  Low RS percentile: ITT (65.1)
+  Low RS percentile: PHG (63.9)
+  Low RS percentile: VTR (51.0)
+  Low RS percentile: CBOE (62.1)
+  Low RS percentile: XBI (46.5)
+  Low RS percentile: COO (51.5)
+  Low RS percentile: TXT (68.4)
+  Low RS percentile: MAR (68.6)
+  Low RS percentile: BRC (66.7)
+  Low RS percentile: HST (60.7)
+  Low RS percentile: VMI (66.1)
+  Low RS percentile: EVN.VI (53.4)
+  Low RS percentile: CFFN (65.3)
+  Low RS percentile: INDB (64.1)
+  Low RS percentile: DCI (69.6)
+  Low RS percentile: HTH (61.8)
+  Low RS percentile: POR (46.6)
+  Low RS percentile: TNL (63.7)
+  Low RS percentile: H (38.8)
+  Low RS percentile: NUE (62.3)
+  Low RS percentile: RTX (59.5)
+  Low RS percentile: UFCS (40.5)
+  Low RS percentile: HASI (62.4)
+  Low RS percentile: GEF (69.1)
+  Low RS percentile: STT (62.5)
+  Low RS percentile: INGA.AS (55.9)
+  Low RS percentile: CBK.DE (57.7)
+  Low RS percentile: CWEN-A (44.8)
+  Low RS percentile: HOPE (60.7)
+  Low RS percentile: STBA (54.1)
+  Low RS percentile: ADM (63.6)
+  Low RS percentile: PZU.WA (62.7)
+  Low RS percentile: USB (68.8)
+  Low RS percentile: CWEN (44.9)
+  Low RS percentile: TRMK (62.9)
+  Low RS percentile: HLT (62.1)
+  Low RS percentile: PKG (67.9)
+  Low RS percentile: XHR (55.5)
+  Low RS percentile: BKH (37.2)
+  Low RS percentile: RF (67.3)
+  Low RS percentile: PFS (67.1)
+  Low RS percentile: RNST (61.0)
+  Low RS percentile: UBSI (65.7)
+  Low RS percentile: FCF (58.7)
+  Low RS percentile: PFG (56.9)
+  Low RS percentile: MPW (47.0)
+  Low RS percentile: NTRS (59.6)
+  Low RS percentile: ACT (53.5)
+  Low RS percentile: ADAM (59.3)
+  Low RS percentile: BAS.DE (52.9)
+  Low RS percentile: PHM (58.8)
+  Low RS percentile: UCB (54.4)
+  Low RS percentile: FNB (51.7)
+  Low RS percentile: PEB (51.3)
+  Low RS percentile: ABCB (49.7)
+  Low RS percentile: ELAN (66.0)
+  Low RS percentile: EXAS (35.0)
+  Low RS percentile: HCA (47.6)
+  Low RS percentile: CAH (45.6)
+  Low RS percentile: NATL (59.1)
+  Low RS percentile: AES (69.8)
+  Low RS percentile: RNR (68.2)
+  Low RS percentile: BKU (67.5)
+  Low RS percentile: GE (67.1)
+  Low RS percentile: OSIS (64.2)
+  Low RS percentile: AMGN (63.4)
+  Low RS percentile: VLO (62.7)
+  Low RS percentile: GM (65.9)
+  Low RS percentile: NEE (59.0)
+  Low RS percentile: KW (58.8)
+  Low RS percentile: LLOY.L (55.7)
+  Low RS percentile: F (55.6)
+  Low RS percentile: MCK (53.6)
+  Low RS percentile: WMS (64.4)
+  Low RS percentile: CMA (63.6)
+  Low RS percentile: HI (32.3)
+  Low RS percentile: PEN (60.5)
+  Low RS percentile: BURL (47.9)
+  Low RS percentile: ICUI (39.3)
+  Low RS percentile: SXI (49.1)
+  Low RS percentile: WELL (36.1)
+  Low RS percentile: TRST (48.0)
+  Low RS percentile: BIIB (47.7)
+  Low RS percentile: RL (47.5)
+  Low RS percentile: AZN.L (47.0)
+  Low RS percentile: PNC (69.5)
+  Low RS percentile: ONB (63.2)
+  Low RS percentile: SSB (68.7)
+  Low RS percentile: HWC (67.6)
+  Low RS percentile: GBCI (65.4)
+  Low RS percentile: CSGS (35.5)
+  Low RS percentile: COLB (53.2)
+  Low RS percentile: EMR (64.7)
+  Low RS percentile: GEHC (46.7)
+  Low RS percentile: CPF (58.9)
+  Low RS percentile: BOOT (45.4)
+  Low RS percentile: FANG (60.5)
+  Low RS percentile: WTFC (60.4)
+  Low RS percentile: GIII (53.1)
+  Low RS percentile: TCBI (57.9)
+  Low RS percentile: PHIA.AS (51.1)
+  Low RS percentile: CCS (56.5)
+  Low RS percentile: CSCO (38.1)
+  Low RS percentile: AMPH (40.2)
+  Low RS percentile: CNX (37.3)
+
+============================================================
+PART 3 — SCORE BREAKDOWN & CONFIG THRESHOLDS
+============================================================
+
+How the composite score is computed: composite = 0.2*Trend + 0.25*Base + 0.25*RS + 0.15*Vol + 0.15*Breakout (each component 0–100).
+
+----- Config thresholds (config) -----
+Eligibility:
+  MIN_AVG_DOLLAR_VOLUME_20D = 1,000,000  MIN_PRICE_THRESHOLD = 5.0
+  MIN_PRIOR_RUN_PCT = 25.0%  PRIOR_RUN_LOOKBACK_TRADING_DAYS = 63
+
+Trend score (0–100 by % above 200 SMA):
+  ≥30.0% → 100  15.0–30.0% → 70  5.0–15.0% → 40  0.0–5.0% → 15  <0.0% → 0
+
+Composite weights:
+  WEIGHT_TREND_STRUCTURE = 0.2  WEIGHT_BASE_QUALITY = 0.25  WEIGHT_RELATIVE_STRENGTH = 0.25  WEIGHT_VOLUME_SIGNATURE = 0.15  WEIGHT_BREAKOUT_QUALITY = 0.15
+
+Grade bands (composite score):
+  ≥85.0 → A+  ≥75.0 → A  ≥65.0 → B  ≥55.0 → C  <55.0 → REJECT
+  MIN_RS_PERCENTILE_FOR_A_PLUS = 80.0  MIN_RS_PERCENTILE_FOR_A = 70.0 (downgrade if below)
+
+Base score (additions/penalties):
+  depth ≤15% → +10  ≤20% → +5  prior_run ≥25.0% → +10  else → -20
+  length 5.0–8.0 wks → +5  <4.0 wks → -5
+
+Breakout score (pre-breakout by distance to pivot):
+  dist [-3%, 0%] → 80  [-5%, -3%) → 60  >8.0% → 30  else 50  (in breakout → 100)
+
+Volume score (base contraction):
+  contraction <0.8 → 100  <0.95 → 70  else 50 (when passed); failed → 0/50/70 by band
+
+----- Per-stock score derivation (top 80) -----
+--- NEOG (A+) ---
+  Composite = 0.2*100.0 + 0.25*100.0 + 0.25*99.3 + 0.15*100.0 + 0.15*80.0 = 96.8
+  Trend: 100.0  (>=30.0% above 200 SMA)
+  Base: 100.0  (depth 13.0%, prior_run 112.8%, length 4.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 99.3  (rs_percentile = 99.3)
+  Volume: 100.0  (contraction <0.8 -> 100)
+  Breakout: 80.0  (dist -1.09% in [-3%, 0%] -> 80)
+
+--- TPR (A+) ---
+  Composite = 0.2*100.0 + 0.25*100.0 + 0.25*94.4 + 0.15*100.0 + 0.15*80.0 = 95.6
+  Trend: 100.0  (>=30.0% above 200 SMA)
+  Base: 100.0  (depth 21.5%, prior_run 70.2%, length 8.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 94.4  (rs_percentile = 94.4)
+  Volume: 100.0  (contraction <0.8 -> 100)
+  Breakout: 80.0  (dist -0.62% in [-3%, 0%] -> 80)
+
+--- ADEA (A+) ---
+  Composite = 0.2*100.0 + 0.25*95.0 + 0.25*97.8 + 0.15*100.0 + 0.15*80.0 = 95.2
+  Trend: 100.0  (>=30.0% above 200 SMA)
+  Base: 95.0  (depth 20.0%, prior_run 78.7%, length 8.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 97.8  (rs_percentile = 97.8)
+  Volume: 100.0  (contraction <0.8 -> 100)
+  Breakout: 80.0  (dist -0.39% in [-3%, 0%] -> 80)
+
+--- VSCO (A+) ---
+  Composite = 0.2*100.0 + 0.25*100.0 + 0.25*97.7 + 0.15*100.0 + 0.15*60.0 = 93.4
+  Trend: 100.0  (>=30.0% above 200 SMA)
+  Base: 100.0  (depth 22.2%, prior_run 158.1%, length 8.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 97.7  (rs_percentile = 97.7)
+  Volume: 100.0  (contraction <0.8 -> 100)
+  Breakout: 60.0  (dist -4.32% in [-5%, -3%) -> 60)
+
+--- GEV (A+) ---
+  Composite = 0.2*100.0 + 0.25*100.0 + 0.25*95.1 + 0.15*70.0 + 0.15*80.0 = 91.3
+  Trend: 100.0  (>=30.0% above 200 SMA)
+  Base: 100.0  (depth 24.7%, prior_run 68.8%, length 4.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 95.1  (rs_percentile = 95.1)
+  Volume: 70.0  (contraction <0.95 -> 70)
+  Breakout: 80.0  (dist -2.11% in [-3%, 0%] -> 80)
+
+--- EGBN (A+) ---
+  Composite = 0.2*100.0 + 0.25*100.0 + 0.25*92.9 + 0.15*100.0 + 0.15*50.0 = 90.7
+  Trend: 100.0  (>=30.0% above 200 SMA)
+  Base: 100.0  (depth 13.3%, prior_run 89.0%, length 4.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 92.9  (rs_percentile = 92.9)
+  Volume: 100.0  (contraction <0.8 -> 100)
+  Breakout: 50.0  (dist -6.9% -> 50)
+
+--- FIVE (A+) ---
+  Composite = 0.2*100.0 + 0.25*100.0 + 0.25*91.9 + 0.15*70.0 + 0.15*80.0 = 90.5
+  Trend: 100.0  (>=30.0% above 200 SMA)
+  Base: 100.0  (depth 18.3%, prior_run 63.2%, length 8.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 91.9  (rs_percentile = 91.9)
+  Volume: 70.0  (contraction <0.95 -> 70)
+  Breakout: 80.0  (dist -0.76% in [-3%, 0%] -> 80)
+
+--- ROG (A+) ---
+  Composite = 0.2*100.0 + 0.25*100.0 + 0.25*90.4 + 0.15*70.0 + 0.15*80.0 = 90.1
+  Trend: 100.0  (>=30.0% above 200 SMA)
+  Base: 100.0  (depth 19.5%, prior_run 50.1%, length 8.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 90.4  (rs_percentile = 90.4)
+  Volume: 70.0  (contraction <0.95 -> 70)
+  Breakout: 80.0  (dist -2.53% in [-3%, 0%] -> 80)
+
+--- MATX (A+) ---
+  Composite = 0.2*100.0 + 0.25*100.0 + 0.25*96.7 + 0.15*70.0 + 0.15*60.0 = 88.7
+  Trend: 100.0  (>=30.0% above 200 SMA)
+  Base: 100.0  (depth 13.0%, prior_run 87.6%, length 4.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 96.7  (rs_percentile = 96.7)
+  Volume: 70.0  (contraction <0.95 -> 70)
+  Breakout: 60.0  (dist -3.79% in [-5%, -3%) -> 60)
+
+--- ASO (A+) ---
+  Composite = 0.2*70.0 + 0.25*100.0 + 0.25*89.6 + 0.15*100.0 + 0.15*80.0 = 88.4
+  Trend: 70.0  (15.0-30.0% above 200 SMA)
+  Base: 100.0  (depth 13.0%, prior_run 50.0%, length 6.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 89.6  (rs_percentile = 89.6)
+  Volume: 100.0  (contraction <0.8 -> 100)
+  Breakout: 80.0  (dist -1.23% in [-3%, 0%] -> 80)
+
+--- BTSG (A) ---
+  Composite = 0.2*100.0 + 0.25*100.0 + 0.25*65.5 + 0.15*100.0 + 0.15*80.0 = 88.4
+  Trend: 100.0  (>=30.0% above 200 SMA)
+  Base: 100.0  (depth 10.9%, prior_run 48.4%, length 6.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 65.5  (rs_percentile = 65.5)
+  Volume: 100.0  (contraction <0.8 -> 100)
+  Breakout: 80.0  (dist -1.45% in [-3%, 0%] -> 80)
+
+--- ENGI.PA (A+) ---
+  Composite = 0.2*100.0 + 0.25*100.0 + 0.25*82.7 + 0.15*70.0 + 0.15*80.0 = 88.2
+  Trend: 100.0  (>=30.0% above 200 SMA)
+  Base: 100.0  (depth 19.4%, prior_run 55.4%, length 8.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 82.7  (rs_percentile = 82.7)
+  Volume: 70.0  (contraction <0.95 -> 70)
+  Breakout: 80.0  (dist -0.33% in [-3%, 0%] -> 80)
+
+--- BNP.PA (A+) ---
+  Composite = 0.2*70.0 + 0.25*100.0 + 0.25*88.0 + 0.15*100.0 + 0.15*80.0 = 88.0
+  Trend: 70.0  (15.0-30.0% above 200 SMA)
+  Base: 100.0  (depth 12.9%, prior_run 49.1%, length 6.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 88.0  (rs_percentile = 88.0)
+  Volume: 100.0  (contraction <0.8 -> 100)
+  Breakout: 80.0  (dist -0.76% in [-3%, 0%] -> 80)
+
+--- FOLD (A+) ---
+  Composite = 0.2*100.0 + 0.25*100.0 + 0.25*93.1 + 0.15*50.0 + 0.15*80.0 = 87.8
+  Trend: 100.0  (>=30.0% above 200 SMA)
+  Base: 100.0  (depth 0.8%, prior_run 82.7%, length 6.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 93.1  (rs_percentile = 93.1)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0  (dist -0.28% in [-3%, 0%] -> 80)
+
+--- SLB (A+) ---
+  Composite = 0.2*100.0 + 0.25*100.0 + 0.25*92.9 + 0.15*50.0 + 0.15*80.0 = 87.7
+  Trend: 100.0  (>=30.0% above 200 SMA)
+  Base: 100.0  (depth 13.3%, prior_run 65.6%, length 6.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 92.9  (rs_percentile = 92.9)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0  (dist -1.43% in [-3%, 0%] -> 80)
+
+--- RIO (A+) ---
+  Composite = 0.2*100.0 + 0.25*100.0 + 0.25*92.3 + 0.15*50.0 + 0.15*80.0 = 87.6
+  Trend: 100.0  (>=30.0% above 200 SMA)
+  Base: 100.0  (depth 21.2%, prior_run 55.4%, length 8.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 92.3  (rs_percentile = 92.3)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0  (dist -0.68% in [-3%, 0%] -> 80)
+
+--- AA (A+) ---
+  Composite = 0.2*100.0 + 0.25*95.0 + 0.25*97.4 + 0.15*50.0 + 0.15*80.0 = 87.6
+  Trend: 100.0  (>=30.0% above 200 SMA)
+  Base: 95.0  (depth 21.9%, prior_run 109.3%, length 8.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 97.4  (rs_percentile = 97.4)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0  (dist -1.99% in [-3%, 0%] -> 80)
+
+--- ASML.AS (A+) ---
+  Composite = 0.2*100.0 + 0.25*100.0 + 0.25*91.8 + 0.15*50.0 + 0.15*80.0 = 87.5
+  Trend: 100.0  (>=30.0% above 200 SMA)
+  Base: 100.0  (depth 14.9%, prior_run 59.7%, length 4.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 91.8  (rs_percentile = 91.8)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0  (dist -1.86% in [-3%, 0%] -> 80)
+
+--- HAL (A+) ---
+  Composite = 0.2*100.0 + 0.25*100.0 + 0.25*90.5 + 0.15*50.0 + 0.15*80.0 = 87.1
+  Trend: 100.0  (>=30.0% above 200 SMA)
+  Base: 100.0  (depth 11.9%, prior_run 68.6%, length 6.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 90.5  (rs_percentile = 90.5)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0  (dist -2.54% in [-3%, 0%] -> 80)
+
+--- RIO.L (A+) ---
+  Composite = 0.2*100.0 + 0.25*100.0 + 0.25*90.1 + 0.15*50.0 + 0.15*80.0 = 87.0
+  Trend: 100.0  (>=30.0% above 200 SMA)
+  Base: 100.0  (depth 21.1%, prior_run 56.3%, length 8.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 90.1  (rs_percentile = 90.1)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0  (dist -1.27% in [-3%, 0%] -> 80)
+
+--- MWA (A+) ---
+  Composite = 0.2*70.0 + 0.25*100.0 + 0.25*83.0 + 0.15*100.0 + 0.15*80.0 = 86.7
+  Trend: 70.0  (15.0-30.0% above 200 SMA)
+  Base: 100.0  (depth 22.3%, prior_run 34.0%, length 8.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 83.0  (rs_percentile = 83.0)
+  Volume: 100.0  (contraction <0.8 -> 100)
+  Breakout: 80.0  (dist -1.93% in [-3%, 0%] -> 80)
+
+--- BBT (A+) ---
+  Composite = 0.2*70.0 + 0.25*100.0 + 0.25*81.3 + 0.15*100.0 + 0.15*80.0 = 86.3
+  Trend: 70.0  (15.0-30.0% above 200 SMA)
+  Base: 100.0  (depth 18.8%, prior_run 40.1%, length 8.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 81.3  (rs_percentile = 81.3)
+  Volume: 100.0  (contraction <0.8 -> 100)
+  Breakout: 80.0  (dist -2.21% in [-3%, 0%] -> 80)
+
+--- RBC (A+) ---
+  Composite = 0.2*100.0 + 0.25*100.0 + 0.25*86.9 + 0.15*50.0 + 0.15*80.0 = 86.2
+  Trend: 100.0  (>=30.0% above 200 SMA)
+  Base: 100.0  (depth 22.2%, prior_run 57.7%, length 8.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 86.9  (rs_percentile = 86.9)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0  (dist -1.67% in [-3%, 0%] -> 80)
+
+--- HSBA.L (A+) ---
+  Composite = 0.2*100.0 + 0.25*100.0 + 0.25*86.4 + 0.15*50.0 + 0.15*80.0 = 86.1
+  Trend: 100.0  (>=30.0% above 200 SMA)
+  Base: 100.0  (depth 13.0%, prior_run 45.3%, length 6.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 86.4  (rs_percentile = 86.4)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0  (dist 0.0% in [-3%, 0%] -> 80)
+
+--- TTC (A+) ---
+  Composite = 0.2*70.0 + 0.25*100.0 + 0.25*92.0 + 0.15*100.0 + 0.15*60.0 = 86.0
+  Trend: 70.0  (15.0-30.0% above 200 SMA)
+  Base: 100.0  (depth 13.1%, prior_run 51.3%, length 4.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 92.0  (rs_percentile = 92.0)
+  Volume: 100.0  (contraction <0.8 -> 100)
+  Breakout: 60.0  (dist -3.26% in [-5%, -3%) -> 60)
+
+--- GLE.PA (A+) ---
+  Composite = 0.2*100.0 + 0.25*100.0 + 0.25*84.7 + 0.15*50.0 + 0.15*80.0 = 85.7
+  Trend: 100.0  (>=30.0% above 200 SMA)
+  Base: 100.0  (depth 14.8%, prior_run 48.8%, length 8.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 84.7  (rs_percentile = 84.7)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0  (dist -1.42% in [-3%, 0%] -> 80)
+
+--- INSW (A+) ---
+  Composite = 0.2*100.0 + 0.25*100.0 + 0.25*84.1 + 0.15*50.0 + 0.15*80.0 = 85.5
+  Trend: 100.0  (>=30.0% above 200 SMA)
+  Base: 100.0  (depth 18.0%, prior_run 52.7%, length 4.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 84.1  (rs_percentile = 84.1)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0  (dist -1.19% in [-3%, 0%] -> 80)
+
+--- OUT (A) ---
+  Composite = 0.2*100.0 + 0.25*100.0 + 0.25*70.3 + 0.15*70.0 + 0.15*80.0 = 85.1
+  Trend: 100.0  (>=30.0% above 200 SMA)
+  Base: 100.0  (depth 11.6%, prior_run 59.3%, length 6.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 70.3  (rs_percentile = 70.3)
+  Volume: 70.0  (contraction <0.95 -> 70)
+  Breakout: 80.0  (dist -0.65% in [-3%, 0%] -> 80)
+
+--- FDP (A) ---
+  Composite = 0.2*70.0 + 0.25*100.0 + 0.25*76.1 + 0.15*100.0 + 0.15*80.0 = 85.0
+  Trend: 70.0  (15.0-30.0% above 200 SMA)
+  Base: 100.0  (depth 20.4%, prior_run 34.7%, length 8.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 76.1  (rs_percentile = 76.1)
+  Volume: 100.0  (contraction <0.8 -> 100)
+  Breakout: 80.0  (dist -1.79% in [-3%, 0%] -> 80)
+
+--- INTC (A) ---
+  Composite = 0.2*100.0 + 0.25*95.0 + 0.25*86.5 + 0.15*50.0 + 0.15*80.0 = 84.9
+  Trend: 100.0  (>=30.0% above 200 SMA)
+  Base: 95.0  (depth 16.7%, prior_run 56.6%, length 4.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 86.5  (rs_percentile = 86.5)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0  (dist -0.19% in [-3%, 0%] -> 80)
+
+--- VOD.L (A) ---
+  Composite = 0.2*100.0 + 0.25*100.0 + 0.25*81.6 + 0.15*50.0 + 0.15*80.0 = 84.9
+  Trend: 100.0  (>=30.0% above 200 SMA)
+  Base: 100.0  (depth 19.0%, prior_run 45.0%, length 8.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 81.6  (rs_percentile = 81.6)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0  (dist -2.65% in [-3%, 0%] -> 80)
+
+--- GMED (B) ---
+  Composite = 0.2*100.0 + 0.25*100.0 + 0.25*50.5 + 0.15*100.0 + 0.15*80.0 = 84.6
+  Trend: 100.0  (>=30.0% above 200 SMA)
+  Base: 100.0  (depth 10.7%, prior_run 70.0%, length 6.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 50.5  (rs_percentile = 50.5)
+  Volume: 100.0  (contraction <0.8 -> 100)
+  Breakout: 80.0  (dist -0.07% in [-3%, 0%] -> 80)
+
+--- NVT (B) ---
+  Composite = 0.2*100.0 + 0.25*100.0 + 0.25*67.9 + 0.15*70.0 + 0.15*80.0 = 84.5
+  Trend: 100.0  (>=30.0% above 200 SMA)
+  Base: 100.0  (depth 16.9%, prior_run 31.6%, length 8.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 67.9  (rs_percentile = 67.9)
+  Volume: 70.0  (contraction <0.95 -> 70)
+  Breakout: 80.0  (dist -0.69% in [-3%, 0%] -> 80)
+
+--- RWE.DE (A) ---
+  Composite = 0.2*100.0 + 0.25*100.0 + 0.25*79.2 + 0.15*50.0 + 0.15*80.0 = 84.3
+  Trend: 100.0  (>=30.0% above 200 SMA)
+  Base: 100.0  (depth 10.2%, prior_run 39.1%, length 6.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 79.2  (rs_percentile = 79.2)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0  (dist -0.73% in [-3%, 0%] -> 80)
+
+--- ECPG (A) ---
+  Composite = 0.2*70.0 + 0.25*100.0 + 0.25*72.7 + 0.15*100.0 + 0.15*80.0 = 84.2
+  Trend: 70.0  (15.0-30.0% above 200 SMA)
+  Base: 100.0  (depth 10.4%, prior_run 49.4%, length 6.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 72.7  (rs_percentile = 72.7)
+  Volume: 100.0  (contraction <0.8 -> 100)
+  Breakout: 80.0  (dist -0.85% in [-3%, 0%] -> 80)
+
+--- LEA (A) ---
+  Composite = 0.2*70.0 + 0.25*100.0 + 0.25*84.0 + 0.15*100.0 + 0.15*60.0 = 84.0
+  Trend: 70.0  (15.0-30.0% above 200 SMA)
+  Base: 100.0  (depth 20.0%, prior_run 48.7%, length 8.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 84.0  (rs_percentile = 84.0)
+  Volume: 100.0  (contraction <0.8 -> 100)
+  Breakout: 60.0  (dist -3.69% in [-5%, -3%) -> 60)
+
+--- CLH (A) ---
+  Composite = 0.2*70.0 + 0.25*100.0 + 0.25*87.8 + 0.15*70.0 + 0.15*80.0 = 83.5
+  Trend: 70.0  (15.0-30.0% above 200 SMA)
+  Base: 100.0  (depth 12.6%, prior_run 43.4%, length 6.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 87.8  (rs_percentile = 87.8)
+  Volume: 70.0  (contraction <0.95 -> 70)
+  Breakout: 80.0  (dist -1.01% in [-3%, 0%] -> 80)
+
+--- GVA (A) ---
+  Composite = 0.2*70.0 + 0.25*100.0 + 0.25*85.7 + 0.15*70.0 + 0.15*80.0 = 82.9
+  Trend: 70.0  (15.0-30.0% above 200 SMA)
+  Base: 100.0  (depth 15.9%, prior_run 41.1%, length 8.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 85.7  (rs_percentile = 85.7)
+  Volume: 70.0  (contraction <0.95 -> 70)
+  Breakout: 80.0  (dist -1.23% in [-3%, 0%] -> 80)
+
+--- BMY (A) ---
+  Composite = 0.2*70.0 + 0.25*100.0 + 0.25*85.0 + 0.15*70.0 + 0.15*80.0 = 82.7
+  Trend: 70.0  (15.0-30.0% above 200 SMA)
+  Base: 100.0  (depth 13.8%, prior_run 46.1%, length 6.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 85.0  (rs_percentile = 85.0)
+  Volume: 70.0  (contraction <0.95 -> 70)
+  Breakout: 80.0  (dist -1.29% in [-3%, 0%] -> 80)
+
+--- AAMI (A) ---
+  Composite = 0.2*70.0 + 0.25*100.0 + 0.25*83.7 + 0.15*70.0 + 0.15*80.0 = 82.4
+  Trend: 70.0  (15.0-30.0% above 200 SMA)
+  Base: 100.0  (depth 19.5%, prior_run 37.4%, length 8.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 83.7  (rs_percentile = 83.7)
+  Volume: 70.0  (contraction <0.95 -> 70)
+  Breakout: 80.0  (dist -1.07% in [-3%, 0%] -> 80)
+
+--- JNJ (A) ---
+  Composite = 0.2*100.0 + 0.25*100.0 + 0.25*71.4 + 0.15*50.0 + 0.15*80.0 = 82.3
+  Trend: 100.0  (>=30.0% above 200 SMA)
+  Base: 100.0  (depth 8.9%, prior_run 33.9%, length 4.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 71.4  (rs_percentile = 71.4)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0  (dist -0.83% in [-3%, 0%] -> 80)
+
+--- ROST (B) ---
+  Composite = 0.2*70.0 + 0.25*100.0 + 0.25*65.2 + 0.15*100.0 + 0.15*80.0 = 82.3
+  Trend: 70.0  (15.0-30.0% above 200 SMA)
+  Base: 100.0  (depth 9.8%, prior_run 37.9%, length 6.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 65.2  (rs_percentile = 65.2)
+  Volume: 100.0  (contraction <0.8 -> 100)
+  Breakout: 80.0  (dist -1.62% in [-3%, 0%] -> 80)
+
+--- BDX (A) ---
+  Composite = 0.2*70.0 + 0.25*100.0 + 0.25*74.5 + 0.15*100.0 + 0.15*60.0 = 81.6
+  Trend: 70.0  (15.0-30.0% above 200 SMA)
+  Base: 100.0  (depth 19.2%, prior_run 46.8%, length 8.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 74.5  (rs_percentile = 74.5)
+  Volume: 100.0  (contraction <0.8 -> 100)
+  Breakout: 60.0  (dist -3.42% in [-5%, -3%) -> 60)
+
+--- WMB (A) ---
+  Composite = 0.2*70.0 + 0.25*100.0 + 0.25*80.5 + 0.15*70.0 + 0.15*80.0 = 81.6
+  Trend: 70.0  (15.0-30.0% above 200 SMA)
+  Base: 100.0  (depth 21.1%, prior_run 31.8%, length 8.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 80.5  (rs_percentile = 80.5)
+  Volume: 70.0  (contraction <0.95 -> 70)
+  Breakout: 80.0  (dist -0.16% in [-3%, 0%] -> 80)
+
+--- TDY (A) ---
+  Composite = 0.2*70.0 + 0.25*100.0 + 0.25*90.6 + 0.15*50.0 + 0.15*80.0 = 81.1
+  Trend: 70.0  (15.0-30.0% above 200 SMA)
+  Base: 100.0  (depth 12.4%, prior_run 43.2%, length 4.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 90.6  (rs_percentile = 90.6)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0  (dist -2.15% in [-3%, 0%] -> 80)
+
+--- BWXT (A) ---
+  Composite = 0.2*70.0 + 0.25*100.0 + 0.25*71.8 + 0.15*100.0 + 0.15*60.0 = 81.0
+  Trend: 70.0  (15.0-30.0% above 200 SMA)
+  Base: 100.0  (depth 21.7%, prior_run 34.5%, length 8.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 71.8  (rs_percentile = 71.8)
+  Volume: 100.0  (contraction <0.8 -> 100)
+  Breakout: 60.0  (dist -3.54% in [-5%, -3%) -> 60)
+
+--- TRN (A) ---
+  Composite = 0.2*70.0 + 0.25*100.0 + 0.25*89.0 + 0.15*50.0 + 0.15*80.0 = 80.8
+  Trend: 70.0  (15.0-30.0% above 200 SMA)
+  Base: 100.0  (depth 21.5%, prior_run 43.9%, length 4.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 89.0  (rs_percentile = 89.0)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0  (dist -2.38% in [-3%, 0%] -> 80)
+
+--- SUPN (A) ---
+  Composite = 0.2*70.0 + 0.25*95.0 + 0.25*81.1 + 0.15*100.0 + 0.15*50.0 = 80.5
+  Trend: 70.0  (15.0-30.0% above 200 SMA)
+  Base: 95.0  (depth 20.8%, prior_run 38.4%, length 8.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 81.1  (rs_percentile = 81.1)
+  Volume: 100.0  (contraction <0.8 -> 100)
+  Breakout: 50.0  (dist -5.63% -> 50)
+
+--- MUFG (A) ---
+  Composite = 0.2*70.0 + 0.25*100.0 + 0.25*75.3 + 0.15*100.0 + 0.15*50.0 = 80.3
+  Trend: 70.0  (15.0-30.0% above 200 SMA)
+  Base: 100.0  (depth 13.4%, prior_run 36.9%, length 6.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 75.3  (rs_percentile = 75.3)
+  Volume: 100.0  (contraction <0.8 -> 100)
+  Breakout: 50.0  (dist -5.91% -> 50)
+
+--- ACA (A) ---
+  Composite = 0.2*70.0 + 0.25*100.0 + 0.25*75.3 + 0.15*70.0 + 0.15*80.0 = 80.3
+  Trend: 70.0  (15.0-30.0% above 200 SMA)
+  Base: 100.0  (depth 19.3%, prior_run 47.1%, length 8.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 75.3  (rs_percentile = 75.3)
+  Volume: 70.0  (contraction <0.95 -> 70)
+  Breakout: 80.0  (dist -2.31% in [-3%, 0%] -> 80)
+
+--- SMFG (A) ---
+  Composite = 0.2*70.0 + 0.25*100.0 + 0.25*86.5 + 0.15*70.0 + 0.15*60.0 = 80.1
+  Trend: 70.0  (15.0-30.0% above 200 SMA)
+  Base: 100.0  (depth 20.7%, prior_run 60.3%, length 8.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 86.5  (rs_percentile = 86.5)
+  Volume: 70.0  (contraction <0.95 -> 70)
+  Breakout: 60.0  (dist -4.57% in [-5%, -3%) -> 60)
+
+--- VOLV-B.ST (A) ---
+  Composite = 0.2*70.0 + 0.25*100.0 + 0.25*85.9 + 0.15*50.0 + 0.15*80.0 = 80.0
+  Trend: 70.0  (15.0-30.0% above 200 SMA)
+  Base: 100.0  (depth 17.4%, prior_run 44.5%, length 8.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 85.9  (rs_percentile = 85.9)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0  (dist -1.16% in [-3%, 0%] -> 80)
+
+--- R (A) ---
+  Composite = 0.2*70.0 + 0.25*100.0 + 0.25*86.1 + 0.15*50.0 + 0.15*80.0 = 80.0
+  Trend: 70.0  (15.0-30.0% above 200 SMA)
+  Base: 100.0  (depth 19.7%, prior_run 46.1%, length 8.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 86.1  (rs_percentile = 86.1)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0  (dist -2.81% in [-3%, 0%] -> 80)
+
+--- CM (A) ---
+  Composite = 0.2*70.0 + 0.25*100.0 + 0.25*73.2 + 0.15*70.0 + 0.15*80.0 = 79.8
+  Trend: 70.0  (15.0-30.0% above 200 SMA)
+  Base: 100.0  (depth 10.7%, prior_run 27.3%, length 6.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 73.2  (rs_percentile = 73.2)
+  Volume: 70.0  (contraction <0.95 -> 70)
+  Breakout: 80.0  (dist -0.22% in [-3%, 0%] -> 80)
+
+--- ATCO-A.ST (A) ---
+  Composite = 0.2*70.0 + 0.25*100.0 + 0.25*84.7 + 0.15*50.0 + 0.15*80.0 = 79.7
+  Trend: 70.0  (15.0-30.0% above 200 SMA)
+  Base: 100.0  (depth 9.3%, prior_run 33.0%, length 6.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 84.7  (rs_percentile = 84.7)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0  (dist -1.46% in [-3%, 0%] -> 80)
+
+--- JBSS (B) ---
+  Composite = 0.2*70.0 + 0.25*100.0 + 0.25*66.4 + 0.15*100.0 + 0.15*60.0 = 79.6
+  Trend: 70.0  (15.0-30.0% above 200 SMA)
+  Base: 100.0  (depth 19.1%, prior_run 44.2%, length 8.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 66.4  (rs_percentile = 66.4)
+  Volume: 100.0  (contraction <0.8 -> 100)
+  Breakout: 60.0  (dist -3.25% in [-5%, -3%) -> 60)
+
+--- EOAN.DE (A) ---
+  Composite = 0.2*70.0 + 0.25*100.0 + 0.25*83.3 + 0.15*50.0 + 0.15*80.0 = 79.3
+  Trend: 70.0  (15.0-30.0% above 200 SMA)
+  Base: 100.0  (depth 13.4%, prior_run 29.6%, length 6.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 83.3  (rs_percentile = 83.3)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0  (dist -0.13% in [-3%, 0%] -> 80)
+
+--- NOVN.SW (A) ---
+  Composite = 0.2*70.0 + 0.25*100.0 + 0.25*82.8 + 0.15*50.0 + 0.15*80.0 = 79.2
+  Trend: 70.0  (15.0-30.0% above 200 SMA)
+  Base: 100.0  (depth 13.2%, prior_run 33.8%, length 6.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 82.8  (rs_percentile = 82.8)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0  (dist -0.03% in [-3%, 0%] -> 80)
+
+--- FLEX (B) ---
+  Composite = 0.2*70.0 + 0.25*100.0 + 0.25*64.5 + 0.15*100.0 + 0.15*60.0 = 79.1
+  Trend: 70.0  (15.0-30.0% above 200 SMA)
+  Base: 100.0  (depth 18.8%, prior_run 28.0%, length 8.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 64.5  (rs_percentile = 64.5)
+  Volume: 100.0  (contraction <0.8 -> 100)
+  Breakout: 60.0  (dist -3.01% in [-5%, -3%) -> 60)
+
+--- CASY (A) ---
+  Composite = 0.2*70.0 + 0.25*100.0 + 0.25*81.4 + 0.15*50.0 + 0.15*80.0 = 78.9
+  Trend: 70.0  (15.0-30.0% above 200 SMA)
+  Base: 100.0  (depth 12.5%, prior_run 37.8%, length 6.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 81.4  (rs_percentile = 81.4)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0  (dist -1.43% in [-3%, 0%] -> 80)
+
+--- SMP (B) ---
+  Composite = 0.2*70.0 + 0.25*100.0 + 0.25*63.8 + 0.15*100.0 + 0.15*60.0 = 78.9
+  Trend: 70.0  (15.0-30.0% above 200 SMA)
+  Base: 100.0  (depth 21.3%, prior_run 27.8%, length 8.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 63.8  (rs_percentile = 63.8)
+  Volume: 100.0  (contraction <0.8 -> 100)
+  Breakout: 60.0  (dist -3.94% in [-5%, -3%) -> 60)
+
+--- TD (B) ---
+  Composite = 0.2*70.0 + 0.25*100.0 + 0.25*69.0 + 0.15*70.0 + 0.15*80.0 = 78.8
+  Trend: 70.0  (15.0-30.0% above 200 SMA)
+  Base: 100.0  (depth 6.6%, prior_run 27.1%, length 6.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 69.0  (rs_percentile = 69.0)
+  Volume: 70.0  (contraction <0.95 -> 70)
+  Breakout: 80.0  (dist -1.23% in [-3%, 0%] -> 80)
+
+--- MAC (A) ---
+  Composite = 0.2*70.0 + 0.25*100.0 + 0.25*81.2 + 0.15*50.0 + 0.15*80.0 = 78.8
+  Trend: 70.0  (15.0-30.0% above 200 SMA)
+  Base: 100.0  (depth 15.5%, prior_run 30.1%, length 8.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 81.2  (rs_percentile = 81.2)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0  (dist -1.15% in [-3%, 0%] -> 80)
+
+--- HUBB (A) ---
+  Composite = 0.2*70.0 + 0.25*100.0 + 0.25*80.7 + 0.15*50.0 + 0.15*80.0 = 78.7
+  Trend: 70.0  (15.0-30.0% above 200 SMA)
+  Base: 100.0  (depth 12.4%, prior_run 32.2%, length 6.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 80.7  (rs_percentile = 80.7)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0  (dist -1.05% in [-3%, 0%] -> 80)
+
+--- VCTR (A) ---
+  Composite = 0.2*70.0 + 0.25*100.0 + 0.25*80.7 + 0.15*50.0 + 0.15*80.0 = 78.7
+  Trend: 70.0  (15.0-30.0% above 200 SMA)
+  Base: 100.0  (depth 19.0%, prior_run 36.4%, length 8.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 80.7  (rs_percentile = 80.7)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0  (dist -0.26% in [-3%, 0%] -> 80)
+
+--- ROG.SW (B) ---
+  Composite = 0.2*70.0 + 0.25*100.0 + 0.25*67.7 + 0.15*70.0 + 0.15*80.0 = 78.4
+  Trend: 70.0  (15.0-30.0% above 200 SMA)
+  Base: 100.0  (depth 11.7%, prior_run 45.2%, length 6.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 67.7  (rs_percentile = 67.7)
+  Volume: 70.0  (contraction <0.95 -> 70)
+  Breakout: 80.0  (dist -1.55% in [-3%, 0%] -> 80)
+
+--- ATCO-B.ST (A) ---
+  Composite = 0.2*70.0 + 0.25*100.0 + 0.25*79.6 + 0.15*50.0 + 0.15*80.0 = 78.4
+  Trend: 70.0  (15.0-30.0% above 200 SMA)
+  Base: 100.0  (depth 9.0%, prior_run 28.6%, length 6.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 79.6  (rs_percentile = 79.6)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0  (dist -1.33% in [-3%, 0%] -> 80)
+
+--- CVX (A) ---
+  Composite = 0.2*70.0 + 0.25*100.0 + 0.25*78.6 + 0.15*50.0 + 0.15*80.0 = 78.2
+  Trend: 70.0  (15.0-30.0% above 200 SMA)
+  Base: 100.0  (depth 13.1%, prior_run 28.3%, length 6.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 78.6  (rs_percentile = 78.6)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0  (dist -1.95% in [-3%, 0%] -> 80)
+
+--- XLE (A) ---
+  Composite = 0.2*70.0 + 0.25*100.0 + 0.25*78.7 + 0.15*50.0 + 0.15*80.0 = 78.2
+  Trend: 70.0  (15.0-30.0% above 200 SMA)
+  Base: 100.0  (depth 20.8%, prior_run 32.1%, length 8.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 78.7  (rs_percentile = 78.7)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0  (dist -1.9% in [-3%, 0%] -> 80)
+
+--- ALFA.ST (A) ---
+  Composite = 0.2*70.0 + 0.25*100.0 + 0.25*77.9 + 0.15*50.0 + 0.15*80.0 = 78.0
+  Trend: 70.0  (15.0-30.0% above 200 SMA)
+  Base: 100.0  (depth 9.1%, prior_run 26.4%, length 6.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 77.9  (rs_percentile = 77.9)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0  (dist -1.6% in [-3%, 0%] -> 80)
+
+--- XLB (A) ---
+  Composite = 0.2*70.0 + 0.25*100.0 + 0.25*78.0 + 0.15*50.0 + 0.15*80.0 = 78.0
+  Trend: 70.0  (15.0-30.0% above 200 SMA)
+  Base: 100.0  (depth 11.3%, prior_run 28.8%, length 6.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 78.0  (rs_percentile = 78.0)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0  (dist -2.0% in [-3%, 0%] -> 80)
+
+--- WTS (A) ---
+  Composite = 0.2*70.0 + 0.25*100.0 + 0.25*77.2 + 0.15*50.0 + 0.15*80.0 = 77.8
+  Trend: 70.0  (15.0-30.0% above 200 SMA)
+  Base: 100.0  (depth 20.3%, prior_run 32.8%, length 8.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 77.2  (rs_percentile = 77.2)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0  (dist -1.02% in [-3%, 0%] -> 80)
+
+--- TILE (B) ---
+  Composite = 0.2*70.0 + 0.25*95.0 + 0.25*69.9 + 0.15*100.0 + 0.15*50.0 = 77.7
+  Trend: 70.0  (15.0-30.0% above 200 SMA)
+  Base: 95.0  (depth 20.8%, prior_run 43.4%, length 8.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 69.9  (rs_percentile = 69.9)
+  Volume: 100.0  (contraction <0.8 -> 100)
+  Breakout: 50.0  (dist -6.72% -> 50)
+
+--- WSR (B) ---
+  Composite = 0.2*70.0 + 0.25*100.0 + 0.25*64.3 + 0.15*70.0 + 0.15*80.0 = 77.6
+  Trend: 70.0  (15.0-30.0% above 200 SMA)
+  Base: 100.0  (depth 10.3%, prior_run 34.2%, length 6.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 64.3  (rs_percentile = 64.3)
+  Volume: 70.0  (contraction <0.95 -> 70)
+  Breakout: 80.0  (dist -1.33% in [-3%, 0%] -> 80)
+
+--- TM (A) ---
+  Composite = 0.2*70.0 + 0.25*100.0 + 0.25*76.0 + 0.15*50.0 + 0.15*80.0 = 77.5
+  Trend: 70.0  (15.0-30.0% above 200 SMA)
+  Base: 100.0  (depth 12.6%, prior_run 33.1%, length 6.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 76.0  (rs_percentile = 76.0)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0  (dist -2.95% in [-3%, 0%] -> 80)
+
+--- GNL (A) ---
+  Composite = 0.2*70.0 + 0.25*100.0 + 0.25*76.2 + 0.15*50.0 + 0.15*80.0 = 77.5
+  Trend: 70.0  (15.0-30.0% above 200 SMA)
+  Base: 100.0  (depth 10.7%, prior_run 34.2%, length 6.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 76.2  (rs_percentile = 76.2)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0  (dist -2.54% in [-3%, 0%] -> 80)
+
+--- SAN.MC (A) ---
+  Composite = 0.2*70.0 + 0.25*100.0 + 0.25*75.6 + 0.15*50.0 + 0.15*80.0 = 77.4
+  Trend: 70.0  (15.0-30.0% above 200 SMA)
+  Base: 100.0  (depth 11.7%, prior_run 39.0%, length 6.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 75.6  (rs_percentile = 75.6)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0  (dist -0.59% in [-3%, 0%] -> 80)
+
+--- FCFS (A) ---
+  Composite = 0.2*70.0 + 0.25*100.0 + 0.25*75.8 + 0.15*50.0 + 0.15*80.0 = 77.4
+  Trend: 70.0  (15.0-30.0% above 200 SMA)
+  Base: 100.0  (depth 13.6%, prior_run 28.6%, length 6.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 75.8  (rs_percentile = 75.8)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0  (dist -1.39% in [-3%, 0%] -> 80)
+
+--- PH (A) ---
+  Composite = 0.2*70.0 + 0.25*100.0 + 0.25*74.0 + 0.15*50.0 + 0.15*80.0 = 77.0
+  Trend: 70.0  (15.0-30.0% above 200 SMA)
+  Base: 100.0  (depth 11.9%, prior_run 44.3%, length 6.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 74.0  (rs_percentile = 74.0)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0  (dist -2.29% in [-3%, 0%] -> 80)
+
+--- REP.MC (A) ---
+  Composite = 0.2*70.0 + 0.25*100.0 + 0.25*73.5 + 0.15*50.0 + 0.15*80.0 = 76.9
+  Trend: 70.0  (15.0-30.0% above 200 SMA)
+  Base: 100.0  (depth 18.7%, prior_run 35.1%, length 8.0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 73.5  (rs_percentile = 73.5)
+  Volume: 50.0  (contraction >=0.95 or other -> 50)
+  Breakout: 80.0  (dist -0.11% in [-3%, 0%] -> 80)
+
+===== END SEPA SCAN =====

@@ -329,8 +329,8 @@ class MinerviniScanner:
                 results["failures"].append(f"Base depth {base_depth_pct:.1f}% (acceptable but >{BASE_DEPTH_WARNING_PCT}%)")
             
             # Check for wide, sloppy candles (high volatility)
-            base_volatility = base_data['Close'].pct_change().std()
-            avg_volatility = hist['Close'].pct_change().tail(252).std()
+            base_volatility = base_data['Close'].pct_change(fill_method=None).std()
+            avg_volatility = hist['Close'].pct_change(fill_method=None).tail(252).std()
             
             if base_volatility > avg_volatility * BASE_VOLATILITY_MULTIPLIER:
                 results["passed"] = False
@@ -391,7 +391,7 @@ class MinerviniScanner:
             # Method 1: Look for low volatility periods (improved method)
             window = VOLATILITY_WINDOW  # ~2 weeks
             data = data.copy()  # Avoid SettingWithCopyWarning
-            data['volatility'] = data['Close'].pct_change().rolling(window=window).std()
+            data['volatility'] = data['Close'].pct_change(fill_method=None).rolling(window=window).std()
             
             # Find periods with low volatility (potential bases)
             avg_volatility = data['volatility'].mean()
@@ -519,8 +519,8 @@ class MinerviniScanner:
                 benchmark_hist = self.data_provider.get_historical_data(bench, period="1y", interval="1d")
                 if not benchmark_hist.empty:
                     # Calculate RS manually
-                    stock_returns = hist['Close'].pct_change().dropna()
-                    bench_returns = benchmark_hist['Close'].pct_change().dropna()
+                    stock_returns = hist['Close'].pct_change(fill_method=None).dropna()
+                    bench_returns = benchmark_hist['Close'].pct_change(fill_method=None).dropna()
                     
                     # Align dates
                     common_dates = stock_returns.index.intersection(bench_returns.index)

@@ -4,7 +4,8 @@ Used by 01_fetch_yahoo_watchlist_V2.py (pipeline cache).
 """
 import time
 from datetime import datetime
-from typing import Dict
+from typing import Dict, List
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 from bot import TradingBot
 from logger_config import get_logger
@@ -91,3 +92,91 @@ def fetch_stock_data_with_retry(ticker: str, bot: TradingBot, max_retries: int =
         "data_available": False,
         "fetched_at": datetime.now().isoformat(),
     }
+
+
+def _build_result_from_hist(
+    ticker: str,
+    hist,
+    stock_info: Dict,
+    eur_usd_rate: float,
+) -> Dict:
+    """Build cache result dict from hist DataFrame and stock_info (same shape as fetch_stock_data)."""
+    hist_dict = {
+        "index": [str(idx) for idx in hist.index],
+        "data": hist.to_dict("records"),
+    }
+    if (stock_info or {}).get("currency") == "EUR" and eur_usd_rate and eur_usd_rate > 0:
+        for row in hist_dict["data"]:
+            for key in ("Open", "High", "Low", "Close"):
+                if key in row and row[key] is not None:
+                    row[key] = round(float(row[key]) * eur_usd_rate, 4)
+        if stock_info:
+            for key in ("current_price", "52_week_high", "52_week_low"):
+                if stock_info.get(key) is not None:
+                    stock_info[key] = round(float(stock_info[key]) * eur_usd_rate, 4)
+            stock_info["currency"] = "USD"
+            stock_info["original_currency"] = "EUR"
+    elif (stock_info or {}).get("currency") == "EUR":
+        if stock_info:
+            stock_info["original_currency"] = "EUR"
+            stock_info["rate_unavailable"] = True
+    return {
+        "ticker": ticker,
+        "data_available": True,
+        "historical_data": hist_dict,
+        "stock_info": stock_info or {},
+        "data_points": len(hist),
+        "date_range": {"start": str(hist.index[0]), "end": str(hist.index[-1])},
+        "fetched_at": datetime.now().isoformat(),
+    }
+
+
+def fetch_stock_data_batch(tickers: List[str], bot: TradingBot, stock_info_workers: int = 4) -> Dict[str, Dict]:
+    """
+    Fetch historical data for many tickers in one batch (yf.download), then fetch stock_info
+    in parallel. Returns dict mapping ticker -> same result shape as fetch_stock_data.
+    Tickers with insufficient data get an error result.
+    """
+    if not tickers:
+        return {}
+    logger.info("Batch fetching historical data for %d tickers...", len(tickers))
+    hist_by_ticker = bot.data_provider.get_historical_data_batch(tickers, period="1y", interval="1d")
+    min_rows = 200
+    ok_tickers = [t for t in tickers if t in hist_by_ticker and len(hist_by_ticker[t]) >= min_rows]
+    results: Dict[str, Dict] = {}
+    for t in tickers:
+        if t not in hist_by_ticker or len(hist_by_ticker[t]) < min_rows:
+            results[t] = {
+                "ticker": t,
+                "error": "Insufficient historical data ({} rows, need ≥{})".format(
+                    len(hist_by_ticker.get(t, [])) if t in hist_by_ticker else 0, min_rows
+                ),
+                "data_available": False,
+                "fetched_at": datetime.now().isoformat(),
+            }
+    if not ok_tickers:
+        return results
+    eur_usd_rate = get_eur_usd_rate()
+    rate = eur_usd_rate if eur_usd_rate and eur_usd_rate > 0 else None
+    # Fetch stock_info in parallel
+    def get_info(t: str):
+        return t, bot.data_provider.get_stock_info(t)
+    info_by_ticker: Dict[str, Dict] = {}
+    with ThreadPoolExecutor(max_workers=min(stock_info_workers, len(ok_tickers))) as ex:
+        futures = {ex.submit(get_info, t): t for t in ok_tickers}
+        for future in as_completed(futures):
+            try:
+                t, info = future.result()
+                info_by_ticker[t] = info or {}
+            except Exception as e:
+                t = futures[future]
+                logger.warning("Stock info failed for %s: %s", t, e)
+                info_by_ticker[t] = {}
+    for t in ok_tickers:
+        results[t] = _build_result_from_hist(
+            t,
+            hist_by_ticker[t],
+            info_by_ticker.get(t, {}),
+            rate or 0.0,
+        )
+    return results

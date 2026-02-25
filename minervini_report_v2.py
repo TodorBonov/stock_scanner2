@@ -107,21 +107,39 @@ def _important_notes(r: Dict) -> List[str]:
 
 
 def _important_note_short(r: Dict) -> str:
-    """Short note string for ranked tables: Ext, Late, LowRS, BO or —."""
-    notes = _important_notes(r)
-    if not notes:
+    """Short note string for ranked tables: Ext, Late, LowRS, BO; or for REJECT a truncated reason; or —."""
+    if r.get("eligible", False):
+        notes = _important_notes(r)
+        if not notes:
+            return "—"
+        abbr = []
+        for n in notes:
+            if "Extended" in n:
+                abbr.append("Ext")
+            elif "Late-stage" in n:
+                abbr.append("Late")
+            elif "Low RS" in n:
+                abbr.append("LowRS")
+            elif "In breakout" in n:
+                abbr.append("BO")
+        return ",".join(abbr) if abbr else "—"
+    # For rejected stocks, show first reject reason (e.g. "below 200 SMA" or "No valid base")
+    reason = r.get("reject_reason") or ""
+    if not reason:
         return "—"
-    abbr = []
-    for n in notes:
-        if "Extended" in n:
-            abbr.append("Ext")
-        elif "Late-stage" in n:
-            abbr.append("Late")
-        elif "Low RS" in n:
-            abbr.append("LowRS")
-        elif "In breakout" in n:
-            abbr.append("BO")
-    return ",".join(abbr) if abbr else "—"
+    if "Price below 200 SMA" in reason:
+        return "below 200 SMA"
+    if "No valid base" in reason:
+        return "No valid base"
+    if "Prior run" in reason and "% < " in reason:
+        return "Prior run low"
+    if "dollar volume" in reason or "Avg 20d" in reason:
+        return "Liquidity"
+    if "Price $" in reason:
+        return "Price"
+    # First 20 chars of first segment
+    first = reason.split(";")[0].strip() if ";" in reason else reason
+    return first[:18] + "…" if len(first) > 18 else first
 
 
 def _short_summary_block(r: Dict) -> List[str]:
@@ -163,6 +181,9 @@ def _detailed_block(r: Dict) -> List[str]:
         f"----- {ticker} -----",
         f"Grade: {r.get('grade', '?')}",
     ]
+    reject_reason = r.get("reject_reason")
+    if reject_reason:
+        lines.append(f"Reject reason: {reject_reason}")
     important = _important_notes(r)
     if important:
         lines.append(f"Important note: {'; '.join(important)}")
@@ -363,6 +384,8 @@ def generate_user_friendly_report(
     lines.append("----- Executive Summary -----")
     lines.append(f"Universe: {len(scan_results)} stocks")
     lines.append(f"Eligible Stage 2: {len(eligible)}")
+    if len(eligible) == 0:
+        lines.append("(No stocks passed structural eligibility. KPIs—RS %, RSI, Pivot, Stop, R/R—are only computed for eligible stocks; rejected stocks show — and 0. Check each stock's 'Reject reason' below.)")
     lines.append(f"A+/A candidates: {len(actionable)}")
     lines.append(f"B candidates: {len(watchlist)}")
     lines.append(f"In Breakout Now: {in_breakout_count}")

@@ -40,8 +40,8 @@ OPENAI_API_TIMEOUT = 60  # seconds for OpenAI API calls
 # Why important: AI calls can take longer, so timeout is more generous
 
 # ChatGPT (06, 07) – model for existing-positions and new-positions analysis
-# See https://platform.openai.com/docs/models (e.g. gpt-4o, gpt-4-turbo, gpt-4o-mini)
-OPENAI_CHATGPT_MODEL = "gpt-4o"
+# See https://platform.openai.com/docs/models (e.g. gpt-5.2, gpt-5.2-pro, gpt-5-mini)
+OPENAI_CHATGPT_MODEL = "gpt-5.2"
 OPENAI_CHATGPT_MAX_COMPLETION_TOKENS = 64000  # Allow long analysis for many stocks (increase if output is truncated)
 OPENAI_CHATGPT_MAX_A_GRADE_STOCKS = 9999  # Max A+ and A stocks in one prompt (9999 = send all)
 OPENAI_CHATGPT_MAX_PRE_BREAKOUT_STOCKS = 9999  # Max pre-breakout setups in one prompt (9999 = send all)

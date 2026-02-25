@@ -1,0 +1,2310 @@
+Report run: 2026-02-25 23:18:24
+Data as of (Yahoo): 2026-02-25T23:17:28.287087
+
+============================================================
+PART 1 — RANK TABLE & DETAILED (PER STOCK)
+============================================================
+
+----- Executive Summary -----
+Universe: 1726 stocks
+Eligible Stage 2: 0
+A+/A candidates: 0
+B candidates: 0
+In Breakout Now: 0
+Average RS Percentile (eligible): 0
+
+----- Ranked Table -----
+| Rank | Ticker | Grade | Score | Base Type | Depth % | RS %ile | Dist to Pivot | R/R | Stop | Note |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | AAPL | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 2 | MSFT | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 3 | NVDA | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 4 | AMD | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 5 | TSLA | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 6 | INTC | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 7 | GDS | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 8 | QBTS | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 9 | IONQ | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 10 | RGTI | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 11 | QUBT | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 12 | PFE | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 13 | JNJ | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 14 | MRK | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 15 | ABBV | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 16 | BMY | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 17 | LLY | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 18 | GILD | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 19 | AMGN | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 20 | REGN | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 21 | VRTX | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 22 | BIIB | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 23 | TEVA | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 24 | ZTS | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 25 | ALKS | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 26 | IONS | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 27 | INCY | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 28 | RHM.DE | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 29 | HAG.DE | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 30 | HO.PA | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 31 | SAF.PA | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 32 | AM.PA | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 33 | BA.L | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 34 | RR.L | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 35 | QQ.L | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 36 | LDO.MI | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 37 | IDR.MC | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 38 | SAAB-B.ST | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 39 | AIR.AS | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 40 | KOG.OL | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 41 | SAP.DE | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 42 | ASML.AS | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 43 | ADYEN.AS | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 44 | CAP.PA | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 45 | SGE.L | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 46 | ERIC-B.ST | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 47 | DBK.DE | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 48 | CBK.DE | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 49 | BNP.PA | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 50 | GLE.PA | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 51 | HSBA.L | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 52 | LLOY.L | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 53 | BARC.L | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 54 | SAN.MC | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 55 | BBVA.MC | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 56 | ISP.MI | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 57 | UCG.MI | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 58 | INGA.AS | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 59 | UBSG.SW | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 60 | VOW3.DE | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 61 | BMW.DE | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 62 | RNO.PA | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 63 | PEUG.PA | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 64 | STLA | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 65 | VOLV-B.ST | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 66 | BP.L | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 67 | SHEL.L | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 68 | TTE.PA | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 69 | ENI.MI | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 70 | REP.MC | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 71 | EQNR.OL | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 72 | NOVN.SW | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 73 | ROG.SW | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 74 | GSK.L | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 75 | GS71.DE | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 76 | WTAI | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 77 | AZN.L | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 78 | HIK.L | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 79 | SAN.PA | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+| 80 | IPS.PA | REJECT | 0.0 | standard_base | 0.0 | — | 0.0 | — | — | — |
+
+----- Detailed (per stock) -----
+----- AAPL -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- MSFT -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- NVDA -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- AMD -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- TSLA -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- INTC -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- GDS -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- QBTS -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- IONQ -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- RGTI -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- QUBT -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- PFE -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- JNJ -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- MRK -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- ABBV -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- BMY -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- LLY -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- GILD -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- AMGN -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- REGN -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- VRTX -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- BIIB -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- TEVA -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- ZTS -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- ALKS -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- IONS -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- INCY -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- RHM.DE -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- HAG.DE -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- HO.PA -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- SAF.PA -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- AM.PA -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- BA.L -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- RR.L -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- QQ.L -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- LDO.MI -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- IDR.MC -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- SAAB-B.ST -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- AIR.AS -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- KOG.OL -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- SAP.DE -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- ASML.AS -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- ADYEN.AS -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- CAP.PA -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- SGE.L -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- ERIC-B.ST -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- DBK.DE -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- CBK.DE -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- BNP.PA -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- GLE.PA -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- HSBA.L -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- LLOY.L -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- BARC.L -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- SAN.MC -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- BBVA.MC -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- ISP.MI -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- UCG.MI -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- INGA.AS -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- UBSG.SW -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- VOW3.DE -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- BMW.DE -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- RNO.PA -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- PEUG.PA -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- STLA -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- VOLV-B.ST -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- BP.L -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- SHEL.L -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- TTE.PA -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- ENI.MI -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- REP.MC -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- EQNR.OL -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- NOVN.SW -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- ROG.SW -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- GSK.L -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- GS71.DE -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- WTAI -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- AZN.L -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- HIK.L -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- SAN.PA -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+----- IPS.PA -----
+Grade: REJECT
+Composite Score: 0.0
+  Score calculation: 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0   (below 200 SMA)
+  Base: 0.0    (depth 0.0% (<=15 +10, <=20 +5); length 0 wks (5.0-8.0 +5, <4.0 -5); 80+bonuses = 0.0)
+  RS: 0.0     (rs_percentile 0-100; this stock —)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0 (dist 0.0% > 8.0% (extended) -> 30)
+Base: standard_base (0.0 weeks, 0.0% deep)
+Prior Run: —
+RS Percentile: —
+RSI: —
+Pivot: —
+Distance to Pivot: 0.0%
+Stop: —
+Reward/Risk: —
+Status: Watch
+
+
+============================================================
+EARLY CANDIDATES (before extension)
+============================================================
+
+Stocks that are not yet extended (trend 40-70), building RS (50-80 %ile),
+and near pivot (-5% to 0%). Sorted by grade (A+ then A then B), then composite score.
+
+----- Early candidates table -----
+| Rank | Ticker | Grade | Score | Trend | RS %ile | Dist to Pivot | Base Type | Note |
+|---|---|---|---|---|---|---|---|---|
+
+  (none match the early thresholds this run)
+
+----- Risk Warnings (summary) -----
+  None
+
+============================================================
+PART 3 — SCORE BREAKDOWN & CONFIG THRESHOLDS
+============================================================
+
+How the composite score is computed: composite = 0.2*Trend + 0.25*Base + 0.25*RS + 0.15*Vol + 0.15*Breakout (each component 0–100).
+
+----- Config thresholds (config) -----
+Eligibility:
+  MIN_AVG_DOLLAR_VOLUME_20D = 1,000,000  MIN_PRICE_THRESHOLD = 5.0
+  MIN_PRIOR_RUN_PCT = 25.0%  PRIOR_RUN_LOOKBACK_TRADING_DAYS = 63
+
+Trend score (0–100 by % above 200 SMA):
+  ≥30.0% → 100  15.0–30.0% → 70  5.0–15.0% → 40  0.0–5.0% → 15  <0.0% → 0
+
+Composite weights:
+  WEIGHT_TREND_STRUCTURE = 0.2  WEIGHT_BASE_QUALITY = 0.25  WEIGHT_RELATIVE_STRENGTH = 0.25  WEIGHT_VOLUME_SIGNATURE = 0.15  WEIGHT_BREAKOUT_QUALITY = 0.15
+
+Grade bands (composite score):
+  ≥85.0 → A+  ≥75.0 → A  ≥65.0 → B  ≥55.0 → C  <55.0 → REJECT
+  MIN_RS_PERCENTILE_FOR_A_PLUS = 80.0  MIN_RS_PERCENTILE_FOR_A = 70.0 (downgrade if below)
+
+Base score (additions/penalties):
+  depth ≤15% → +10  ≤20% → +5  prior_run ≥25.0% → +10  else → -20
+  length 5.0–8.0 wks → +5  <4.0 wks → -5
+
+Breakout score (pre-breakout by distance to pivot):
+  dist [-3%, 0%] → 80  [-5%, -3%) → 60  >8.0% → 30  else 50  (in breakout → 100)
+
+Volume score (base contraction):
+  contraction <0.8 → 100  <0.95 → 70  else 50 (when passed); failed → 0/50/70 by band
+
+----- Per-stock score derivation (top 80) -----
+--- AAPL (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- MSFT (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- NVDA (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- AMD (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- TSLA (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- INTC (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- GDS (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- QBTS (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- IONQ (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- RGTI (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- QUBT (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- PFE (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- JNJ (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- MRK (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- ABBV (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- BMY (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- LLY (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- GILD (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- AMGN (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- REGN (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- VRTX (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- BIIB (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- TEVA (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- ZTS (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- ALKS (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- IONS (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- INCY (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- RHM.DE (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- HAG.DE (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- HO.PA (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- SAF.PA (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- AM.PA (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- BA.L (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- RR.L (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- QQ.L (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- LDO.MI (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- IDR.MC (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- SAAB-B.ST (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- AIR.AS (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- KOG.OL (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- SAP.DE (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- ASML.AS (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- ADYEN.AS (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- CAP.PA (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- SGE.L (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- ERIC-B.ST (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- DBK.DE (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- CBK.DE (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- BNP.PA (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- GLE.PA (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- HSBA.L (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- LLOY.L (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- BARC.L (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- SAN.MC (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- BBVA.MC (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- ISP.MI (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- UCG.MI (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- INGA.AS (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- UBSG.SW (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- VOW3.DE (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- BMW.DE (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- RNO.PA (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- PEUG.PA (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- STLA (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- VOLV-B.ST (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- BP.L (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- SHEL.L (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- TTE.PA (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- ENI.MI (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- REP.MC (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- EQNR.OL (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- NOVN.SW (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- ROG.SW (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- GSK.L (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- GS71.DE (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- WTAI (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- AZN.L (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- HIK.L (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- SAN.PA (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+--- IPS.PA (REJECT) ---
+  Composite = 0.2*0.0 + 0.25*0.0 + 0.25*0.0 + 0.15*0.0 + 0.15*0.0 = 0.0
+  Trend: 0.0  (below 200 SMA)
+  Base: 0.0  (depth 0.0%, prior_run —, length 0 wks; depth ≤15 +10, ≤20 +5, prior ≥25.0 +10, length 5.0-8.0 +5)
+  RS: 0.0  (rs_percentile = None)
+  Volume: 0.0  (failed / 0)
+  Breakout: 0.0  (dist 0.0% > 8.0% (extended) -> 30)
+
+===== END SEPA SCAN =====

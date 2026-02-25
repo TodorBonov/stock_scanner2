@@ -9,8 +9,6 @@ import time
 import json
 from pathlib import Path
 from datetime import datetime
-from concurrent.futures import ThreadPoolExecutor, TimeoutError as FuturesTimeoutError
-
 from dotenv import load_dotenv
 from config import DEFAULT_ENV_PATH
 from logger_config import setup_logging, get_logger
@@ -19,14 +17,14 @@ if Path(DEFAULT_ENV_PATH).exists():
     load_dotenv(Path(DEFAULT_ENV_PATH))
 
 from watchlist_loader import load_watchlist, get_yahoo_symbols_for_fetch
-from fetch_utils import fetch_stock_data_with_retry
+from fetch_utils import fetch_stock_data_batch
 from bot import TradingBot
 
 # New pipeline: own cache file (do not overwrite main pipeline cache)
 NEW_PIPELINE_DIR = Path("data")
 NEW_PIPELINE_CACHE = NEW_PIPELINE_DIR / "cached_stock_data_new_pipeline.json"
-DELAY_BETWEEN_FETCHES_SEC = 1.0
-FETCH_TIMEOUT_SEC = 60
+FETCH_TIMEOUT_SEC = 300  # batch can take longer
+BATCH_DELAY_AFTER_SEC = 1.0  # short delay after batch to be nice to Yahoo
 
 if sys.platform == "win32" and "pytest" not in sys.modules:
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
@@ -78,37 +76,50 @@ def main():
     skipped = 0
     errors = 0
 
+    # Tickers we need to fetch (not in cache with data, or refresh)
+    to_fetch = [
+        t for t in tickers
+        if args.refresh or t not in cached_stocks or not cached_stocks[t].get("data_available", False)
+    ]
+    skipped = sum(1 for t in tickers if t not in to_fetch)
+
     print(f"\n{'='*80}")
     print("01: FETCH YAHOO WATCHLIST")
     print(f"{'='*80}")
     print(f"Watchlist: {args.watchlist}")
-    print(f"Tickers: {total}")
+    print(f"Tickers: {total}  (fetching: {len(to_fetch)}, using cache: {skipped})")
     print(f"Cache: {NEW_PIPELINE_CACHE}")
     print(f"{'='*80}\n")
 
     for i, ticker in enumerate(tickers, 1):
-        if not args.refresh and ticker in cached_stocks and cached_stocks[ticker].get("data_available", False):
+        if ticker not in to_fetch:
             print(f"[{i}/{total}] {ticker:12s} - Using cached")
-            skipped += 1
             continue
-        if not args.refresh and ticker in cached_stocks and cached_stocks[ticker].get("error"):
-            print(f"[{i}/{total}] {ticker:12s} - Retrying...")
-        print(f"[{i}/{total}] {ticker:12s} - Fetching...", end=" ", flush=True)
-        try:
-            with ThreadPoolExecutor(max_workers=1) as executor:
-                future = executor.submit(fetch_stock_data_with_retry, ticker, bot)
-                result = future.result(timeout=FETCH_TIMEOUT_SEC)
-        except FuturesTimeoutError:
-            result = {"ticker": ticker, "error": "Timeout", "data_available": False, "fetched_at": datetime.now().isoformat()}
+        print(f"[{i}/{total}] {ticker:12s} - Queued for batch fetch")
 
-        cached_stocks[ticker] = result
-        if result.get("data_available", False):
-            fetched += 1
-            print(f"OK ({result.get('data_points', 0)} points)")
-        else:
-            errors += 1
-            print(f"Error: {result.get('error', 'Unknown')[:50]}")
-        time.sleep(DELAY_BETWEEN_FETCHES_SEC)
+    if to_fetch:
+        print(f"\nBatch downloading {len(to_fetch)} tickers from Yahoo (threaded)...")
+        try:
+            batch_results = fetch_stock_data_batch(to_fetch, bot, stock_info_workers=6)
+        except Exception as e:
+            logger.exception("Batch fetch failed")
+            batch_results = {t: {"ticker": t, "error": str(e), "data_available": False, "fetched_at": datetime.now().isoformat()} for t in to_fetch}
+        for ticker in to_fetch:
+            result = batch_results.get(ticker) or {
+                "ticker": ticker,
+                "error": "No result from batch",
+                "data_available": False,
+                "fetched_at": datetime.now().isoformat(),
+            }
+            cached_stocks[ticker] = result
+            if result.get("data_available", False):
+                fetched += 1
+            else:
+                errors += 1
+        print(f"Batch done: {fetched} OK, {errors} errors.")
+        time.sleep(BATCH_DELAY_AFTER_SEC)
+    else:
+        print("\nNothing to fetch (all cached).")
 
     cached_data["stocks"] = cached_stocks
     cached_data["metadata"] = {

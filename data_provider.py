@@ -467,7 +467,68 @@ class StockDataProvider:
 
         logger.error(f"Yahoo Finance error for {ticker}: {last_error}", exc_info=True)
         return pd.DataFrame()
-    
+
+    def get_historical_data_batch(self, tickers: List[str], period: str = "1y", interval: str = "1d") -> Dict[str, pd.DataFrame]:
+        """
+        Get historical OHLCV for multiple tickers in one batch via yf.download (threaded).
+        Returns dict mapping original ticker -> DataFrame with Open, High, Low, Close, Volume.
+        Only includes tickers that have enough data; missing/failed tickers are omitted.
+        """
+        if not YFINANCE_AVAILABLE or not tickers:
+            return {}
+        required_cols = ["Open", "High", "Low", "Close", "Volume"]
+        # Build cleaned list and map cleaned -> original (use first occurrence to preserve order)
+        cleaned_to_original: Dict[str, str] = {}
+        for t in tickers:
+            c = clean_ticker(t)
+            if c not in cleaned_to_original:
+                cleaned_to_original[c] = t
+        unique_cleaned = list(cleaned_to_original.keys())
+        yf_period = period if period in ["1d", "5d", "1mo", "3mo", "6mo", "1y", "2y", "5y", "10y", "ytd", "max"] else "1y"
+        yf_interval = interval if interval in ["1m", "2m", "5m", "15m", "30m", "60m", "90m", "1h", "1d", "5d", "1wk", "1mo", "3mo"] else "1d"
+        result: Dict[str, pd.DataFrame] = {}
+        for attempt in range(YF_RATE_LIMIT_MAX_RETRIES + 1):
+            try:
+                logger.debug("Batch download from Yahoo Finance for %d tickers (attempt %d)", len(unique_cleaned), attempt + 1)
+                raw = yf.download(
+                    unique_cleaned,
+                    period=yf_period,
+                    interval=yf_interval,
+                    group_by="ticker",
+                    threads=True,
+                    auto_adjust=False,
+                    progress=False,
+                )
+                if raw.empty:
+                    logger.warning("Yahoo Finance batch returned empty data")
+                    return result
+                # Normalize to per-ticker DataFrames
+                if isinstance(raw.columns, pd.MultiIndex):
+                    for level0 in raw.columns.get_level_values(0).unique():
+                        ticker_key = str(level0).strip()
+                        sub = raw[level0].copy()
+                        sub.columns = [c.strip() if isinstance(c, str) else c for c in sub.columns]
+                        available = [c for c in required_cols if c in sub.columns]
+                        if len(available) >= len(required_cols):
+                            result[cleaned_to_original.get(ticker_key, ticker_key)] = sub[required_cols].copy()
+                else:
+                    # Single ticker: yfinance returns flat columns
+                    orig = cleaned_to_original.get(unique_cleaned[0], unique_cleaned[0])
+                    available = [c for c in required_cols if c in raw.columns]
+                    if len(available) >= len(required_cols):
+                        result[orig] = raw[required_cols].copy()
+                return result
+            except Exception as e:
+                last_error = e
+                if _is_yf_rate_limit_error(e) and attempt < YF_RATE_LIMIT_MAX_RETRIES:
+                    wait = YF_RATE_LIMIT_WAIT_SECONDS[attempt]
+                    logger.warning("Yahoo Finance batch rate limited. Waiting %ds before retry %d/%d...", wait, attempt + 1, YF_RATE_LIMIT_MAX_RETRIES)
+                    time.sleep(wait)
+                else:
+                    break
+        logger.error("Yahoo Finance batch error: %s", last_error, exc_info=True)
+        return result
+
     def get_historical_data(self, ticker: str, period: str = "1y", interval: str = "1d") -> pd.DataFrame:
         """
         Get historical price and volume data from available sources (Yahoo Finance or Alpha Vantage)
@@ -559,8 +620,8 @@ class StockDataProvider:
                 return {}
             
             # Calculate returns
-            stock_returns = stock_hist['Close'].pct_change().dropna()
-            benchmark_returns = benchmark_hist['Close'].pct_change().dropna()
+            stock_returns = stock_hist['Close'].pct_change(fill_method=None).dropna()
+            benchmark_returns = benchmark_hist['Close'].pct_change(fill_method=None).dropna()
             
             # Align dates
             common_dates = stock_returns.index.intersection(benchmark_returns.index)
@@ -652,7 +713,7 @@ class StockDataProvider:
             price_change = (recent_prices.iloc[-1] - recent_prices.iloc[0]) / recent_prices.iloc[0]
             
             # Check for consolidation (low volatility)
-            volatility = recent_prices.pct_change().std()
+            volatility = recent_prices.pct_change(fill_method=None).std()
             
             return {
                 "uptrend": higher_highs and higher_lows,
