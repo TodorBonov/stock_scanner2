@@ -53,35 +53,32 @@ TRADING212_API_SECRET=your_secret_here
 
 ## Quick Start
 
-Run the pipeline in order (see **PIPELINES.md** for details):
+**Use Pipeline V2** (one command):
 
 ```powershell
-python 01_fetch_yahoo_watchlist.py
-python 02_fetch_positions_trading212.py
-python 03_prepare_for_minervini.py
-python 04_generate_full_report.py
-python 05_prepare_chatgpt_data.py
-python 06_chatgpt_existing_positions.py
-python 07_chatgpt_new_positions.py
+python run_pipeline_v2.py
 ```
 
-- **01** fetches OHLCV from Yahoo for watchlist (CSV or legacy .txt) → `data/cached_stock_data_new_pipeline.json`
-- **02** fetches open positions from Trading 212 → `data/positions_new_pipeline.json` (optional if you only want new-position suggestions)
-- **03** prepares data for Minervini (watchlist + cache + positions) → `data/prepared_for_minervini.json`, `reports/problems_with_tickers.txt`
-- **04** runs Minervini scan (reads prepared file or legacy cache), writes summary/detailed reports and `reports/scan_results_latest.json`
-- **05** prepares JSON for ChatGPT from scan results + positions (no scan) → `reports/new_pipeline/prepared_*.json`
-- **06** sends existing positions to ChatGPT for hold/add/trim/exit analysis
-- **07** sends A+/A new-position candidates to ChatGPT for entry evaluation
+Optional: `python run_pipeline_v2.py --csv` (export CSV from scan), `--refresh` (refetch Yahoo data).
 
-**Watchlist**: Use `watchlist.csv` with columns `type,yahoo_symbol,trading212_symbol,benchmark_index` (or legacy `watchlist.txt`, one symbol per line). See **PIPELINES.md**.
+- **01** → Fetch Yahoo OHLCV for watchlist  
+- **02** → Fetch Trading212 positions  
+- **03** → Prepare data for scanner  
+- **04 V2** → V2 Minervini scan → `reports/v2/sepa_scan_user_report_*.txt`  
+- **05** → Prep existing positions for ChatGPT  
+- **05 V2** → Prep new candidates from V2 scan  
+- **06** → ChatGPT analysis for existing positions → `reports/new_pipeline/chatgpt_existing_positions_*.txt`  
+- **08** → ChatGPT ranking of new candidates → `reports/v2/chatgpt_new_positions_v2_*.txt`  
 
-Optional 6-month OHLCV variant: run **05** with `--use-6mo`, then **06** and **07** with `--use-6mo`. See `reports/new_pipeline/TOKEN_COMPARISON_ORIGINAL_VS_6MO.md`.
+**Watchlist:** `watchlist.csv` with columns `type,yahoo_symbol,trading212_symbol,benchmark_index`. See **PIPELINES.md**.
+
+**Confused by script names or the two configs?** See **SCRIPTS_AND_CONFIG_REFERENCE.md** — it maps every script and config to “what to run” and “what to ignore” when using Pipeline V2.
+
+*(Original pipeline 01→04→05→06→07 is preserved on branch `pipeline-v1`; see **PIPELINE_ARCHIVE.md**.)*
 
 ## Usage
 
-Run in order: 01 → 02 → 03 → 04 → 05 → 06 → 07. Data paths: `data/cached_stock_data_new_pipeline.json`, `data/prepared_for_minervini.json`, `reports/scan_results_latest.json`, `reports/new_pipeline/`. Full details: **PIPELINES.md**.
-
-You can also run **04_generate_full_report.py** (or **generate_full_report.py**) standalone for a Minervini report; it prefers `data/prepared_for_minervini.json` from step 03, else legacy `data/cached_stock_data.json`. Use `--refresh` to fetch into the legacy cache.
+Run **Pipeline V2:** `python run_pipeline_v2.py`. Data paths: `data/cached_stock_data_new_pipeline.json`, `data/prepared_for_minervini.json`, `reports/scan_results_v2_latest.json`, `reports/v2/`, `reports/new_pipeline/`. Full details: **PIPELINE_V2.md**. Script/config map: **SCRIPTS_AND_CONFIG_REFERENCE.md**.
 
 ## Minervini SEPA Criteria Explained
 

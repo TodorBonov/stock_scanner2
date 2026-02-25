@@ -1,6 +1,12 @@
-# Pipeline V2 (Side Implementation)
+# Pipeline V2
 
-V2 runs **alongside** the main pipeline (01→07). It does not overwrite `scan_results_latest.json` or any main report paths.
+**Run:** `python run_pipeline_v2.py` (optionally `--csv`, `--refresh`).
+
+**Script and config names confusing?** See **SCRIPTS_AND_CONFIG_REFERENCE.md** for a clear map of what each script and config does and what to ignore when using V2.
+
+---
+
+V2 is now the primary pipeline. It writes to `reports/v2/` and `scan_results_v2_latest.json`; it does not overwrite `scan_results_latest.json` or the original report paths.
 
 ## What V2 Changes
 

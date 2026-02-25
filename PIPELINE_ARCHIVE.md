@@ -1,41 +1,22 @@
 # Pipeline archive (original pipeline)
 
-The **original pipeline** (01 → 04 → 05 → 06 → 07) is preserved so you can run it anytime. Day-to-day use is **Pipeline V2** (`run_pipeline_v2.py`).
+**main** has only **Pipeline V2** and shared code; any script or config used only by the original pipeline has been removed from main.
 
-## Where it’s saved
+The **original pipeline** (01 → 04 → 05 → 06 → 07) lives on branch **V1**. Shared files (01, 02, 03, 05, 06, config, etc.) exist on both branches and can evolve separately.
 
-- **Branch:** `pipeline-v1` — snapshot of the repo with both pipelines; original pipeline scripts are unchanged.
-- **Tag:** `pipeline-v1-baseline` — permanent reference to that state.
+## Where the original pipeline lives
 
-## One-time setup (create branch and tag)
+- **Branch: `V1`** — full repo with everything the old pipeline needs (04_generate_full_report.py, 07_chatgpt_new_positions.py, pre_breakout_*, generate_full_report.py, etc.).
+- **Branch: `pipeline-v1`** / **Tag: `pipeline-v1-baseline`** — earlier snapshot with both pipelines in one tree (before we split).
 
-From the repo root, with your current work committed (or at least the state you want to preserve):
+## How to run the original pipeline
 
-```powershell
-# Optional: commit current work so branch/tag include it
-git add -A
-git commit -m "Pipeline V2 as primary; archive original pipeline on pipeline-v1"
-
-# Create archive branch and tag
-git branch pipeline-v1
-git tag pipeline-v1-baseline -m "Original pipeline (01→04→05→06→07) baseline; use run_pipeline_v2.py on main"
-```
-
-To push the branch and tag to the remote (e.g. GitHub):
-
-```powershell
-git push origin pipeline-v1
-git push origin pipeline-v1-baseline
-```
-
-## How to run the original pipeline later
-
-1. **Checkout the archive branch:**
+1. **Checkout V1:**
    ```powershell
-   git checkout pipeline-v1
+   git checkout V1
    ```
 
-2. **Run the original sequence** (no single runner script; run in order):
+2. **Run the original sequence** (in order):
    ```powershell
    python 01_fetch_yahoo_watchlist.py
    python 02_fetch_positions_trading212.py
@@ -51,16 +32,11 @@ git push origin pipeline-v1-baseline
    git checkout main
    ```
 
-Or open a specific snapshot anytime with:
-
-```powershell
-git checkout pipeline-v1-baseline
-```
-
 ## Summary
 
-| What              | Where / command                          |
-|-------------------|------------------------------------------|
-| Use from now on   | `python run_pipeline_v2.py` (on `main`)  |
-| Original pipeline | Branch `pipeline-v1`, tag `pipeline-v1-baseline` |
-| Docs              | **PIPELINES.md** (original), **PIPELINE_V2.md** (V2) |
+| Branch | Contents |
+|--------|----------|
+| **main** | Pipeline V2 only + shared code. Run: `python run_pipeline_v2.py`. No 04_generate_full_report.py, 07_chatgpt_new_positions.py, pre_breakout_*, etc. |
+| **V1** | Everything the original pipeline needs. Same shared scripts (01, 02, 03, 05, 06) plus original scan, report, and ChatGPT scripts. |
+
+Shared files (e.g. 01, 02, 03, 05, 06, config.py) are present on both branches and can have their own life (fixes or changes on main vs V1).

@@ -56,7 +56,7 @@ def main():
     if args.from_scan:
         path = Path(SCAN_RESULTS_LATEST)
         if not path.exists():
-            print(f"Scan results not found at {path}. Run 04_generate_full_report.py first.")
+            print(f"Scan results not found at {path}. Run the pipeline scan step first (e.g. run_pipeline_v2.py).")
             return
         with open(path, encoding="utf-8") as f:
             results = json.load(f)

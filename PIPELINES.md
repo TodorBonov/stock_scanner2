@@ -1,14 +1,14 @@
 # Pipeline
 
-**Primary pipeline (from now on):** use **Pipeline V2** — `python run_pipeline_v2.py`. See **PIPELINE_V2.md**.
+**main** has only **Pipeline V2**. Run: `python run_pipeline_v2.py`. See **PIPELINE_V2.md**.
 
-The **original pipeline** (01 → 04 → 05 → 06 → 07, with `04_generate_full_report.py` and `07_chatgpt_new_positions.py`) is preserved on branch `pipeline-v1` and tag `pipeline-v1-baseline`. See **PIPELINE_ARCHIVE.md** for how to run it.
+The **original pipeline** (01 → 04 → 05 → 06 → 07) is on branch **V1**; its scripts are not on main. See **PIPELINE_ARCHIVE.md**.
 
 ---
 
-## Original pipeline (archived)
+## Original pipeline (on branch V1 only)
 
-Script order: **01 → 02 → 03 → 04 → 05 → 06 → 07**. Optional 6-month OHLCV: use `--use-6mo` on 05, 06, 07.
+Script order: **01 → 02 → 03 → 04 → 05 → 06 → 07**. Optional 6-month OHLCV: use `--use-6mo` on 05, 06, 07. Checkout branch **V1** to run it.
 
 ---
 
