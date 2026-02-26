@@ -9,7 +9,12 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 
 from bot import TradingBot
 from logger_config import get_logger
-from config import FAILED_FETCH_LIST, TICKER_MAPPING_ERRORS_FILE
+from config import (
+    FAILED_FETCH_LIST,
+    TICKER_MAPPING_ERRORS_FILE,
+    YF_BATCH_CHUNK_SIZE,
+    YF_BATCH_CHUNK_DELAY_SEC,
+)
 from currency_utils import get_eur_usd_rate
 
 logger = get_logger(__name__)
@@ -133,14 +138,24 @@ def _build_result_from_hist(
 
 def fetch_stock_data_batch(tickers: List[str], bot: TradingBot, stock_info_workers: int = 4) -> Dict[str, Dict]:
     """
-    Fetch historical data for many tickers in one batch (yf.download), then fetch stock_info
-    in parallel. Returns dict mapping ticker -> same result shape as fetch_stock_data.
+    Fetch historical data for many tickers in chunks (yf.download per chunk, delay between chunks)
+    to reduce Yahoo rate limits, then fetch stock_info in parallel.
+    Returns dict mapping ticker -> same result shape as fetch_stock_data.
     Tickers with insufficient data get an error result.
     """
     if not tickers:
         return {}
-    logger.info("Batch fetching historical data for %d tickers...", len(tickers))
-    hist_by_ticker = bot.data_provider.get_historical_data_batch(tickers, period="1y", interval="1d")
+    # Chunk tickers to avoid Yahoo rate limits; merge results from each chunk
+    chunk_size = max(1, YF_BATCH_CHUNK_SIZE)
+    chunks = [tickers[i : i + chunk_size] for i in range(0, len(tickers), chunk_size)]
+    hist_by_ticker: Dict[str, any] = {}
+    for idx, chunk in enumerate(chunks):
+        logger.info("Batch fetching historical data for %d tickers (chunk %d/%d)...", len(chunk), idx + 1, len(chunks))
+        chunk_hist = bot.data_provider.get_historical_data_batch(chunk, period="1y", interval="1d")
+        hist_by_ticker.update(chunk_hist)
+        if idx < len(chunks) - 1 and YF_BATCH_CHUNK_DELAY_SEC > 0:
+            logger.info("Waiting %ds before next chunk (rate-limit mitigation)...", YF_BATCH_CHUNK_DELAY_SEC)
+            time.sleep(YF_BATCH_CHUNK_DELAY_SEC)
     min_rows = 200
     ok_tickers = [t for t in tickers if t in hist_by_ticker and len(hist_by_ticker[t]) >= min_rows]
     results: Dict[str, Dict] = {}

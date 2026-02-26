@@ -54,6 +54,10 @@ DATA_PROVIDER_TIMEOUT = 30  # seconds for data provider API calls
 # Used by: StockDataProvider (yfinance, Alpha Vantage)
 # Why important: Prevents hanging when data providers are slow
 
+# Yahoo Finance batch download (rate-limit mitigation)
+YF_BATCH_CHUNK_SIZE = 150  # tickers per chunk; smaller = gentler on Yahoo, more chunks = longer run
+YF_BATCH_CHUNK_DELAY_SEC = 45  # seconds to wait between chunks to avoid rate limits
+
 # ============================================================================
 # SCORING CONFIGURATION
 # ============================================================================

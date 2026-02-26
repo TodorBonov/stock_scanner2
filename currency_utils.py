@@ -3,6 +3,7 @@ Currency conversion for report display.
 All data and calculations stay in USD; convert to EUR only at report time for positions bought in EUR.
 Uses Yahoo Finance EURUSD=X (USD per 1 EUR) for the rate.
 """
+import os
 from typing import Optional, Tuple
 import logging
 
@@ -20,7 +21,12 @@ def get_eur_usd_rate_with_date() -> Tuple[Optional[float], Optional[str]]:
     """
     try:
         import yfinance as yf
-        t = yf.Ticker(EURUSD_YAHOO_TICKER)
+        session = None
+        if os.environ.get("DISABLE_SSL_VERIFY", "").strip().lower() in ("1", "true", "yes"):
+            import requests
+            session = requests.Session()
+            session.verify = False
+        t = yf.Ticker(EURUSD_YAHOO_TICKER, session=session) if session else yf.Ticker(EURUSD_YAHOO_TICKER)
         hist = t.history(period="5d", interval="1d")
         if hist is not None and not hist.empty and "Close" in hist.columns:
             rate = float(hist["Close"].iloc[-1])

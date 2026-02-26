@@ -5,6 +5,7 @@ Fetches stock data from multiple sources with automatic fallback:
 2. Alpha Vantage API - Requires API key, good for international stocks
 3. Trading 212 - Final fallback for position data
 """
+import os
 import pandas as pd
 import requests
 import time
@@ -65,6 +66,24 @@ class StockDataProvider:
         self.alpha_vantage_base = "https://www.alphavantage.co/query"
         self.trading212_client = trading212_client
         self.prefer_yfinance = prefer_yfinance and YFINANCE_AVAILABLE
+        # Optional: disable SSL verification (e.g. corporate proxy with SSL inspection). Set DISABLE_SSL_VERIFY=1 in .env
+        _disable = os.environ.get("DISABLE_SSL_VERIFY", "").strip().lower() in ("1", "true", "yes")
+        self._verify_ssl = not _disable
+        self._session = None
+        if _disable:
+            try:
+                from curl_cffi import requests as curl_requests
+                self._session = curl_requests.Session(impersonate="chrome")
+                self._session.verify = False
+            except ImportError:
+                self._session = requests.Session()
+                self._session.verify = False
+            try:
+                import urllib3
+                urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+            except Exception:
+                pass
+            logger.info("SSL verification disabled (DISABLE_SSL_VERIFY). Use only in trusted environments.")
         
         if self.prefer_yfinance:
             logger.info("Using Yahoo Finance (yfinance) as primary data source (free, no API key needed)")
@@ -93,7 +112,7 @@ class StockDataProvider:
                 "apikey": self.alpha_vantage_key
             }
             
-            response = requests.get(url, params=params, timeout=30)
+            response = requests.get(url, params=params, timeout=30, verify=self._verify_ssl)
             
             if response.status_code == 200:
                 overview = response.json()
@@ -109,7 +128,7 @@ class StockDataProvider:
                     "apikey": self.alpha_vantage_key
                 }
                 
-                income_response = requests.get(url, params=income_params, timeout=30)
+                income_response = requests.get(url, params=income_params, timeout=30, verify=self._verify_ssl)
                 income_data = {}
                 income_reports = []
                 if income_response.status_code == 200:
@@ -125,7 +144,7 @@ class StockDataProvider:
                     "apikey": self.alpha_vantage_key
                 }
                 
-                balance_response = requests.get(url, params=balance_params, timeout=30)
+                balance_response = requests.get(url, params=balance_params, timeout=30, verify=self._verify_ssl)
                 balance_data = {}
                 if balance_response.status_code == 200:
                     balance_json = balance_response.json()
@@ -228,7 +247,7 @@ class StockDataProvider:
                 "datatype": "json"
             }
             
-            response = requests.get(url, params=params, timeout=30)
+            response = requests.get(url, params=params, timeout=30, verify=self._verify_ssl)
             
             if response.status_code == 200:
                 data = response.json()
@@ -351,7 +370,7 @@ class StockDataProvider:
 
         for attempt in range(YF_RATE_LIMIT_MAX_RETRIES + 1):
             try:
-                stock = yf.Ticker(ticker_clean)
+                stock = yf.Ticker(ticker_clean, session=self._session) if self._session else yf.Ticker(ticker_clean)
                 info = stock.info
 
                 if not info or len(info) < 5:
@@ -441,7 +460,7 @@ class StockDataProvider:
         for attempt in range(YF_RATE_LIMIT_MAX_RETRIES + 1):
             try:
                 logger.debug(f"Fetching historical data from Yahoo Finance for {ticker_clean}" + (f" (attempt {attempt + 1})" if attempt else ""))
-                stock = yf.Ticker(ticker_clean)
+                stock = yf.Ticker(ticker_clean, session=self._session) if self._session else yf.Ticker(ticker_clean)
                 hist = stock.history(period=yf_period, interval=yf_interval)
 
                 if hist.empty:
@@ -490,8 +509,7 @@ class StockDataProvider:
         for attempt in range(YF_RATE_LIMIT_MAX_RETRIES + 1):
             try:
                 logger.debug("Batch download from Yahoo Finance for %d tickers (attempt %d)", len(unique_cleaned), attempt + 1)
-                raw = yf.download(
-                    unique_cleaned,
+                download_kw = dict(
                     period=yf_period,
                     interval=yf_interval,
                     group_by="ticker",
@@ -499,6 +517,9 @@ class StockDataProvider:
                     auto_adjust=False,
                     progress=False,
                 )
+                if self._session:
+                    download_kw["session"] = self._session
+                raw = yf.download(unique_cleaned, **download_kw)
                 if raw.empty:
                     logger.warning("Yahoo Finance batch returned empty data")
                     return result

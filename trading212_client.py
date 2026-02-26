@@ -2,6 +2,7 @@
 Trading 212 API Client
 Handles authentication and API calls to Trading 212
 """
+import os
 import requests
 import base64
 import time
@@ -33,6 +34,8 @@ class Trading212Client:
         self.rate_limit_delay = rate_limit_delay
         self._auth_header = self._generate_auth_header()
         self._last_request_time = 0
+        _disable = os.environ.get("DISABLE_SSL_VERIFY", "").strip().lower() in ("1", "true", "yes")
+        self._verify_ssl = not _disable
         logger.debug(f"Trading212Client initialized with rate_limit_delay={rate_limit_delay}")
     
     def _generate_auth_header(self) -> str:
@@ -67,6 +70,8 @@ class Trading212Client:
         # Add timeout to kwargs if not already specified
         if 'timeout' not in kwargs:
             kwargs['timeout'] = TRADING212_API_TIMEOUT
+        if 'verify' not in kwargs:
+            kwargs['verify'] = self._verify_ssl
         
         for attempt in range(max_retries):
             try:
