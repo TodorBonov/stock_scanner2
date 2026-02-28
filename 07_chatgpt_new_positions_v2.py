@@ -6,6 +6,7 @@ Writes reportsV2/chatgpt_new_positions_v2_<ts>.txt
 """
 import json
 import re
+import math
 import argparse
 from pathlib import Path
 from datetime import datetime
@@ -43,14 +44,16 @@ STOCKS:
 
 
 def _fmt(x, round_to=None):
-    """Format value for prompt; use — if None or missing."""
+    """Format value for prompt; use — if None, missing, or non-finite (NaN/inf)."""
     if x is None or x == "":
         return "—"
     try:
         v = float(x)
+        if not math.isfinite(v):
+            return "—"
         return str(round(v, round_to)) if round_to is not None else str(v)
     except (TypeError, ValueError):
-        return str(x)
+        return str(x) if x != "nan" and str(x).lower() != "nan" else "—"
 
 
 def _infer_exchange(ticker: str) -> str:

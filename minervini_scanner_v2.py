@@ -584,6 +584,16 @@ class MinerviniScannerV2(MinerviniScanner):
             )
             power_rank = 0.5 * (rs_percentile or 0) + 0.5 * prior_scaled
 
+            # Trend details for downstream (e.g. 05/07) when cache OHLCV is missing
+            trend_details = (trend_results.get("details") or {}).copy()
+            trend_for_export = {}
+            for k in ("current_price", "sma_50", "sma_150", "sma_200", "52_week_high", "52_week_low"):
+                if k in trend_details and trend_details[k] is not None:
+                    try:
+                        trend_for_export[k] = round(float(trend_details[k]), 2)
+                    except (TypeError, ValueError):
+                        pass
+
             return {
                 "ticker": ticker,
                 "eligible": True,
@@ -599,6 +609,7 @@ class MinerviniScannerV2(MinerviniScanner):
                 "relative_strength": rs_block,
                 "breakout": breakout_block,
                 "risk": risk_block,
+                "trend_details": trend_for_export if trend_for_export else None,
             }
         except Exception as e:
             logger.error(f"Error scanning {ticker}: {e}", exc_info=True)

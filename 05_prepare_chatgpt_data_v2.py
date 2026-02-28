@@ -6,6 +6,7 @@ A+/A from V2 grade (eligible + grade in A+, A). New positions payload includes V
 """
 import argparse
 import json
+import math
 from pathlib import Path
 from datetime import datetime
 from typing import Dict, List, Optional
@@ -118,17 +119,32 @@ def derive_trend_and_volume_from_ohlcv(hist_dict: dict) -> Dict:
         lows = []
         vols = []
         for rec in data:
-            c = rec.get("Close") or rec.get("close")
-            o = rec.get("Open") or rec.get("open")
-            h = rec.get("High") or rec.get("high")
-            l_ = rec.get("Low") or rec.get("low")
-            v = rec.get("Volume") or rec.get("volume") or 0
+            raw_c = rec.get("Close") or rec.get("close")
+            raw_o = rec.get("Open") or rec.get("open")
+            raw_h = rec.get("High") or rec.get("high")
+            raw_l = rec.get("Low") or rec.get("low")
+            raw_v = rec.get("Volume") or rec.get("volume") or 0
+
+            # Treat NaN / non-finite values as missing so they don't pollute aggregates
+            def _finite_or_none(x):
+                try:
+                    v = float(x)
+                except (TypeError, ValueError):
+                    return None
+                return v if math.isfinite(v) else None
+
+            c = _finite_or_none(raw_c)
+            o = _finite_or_none(raw_o)
+            h = _finite_or_none(raw_h)
+            l_ = _finite_or_none(raw_l)
+            v = _finite_or_none(raw_v)
+
             if c is not None:
-                closes.append(float(c))
-                opens.append(float(o) if o is not None else float(c))
-                highs.append(float(h)) if h is not None else highs.append(float(c))
-                lows.append(float(l_)) if l_ is not None else lows.append(float(c))
-                vols.append(float(v))
+                closes.append(c)
+                opens.append(o if o is not None else c)
+                highs.append(h if h is not None else c)
+                lows.append(l_ if l_ is not None else c)
+                vols.append(v if v is not None else 0.0)
             else:
                 closes.append(None)
                 opens.append(None)
@@ -152,7 +168,7 @@ def derive_trend_and_volume_from_ohlcv(hist_dict: dict) -> Dict:
             start = len(closes) - 20
             up_days = sum(1 for i in range(start, len(closes)) if closes[i] is not None and opens[i] is not None and closes[i] > opens[i])
             out["accumulation_days_4w"] = up_days
-        # 52w high/low (last 252 or all)
+        # 52w high/low (last 252 or all) – ignore missing/non-finite values
         window_52 = min(252, n)
         recent_highs = [h for h in highs[-window_52:] if h is not None]
         recent_lows = [l for l in lows[-window_52:] if l is not None]
@@ -172,7 +188,8 @@ def derive_trend_and_volume_from_ohlcv(hist_dict: dict) -> Dict:
         # Avg daily volume (last 20)
         valid_vols = [v for v in vols if v is not None and v > 0]
         if valid_vols:
-            out["avg_daily_volume"] = round(sum(valid_vols[-20:]) / min(20, len(valid_vols[-20:])), 0)
+            window = valid_vols[-20:] if len(valid_vols) >= 20 else valid_vols
+            out["avg_daily_volume"] = round(sum(window) / len(window), 0)
     except (TypeError, ValueError, IndexError) as e:
         logger.debug("derive_trend_and_volume failed: %s", e)
     return out
@@ -262,6 +279,12 @@ def main():
             continue
         # Derive trend/52w/returns/volume from OHLCV for 08 prompt (independent analysis)
         derived = derive_trend_and_volume_from_ohlcv(hist)
+        # When cache OHLCV is all-NaN, scanner may have used live data; backfill from scan result
+        trend_details = r.get("trend_details") or {}
+        if trend_details:
+            for key in ("current_price", "sma_50", "sma_150", "sma_200", "52_week_high", "52_week_low"):
+                if key in trend_details and derived.get(key) is None:
+                    derived[key] = trend_details[key]
         # Include V2 fields so ChatGPT prompt can reference composite_score, base type, rs_percentile, etc.
         prepared_new.append({
             "ticker": ticker,
