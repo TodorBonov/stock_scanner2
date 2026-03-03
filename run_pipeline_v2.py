@@ -14,6 +14,7 @@ import sys
 from pathlib import Path
 
 from config import REPORTS_DIR
+from export_rank_table_for_web_v2 import main as export_rank_table_html
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 STEPS = [
@@ -61,6 +62,15 @@ def main():
         if rc != 0:
             print(f"[ERROR] Step {name} exited with code {rc}")
             sys.exit(rc)
+
+        # After the SEPA V2 scan step (04 V2) completes and writes scan_results_v2_latest.json,
+        # generate/update the public rank table HTML in docs/index.html.
+        if name == "04 V2":
+            try:
+                export_rank_table_html()
+            except SystemExit as e:
+                # Keep the pipeline running even if HTML export fails.
+                print(f"[WARN] Rank table HTML export failed: {e}")
     print("\nPipeline V2 completed.\n")
 
 
