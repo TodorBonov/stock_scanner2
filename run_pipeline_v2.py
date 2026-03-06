@@ -7,6 +7,7 @@ Run the complete Pipeline V2: 01 → 02 → 03 → 04 V2 → 05 V2 → 06 V2 →
   python run_pipeline_v2.py --watchlist watchlist_test.csv --refresh
   python run_pipeline_v2.py --csv                            # also export CSV from 04 V2
   python run_pipeline_v2.py --csv --refresh
+  python run_pipeline_v2.py --exclude-07                     # run pipeline without step 07 (ChatGPT new positions)
 """
 import argparse
 import subprocess
@@ -33,6 +34,7 @@ def main():
     parser.add_argument("--watchlist", default="watchlist.csv", help="Watchlist CSV or .txt (default: watchlist.csv; use watchlist_test.csv for short list)")
     parser.add_argument("--csv", action="store_true", help="Export CSV from 04 V2 (sepa_scan_summary_<ts>.csv in reportsV2/)")
     parser.add_argument("--refresh", action="store_true", help="Force step 01 to refetch all data from Yahoo (ignore cache)")
+    parser.add_argument("--exclude-07", action="store_true", help="Skip step 07 (ChatGPT new positions)")
     args = parser.parse_args()
 
     extra_04 = ["--csv"] if args.csv else []
@@ -44,6 +46,9 @@ def main():
     REPORTS_DIR.mkdir(parents=True, exist_ok=True)
 
     for name, script in STEPS:
+        if name == "07" and args.exclude_07:
+            print(f"\n{'='*60}\nStep {name}: skipped (--exclude-07)\n{'='*60}")
+            continue
         path = SCRIPT_DIR / script
         if not path.exists():
             print(f"[ERROR] Not found: {path}")
