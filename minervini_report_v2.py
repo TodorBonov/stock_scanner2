@@ -177,9 +177,14 @@ def _detailed_block(r: Dict) -> List[str]:
     dist = _safe_float((r.get("breakout") or {}).get("distance_to_pivot_pct"))
     rs_pct = (r.get("relative_strength") or {}).get("rs_percentile")
 
+    region = r.get("region") or "—"
+    sector = r.get("sector") or "—"
+    mcap = r.get("market_cap") or "—"
+
     lines = [
         f"----- {ticker} -----",
         f"Grade: {r.get('grade', '?')}",
+        f"Region/Sector: {region} / {sector}   |   Market Cap: {mcap}",
     ]
     reject_reason = r.get("reject_reason")
     if reject_reason:
@@ -393,9 +398,9 @@ def generate_user_friendly_report(
     lines.append("")
 
     lines.append("----- Ranked Table -----")
-    header = "| Rank | Ticker | Grade | Score | Base Type | Depth % | RS %ile | Dist to Pivot | R/R | Stop | Note |"
+    header = "| Rank | Ticker | Grade | Score | Base Type | Depth % | RS %ile | Dist to Pivot | R/R | Stop | Note | Status | Region | Sector | Market Cap |"
     lines.append(header)
-    lines.append("|" + "---|" * 11)
+    lines.append("|" + "---|" * 15)
     for i, r in enumerate(sorted_results[:80], 1):
         ticker = r.get("ticker", "?")
         grade = r.get("grade", "?")
@@ -410,7 +415,13 @@ def generate_user_friendly_report(
         stop = (r.get("risk") or {}).get("stop_price")
         stop_str = f"{_safe_float(stop, round_to=2)}" if stop is not None else "—"
         note_str = _important_note_short(r)
-        lines.append(f"| {i} | {ticker} | {grade} | {score} | {base_type} | {depth} | {rs_str} | {dist} | {rr_str} | {stop_str} | {note_str} |")
+        status = _status_line(r)
+        region = r.get("region") or "—"
+        sector = r.get("sector") or "—"
+        mcap = r.get("market_cap") or "—"
+        lines.append(
+            f"| {i} | {ticker} | {grade} | {score} | {base_type} | {depth} | {rs_str} | {dist} | {rr_str} | {stop_str} | {note_str} | {status} | {region} | {sector} | {mcap} |"
+        )
     lines.append("")
 
     lines.append("----- Detailed (per stock) -----")

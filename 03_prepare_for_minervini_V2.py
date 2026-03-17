@@ -26,6 +26,9 @@ from watchlist_loader import (
     YAHOO_SYMBOL,
     TRADING212_SYMBOL,
     BENCHMARK_INDEX,
+    REGION,
+    SECTOR,
+    MARKET_CAP,
 )
 from ticker_utils import clean_ticker
 
@@ -123,6 +126,10 @@ def main():
         rec["benchmark_index"] = bench
         rec["yahoo_symbol"] = yahoo
         rec["trading212_symbol"] = t212
+        # Enrich with static watchlist metadata so V2 scan/report/html can show it.
+        rec["region"] = (r.get(REGION) or "").strip() or None
+        rec["sector"] = (r.get(SECTOR) or "").strip() or None
+        rec["market_cap"] = (r.get(MARKET_CAP) or "").strip() or None
         prepared_stocks[yahoo] = rec
 
     # Positions not in watchlist (unmapped)

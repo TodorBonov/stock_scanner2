@@ -128,6 +128,9 @@ def _build_detail_for_ticker(r: Dict[str, Any]) -> Dict[str, Any]:
         "stop_method": str(risk.get("stop_method") or "ATR"),
         "reward_to_risk": _safe_float(risk.get("reward_to_risk"), digits=1),
         "power_rank": _safe_float(r.get("power_rank"), digits=1),
+        "region": str(r.get("region") or "—"),
+        "sector": str(r.get("sector") or "—"),
+        "market_cap": str(r.get("market_cap") or "—"),
         "status": _status_line(r),
     }
 
@@ -251,6 +254,10 @@ def _build_html(
             "reward_risk": r.reward_risk,
             "stop_price": r.stop_price,
             "note": r.note,
+            "status": (details_map.get(r.ticker, {}) or {}).get("status", "—"),
+            "region": (details_map.get(r.ticker, {}) or {}).get("region", "—"),
+            "sector": (details_map.get(r.ticker, {}) or {}).get("sector", "—"),
+            "market_cap": (details_map.get(r.ticker, {}) or {}).get("market_cap", "—"),
         })
 
         row_html_parts.append(
@@ -266,6 +273,9 @@ def _build_html(
             f"<td class='col-rr' data-sort='{r.reward_risk}'>{_fmt_rr(r.reward_risk)}</td>"
             f"<td class='col-stop' data-sort='{r.stop_price}'>{_fmt_stop(r.stop_price)}</td>"
             f"<td class='col-note'>{note_html}</td>"
+            f"<td class='col-region' data-sort='{rows_data[-1]['region']}'>{rows_data[-1]['region']}</td>"
+            f"<td class='col-sector' data-sort='{rows_data[-1]['sector']}'>{rows_data[-1]['sector']}</td>"
+            f"<td class='col-mcap' data-sort='{rows_data[-1]['market_cap']}'>{rows_data[-1]['market_cap']}</td>"
             f"<td class='col-details'><button type='button' class='view-more-btn' data-ticker=\"{r.ticker.replace(chr(34), '&quot;')}\">View more</button></td>"
             "</tr>"
         )
@@ -707,6 +717,10 @@ def _build_html(
               <th class="sortable" data-col="8" data-num="1">R/R <span class="sort-indicator"></span></th>
               <th class="sortable" data-col="9" data-num="1">Stop <span class="sort-indicator"></span></th>
               <th>Note</th>
+              <th>Status</th>
+              <th>Region</th>
+              <th>Sector</th>
+              <th>Market Cap</th>
               <th>Details</th>
             </tr>
           </thead>
@@ -737,7 +751,7 @@ def _build_html(
     function getSortValue(row, col) {{
       var r = RANK_DATA.rows[row];
       if (!r) return null;
-      var keys = ['rank','ticker','grade','score','base_type','depth_pct','rs_percentile','dist_to_pivot_pct','reward_risk','stop_price'];
+      var keys = ['rank','ticker','grade','score','base_type','depth_pct','rs_percentile','dist_to_pivot_pct','reward_risk','stop_price','note','status','region','sector','market_cap'];
       var k = keys[col];
       if (k) return r[k];
       return null;
@@ -769,7 +783,7 @@ def _build_html(
         var c = compare(a, b, sortCol, isNum);
         return sortDir * (c < 0 ? -1 : c > 0 ? 1 : 0);
       }});
-      var rowCells = ['rank','ticker','grade','score','base_type','depth_pct','rs_percentile','dist_to_pivot_pct','reward_risk','stop_price','note'];
+      var rowCells = ['rank','ticker','grade','score','base_type','depth_pct','rs_percentile','dist_to_pivot_pct','reward_risk','stop_price','note','status','region','sector','market_cap'];
       var fmtPct = function(v) {{ return (v != null && v !== '') ? v + '%' : '—'; }};
       var fmt = function(r, i) {{
         if (i === 5 || i === 6 || i === 7) return fmtPct(r[rowCells[i]]);
@@ -800,6 +814,10 @@ def _build_html(
           '<td class="col-rr" data-sort="' + r.reward_risk + '">' + (r.reward_risk != null && r.reward_risk !== '' ? r.reward_risk : '—') + '</td>' +
           '<td class="col-stop" data-sort="' + r.stop_price + '">' + (r.stop_price != null && r.stop_price !== '' ? Number(r.stop_price).toFixed(2) : '—') + '</td>' +
           '<td class="col-note">' + noteHtml + '</td>' +
+          '<td class="col-status" data-sort="' + (r.status || '—') + '">' + (r.status || '—') + '</td>' +
+          '<td class="col-region" data-sort="' + (r.region || '—') + '">' + (r.region || '—') + '</td>' +
+          '<td class="col-sector" data-sort="' + (r.sector || '—') + '">' + (r.sector || '—') + '</td>' +
+          '<td class="col-mcap" data-sort="' + (r.market_cap || '—') + '">' + (r.market_cap || '—') + '</td>' +
           '<td class="col-details"><button type="button" class="view-more-btn" data-ticker="' + r.ticker.replace(/"/g, '&quot;') + '">View more</button></td>';
         tbody.appendChild(tr);
       }}
@@ -837,6 +855,9 @@ def _build_html(
       }}
       parts.push('<div class="detail-grid">');
       parts.push('<div class="detail-item"><span class="detail-label">Grade</span><div class="detail-value">' + (d.grade || '—') + '</div></div>');
+      parts.push('<div class="detail-item"><span class="detail-label">Region</span><div class="detail-value">' + (d.region || '—') + '</div></div>');
+      parts.push('<div class="detail-item"><span class="detail-label">Sector</span><div class="detail-value">' + (d.sector || '—') + '</div></div>');
+      parts.push('<div class="detail-item"><span class="detail-label">Market Cap</span><div class="detail-value">' + (d.market_cap || '—') + '</div></div>');
       parts.push('<div class="detail-item"><span class="detail-label">Composite Score</span><div class="detail-value">' + (d.composite_score != null ? d.composite_score : '—') + '</div></div>');
       parts.push('<div class="detail-item"><span class="detail-label">Trend</span><div class="detail-value">' + (d.trend_score != null ? d.trend_score : '—') + '</div></div>');
       parts.push('<div class="detail-item"><span class="detail-label">Base score</span><div class="detail-value">' + (d.base_score != null ? d.base_score : '—') + '</div></div>');

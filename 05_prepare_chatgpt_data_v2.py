@@ -220,6 +220,52 @@ def build_t212_to_yahoo_map(watchlist_path: str = "watchlist.csv") -> Dict[str, 
     return out
 
 
+def build_ticker_group_map_from_legacy_watchlist(path: str = "watchlist.txt") -> Dict[str, str]:
+    """
+    Build yahoo_symbol -> ticker_group map from legacy text watchlist with grouped sections.
+    Uses the latest non-empty comment line (starting with '#') as group header, with:
+    - leading '#' removed
+    - trailing ' Stocks' removed (so '# US Tech Stocks' -> 'US Tech').
+    """
+    p = Path(path)
+    if not p.exists():
+        return {}
+    group_by_ticker: Dict[str, str] = {}
+    current_group: Optional[str] = None
+
+    # Try multiple encodings to handle legacy UTF-16/UTF-8 watchlist files (same
+    # strategy as backfill_ticker_groups_from_watchlist_txt.py).
+    last_err = None
+    for enc in ("utf-8-sig", "utf-8", "utf-16", "utf-16-le", "utf-16-be", "cp1252"):
+        try:
+            with p.open("r", encoding=enc, errors="strict") as f:
+                for raw in f:
+                    line = raw.strip()
+                    if not line:
+                        continue
+                    if line.startswith("#"):
+                        header = line.lstrip("#").strip()
+                        if not header or header.startswith("=") or header.lower().startswith("add one ticker") or header.lower().startswith("lines starting"):
+                            continue
+                        if header.endswith(" Stocks"):
+                            header = header[: -len(" Stocks")].strip()
+                        current_group = header
+                        continue
+                    symbol = line.upper()
+                    if not symbol or symbol.startswith("#"):
+                        continue
+                    if current_group:
+                        group_by_ticker[symbol] = current_group
+            # If we got here without errors, we parsed successfully.
+            return group_by_ticker
+        except UnicodeDecodeError as e:
+            last_err = e
+            continue
+    if last_err:
+        raise last_err
+    return group_by_ticker
+
+
 def main():
     parser = argparse.ArgumentParser(description="05 V2: Prepare ChatGPT data from V2 scan")
     parser.add_argument("--watchlist", default="watchlist.csv", help="Watchlist CSV (same as 01/03)")
@@ -239,6 +285,7 @@ def main():
     positions = load_positions()
     eur_usd_rate, eur_usd_rate_date = get_eur_usd_rate_with_date()
     t212_to_yahoo = build_t212_to_yahoo_map(args.watchlist)
+    legacy_groups = build_ticker_group_map_from_legacy_watchlist()
 
     V2_REPORTS.mkdir(parents=True, exist_ok=True)
 
@@ -288,6 +335,7 @@ def main():
         # Include V2 fields so ChatGPT prompt can reference composite_score, base type, rs_percentile, etc.
         prepared_new.append({
             "ticker": ticker,
+            "ticker_group": legacy_groups.get(ticker, ""),
             "grade": r.get("grade"),
             "composite_score": r.get("composite_score"),
             "eligible": r.get("eligible"),

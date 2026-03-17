@@ -164,6 +164,22 @@ def main():
 
     print(f"SEPA V2 Scan: {len(tickers)} tickers")
     results = scanner.scan_universe(tickers, benchmark_overrides or None)
+
+    # Attach static watchlist metadata (Region, Sector, Market Cap) from prepared cache
+    # so it flows into scan_results_v2_latest.json and downstream HTML / text reports.
+    for r in results:
+        t = r.get("ticker")
+        if not t:
+            continue
+        extra = stocks.get(t)
+        if not isinstance(extra, dict):
+            continue
+        if extra.get("region") is not None:
+            r["region"] = extra.get("region")
+        if extra.get("sector") is not None:
+            r["sector"] = extra.get("sector")
+        if extra.get("market_cap") is not None:
+            r["market_cap"] = extra.get("market_cap")
     print(f"Scan complete: {len(results)} results")
 
     # Write LLM/engine JSON (single source of truth)

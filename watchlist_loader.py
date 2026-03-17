@@ -16,13 +16,30 @@ TYPE = "type"
 YAHOO_SYMBOL = "yahoo_symbol"
 TRADING212_SYMBOL = "trading212_symbol"
 BENCHMARK_INDEX = "benchmark_index"
+TICKER_GROUP = "ticker_group"
+REGION = "region"
+SECTOR = "sector"
+MARKET_CAP = "market_cap"
 
 VALID_TYPES = ("ticker", "index")
 
 
 def load_watchlist_csv(path: str) -> List[Dict[str, str]]:
     """
-    Load watchlist from CSV. Columns: type, yahoo_symbol, trading212_symbol, benchmark_index.
+    Load watchlist from CSV.
+
+    Required logical columns:
+    - type
+    - yahoo_symbol
+    - trading212_symbol
+    - benchmark_index
+
+    Optional logical columns (if present in the CSV header, names are matched
+    case-insensitively and with spaces/underscores normalized):
+    - ticker_group
+    - region
+    - sector
+    - market_cap
     type must be 'ticker' or 'index'. Returns list of dicts with keys normalized (strip, uppercase where needed).
     """
     out: List[Dict[str, str]] = []
@@ -41,18 +58,31 @@ def load_watchlist_csv(path: str) -> List[Dict[str, str]]:
             yahoo = (row.get(fieldmap.get("yahoo_symbol", "yahoo_symbol")) or "").strip().upper()
             t212 = (row.get(fieldmap.get("trading212_symbol", "trading212_symbol")) or "").strip().upper()
             bench = (row.get(fieldmap.get("benchmark_index", "benchmark_index")) or "").strip().upper()
+            group = (row.get(fieldmap.get("ticker_group", "ticker_group")) or "").strip()
+            region = (row.get(fieldmap.get("region", "region")) or "").strip()
+            sector = (row.get(fieldmap.get("sector", "sector")) or "").strip()
+            market_cap = (row.get(fieldmap.get("market_cap", "market_cap")) or "").strip()
             if not yahoo:
                 continue
             if raw_type not in VALID_TYPES:
                 raw_type = "ticker"
             if not bench and yahoo:
                 bench = get_benchmark(yahoo, None) or "^GDAXI"
-            out.append({
+            rec: Dict[str, Any] = {
                 TYPE: raw_type,
                 YAHOO_SYMBOL: yahoo,
                 TRADING212_SYMBOL: t212 or "",
                 BENCHMARK_INDEX: bench or "^GDAXI",
-            })
+                TICKER_GROUP: group,
+            }
+            # Attach optional enrichment only if present (keep loader backward compatible).
+            if region:
+                rec[REGION] = region
+            if sector:
+                rec[SECTOR] = sector
+            if market_cap:
+                rec[MARKET_CAP] = market_cap
+            out.append(rec)
     logger.info("Loaded %d rows from watchlist CSV %s", len(out), path)
     return out
 

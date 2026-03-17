@@ -1,7 +1,7 @@
-type,yahoo_symbol,trading212_symbol,benchmark_index
-ticker,AAPL,AAPL,^GSPC
-ticker,MSFT,MSFT,^GSPC
-ticker,NVDA,NVDA,^GSPC
-index,^GSPC,,^GSPC
-ticker,RWE.DE,RWED,^GDAXI
-index,^GDAXI,,^GDAXI
+type,yahoo_symbol,trading212_symbol,benchmark_index,Region,Sector,Market Cap
+ticker,AAPL,AAPL,^GSPC,US,Tech,Large / Mega Cap (index component or peer)
+ticker,MSFT,MSFT,^GSPC,US,Tech,Large / Mega Cap (index component or peer)
+ticker,NVDA,NVDA,^GSPC,US,Tech,Large / Mega Cap (index component or peer)
+index,^GSPC,,^GSPC,Global,Index,Index (benchmark / RS anchor)
+ticker,RWE.DE,RWED,^GDAXI,Europe,Industrials,Large / Mega Cap (index component or peer)
+index,^GDAXI,,^GDAXI,Global,Index,Index (benchmark / RS anchor)
