@@ -214,7 +214,7 @@ def main():
     max_tokens = min(OPENAI_CHATGPT_MAX_COMPLETION_TOKENS, 8000)
 
     print(f"\n{'='*80}")
-    print("06 V2: CHATGPT EXISTING POSITIONS (Trading212 + V2 context)")
+    print("[GPT] 06: ANALYZE HOLDINGS — uses OpenAI API (costs tokens)")
     print(f"{'='*80}")
     print(f"Positions: {len(positions)}  Model: {model}")
     print(f"{'='*80}\n")

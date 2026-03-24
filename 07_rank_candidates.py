@@ -300,7 +300,7 @@ def main():
     # Ranking by my composite score (for first table)
     ranking_by_my_score = sorted(stocks, key=lambda s: (-(float(s.get("composite_score") or 0)), s.get("ticker") or ""))
 
-    print(f"\n{'='*80}\n08 V2: CHATGPT NEW POSITIONS (V2 scan data)\n{'='*80}\n")
+    print(f"\n{'='*80}\n[GPT] 07: RANK CANDIDATES — uses OpenAI API (costs tokens)\n{'='*80}\n")
     report_run_ts = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     report_lines = [
         "=" * 80, "08 V2: CHATGPT NEW POSITION SUGGESTIONS", "=" * 80,
