@@ -1,10 +1,10 @@
 """
-Pipeline step 06 V2: ChatGPT analysis for existing (opened) positions from Trading212.
-Reads reportsV2/prepared_existing_positions_v2.json (from 05_prepare_chatgpt_data_v2.py).
+Pipeline step 06: ChatGPT analysis for existing (opened) positions from Trading212.
+Reads reports/data/ai_holdings_input.json (from 05_prep_ai_data.py).
 Uses full position data (entry, current, quantity, currency) + OHLCV; optionally enriches
-with V2 scan data (composite_score, grade, base type, pivot) when the ticker was in the scan.
+with scan data (composite_score, grade, base type, pivot) when the ticker was in the scan.
 Output: institutional review and a clear suggestion per stock (HOLD / ADD / TRIM / EXIT).
-Writes reportsV2/chatgpt_existing_positions_v2_<ts>.txt
+Writes reports/ai/holdings_<ts>.txt
 """
 import json
 import re
@@ -27,8 +27,8 @@ from config import (
 if Path(DEFAULT_ENV_PATH).exists():
     load_dotenv(Path(DEFAULT_ENV_PATH))
 
-V2_REPORTS = REPORTS_DIR_V2  # reportsV2
-PREPARED_EXISTING_V2 = V2_REPORTS / "prepared_existing_positions_v2.json"
+V2_REPORTS = REPORTS_DIR_V2
+PREPARED_EXISTING_V2 = V2_REPORTS / "data/ai_holdings_input.json"
 
 setup_logging(log_level="INFO", log_to_file=True)
 logger = get_logger(__name__)
@@ -45,7 +45,7 @@ def _fmt(x, round_to=None):
 
 
 def load_v2_scan_by_ticker() -> Dict[str, Dict]:
-    """Load V2 scan results and index by ticker (uppercase)."""
+    """Load scan results and index by ticker (uppercase)."""
     if not SCAN_RESULTS_V2_LATEST.exists():
         return {}
     try:
@@ -59,7 +59,7 @@ def load_v2_scan_by_ticker() -> Dict[str, Dict]:
 
 
 def _build_v2_context_block(v2_row: Dict) -> str:
-    """Build optional V2 scan context section for the prompt."""
+    """Build optional scan context section for the prompt."""
     base = v2_row.get("base") or {}
     rs = v2_row.get("relative_strength") or {}
     br = v2_row.get("breakout") or {}
@@ -190,7 +190,7 @@ def _parse_recommendation(content: str) -> Tuple[str, str]:
 
 def main():
     parser = argparse.ArgumentParser(
-        description="06 V2: ChatGPT analysis for existing positions (Trading212 + OHLCV, optional V2 scan context)"
+        description="06 V2: ChatGPT analysis for existing positions (Trading212 + OHLCV, optional scan context)"
     )
     parser.add_argument("--model", default=None, help="OpenAI model")
     parser.add_argument("--api-key", default=None, help="OpenAI API key")
@@ -199,7 +199,7 @@ def main():
 
     api_key = require_openai_api_key(args.api_key)
     if not PREPARED_EXISTING_V2.exists():
-        print(f"[ERROR] {PREPARED_EXISTING_V2} not found. Run 02_fetch_positions_trading212_V2.py then 05_prepare_chatgpt_data_v2.py.")
+        print(f"[ERROR] {PREPARED_EXISTING_V2} not found. Run 02_fetch_positions.py then 05_prep_ai_data.py.")
         return
 
     with open(PREPARED_EXISTING_V2, "r", encoding="utf-8") as f:
@@ -233,7 +233,7 @@ def main():
         ohlcv = (pos.get("ohlcv_csv") or "").strip()
 
         v2_row = v2_by_ticker.get((ticker or "").strip().upper()) if ticker else None
-        v2_context = _build_v2_context_block(v2_row) if v2_row else "V2 scan context: not available (ticker not in latest scan or scan not run)."
+        v2_context = _build_v2_context_block(v2_row) if v2_row else "scan context: not available (ticker not in latest scan or scan not run)."
 
         if not ohlcv or ohlcv == NO_OHLCV_PLACEHOLDER:
             prompt_text = PROMPT_NO_OHLCV.format(
@@ -310,9 +310,10 @@ def main():
         report_lines.append("-" * 80)
         report_lines.append("")
 
-    V2_REPORTS.mkdir(parents=True, exist_ok=True)
+    ai_dir = V2_REPORTS / "ai"
+    ai_dir.mkdir(parents=True, exist_ok=True)
     ts = datetime.now().strftime("%Y%m%d_%H%M%S")
-    out_file = V2_REPORTS / f"chatgpt_existing_positions_v2_{ts}.txt"
+    out_file = ai_dir / f"holdings_{ts}.txt"
     out_file.write_text("\n".join(report_lines), encoding="utf-8")
     print(f"Report saved: {out_file}\n")
 

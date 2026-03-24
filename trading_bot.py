@@ -8,7 +8,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 from trading212_client import Trading212Client
 from data_provider import StockDataProvider
-from minervini_scanner import MinerviniScanner
+from sepa_checklist import MinerviniScanner
 from logger_config import get_logger
 from validators import (
     validate_file_path,

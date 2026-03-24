@@ -1,9 +1,9 @@
-"""Minimal tests for minervini_scanner."""
+"""Minimal tests for sepa_checklist."""
 import pandas as pd
 import pytest
 from unittest.mock import MagicMock
 
-from minervini_scanner import MinerviniScanner
+from sepa_checklist import MinerviniScanner
 
 
 def test_scan_stock_insufficient_data_returns_f():

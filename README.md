@@ -1,296 +1,170 @@
 # Minervini SEPA Scanner
 
-A professional-grade stock scanner that implements Mark Minervini's exact SEPA (Stock Exchange Price Action) methodology for European stocks. This scanner evaluates stocks against Minervini's complete checklist: Trend & Structure, Base Quality, Relative Strength, Volume Signature, and Breakout Rules.
+A professional-grade stock scanner implementing Mark Minervini's exact SEPA (Stock Exchange Price Action) methodology for European stocks. Evaluates stocks against the complete 5-part Minervini checklist, assigns a composite score (0–100), and grades each stock A+/A/B/C/REJECT.
 
 ## Features
 
-1. **Complete Minervini SEPA Checklist**: Implements all 5 parts of Minervini's methodology
+1. **Complete Minervini SEPA Checklist** — all 5 parts
    - ✅ Trend & Structure (NON-NEGOTIABLE)
-   - ✅ Base Quality (3-8 week bases, ≤25% depth)
+   - ✅ Base Quality (3–8 week bases, ≤25% depth)
    - ✅ Relative Strength (RS line, RSI > 60)
    - ✅ Volume Signature (dry volume in base, +40% on breakout)
    - ✅ Breakout Day Rules (pivot clearance, volume expansion)
 
-2. **Automatic Grading**: Stocks receive A+, A, B, C, or F grades
-   - **A+**: All criteria met → Full position
-   - **A**: 1-2 minor flaws → Half position
-   - **B/C/F**: More than 2 flaws → Walk away
+2. **Automatic Grading** via composite score (0–100)
+   - **A+ (≥85)**: Full position
+   - **A (75–84)**: Half position
+   - **B/C**: Watch / caution
+   - **REJECT (<55)**: Walk away
 
-3. **European Market Focus**: Optimized for SEPA stocks
-   - Supports DAX (^GDAXI), CAC 40 (^FCHI), AEX (^AEX), Swiss (^SSMI), Nordics (^OMX), and others (e.g. ^GSPC). Use `--benchmark` on steps 01/02. Mixed watchlists can use per-ticker benchmarks via `benchmark_mapping.py`.
-   - Relative strength calculated vs chosen benchmark
+3. **European Market Focus** — DAX, CAC 40, AEX, Swiss, Nordics and more. Per-ticker benchmarks via `benchmark_mapping.py`.
 
-4. **Free Data Sources**: Uses Yahoo Finance (yfinance) as primary data source
-   - No API key required for basic scanning
-   - Alpha Vantage optional for additional data
+4. **Free Data Sources** — Yahoo Finance (primary), Alpha Vantage (fallback). No API key required for basic scanning.
+
+5. **AI Analysis** — optional ChatGPT step ranks new candidates and reviews existing holdings.
+
+---
 
 ## Setup
-
-### 1. Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 2. Optional: Get Alpha Vantage API Key (Optional)
+Copy `config.example.env` to `.env` and fill in the keys you need:
 
-For additional data coverage, get a free Alpha Vantage key:
-1. Go to https://www.alphavantage.co/support/#api-key
-2. Get your free API key
-3. Add to `.env` file: `ALPHA_VANTAGE_API_KEY=your_key_here`
-
-**Note**: The scanner works with just Yahoo Finance (yfinance) - no API key needed!
-
-### 3. Configure (Optional)
-
-Create a `.env` file in the project root (optional). Copy `config.example.env` and fill in as needed:
 ```
-ALPHA_VANTAGE_API_KEY=your_key_here
-# For position suggestions (step 05):
-TRADING212_API_KEY=your_key_here
+ALPHA_VANTAGE_API_KEY=your_key_here   # optional
+TRADING212_API_KEY=your_key_here      # optional — needed for step 02
 TRADING212_API_SECRET=your_secret_here
+OPENAI_API_KEY=your_key_here          # optional — needed for steps 06 and 07
 ```
+
+---
 
 ## Quick Start
 
-**Use Pipeline V2** (one command). You can combine **cached or fresh data** with **short or full watchlist**:
-
-| Data | Watchlist | Command |
-|------|-----------|---------|
-| Cached | Full (`watchlist.csv`) | `python run_pipeline_v2.py` |
-| Cached | Short (`watchlist_test.csv`) | `python run_pipeline_v2.py --watchlist watchlist_test.csv` |
-| Fresh | Full | `python run_pipeline_v2.py --refresh` |
-| Fresh | Short | `python run_pipeline_v2.py --watchlist watchlist_test.csv --refresh` |
-
-Optional: `--csv` to also export a CSV from the scan (e.g. `python run_pipeline_v2.py --csv --refresh`).
-
-- **01** → Fetch Yahoo OHLCV for watchlist  
-- **02** → Fetch Trading212 positions  
-- **03** → Prepare data for scanner  
-- **04 V2** → V2 Minervini scan → `reportsV2/sepa_scan_user_report_*.txt`  
-- **05 V2** → Prep existing + new from V2 scan  
-- **06 V2** → ChatGPT analysis for existing positions → `reportsV2/chatgpt_existing_positions_v2_*.txt`
-- **07** → ChatGPT ranking of new candidates → `reportsV2/chatgpt_new_positions_v2_*.txt`
-
-**Watchlist:** Use `watchlist.csv` (full) or `watchlist_test.csv` (short). Same CSV format: `type,yahoo_symbol,trading212_symbol,benchmark_index`. See **PIPELINES.md**.
-
-**Confused by script names or config?** See **SCRIPTS_AND_CONFIG_REFERENCE.md** — one config (**config.py**) for the whole pipeline.
-
-*(Original pipeline 01→04→05→06→07 is on branch `pipeline-v1` only; see **PIPELINE_ARCHIVE.md**.)*
-
-## Usage
-
-Run **Pipeline V2:** `python run_pipeline_v2.py`. Data paths: `data/cached_stock_data_new_pipeline.json`, `data/prepared_for_minervini.json`, `reportsV2/scan_results_v2_latest.json`, `reportsV2/`. Full details: **PIPELINE_V2.md**. Script/config map: **SCRIPTS_AND_CONFIG_REFERENCE.md**.
-
-## Minervini SEPA Criteria Explained
-
-### PART 1: Trend & Structure (NON-NEGOTIABLE)
-
-**All of these must pass, or it's NOT SEPA:**
-- ✅ Price above 50, 150, 200 SMA
-- ✅ 50 SMA > 150 SMA > 200 SMA
-- ✅ All three SMAs sloping UP
-- ✅ Price ≥ 30% above 52-week low
-- ✅ Price within 10–15% of 52-week high
-
-### PART 2: Base Quality
-
-**This is where amateurs fail:**
-- ✅ Base length 3–8 weeks (daily chart)
-- ✅ Depth ≤ 20–25% (≤15% is elite)
-- ✅ No wide, sloppy candles
-- ✅ Tight closes near highs
-- ✅ Volume contracts inside base
-
-### PART 3: Relative Strength (CRITICAL)
-
-**Minervini buys strength, not value:**
-- ✅ RS line near or at new highs
-- ✅ Stock outperforms index (DAX / STOXX / FTSE)
-- ✅ RSI(14) > 60 before breakout
-
-### PART 4: Volume Signature
-
-- ✅ Dry volume in base
-- ✅ Breakout volume +40% or more
-- ✅ No heavy sell volume before breakout
-
-### PART 5: Breakout Day Rules
-
-- ✅ Clears pivot decisively
-- ✅ Closes in top 25–30% of range
-- ✅ Volume expansion present
-
-## Output Format
-
-The scanner provides detailed results for each stock:
-
-```
-================================================================================
-[STOCK] AAPL - Grade: A+ | Meets Criteria: True | Position Size: Full
-================================================================================
-
-[PRICE] Price Information:
-   Current Price: $175.50
-   52-Week High: $198.23
-   52-Week Low: $124.17
-   From 52W High: 11.5%
-   From 52W Low: 41.3%
-
-[PART 1] Trend & Structure (NON-NEGOTIABLE):
-   Status: ✅ PASSED
-   Price above 50 SMA: True
-   Price above 150 SMA: True
-   Price above 200 SMA: True
-   SMA Order (50>150>200): True
-   50 SMA: $165.20
-   150 SMA: $155.80
-   200 SMA: $150.30
-
-[PART 2] Base Quality:
-   Status: ✅ PASSED
-   Base Length: 5.2 weeks (need 3-8)
-   Base Depth: 12.3% (need ≤25%, ≤15% elite)
-   Volume Contraction: 0.75x
-   Avg Close Position: 68.5% of range
-
-... (and so on for all 5 parts)
+```bash
+python run_pipeline.py                                      # full watchlist, cached data
+python run_pipeline.py --refresh                            # force fresh Yahoo data
+python run_pipeline.py --watchlist watchlist_test.csv       # short watchlist (quick test)
+python run_pipeline.py --csv                                # also export CSV from step 04
+python run_pipeline.py --exclude-07                         # skip ChatGPT ranking step
 ```
 
-## Position Sizing Rules
+---
 
-Based on Minervini's methodology:
+## Pipeline Steps
 
-- **A+ Grade**: All boxes checked → **Full position**
-- **A Grade**: 1–2 minor flaws → **Half position**
-- **B/C/F Grade**: More than 2 flaws → **WALK AWAY**
+| Step | Script | What it does | Output |
+|------|--------|--------------|--------|
+| 01 | `01_fetch_prices.py` | Fetch/cache Yahoo OHLCV for watchlist | `data/cached_stock_data_new_pipeline.json` |
+| 02 | `02_fetch_positions.py` | Fetch open positions from Trading212 | `data/positions_new_pipeline.json` |
+| 03 | `03_prepare_data.py` | Merge cache + positions + watchlist | `data/prepared_for_minervini.json` |
+| 04 | `04_scan.py` | Run SEPA scorer → grades + scores | `reports/scan/scan_<ts>.txt`, `reports/scan/latest.json` |
+| 05 | `05_prep_ai_data.py` | Prepare A+/A stocks + holdings for AI | `reports/data/ai_*.json` |
+| 06 | `06_analyze_holdings.py` | ChatGPT review of existing holdings | `reports/ai/holdings_<ts>.txt` |
+| 07 | `07_rank_candidates.py` | ChatGPT ranking of new candidates | `reports/ai/candidates_<ts>.txt` |
+
+---
 
 ## Project Structure
 
-Key files:
-
 ```
-.
-├── PIPELINES.md                # Pipeline run order and data paths
-├── run_pipeline_v2.py                  # Run full Pipeline V2 (one command)
-├── 01_fetch_yahoo_watchlist_V2.py      # Step 1: Fetch Yahoo → cache
-├── 02_fetch_positions_trading212_V2.py # Step 2: T212 positions
-├── 03_prepare_for_minervini_V2.py      # Step 3: Prepare for Minervini + problems report
-├── 04_generate_full_report_v2.py       # Step 4: V2 Minervini scan
-├── 05_prepare_chatgpt_data_v2.py       # Step 5: Prep existing + new for ChatGPT
-├── 06_chatgpt_existing_positions_v2.py # Step 6: ChatGPT existing positions
-├── 07_chatgpt_new_positions_v2.py      # Step 7: ChatGPT new position candidates
-├── fetch_utils.py                      # Shared fetch logic
-├── watchlist.csv                       # Watchlist CSV (type, yahoo_symbol, trading212_symbol, benchmark_index)
-├── bot.py                      # Main bot interface
-├── minervini_scanner.py        # Core Minervini SEPA scanner logic
-├── data_provider.py            # Data fetching (yfinance, Alpha Vantage)
-├── trading212_client.py        # Trading 212 API client
-├── config.py                   # Configuration and paths
-├── cache_utils.py              # Cache load/save
-├── benchmark_mapping.py        # Per-ticker benchmark for mixed watchlists
-├── openai_utils.py             # OpenAI API helpers (06, 07)
-├── config.example.env          # Example .env (copy to .env)
-├── requirements.txt            # Python dependencies
-├── watchlist.csv               # Main watchlist (type, yahoo_symbol, trading212_symbol, benchmark_index)
-├── watchlist_test.csv          # Short watchlist for quick runs
-├── data/                       # cached_stock_data_new_pipeline.json, positions_new_pipeline.json
-├── reportsV2/                 # All V2 reports (SEPA, prepared JSON, ChatGPT)
-└── tests/                      # Unit tests
+run_pipeline.py             # Single entry point
+
+# Pipeline steps
+01_fetch_prices.py
+02_fetch_positions.py
+03_prepare_data.py
+04_scan.py
+05_prep_ai_data.py
+06_analyze_holdings.py
+07_rank_candidates.py
+
+# Scanner engine
+sepa_checklist.py           # 5-part Minervini checklist (pass/fail)
+sepa_scorer.py              # Composite scoring → grade
+sepa_report.py              # Report formatter
+sepa_web_export.py          # HTML rank table → docs/index.html
+
+# Data layer
+trading_bot.py              # Orchestrates data + Trading212 client
+data_provider.py            # Yahoo / Alpha Vantage / Trading212 fetcher
+trading212_client.py        # Trading212 API client
+fetch_utils.py              # Batch fetch logic
+watchlist_loader.py         # Loads watchlist.csv
+benchmark_mapping.py        # Per-ticker benchmark assignment
+
+# Utilities
+config.py                   # All thresholds, paths, API settings
+cache_utils.py
+currency_utils.py
+ticker_utils.py
+position_sizing.py
+openai_utils.py
+logger_config.py
+validators.py
+
+# Inputs
+watchlist.csv               # type, yahoo_symbol, trading212_symbol, benchmark_index
+watchlist_test.csv          # short list for quick runs
+
+# Outputs
+data/                       # cached OHLCV, positions (gitignored)
+reports/scan/               # scan_<ts>.txt — one per run
+reports/ai/                 # holdings_<ts>.txt, candidates_<ts>.txt
+reports/data/               # intermediate JSON for steps 06/07 (gitignored)
+docs/index.html             # live HTML rank table
 ```
 
-## Data Sources
+---
 
-- **Yahoo Finance (yfinance)**: Primary data source (free, no API key needed)
-  - Historical price/volume data
-  - Moving averages
-  - RSI calculations
-  - 52-week highs/lows
+## Minervini SEPA Criteria
 
-- **Alpha Vantage** (optional): Additional data coverage
-  - Free tier: 25 requests/day
-  - Premium: Higher limits
+### Part 1: Trend & Structure (NON-NEGOTIABLE)
+All must pass or the stock is rejected immediately:
+- Price above 50, 150, 200 SMA
+- 50 SMA > 150 SMA > 200 SMA, all sloping up
+- Price ≥30% above 52-week low
+- Price within 15% of 52-week high
 
-- **Trading 212 API** (optional): For stock search functionality
+### Part 2: Base Quality
+- Length: 3–8 weeks
+- Depth: ≤25% (≤15% is elite)
+- Volume contracts inside base
+- Tight closes near highs
 
-## Important Notes
+### Part 3: Relative Strength
+- RS line near or at new highs
+- Outperforms chosen benchmark (DAX, CAC, etc.)
+- RSI(14) > 60 before breakout
 
-⚠️ **This scanner is for educational purposes. Always:**
-- Test thoroughly before using with real money
-- Start with small positions
-- Never risk more than you can afford to lose
-- Review all recommendations manually
-- Understand that past performance doesn't guarantee future results
-- This implements Minervini's methodology but is not financial advice
+### Part 4: Volume Signature
+- Dry volume in base
+- Breakout volume +40%+
+- No heavy sell volume before breakout
 
-✅ **What This Scanner Does:**
-- ✅ Real technical analysis (SMAs, RSI, volume patterns)
-- ✅ Real base identification and quality assessment
-- ✅ Real relative strength calculations vs benchmarks
-- ✅ Real breakout pattern detection
-- ✅ Complete Minervini checklist evaluation
+### Part 5: Breakout Day Rules
+- Clears pivot decisively (≥2% above base high)
+- Closes in top 25–30% of range
+- Volume expansion present
 
-## Example Workflow
-
-1. **Screen stocks** using TradingView or your preferred screener with basic filters:
-   - Close > SMA50
-   - SMA50 > SMA150
-   - SMA150 > SMA200
-   - RSI(14) > 60
-   - Close within 15% of 52W high
-   - Average Volume > 300k
-
-2. **Export ticker list** from your screener
-
-3. **Run the pipeline** (after adding tickers to `watchlist.csv`): `python run_pipeline_v2.py`  
-   Or step by step: `01_fetch_yahoo_watchlist_V2.py` → `02_fetch_positions_trading212_V2.py` → `03_prepare_for_minervini_V2.py` → `04_generate_full_report_v2.py` → `05_prepare_chatgpt_data_v2.py` → `06_chatgpt_existing_positions_v2.py` → `07_chatgpt_new_positions_v2.py`.
-
-4. **Review A+ and A graded stocks** for potential entries
-
-5. **Apply pyramiding rules** (not automated - manual execution):
-   - First Entry: Buy pivot breakout (0.5-1% risk per trade)
-   - First Add: Add if stock moves +2-3% from entry with volume confirmation
-   - Second Add: Add if price respects 10 SMA, no wide red candles
+---
 
 ## Troubleshooting
 
-### (Obsolete: .ps1 scripts removed; pipeline is Python only.)
+### 401 on step 02
 
-PowerShell’s execution policy is blocking scripts. You can either:
+`02_fetch_positions.py` calls the Trading212 Live API. Common causes:
+- Wrong or expired API key — regenerate in Trading212 → Invest → Settings → API
+- Demo vs Live mismatch — this app uses the Live API
+- `.env` not loaded — run from the project root
 
-- **Use the batch file** (no policy change): run `.\run_full_pipeline.cmd` instead of `.\run_full_pipeline.ps1`. It does the same thing.
-- **Allow scripts for your user** (one-time): in PowerShell run:
-  ```powershell
-  Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
-  ```
-  Then `.\run_full_pipeline.ps1` will work.
+To skip Trading212: run `01 → 03 → 04 → 05` directly (step 03 handles missing positions gracefully).
 
-### "Unauthorized" (401) when running 02
-
-**02_fetch_positions_trading212_V2.py** calls the **Trading 212 API** to fetch your open positions. If you see `401 Unauthorized` or "Failed to fetch positions", the API is rejecting your credentials.
-
-**Common causes:**
-
-1. **Wrong or expired API key/secret**  
-   In Trading 212: **Invest** → **Settings** → **API** → create or regenerate your API key and secret. Copy both into `.env`:
-   ```
-   TRADING212_API_KEY=your_key_here
-   TRADING212_API_SECRET=your_secret_here
-   ```
-
-2. **Demo vs Live**  
-   This app uses the **Live** API (`live.trading212.com`). If your account or keys are for the **Demo** environment, the Live API will return 401. Use keys from your **Live** account.
-
-3. **`.env` not loaded**  
-   Run the script from the project root so that the `.env` file in that folder is found. The scripts load it automatically via `python-dotenv`.
-
-**To run the rest of the pipeline without Trading 212:**  
-Skip 02 and run 01 → 03 → 04 → 05. New4 will have no existing positions; New5 will still analyze A+/A new-position candidates.
-
-## License
-
-This project is provided as-is for educational purposes.
+---
 
 ## Disclaimer
 
-This software is for educational purposes only. Trading involves risk of loss. Always do your own research and consult with a financial advisor before making investment decisions. The authors are not responsible for any financial losses incurred from using this software.
+For educational purposes only. Trading involves risk of loss. Always do your own research. This implements Minervini's methodology but is not financial advice.

@@ -48,7 +48,7 @@ Then:
 - **Price from 52W high** = (54.76 − 51.80) / 54.76 × 100 = **5.4%** → pass (≤ 15%); 5.4% < 10% → *warning* (very close to high).
 - Price > all three SMAs and 50 > 150 > 200 → structure passes (slope check would compare to 20 days ago).
 
-**Where it lives:** `minervini_scanner.py` → `_check_trend_structure()`. Thresholds in `config.py` (e.g. `PRICE_FROM_52W_LOW_MIN_PCT`, `PRICE_FROM_52W_HIGH_MAX_PCT`).
+**Where it lives:** `sepa_checklist.py` → `_check_trend_structure()`. Thresholds in `config.py` (e.g. `PRICE_FROM_52W_LOW_MIN_PCT`, `PRICE_FROM_52W_HIGH_MAX_PCT`).
 
 **If this part fails:** Grade is **F**, `meets_criteria` is False, position size is None. No other part can save it.
 
@@ -85,7 +85,7 @@ Identification accepts 2–12 weeks and depth ≤ 35%; quality check then requir
 - **Close position:** suppose average of `(Close - Low) / (High - Low) × 100` over base = 62% → pass (≥ 50%).  
 - **Volume:** base avg volume = 1.2M, pre-base avg = 1.5M → contraction = 1.2/1.5 = **0.80** → pass (base drier; no 95% warning).
 
-**Where it lives:** `minervini_scanner.py` → `_check_base_quality()`, `_identify_base()`. Config: `config.py` (BASE_* and base-identification constants).
+**Where it lives:** `sepa_checklist.py` → `_check_base_quality()`, `_identify_base()`. Config: `config.py` (BASE_* and base-identification constants).
 
 ---
 
@@ -113,7 +113,7 @@ Identification accepts 2–12 weeks and depth ≤ 35%; quality check then requir
 - **RS line** normalized: recent high = 108, current = 100 → **RS from high** = (108 − 100) / 108 × 100 = **7.4%** → warning (> 5%); if not trending up and > 10% would fail; with relax + RSI ≥ 60 + outperforming, no failure.  
 - **RS rating** = 50 + 5 = 55 (example).
 
-**Where it lives:** `minervini_scanner.py` → `_check_relative_strength()`. Config: `config.py` (RSI_*, RS_*, RS_RELAX_*).
+**Where it lives:** `sepa_checklist.py` → `_check_relative_strength()`. Config: `config.py` (RSI_*, RS_*, RS_RELAX_*).
 
 ---
 
@@ -141,7 +141,7 @@ Identification accepts 2–12 weeks and depth ≤ 35%; quality check then requir
 - **Current price** = 119, **base high** = 115.85 → 119 > 115.85×1.02 ≈ 118.17 → in breakout. **Recent 5d volume** = 2.1M, **20d avg** = 1.4M → **volume increase** = 2.1/1.4 = **1.5** → pass (≥ 1.4).  
 - If not in breakout and down-day volume = 2.0M, base avg = 1.1M → 2.0 > 1.1×1.5 = 1.65 → **heavy sell volume** → failure.
 
-**Where it lives:** `minervini_scanner.py` → `_check_volume_signature()`. Config: `config.py` (VOLUME_*, BREAKOUT_VOLUME_MULTIPLIER, etc.).
+**Where it lives:** `sepa_checklist.py` → `_check_volume_signature()`. Config: `config.py` (VOLUME_*, BREAKOUT_VOLUME_MULTIPLIER, etc.).
 
 ---
 
@@ -168,7 +168,7 @@ If no day in the last 5 clears the pivot, breakout rules **fail** and close posi
 - **Breakout day:** Low = 114, High = 120, Close = 118.5 → **close position** = (118.5 − 114) / (120 − 114) × 100 = **75%** → pass (≥ 70%).  
 - **Breakout day volume** = 1.3M, **20d avg** = 1.0M → **volume ratio** = 1.3 → pass (≥ 1.2). If that day had 1.0M but the next day had 1.25M, with multi-day confirmation the 1.25M day would still satisfy the 1.2× rule.
 
-**Where it lives:** `minervini_scanner.py` → `_check_breakout_rules()`. Config: `config.py` (PIVOT_CLEARANCE_PCT, BREAKOUT_LOOKBACK_DAYS, CLOSE_POSITION_MIN_PCT_BREAKOUT, VOLUME_EXPANSION_MIN, USE_MULTI_DAY_VOLUME_CONFIRMATION, VOLUME_CONFIRMATION_DAYS_AFTER_BREAKOUT).
+**Where it lives:** `sepa_checklist.py` → `_check_breakout_rules()`. Config: `config.py` (PIVOT_CLEARANCE_PCT, BREAKOUT_LOOKBACK_DAYS, CLOSE_POSITION_MIN_PCT_BREAKOUT, VOLUME_EXPANSION_MIN, USE_MULTI_DAY_VOLUME_CONFIRMATION, VOLUME_CONFIRMATION_DAYS_AFTER_BREAKOUT).
 
 ---
 
@@ -194,7 +194,7 @@ If no day in the last 5 clears the pivot, breakout rules **fail** and close posi
 
 Config: `MAX_FAILURES_FOR_A` (2), `MAX_FAILURES_FOR_B` (4), `CRITICAL_FAILURE_GRADE` ("F") in `config.py`.
 
-**Where it lives:** `minervini_scanner.py` → `_calculate_grade()`.
+**Where it lives:** `sepa_checklist.py` → `_calculate_grade()`.
 
 ---
 
@@ -224,7 +224,7 @@ Optional: **ATR stop** = `buy_price - ATR(14) × ATR_STOP_MULTIPLIER` when `USE_
 - **Stop loss** = 115.85 × 0.95 = **110.06**. **Profit target 1** = 115.85 × 1.10 = **127.44**; **Profit target 2** = 115.85 × 1.45 = **167.98**.  
 - **Risk per share** = 115.85 − 110.06 = 5.79; **Reward to target 1** = 127.44 − 115.85 = 11.59 → **R/R** = 11.59 / 5.79 = **2.0**.
 
-**Where it lives:** `minervini_scanner.py` → `_calculate_buy_sell_prices()`. Config: `config.py` (STOP_LOSS_PCT, PROFIT_TARGET_1_PCT, PROFIT_TARGET_2_PCT, BUY_PRICE_BUFFER_PCT, USE_ATR_STOP, ATR_*).
+**Where it lives:** `sepa_checklist.py` → `_calculate_buy_sell_prices()`. Config: `config.py` (STOP_LOSS_PCT, PROFIT_TARGET_1_PCT, PROFIT_TARGET_2_PCT, BUY_PRICE_BUFFER_PCT, USE_ATR_STOP, ATR_*).
 
 ---
 

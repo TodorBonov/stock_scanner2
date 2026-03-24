@@ -1,13 +1,13 @@
 """
-Run the complete Pipeline V2: 01 → 02 → 03 → 04 V2 → 05 V2 → 06 V2 → 07.
+Run the complete pipeline: 01 → 02 → 03 → 04 → 05 → 06 → 07.
 
-  python run_pipeline_v2.py
-  python run_pipeline_v2.py --watchlist watchlist_test.csv   # short watchlist
-  python run_pipeline_v2.py --refresh                        # fresh Yahoo data
-  python run_pipeline_v2.py --watchlist watchlist_test.csv --refresh
-  python run_pipeline_v2.py --csv                            # also export CSV from 04 V2
-  python run_pipeline_v2.py --csv --refresh
-  python run_pipeline_v2.py --exclude-07                     # run pipeline without step 07 (ChatGPT new positions)
+  python run_pipeline.py
+  python run_pipeline.py --watchlist watchlist_test.csv   # short watchlist
+  python run_pipeline.py --refresh                        # fresh Yahoo data
+  python run_pipeline.py --watchlist watchlist_test.csv --refresh
+  python run_pipeline.py --csv                            # also export CSV from step 04
+  python run_pipeline.py --csv --refresh
+  python run_pipeline.py --exclude-07                     # skip step 07 (rank candidates)
 """
 import argparse
 import subprocess
@@ -15,26 +15,26 @@ import sys
 from pathlib import Path
 
 from config import REPORTS_DIR
-from export_rank_table_for_web_v2 import main as export_rank_table_html
+from sepa_web_export import main as export_rank_table_html
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 STEPS = [
-    ("01", "01_fetch_yahoo_watchlist_V2.py"),
-    ("02", "02_fetch_positions_trading212_V2.py"),
-    ("03", "03_prepare_for_minervini_V2.py"),
-    ("04 V2", "04_generate_full_report_v2.py"),
-    ("05 V2", "05_prepare_chatgpt_data_v2.py"),
-    ("06 V2", "06_chatgpt_existing_positions_v2.py"),
-    ("07", "07_chatgpt_new_positions_v2.py"),
+    ("01", "01_fetch_prices.py"),
+    ("02", "02_fetch_positions.py"),
+    ("03", "03_prepare_data.py"),
+    ("04", "04_scan.py"),
+    ("05", "05_prep_ai_data.py"),
+    ("06", "06_analyze_holdings.py"),
+    ("07", "07_rank_candidates.py"),
 ]
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Run complete Pipeline V2 (01 → 02 → 03 → 04 V2 → 05 V2 → 06 V2 → 07)")
+    parser = argparse.ArgumentParser(description="Run the SEPA scanner pipeline (01 → 02 → 03 → 04 → 05 → 06 → 07)")
     parser.add_argument("--watchlist", default="watchlist.csv", help="Watchlist CSV or .txt (default: watchlist.csv; use watchlist_test.csv for short list)")
-    parser.add_argument("--csv", action="store_true", help="Export CSV from 04 V2 (sepa_scan_summary_<ts>.csv in reportsV2/)")
+    parser.add_argument("--csv", action="store_true", help="Export CSV summary from step 04 (reports/scan/)")
     parser.add_argument("--refresh", action="store_true", help="Force step 01 to refetch all data from Yahoo (ignore cache)")
-    parser.add_argument("--exclude-07", action="store_true", help="Skip step 07 (ChatGPT new positions)")
+    parser.add_argument("--exclude-07", action="store_true", help="Skip step 07 (rank candidates)")
     args = parser.parse_args()
 
     extra_04 = ["--csv"] if args.csv else []
@@ -58,9 +58,9 @@ def main():
             cmd.extend(watchlist_arg)
             if extra_01:
                 cmd.extend(extra_01)
-        elif name == "03" or name == "05 V2":
+        elif name == "03" or name == "05":
             cmd.extend(watchlist_arg)
-        elif name == "04 V2" and extra_04:
+        elif name == "04" and extra_04:
             cmd.extend(extra_04)
         print(f"\n{'='*60}\nStep {name}: {script}\n{'='*60}")
         rc = subprocess.call(cmd, cwd=str(SCRIPT_DIR))
@@ -68,15 +68,14 @@ def main():
             print(f"[ERROR] Step {name} exited with code {rc}")
             sys.exit(rc)
 
-        # After the SEPA V2 scan step (04 V2) completes and writes scan_results_v2_latest.json,
-        # generate/update the public rank table HTML in docs/index.html.
-        if name == "04 V2":
+        # After step 04 (scan) completes, generate/update the public rank table HTML.
+        if name == "04":
             try:
                 export_rank_table_html()
             except SystemExit as e:
                 # Keep the pipeline running even if HTML export fails.
                 print(f"[WARN] Rank table HTML export failed: {e}")
-    print("\nPipeline V2 completed.\n")
+    print("\nPipeline completed.\n")
 
 
 if __name__ == "__main__":

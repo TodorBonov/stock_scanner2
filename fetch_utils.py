@@ -1,13 +1,13 @@
 """
 Shared fetch logic for stock data from watchlist.
-Used by 01_fetch_yahoo_watchlist_V2.py (pipeline cache).
+Used by 01_fetch_prices.py (pipeline cache).
 """
 import time
 from datetime import datetime
 from typing import Dict, List
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
-from bot import TradingBot
+from trading_bot import TradingBot
 from logger_config import get_logger
 from config import (
     FAILED_FETCH_LIST,

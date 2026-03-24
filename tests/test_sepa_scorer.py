@@ -3,7 +3,7 @@ import pandas as pd
 import pytest
 from unittest.mock import MagicMock
 
-from minervini_scanner_v2 import MinerviniScannerV2
+from sepa_scorer import MinerviniScannerV2
 
 
 def test_scan_stock_insufficient_data_returns_reject():

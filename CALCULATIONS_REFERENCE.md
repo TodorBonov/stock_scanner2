@@ -8,7 +8,7 @@ This document describes how all scanner calculations are made, with formulas and
 
 **Purpose:** Ensure the stock is in a Stage 2 uptrend (price above rising moving averages, within range of 52W high).
 
-**Code:** `minervini_scanner.py` → `_check_trend_structure()`
+**Code:** `sepa_checklist.py` → `_check_trend_structure()`
 
 | Metric | Formula / Rule | Config | Pass condition |
 |--------|----------------|--------|-----------------|
@@ -26,7 +26,7 @@ This document describes how all scanner calculations are made, with formulas and
 
 **Purpose:** Valid consolidation base (3–8 weeks, depth ≤ 25%, tight closes, volume contracting).
 
-**Code:** `minervini_scanner.py` → `_check_base_quality()`, `_identify_base()`
+**Code:** `sepa_checklist.py` → `_check_base_quality()`, `_identify_base()`
 
 | Metric | Formula / Rule | Config | Pass condition |
 |--------|----------------|--------|-----------------|
@@ -45,7 +45,7 @@ This document describes how all scanner calculations are made, with formulas and
 
 **Purpose:** Stock outperforming benchmark; RSI &gt; 60; RS line not declining sharply (or relaxed when stock is strong).
 
-**Code:** `minervini_scanner.py` → `_check_relative_strength()`
+**Code:** `sepa_checklist.py` → `_check_relative_strength()`
 
 **Benchmark:** Set per run via script args (e.g. `04_generate_full_report.py --benchmark ^GDAXI` or `^GSPC`). Per-ticker benchmark from watchlist CSV or `benchmark_mapping.py`. Default in bot is `^GDAXI`.
 
@@ -64,7 +64,7 @@ This document describes how all scanner calculations are made, with formulas and
 
 **Purpose:** Volume contracts in base; can check expansion on breakout.
 
-**Code:** `minervini_scanner.py` → `_check_volume_signature()`
+**Code:** `sepa_checklist.py` → `_check_volume_signature()`
 
 | Metric | Formula / Rule | Config | Pass condition |
 |--------|----------------|--------|-----------------|
@@ -79,7 +79,7 @@ This document describes how all scanner calculations are made, with formulas and
 
 **Purpose:** Price has cleared pivot by ≥ 2% in last 5 days; breakout day close in top 30% of range; volume expansion (on breakout day or within configurable days after).
 
-**Code:** `minervini_scanner.py` → `_check_breakout_rules()`
+**Code:** `sepa_checklist.py` → `_check_breakout_rules()`
 
 | Metric | Formula / Rule | Config | Pass condition |
 |--------|----------------|--------|-----------------|
@@ -98,7 +98,7 @@ This document describes how all scanner calculations are made, with formulas and
 
 ## 6. Grading and “Meets Criteria”
 
-**Code:** `minervini_scanner.py` → `_calculate_grade()`
+**Code:** `sepa_checklist.py` → `_calculate_grade()`
 
 | Grade | Rule | meets_criteria |
 |-------|------|----------------|
@@ -114,7 +114,7 @@ This document describes how all scanner calculations are made, with formulas and
 
 ## 7. Buy/Sell Prices and Distance to Pivot
 
-**Code:** `minervini_scanner.py` → `_calculate_buy_sell_prices()`
+**Code:** `sepa_checklist.py` → `_calculate_buy_sell_prices()`
 
 | Metric | Formula | Config |
 |--------|---------|--------|
@@ -165,13 +165,13 @@ This document describes how all scanner calculations are made, with formulas and
 
 | Item | File | Function / Section |
 |------|------|--------------------|
-| Trend & Structure | minervini_scanner.py | _check_trend_structure() |
-| Base Quality | minervini_scanner.py | _check_base_quality(), _identify_base() |
-| Relative Strength | minervini_scanner.py | _check_relative_strength() |
-| Volume Signature | minervini_scanner.py | _check_volume_signature() |
-| Breakout Rules | minervini_scanner.py | _check_breakout_rules() |
-| Grading | minervini_scanner.py | _calculate_grade() |
-| Buy/Sell, distance_to_buy_pct | minervini_scanner.py | _calculate_buy_sell_prices() |
+| Trend & Structure | sepa_checklist.py | _check_trend_structure() |
+| Base Quality | sepa_checklist.py | _check_base_quality(), _identify_base() |
+| Relative Strength | sepa_checklist.py | _check_relative_strength() |
+| Volume Signature | sepa_checklist.py | _check_volume_signature() |
+| Breakout Rules | sepa_checklist.py | _check_breakout_rules() |
+| Grading | sepa_checklist.py | _calculate_grade() |
+| Buy/Sell, distance_to_buy_pct | sepa_checklist.py | _calculate_buy_sell_prices() |
 | Current pipeline config | config.py | All constants for above |
 | Pre-breakout config | pre_breakout_config.py | PRE_BREAKOUT_* only |
 | Pre-breakout filter/sort | pre_breakout_utils.py | get_pre_breakout_stocks(), pre_breakout_sort_key() |

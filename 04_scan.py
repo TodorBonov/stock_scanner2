@@ -1,8 +1,8 @@
 """
-Pipeline step 4 V2: Run Minervini SEPA V2 scan (eligibility + composite scoring + RS percentile).
-Reads from data/prepared_for_minervini.json (same as step 04). Does NOT overwrite scan_results_latest.json.
-Writes: reportsV2/scan_results_v2_latest.json (LLM/engine output), reportsV2/sepa_scan_user_report_<ts>.txt,
-        and optional CSV. Existing pipeline (04→05→06→07) is unchanged.
+Pipeline step 4: Run SEPA scan (eligibility + composite scoring + RS percentile).
+Reads from data/prepared_for_minervini.json (output of step 03).
+Writes: reports/scan/latest.json (machine output), reports/scan/scan_<ts>.txt (human report),
+        and optional reports/scan/scan_summary_<ts>.csv.
 """
 import json
 import sys
@@ -12,16 +12,16 @@ from datetime import datetime
 from typing import Dict, List, Optional
 import pandas as pd
 
-from bot import TradingBot
-from minervini_scanner_v2 import MinerviniScannerV2
-from minervini_report_v2 import generate_user_friendly_report, export_scan_summary_to_csv
+from trading_bot import TradingBot
+from sepa_scorer import MinerviniScannerV2
+from sepa_report import generate_user_friendly_report, export_scan_summary_to_csv
 from logger_config import setup_logging, get_logger
 from config import (
     PREPARED_FOR_MINERVINI,
     REPORTS_DIR_V2,
     SCAN_RESULTS_V2_LATEST,
-    USER_REPORT_SUBDIR_V2,
     SEPA_USER_REPORT_PREFIX,
+    SEPA_CSV_PREFIX,
 )
 from cache_utils import load_cached_data
 
@@ -166,7 +166,7 @@ def main():
     results = scanner.scan_universe(tickers, benchmark_overrides or None)
 
     # Attach static watchlist metadata (Region, Sector, Market Cap) from prepared cache
-    # so it flows into scan_results_v2_latest.json and downstream HTML / text reports.
+    # so it flows into scan/latest.json and downstream HTML / text reports.
     for r in results:
         t = r.get("ticker")
         if not t:
@@ -182,13 +182,14 @@ def main():
             r["market_cap"] = extra.get("market_cap")
     print(f"Scan complete: {len(results)} results")
 
-    # Write LLM/engine JSON (single source of truth)
-    REPORTS_DIR_V2.mkdir(parents=True, exist_ok=True)
+    # Write machine-readable JSON (single source of truth for downstream steps)
+    scan_dir = REPORTS_DIR_V2 / "scan"
+    scan_dir.mkdir(parents=True, exist_ok=True)
     with open(SCAN_RESULTS_V2_LATEST, "w", encoding="utf-8") as f:
         json.dump(sanitize_for_json(results), f, indent=2, ensure_ascii=False)
     logger.info("Wrote %s", SCAN_RESULTS_V2_LATEST)
 
-    # User-friendly report (report_run_timestamp = when this report is generated)
+    # Human-readable report
     report_run_ts = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     report_txt = generate_user_friendly_report(
         results,
@@ -196,19 +197,17 @@ def main():
         report_run_timestamp=report_run_ts,
     )
     ts = datetime.now().strftime("%Y%m%d_%H%M%S")
-    report_dir = REPORTS_DIR_V2 / USER_REPORT_SUBDIR_V2 if USER_REPORT_SUBDIR_V2 else REPORTS_DIR_V2
-    report_dir.mkdir(parents=True, exist_ok=True)
-    report_file = report_dir / f"{SEPA_USER_REPORT_PREFIX}{ts}.txt"
+    report_file = scan_dir / f"{SEPA_USER_REPORT_PREFIX}{ts}.txt"
     report_file.write_text(report_txt, encoding="utf-8")
     # Avoid printing full report to console (contains Unicode e.g. ≥) which can fail on Windows cp1252
     print(f"\nUser report saved: {report_file} ({len(report_txt)} chars)")
 
     if args.csv:
-        csv_path = report_dir / f"sepa_scan_summary_{ts}.csv"
+        csv_path = scan_dir / f"{SEPA_CSV_PREFIX}{ts}.csv"
         export_scan_summary_to_csv(results, csv_path)
         print(f"CSV saved: {csv_path}")
 
-    print("\nV2 scan complete. Use scan_results_v2_latest.json for LLM/ChatGPT pipeline.")
+    print("\nScan complete. reports/scan/latest.json ready for AI pipeline (steps 05–07).")
 
 
 if __name__ == "__main__":

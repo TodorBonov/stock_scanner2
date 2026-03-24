@@ -109,16 +109,16 @@ FAILED_FETCH_LIST = Path("data/failed_fetch.txt")
 
 # Ticker mapping: file-based mapping (T212 symbol -> Yahoo/data symbol) for manual resolution
 TICKER_MAPPING_FILE = Path("data/ticker_mapping.json")
-# Purpose: JSON file of ticker mappings; edit to fix mapping errors (see reportsV2/ticker_mapping_errors.txt)
+# Purpose: JSON file of ticker mappings; edit to fix mapping errors (see reports/ticker_mapping_errors.txt)
 # Used by: ticker_utils.py
 
 # Ticker mapping errors: written each run that fetches; lists tickers that failed (possible mapping issues)
-TICKER_MAPPING_ERRORS_FILE = Path("reportsV2/ticker_mapping_errors.txt")
+TICKER_MAPPING_ERRORS_FILE = Path("reports/problems_with_tickers.txt")
 # Purpose: After each fetch, list tickers with no data/error so you can add them to data/ticker_mapping.json
 # Used by: fetch_utils.py
 
-REPORTS_DIR = Path("reportsV2")
-# Purpose: Directory for all reports (Pipeline V2)
+REPORTS_DIR = Path("reports")
+# Purpose: Root directory for all reports
 # Used by: 03, 04, 05, 06, 07, position_sizing
 
 # Pipeline data (01→07)
@@ -126,13 +126,13 @@ PREPARED_FOR_MINERVINI = Path("data/prepared_for_minervini.json")
 # Purpose: Output of step 03; input to step 04. Stored for testing.
 # Used by: 03_prepare_for_minervini.py (write), 04_generate_full_report.py (read)
 
-# Pipeline V2 cache inputs (steps 01, 02 write; step 03 reads)
+# Pipeline cache inputs (steps 01, 02 write; step 03 reads)
 NEW_PIPELINE_CACHE = Path("data/cached_stock_data_new_pipeline.json")
 # Purpose: Yahoo OHLCV cache from step 01.
-# Used by: 01_fetch_yahoo_watchlist_V2.py (write), 03_prepare_for_minervini_V2.py (read)
+# Used by: 01_fetch_prices.py (write), 03_prepare_data.py (read)
 NEW_PIPELINE_POSITIONS = Path("data/positions_new_pipeline.json")
 # Purpose: Trading212 positions from step 02.
-# Used by: 02_fetch_positions_trading212_V2.py (write), 03_prepare_for_minervini_V2.py (read)
+# Used by: 02_fetch_positions.py (write), 03_prepare_data.py (read)
 
 PROBLEMS_WITH_TICKERS = REPORTS_DIR / "problems_with_tickers.txt"
 # Purpose: Report of ticker mismatches, unmapped symbols, missing data (step 03).
@@ -590,7 +590,7 @@ CRITICAL_FAILURE_GRADE = "F"  # Grade if trend & structure fails
 # MINERVINI V2 PIPELINE CONFIGURATION
 # ============================================================================
 # Scanner V2: structural eligibility, composite scoring, grade bands, report paths.
-# Used by: minervini_scanner_v2, minervini_report_v2, steps 04–07.
+# Used by: sepa_scorer, sepa_report, steps 04–07.
 
 # ----------------------------------------------------------------------------
 # STRUCTURAL ELIGIBILITY (V2)
@@ -724,10 +724,10 @@ EARLY_DIST_TO_PIVOT_MAX_PCT = 0.0
 EARLY_MAX_ROWS = 40
 
 # ----------------------------------------------------------------------------
-# V2 OUTPUT PATHS
+# OUTPUT PATHS
 # ----------------------------------------------------------------------------
-REPORTS_DIR_V2 = Path("reportsV2")
-SCAN_RESULTS_V2_LATEST = REPORTS_DIR_V2 / "scan_results_v2_latest.json"
-USER_REPORT_SUBDIR_V2 = ""
-SEPA_USER_REPORT_PREFIX = "sepa_scan_user_report_"
-SEPA_CSV_PREFIX = "sepa_scan_summary_"
+REPORTS_DIR_V2 = Path("reports")          # alias kept for backward compat inside scripts
+SCAN_RESULTS_V2_LATEST = REPORTS_DIR_V2 / "scan/latest.json"
+USER_REPORT_SUBDIR_V2 = "scan"
+SEPA_USER_REPORT_PREFIX = "scan_"
+SEPA_CSV_PREFIX = "scan_summary_"

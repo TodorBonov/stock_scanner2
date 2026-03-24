@@ -125,10 +125,10 @@ Each component is scored 0–100; composite = sum(weight × score).
 
 | Variable | Current value |
 |----------|----------------|
-| `REPORTS_DIR_V2` | `reportsV2` |
-| `SCAN_RESULTS_V2_LATEST` | `reportsV2/scan_results_v2_latest.json` |
+| `REPORTS_DIR_V2` | `reports` |
+| `SCAN_RESULTS_V2_LATEST` | `reports/reports/scan/latest.json` |
 | `USER_REPORT_SUBDIR_V2` | `v2` |
-| `SEPA_USER_REPORT_PREFIX` | `sepa_scan_user_report_` |
+| `SEPA_USER_REPORT_PREFIX` | `scan_` |
 | `SEPA_CSV_PREFIX` | `sepa_scan_summary_` |
 
 ---
@@ -174,7 +174,7 @@ Used only in V2, for **universe comparison**:
 - **Formula (strict percentile rank):**  
   `rs_percentile = (count of tickers with 3M return **strictly less** than this stock’s) / n × 100`  
   So 0 = worst in universe, 100 = best; 50 = half did worse.
-- **Code:** `_percentile_rank(value, universe_values)` in `minervini_scanner_v2.py`.
+- **Code:** `_percentile_rank(value, universe_values)` in `sepa_scorer.py`.
 
 **Use in V2:** This 0–100 value is the **RS component score** in the composite (when `rs_percentile` is provided from the universe pass). So relative strength in the grade is “where this stock ranks in 3M return vs the rest of the scan list,” not vs a single index.
 
@@ -270,7 +270,7 @@ Example from a live V2 run (RWE.DE in a small universe). Illustrates **graded tr
 
 ## 6. Full example: RWE.DE — LLM output and user report
 
-**LLM/engine output** (single ticker object in `reportsV2/scan_results_v2_latest.json`):
+**LLM/engine output** (single ticker object in `reports/reports/scan/latest.json`):
 
 ```json
 {
@@ -336,7 +336,7 @@ Status: Watch
   Scores: Trend 70.0  Base 100.0  RS 50.0  Vol 100.0  Breakout 50.0
 ```
 
-The full user report is written by `04_generate_full_report_v2.py` to `reportsV2/sepa_scan_user_report_<timestamp>.txt`. CSV (including `pivot_source` and `power_rank`) goes to `reportsV2/sepa_scan_summary_<timestamp>.csv`.
+The full user report is written by `04_scan.py` to `reports/scan_<timestamp>.txt`. CSV (including `pivot_source` and `power_rank`) goes to `reports/sepa_scan_summary_<timestamp>.csv`.
 
 ---
 
@@ -346,9 +346,9 @@ To have **fewer** names flagged as extended / overextended, you can change the f
 
 | Where | What | Current | Suggested |
 |-------|------|---------|-----------|
-| **minervini_scanner_v2.py** | Breakout score: threshold above which distance-to-pivot gets score 30 | `if distance_to_pivot_pct > 5` | Raise to **8 or 10** so only stocks >8–10% above pivot are penalized. |
-| **minervini_report_v2.py** | Status "Extended" | `if dist > 5` | Use same value as scanner (e.g. **10**). |
-| **minervini_report_v2.py** | Risk Warnings "Extended" | `> 10` | Raise to **15** so only >15% above pivot are listed. |
+| **sepa_scorer.py** | Breakout score: threshold above which distance-to-pivot gets score 30 | `if distance_to_pivot_pct > 5` | Raise to **8 or 10** so only stocks >8–10% above pivot are penalized. |
+| **sepa_report.py** | Status "Extended" | `if dist > 5` | Use same value as scanner (e.g. **10**). |
+| **sepa_report.py** | Risk Warnings "Extended" | `> 10` | Raise to **15** so only >15% above pivot are listed. |
 | **08_chatgpt_new_positions_v2.py** | Status for prompt | `if d > 5` | Use same as report (e.g. **10**). |
 | **config.py** | Late-stage warning (within X% of 52W high) | `PRICE_TOO_CLOSE_TO_HIGH_PCT = 10` | Raise to **15** so fewer get the "late stage" warning. |
 

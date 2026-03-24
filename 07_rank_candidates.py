@@ -1,8 +1,8 @@
 """
-Pipeline step 7 (V2): ChatGPT analysis for new position candidates using V2 scan output.
-Reads reportsV2/prepared_new_positions_v2.json (from 05_prepare_chatgpt_data_v2.py).
-Uses the structured V2 fields (composite_score, base type, rs_percentile, pivot, stop_method) in the prompt.
-Writes reportsV2/chatgpt_new_positions_v2_<ts>.txt
+Pipeline step 7: ChatGPT ranking of new position candidates from scan output.
+Reads reports/data/ai_candidates_input.json (from 05_prep_ai_data.py).
+Uses structured fields (composite_score, base type, rs_percentile, pivot, stop_method) in the prompt.
+Writes reports/ai/candidates_<ts>.txt
 """
 import json
 import re
@@ -28,8 +28,8 @@ from config import (
 if Path(DEFAULT_ENV_PATH).exists():
     load_dotenv(Path(DEFAULT_ENV_PATH))
 
-V2_REPORTS = REPORTS_DIR_V2  # reportsV2
-PREPARED_NEW_V2 = V2_REPORTS / "prepared_new_positions_v2.json"
+V2_REPORTS = REPORTS_DIR_V2
+PREPARED_NEW_V2 = V2_REPORTS / "data/ai_candidates_input.json"
 
 setup_logging(log_level="INFO", log_to_file=True)
 logger = get_logger(__name__)
@@ -267,7 +267,7 @@ def main():
 
     api_key = require_openai_api_key(args.api_key)
     if not PREPARED_NEW_V2.exists():
-        print(f"[ERROR] {PREPARED_NEW_V2} not found. Run 04_generate_full_report_v2.py then 05_prepare_chatgpt_data_v2.py.")
+        print(f"[ERROR] {PREPARED_NEW_V2} not found. Run 04_scan.py then 05_prep_ai_data.py.")
         return
 
     with open(PREPARED_NEW_V2, "r", encoding="utf-8") as f:
@@ -359,9 +359,10 @@ def main():
         report_lines.append(f"| {r} | {ticker} | {my_grade or '—'} | {my_score or '—'} | {cg_grade or '—'} |")
     report_lines.append("")
 
-    V2_REPORTS.mkdir(parents=True, exist_ok=True)
+    ai_dir = V2_REPORTS / "ai"
+    ai_dir.mkdir(parents=True, exist_ok=True)
     ts = datetime.now().strftime("%Y%m%d_%H%M%S")
-    out_file = V2_REPORTS / f"chatgpt_new_positions_v2_{ts}.txt"
+    out_file = ai_dir / f"candidates_{ts}.txt"
     out_file.write_text("\n".join(report_lines), encoding="utf-8")
     print(f"Report saved: {out_file}\n")
 

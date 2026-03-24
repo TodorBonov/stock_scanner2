@@ -1,75 +1,67 @@
-# Scripts & configs — quick reference
+# Scripts & Config — Quick Reference
 
-**You use Pipeline V2.** One command: `python run_pipeline_v2.py`
-
-This file explains what each script and config is, so the names stop being confusing.
+**One command to run everything:** `python run_pipeline.py`
 
 ---
 
-## What to run (Pipeline V2)
+## Pipeline scripts
 
-| You run | It runs these in order |
-|--------|-------------------------|
-| `python run_pipeline_v2.py` | 01 → 02 → 03 → **04 V2** → **05 V2** → **06 V2** → **07** |
-
-So you never need to remember “04 vs 04_v2” or “07 vs 08” — the runner calls the right ones.
-
----
-
-## Scripts: name → role
-
-### Scripts on main (Pipeline V2 only)
-
-| Script | Step | What it does |
-|--------|------|--------------|
-| `01_fetch_yahoo_watchlist_V2.py` | 01 | Fetch/cache Yahoo OHLCV for watchlist |
-| `02_fetch_positions_trading212_V2.py` | 02 | Fetch open positions from Trading212 |
-| `03_prepare_for_minervini_V2.py` | 03 | Build prepared data for the scanner |
-| `04_generate_full_report_v2.py` | 04 V2 | V2 scan → `reportsV2/sepa_scan_user_report_*.txt`, `reportsV2/scan_results_v2_latest.json` |
-| `05_prepare_chatgpt_data_v2.py` | 05 V2 | Prep existing + new from V2 scan → `reportsV2/prepared_*_v2.json` |
-| `06_chatgpt_existing_positions_v2.py` | 06 V2 | ChatGPT for existing positions → `reportsV2/chatgpt_existing_positions_v2_*.txt` |
-| `07_chatgpt_new_positions_v2.py` | 07 | ChatGPT for new candidates → `reportsV2/chatgpt_new_positions_v2_*.txt` |
-
-### Not on main (only on branch pipeline-v1)
-
-These scripts were removed from main; they exist only on branch **pipeline-v1** (original pipeline):
-
-| Script | Role on pipeline-v1 |
-|--------|------------|
-| `04_generate_full_report.py` | Original Minervini scan (writes `scan_results_latest.json`). |
-| `07_chatgpt_new_positions.py` | Original “new positions” ChatGPT. |
-| `04_chatgpt_existing_positions.py` | Stub that delegates to 06. |
-| `05_chatgpt_new_positions.py` | Stub that delegates to 07. |
-| `generate_full_report.py` | Stub that delegates to 04. |
-| `pre_breakout_config.py` | Config for pre-breakout view (used by original 04). |
-| `pre_breakout_utils.py` | Pre-breakout logic (used by original 04). |
+| Script | Step | Role |
+|--------|------|------|
+| `01_fetch_prices.py` | 01 | Fetch and cache Yahoo OHLCV for every ticker in the watchlist |
+| `02_fetch_positions.py` | 02 | Fetch your open positions from Trading212 |
+| `03_prepare_data.py` | 03 | Merge cache + positions + watchlist into a single prepared file |
+| `04_scan.py` | 04 | Run the SEPA scorer → grades, scores, report |
+| `05_prep_ai_data.py` | 05 | Extract A+/A stocks and holdings and format them for AI |
+| `06_analyze_holdings.py` | 06 | ChatGPT review of your existing holdings |
+| `07_rank_candidates.py` | 07 | ChatGPT ranking of new entry candidates |
 
 ---
 
-## Config files: which is which
+## Scanner engine
 
-| Config file | Used by | What it’s for |
-|-------------|--------|----------------|
-| **config.py** | Everything | Single config: API keys, paths, rate limits, OpenAI model, **original** scanner thresholds, **and** V2 settings (prior run %, grade bands, composite weights, ATR V2, `reportsV2/` paths). |
-| **pre_breakout_config.py** | Only on branch pipeline-v1 | Pre-breakout view (add-on to original scan). Removed from main. |
-| **logger_config.py** | All scripts | Logging setup (not “business” config). |
-
-**In short:** Change **config.py** for API keys, paths, scanner thresholds, and V2 scan rules (grades, weights, report paths). **pre_breakout_config.py** exists only on branch pipeline-v1.
+| File | Role |
+|------|------|
+| `sepa_checklist.py` | 5-part Minervini checklist — pure pass/fail for each criterion |
+| `sepa_scorer.py` | Takes checklist results → composite score (0–100) → grade (A+/A/B/C/REJECT) |
+| `sepa_report.py` | Formats scan results into human-readable `.txt` and optional CSV |
+| `sepa_web_export.py` | Generates `docs/index.html` — sortable HTML rank table |
 
 ---
 
-## Watchlist and test data
+## Config
+
+| File | Used by | What it controls |
+|------|---------|-----------------|
+| `config.py` | Everything | API keys, file paths, all scanner thresholds, scoring weights, grade bands, ATR settings, OpenAI model |
+| `logger_config.py` | All scripts | Logging setup only |
+
+**One config for everything.** All scanner thresholds (SMA periods, base depth, RS, volume, grading bands) and all paths live in `config.py`.
+
+---
+
+## Reports
+
+| Path | What ends up there |
+|------|--------------------|
+| `reports/scan/scan_<ts>.txt` | Human-readable SEPA scan report per run |
+| `reports/scan/latest.json` | Machine-readable scan output (input to step 05) — overwritten each run |
+| `reports/ai/holdings_<ts>.txt` | ChatGPT review of existing holdings (step 06) |
+| `reports/ai/candidates_<ts>.txt` | ChatGPT ranking of new candidates (step 07) |
+| `reports/data/` | Intermediate JSON prepared for steps 06/07 — regenerated each run, gitignored |
+| `reports/problems_with_tickers.txt` | Tickers with data issues — check here if a stock is missing |
+
+---
+
+## Watchlist files
 
 | File | Purpose |
 |------|---------|
-| **watchlist.csv** | Main watchlist (type, yahoo_symbol, trading212_symbol, benchmark_index). Used by the pipeline. |
-| **watchlist_test.csv** | Test watchlist used for testing (e.g. quick runs, CI, or manual tests). Same format as `watchlist.csv`. Do not remove. |
+| `watchlist.csv` | Main watchlist — columns: `type, yahoo_symbol, trading212_symbol, benchmark_index` |
+| `watchlist_test.csv` | Short list for quick test runs. Same format. |
 
 ---
 
-## One-page summary
+## Old pipeline
 
-- **Run:** `python run_pipeline_v2.py` (optionally `--csv` or `--refresh`).
-- **Scripts on main:** 01_fetch_yahoo_watchlist_V2, 02_fetch_positions_trading212_V2, 03_prepare_for_minervini_V2, 04_generate_full_report_v2, 05_prepare_chatgpt_data_v2, 06_chatgpt_existing_positions_v2, 07_chatgpt_new_positions_v2. Nothing for pipeline 1.
-- **Config:** **config.py** (single config for pipeline and V2).
-- **Original pipeline:** Only on branch **pipeline-v1**; see **PIPELINE_ARCHIVE.md**.
+The original pipeline (before scoring and grading) is archived on branch **`pipeline-v1`**. Nothing from that branch is needed on `main`.

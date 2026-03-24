@@ -1,8 +1,8 @@
 """
-Pipeline step 5 V2: Prepare ChatGPT data from V2 scan results.
-Reads reportsV2/scan_results_v2_latest.json (from 04_generate_full_report_v2.py).
-Outputs reportsV2/prepared_existing_positions_v2.json and prepared_new_positions_v2.json.
-A+/A from V2 grade (eligible + grade in A+, A). New positions payload includes V2 structured fields for LLM.
+Pipeline step 5: Prepare AI data from scan results.
+Reads reports/scan/latest.json (from 04_scan.py).
+Outputs reports/data/ai_holdings_input.json and reports/data/ai_candidates_input.json.
+A+/A from grade (eligible + grade in A+, A). New positions payload includes structured fields for LLM.
 """
 import argparse
 import json
@@ -21,9 +21,9 @@ from watchlist_loader import load_watchlist, TRADING212_SYMBOL, YAHOO_SYMBOL
 NEW_PIPELINE_DIR = Path("data")
 NEW_PIPELINE_CACHE = NEW_PIPELINE_DIR / "cached_stock_data_new_pipeline.json"
 NEW_PIPELINE_POSITIONS = NEW_PIPELINE_DIR / "positions_new_pipeline.json"
-V2_REPORTS = REPORTS_DIR_V2  # All V2 reports in reportsV2
-PREPARED_EXISTING_V2 = V2_REPORTS / "prepared_existing_positions_v2.json"
-PREPARED_NEW_V2 = V2_REPORTS / "prepared_new_positions_v2.json"
+V2_REPORTS = REPORTS_DIR_V2
+PREPARED_EXISTING_V2 = V2_REPORTS / "data/ai_holdings_input.json"
+PREPARED_NEW_V2 = V2_REPORTS / "data/ai_candidates_input.json"
 MAX_OHLCV_DAYS_6MO = 126
 
 setup_logging(log_level="INFO", log_to_file=True)
@@ -34,7 +34,7 @@ if Path(DEFAULT_ENV_PATH).exists():
 
 
 def load_scan_results_v2() -> List[Dict]:
-    """Load V2 scan results."""
+    """Load scan results."""
     if not SCAN_RESULTS_V2_LATEST.exists():
         return []
     try:
@@ -42,7 +42,7 @@ def load_scan_results_v2() -> List[Dict]:
             data = json.load(f)
         return data if isinstance(data, list) else []
     except Exception as e:
-        logger.warning("Could not load V2 scan results: %s", e)
+        logger.warning("Could not load scan results: %s", e)
         return []
 
 
@@ -277,7 +277,7 @@ def main():
 
     scan_results = load_scan_results_v2()
     if not scan_results:
-        print("No V2 scan results. Run 04_generate_full_report_v2.py first.")
+        print("No scan results. Run 04_scan.py first.")
         return
 
     cached_data = load_cache()
@@ -363,7 +363,7 @@ def main():
             pass
     meta = {
         "prepared_at": datetime.now().isoformat(),
-        "source": "scan_results_v2_latest.json",
+        "source": "scan/latest.json",
         "data_timestamp_yahoo": data_timestamp_yahoo,
         "eur_usd_rate": eur_usd_rate,
         "eur_usd_rate_date": eur_usd_rate_date,
@@ -374,7 +374,7 @@ def main():
 
     with open(PREPARED_NEW_V2, "w", encoding="utf-8") as f:
         json.dump({"meta": meta, "stocks": prepared_new}, f, indent=2, default=str)
-    print(f"Wrote {PREPARED_NEW_V2} ({len(prepared_new)} A+/A stocks from V2)")
+    print(f"Wrote {PREPARED_NEW_V2} ({len(prepared_new)} A+/A stocks)")
 
     print("=" * 80 + "\n")
 

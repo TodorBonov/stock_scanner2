@@ -46,7 +46,7 @@ def _safe_float(x: Any, default: float = 0.0, digits: int | None = None) -> floa
 
 
 def _important_note_short(r: Dict[str, Any]) -> str:
-    """Short note string similar to minervini_report_v2._important_note_short."""
+    """Short note string similar to sepa_report._important_note_short."""
     notes: List[str] = []
     base = r.get("base") or {}
     depth = _safe_float(base.get("depth_pct"))

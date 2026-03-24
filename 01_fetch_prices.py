@@ -18,7 +18,7 @@ if Path(DEFAULT_ENV_PATH).exists():
 
 from watchlist_loader import load_watchlist, get_yahoo_symbols_for_fetch
 from fetch_utils import fetch_stock_data_batch
-from bot import TradingBot
+from trading_bot import TradingBot
 
 # New pipeline: own cache file (do not overwrite main pipeline cache)
 NEW_PIPELINE_DIR = Path("data")

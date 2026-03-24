@@ -10,7 +10,7 @@ import numpy as np
 from typing import Dict, List, Optional, Tuple, Any
 from data_provider import StockDataProvider
 from logger_config import get_logger
-from minervini_scanner import MinerviniScanner
+from sepa_checklist import MinerviniScanner
 from config import (
     SMA_200_PERIOD, MIN_DATA_DAYS,
     BASE_LENGTH_MIN_WEEKS, BASE_LENGTH_MAX_WEEKS, BASE_DEPTH_MAX_PCT,

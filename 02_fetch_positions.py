@@ -118,7 +118,7 @@ def refresh_ohlcv_for_tickers(tickers: List[str]) -> None:
     """Fetch OHLCV for given tickers and merge into new pipeline cache (same structure as 01)."""
     if not tickers:
         return
-    from bot import TradingBot
+    from trading_bot import TradingBot
     bot = TradingBot(skip_trading212=True)
     cached_data = load_new_pipeline_cache()
     stocks = cached_data.get("stocks", {})

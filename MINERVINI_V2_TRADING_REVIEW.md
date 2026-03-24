@@ -133,4 +133,4 @@ These are either **hardcoded in the V2 scanner/report** or **duplicated across s
 
 - **Strengths:** Structural gate, prior run, RS percentile, base-type pivot, ATR stop with floor, composite scoring, power rank, and deterministic output all support real trading and ranking.
 - **High-value improvements:** Centralize extended thresholds (`EXTENDED_DISTANCE_PCT`, `EXTENDED_RISK_WARNING_PCT`), optionally clarify R/R at current price, and move breakout/base/volume score bands and key periods into config.
-- **Config:** Add the parameters in §3 to `minervini_config_v2.py` (at least extended + breakout bands), and use them in `minervini_scanner_v2.py`, `minervini_report_v2.py`, and `08_chatgpt_new_positions_v2.py` so one config file drives scanner, report, and ChatGPT step.
+- **Config:** Add the parameters in §3 to `minervini_config_v2.py` (at least extended + breakout bands), and use them in `sepa_scorer.py`, `sepa_report.py`, and `08_chatgpt_new_positions_v2.py` so one config file drives scanner, report, and ChatGPT step.
