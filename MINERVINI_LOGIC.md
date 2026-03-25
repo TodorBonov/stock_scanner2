@@ -254,7 +254,7 @@ Besides “already in breakout” names, the report can show **pre-breakout setu
 - −2.56% is in [−5%, 0%] → **included** in pre-breakout list.  
 - Sort: base depth 13%, volume_contraction 0.80, |−2.56| = 2.56, rs_rating 70 → key (13, 0.80, 2.56, −70). A stock with depth 10%, contraction 0.70, distance −1.5%, rs_rating 80 would sort earlier (better).
 
-**Where it lives:** `pre_breakout_utils.py` → `get_pre_breakout_stocks()`, sort key; config in `pre_breakout_config.py` only (PRE_BREAKOUT_*). Used in `04_generate_full_report.py` for the pre-breakout section.
+**Where it lives:** `sepa_scorer.py` → pre-breakout section; config in `config.py` (PRE_BREAKOUT_*). Used in `04_scan.py`.
 
 ---
 

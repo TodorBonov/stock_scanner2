@@ -139,7 +139,7 @@ V2 output shows three RS-related numbers: **rs_3m**, **rs_percentile**, and **rs
 
 ### 3.1 RS vs benchmark (under the hood)
 
-The scanner still uses the **original** relative-strength-vs-benchmark logic (for checklist pass/fail and RS line). It lives in `data_provider.calculate_relative_strength()` and `minervini_scanner._check_relative_strength()`:
+The scanner still uses the **original** relative-strength-vs-benchmark logic (for checklist pass/fail and RS line). It lives in `data_provider.calculate_relative_strength()` and `sepa_checklist._check_relative_strength()`:
 
 - **Period:** Last `period` trading days (default 252 in data provider; 60 days in scanner’s manual fallback, from `config.RS_LOOKBACK_DAYS`).
 - **Aligned returns:** Stock and benchmark daily returns are aligned by date; only common dates in the last `period` days are used.

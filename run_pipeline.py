@@ -7,7 +7,9 @@ Run the complete pipeline: 01 → 02 → 03 → 04 → 05 → 06 → 07.
   python run_pipeline.py --watchlist watchlist_test.csv --refresh
   python run_pipeline.py --csv                            # also export CSV from step 04
   python run_pipeline.py --csv --refresh
-  python run_pipeline.py --exclude-07                     # skip step 07 (rank candidates)
+  python run_pipeline.py --exclude-06                     # skip step 06 [GPT] (analyze holdings)
+  python run_pipeline.py --exclude-07                     # skip step 07 [GPT] (rank candidates)
+  python run_pipeline.py --exclude-06 --exclude-07        # skip both GPT steps
 """
 import argparse
 import subprocess
@@ -34,7 +36,8 @@ def main():
     parser.add_argument("--watchlist", default="watchlist.csv", help="Watchlist CSV or .txt (default: watchlist.csv; use watchlist_test.csv for short list)")
     parser.add_argument("--csv", action="store_true", help="Export CSV summary from step 04 (reports/scan/)")
     parser.add_argument("--refresh", action="store_true", help="Force step 01 to refetch all data from Yahoo (ignore cache)")
-    parser.add_argument("--exclude-07", action="store_true", help="Skip step 07 (rank candidates)")
+    parser.add_argument("--exclude-06", action="store_true", help="Skip step 06 [GPT] (analyze holdings)")
+    parser.add_argument("--exclude-07", action="store_true", help="Skip step 07 [GPT] (rank candidates)")
     args = parser.parse_args()
 
     extra_04 = ["--csv"] if args.csv else []
@@ -46,6 +49,9 @@ def main():
     REPORTS_DIR.mkdir(parents=True, exist_ok=True)
 
     for name, script in STEPS:
+        if name == "06" and args.exclude_06:
+            print(f"\n{'='*60}\nStep {name}: skipped (--exclude-06)\n{'='*60}")
+            continue
         if name == "07" and args.exclude_07:
             print(f"\n{'='*60}\nStep {name}: skipped (--exclude-07)\n{'='*60}")
             continue

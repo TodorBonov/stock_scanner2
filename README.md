@@ -49,7 +49,7 @@ python run_pipeline.py                                      # full watchlist, ca
 python run_pipeline.py --refresh                            # force fresh Yahoo data
 python run_pipeline.py --watchlist watchlist_test.csv       # short watchlist (quick test)
 python run_pipeline.py --csv                                # also export CSV from step 04
-python run_pipeline.py --exclude-07                         # skip ChatGPT ranking step
+python run_pipeline.py --exclude-06 --exclude-07            # skip both GPT steps (no token cost)
 ```
 
 ---
