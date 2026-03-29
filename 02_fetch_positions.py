@@ -118,14 +118,14 @@ def refresh_ohlcv_for_tickers(tickers: List[str]) -> None:
     """Fetch OHLCV for given tickers and merge into new pipeline cache (same structure as 01)."""
     if not tickers:
         return
-    from trading_bot import TradingBot
-    bot = TradingBot(skip_trading212=True)
+    from data_provider import StockDataProvider
+    provider = StockDataProvider(alpha_vantage_api_key=os.getenv("ALPHA_VANTAGE_API_KEY"), prefer_yfinance=True)
     cached_data = load_new_pipeline_cache()
     stocks = cached_data.get("stocks", {})
     for ticker in tickers:
         logger.info("Refreshing OHLCV for %s", ticker)
         try:
-            hist = bot.data_provider.get_historical_data(ticker, period="1y", interval="1d")
+            hist = provider.get_historical_data(ticker, period="1y", interval="1d")
             if hist.empty or len(hist) < 200:
                 stocks[ticker] = {
                     "ticker": ticker,
@@ -134,7 +134,7 @@ def refresh_ohlcv_for_tickers(tickers: List[str]) -> None:
                     "fetched_at": datetime.now().isoformat(),
                 }
                 continue
-            stock_info = bot.data_provider.get_stock_info(ticker) or {}
+            stock_info = provider.get_stock_info(ticker) or {}
             hist_dict = {"index": [str(idx) for idx in hist.index], "data": hist.to_dict("records")}
             if stock_info.get("currency") == "EUR":
                 rate = get_eur_usd_rate()

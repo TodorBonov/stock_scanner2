@@ -5,10 +5,9 @@ Run after scan; can read from latest scan results or pass buy/stop manually.
 """
 import argparse
 import json
-from pathlib import Path
 from typing import Dict, List, Optional
 
-from config import REPORTS_DIR, SCAN_RESULTS_LATEST
+from config import SCAN_RESULTS_V2_LATEST
 
 
 def position_size_from_risk(
@@ -54,13 +53,12 @@ def main():
     args = parser.parse_args()
 
     if args.from_scan:
-        path = Path(SCAN_RESULTS_LATEST)
-        if not path.exists():
-            print(f"Scan results not found at {path}. Run the pipeline scan step first (e.g. run_pipeline.py).")
+        if not SCAN_RESULTS_V2_LATEST.exists():
+            print(f"Scan results not found at {SCAN_RESULTS_V2_LATEST}. Run the pipeline scan step first (e.g. run_pipeline.py).")
             return
-        with open(path, encoding="utf-8") as f:
+        with open(SCAN_RESULTS_V2_LATEST, encoding="utf-8") as f:
             results = json.load(f)
-        tickers = [r for r in results if "error" not in r and r.get("buy_sell_prices", {}).get("pivot_price") is not None]
+        tickers = [r for r in results if "error" not in r and r.get("breakout", {}).get("pivot_price") is not None]
         if args.ticker:
             tickers = [r for r in tickers if r.get("ticker") == args.ticker]
         if not tickers:
@@ -69,16 +67,15 @@ def main():
         print(f"Account: ${args.account:,.2f}  Risk per trade: {args.risk_pct}%")
         print("-" * 60)
         for r in tickers:
-            buy_sell = r.get("buy_sell_prices", {})
-            buy_price = buy_sell.get("buy_price")
-            stop_loss = buy_sell.get("stop_loss")
+            buy_price = r.get("breakout", {}).get("pivot_price")
+            stop_loss = r.get("risk", {}).get("stop_price")
             if buy_price is None or stop_loss is None:
                 continue
             sz = position_size_from_risk(args.account, args.risk_pct, float(buy_price), float(stop_loss))
             if sz is None:
                 continue
             ticker = r.get("ticker", "?")
-            grade = r.get("overall_grade", "?")
+            grade = r.get("grade", "?")
             print(f"  {ticker:12s} Grade {grade}: Buy ${buy_price:.2f} Stop ${stop_loss:.2f}")
             print(f"    -> {sz['shares']} shares (${sz['position_value']:,.2f})  Risk ${sz['risk_amount']:,.2f} ({sz['risk_pct_of_account']}%)")
         return

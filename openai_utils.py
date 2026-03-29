@@ -57,13 +57,16 @@ def send_to_chatgpt(
         messages.append({"role": "system", "content": system_content})
     messages.append({"role": "user", "content": prompt})
 
+    # gpt-5.x / o1 / o3 / o4 use max_completion_tokens; older models use max_tokens
+    _new_api = any(model.startswith(p) for p in ("gpt-5", "o1", "o3", "o4"))
+    token_kwarg = {"max_completion_tokens": max_tokens} if _new_api else {"max_tokens": max_tokens}
+
     for attempt in range(OPENAI_CHATGPT_RETRY_ATTEMPTS):
         try:
-            # gpt-5.x and newer require max_completion_tokens; older models use max_tokens
             resp = client.chat.completions.create(
                 model=model,
                 messages=messages,
-                max_completion_tokens=max_tokens,
+                **token_kwarg,
                 timeout=timeout,
             )
             choice = resp.choices[0] if resp.choices else None

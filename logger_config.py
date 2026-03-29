@@ -41,10 +41,7 @@ def setup_logging(log_level: str = "INFO", log_to_file: bool = True) -> logging.
         log_file = log_dir / DEFAULT_LOG_FILE
 
     logger.setLevel(getattr(logging, log_level.upper(), logging.INFO))
-    
-    # Remove existing handlers to avoid duplicates
-    logger.handlers.clear()
-    
+
     # Console handler
     console_handler = logging.StreamHandler(sys.stdout)
     console_handler.setLevel(logging.INFO)

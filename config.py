@@ -728,6 +728,7 @@ EARLY_MAX_ROWS = 40
 # ----------------------------------------------------------------------------
 REPORTS_DIR_V2 = Path("reports")          # alias kept for backward compat inside scripts
 SCAN_RESULTS_V2_LATEST = REPORTS_DIR_V2 / "scan/latest.json"
+SCAN_HISTORY_FILE = REPORTS_DIR_V2 / "scan/history.jsonl"
 USER_REPORT_SUBDIR_V2 = "scan"
 SEPA_USER_REPORT_PREFIX = "scan_"
 SEPA_CSV_PREFIX = "scan_summary_"

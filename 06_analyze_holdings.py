@@ -101,7 +101,7 @@ Currency: {currency}
 {v2_context}
 
 ========================
-DAILY OHLCV DATA
+DAILY OHLCV DATA ({ohlcv_currency})
 ========================
 {ohlcv_csv}
 
@@ -231,6 +231,7 @@ def main():
         currency = pos.get("currency", "USD")
         position_size = f"{quantity} shares" if quantity else "N/A"
         ohlcv = (pos.get("ohlcv_csv") or "").strip()
+        ohlcv_currency = pos.get("ohlcv_currency") or currency
 
         v2_row = v2_by_ticker.get((ticker or "").strip().upper()) if ticker else None
         v2_context = _build_v2_context_block(v2_row) if v2_row else "scan context: not available (ticker not in latest scan or scan not run)."
@@ -253,6 +254,7 @@ def main():
                 current_price=current_str,
                 position_size=position_size,
                 currency=currency,
+                ohlcv_currency=ohlcv_currency,
                 v2_context=v2_context,
                 ohlcv_csv=ohlcv,
             )

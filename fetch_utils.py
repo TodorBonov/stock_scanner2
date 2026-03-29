@@ -7,7 +7,7 @@ from datetime import datetime
 from typing import Dict, List
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
-from trading_bot import TradingBot
+from data_provider import StockDataProvider
 from logger_config import get_logger
 from config import (
     FAILED_FETCH_LIST,
@@ -20,11 +20,11 @@ from currency_utils import get_eur_usd_rate
 logger = get_logger(__name__)
 
 
-def fetch_stock_data(ticker: str, bot: TradingBot) -> Dict:
+def fetch_stock_data(ticker: str, provider: StockDataProvider) -> Dict:
     """Fetch historical data for a single stock. Returns dict with data_available, historical_data, stock_info, or error."""
     try:
         logger.info("Fetching data for %s...", ticker)
-        hist = bot.data_provider.get_historical_data(ticker, period="1y", interval="1d")
+        hist = provider.get_historical_data(ticker, period="1y", interval="1d")
         if hist.empty or len(hist) < 200:
             logger.warning("Insufficient data for %s: %d rows", ticker, len(hist))
             return {
@@ -33,7 +33,7 @@ def fetch_stock_data(ticker: str, bot: TradingBot) -> Dict:
                 "data_available": False,
                 "fetched_at": datetime.now().isoformat(),
             }
-        stock_info = bot.data_provider.get_stock_info(ticker)
+        stock_info = provider.get_stock_info(ticker)
         hist_dict = {
             "index": [str(idx) for idx in hist.index],
             "data": hist.to_dict("records"),
@@ -79,7 +79,7 @@ def fetch_stock_data(ticker: str, bot: TradingBot) -> Dict:
         }
 
 
-def fetch_stock_data_with_retry(ticker: str, bot: TradingBot, max_retries: int = 2) -> Dict:
+def fetch_stock_data_with_retry(ticker: str, provider: StockDataProvider, max_retries: int = 2) -> Dict:
     """Fetch stock data with retry logic."""
     last_error = None
     for attempt in range(max_retries + 1):
@@ -87,7 +87,7 @@ def fetch_stock_data_with_retry(ticker: str, bot: TradingBot, max_retries: int =
             wait_time = min(2 ** attempt, 10)
             logger.info("Retry attempt %d for %s after %ds...", attempt, ticker, wait_time)
             time.sleep(wait_time)
-        result = fetch_stock_data(ticker, bot)
+        result = fetch_stock_data(ticker, provider)
         if result.get("data_available", False):
             return result
         last_error = result.get("error", "Unknown error")
@@ -136,7 +136,7 @@ def _build_result_from_hist(
     }
 
 
-def fetch_stock_data_batch(tickers: List[str], bot: TradingBot, stock_info_workers: int = 4) -> Dict[str, Dict]:
+def fetch_stock_data_batch(tickers: List[str], provider: StockDataProvider, stock_info_workers: int = 4) -> Dict[str, Dict]:
     """
     Fetch historical data for many tickers in chunks (yf.download per chunk, delay between chunks)
     to reduce Yahoo rate limits, then fetch stock_info in parallel.
@@ -151,7 +151,7 @@ def fetch_stock_data_batch(tickers: List[str], bot: TradingBot, stock_info_worke
     hist_by_ticker: Dict[str, any] = {}
     for idx, chunk in enumerate(chunks):
         logger.info("Batch fetching historical data for %d tickers (chunk %d/%d)...", len(chunk), idx + 1, len(chunks))
-        chunk_hist = bot.data_provider.get_historical_data_batch(chunk, period="1y", interval="1d")
+        chunk_hist = provider.get_historical_data_batch(chunk, period="1y", interval="1d")
         hist_by_ticker.update(chunk_hist)
         if idx < len(chunks) - 1 and YF_BATCH_CHUNK_DELAY_SEC > 0:
             logger.info("Waiting %ds before next chunk (rate-limit mitigation)...", YF_BATCH_CHUNK_DELAY_SEC)
@@ -175,7 +175,7 @@ def fetch_stock_data_batch(tickers: List[str], bot: TradingBot, stock_info_worke
     rate = eur_usd_rate if eur_usd_rate and eur_usd_rate > 0 else None
     # Fetch stock_info in parallel
     def get_info(t: str):
-        return t, bot.data_provider.get_stock_info(t)
+        return t, provider.get_stock_info(t)
     info_by_ticker: Dict[str, Dict] = {}
     with ThreadPoolExecutor(max_workers=min(stock_info_workers, len(ok_tickers))) as ex:
         futures = {ex.submit(get_info, t): t for t in ok_tickers}

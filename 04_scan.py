@@ -5,6 +5,7 @@ Writes: reports/scan/latest.json (machine output), reports/scan/scan_<ts>.txt (h
         and optional reports/scan/scan_summary_<ts>.csv.
 """
 import json
+import os
 import sys
 import argparse
 from pathlib import Path
@@ -12,7 +13,8 @@ from datetime import datetime
 from typing import Dict, List, Optional
 import pandas as pd
 
-from trading_bot import TradingBot
+from dotenv import load_dotenv
+from data_provider import StockDataProvider
 from sepa_scorer import MinerviniScannerV2
 from sepa_report import generate_user_friendly_report, export_scan_summary_to_csv
 from logger_config import setup_logging, get_logger
@@ -20,10 +22,15 @@ from config import (
     PREPARED_FOR_MINERVINI,
     REPORTS_DIR_V2,
     SCAN_RESULTS_V2_LATEST,
+    SCAN_HISTORY_FILE,
     SEPA_USER_REPORT_PREFIX,
     SEPA_CSV_PREFIX,
+    DEFAULT_ENV_PATH,
 )
 from cache_utils import load_cached_data
+
+if Path(DEFAULT_ENV_PATH).exists():
+    load_dotenv(Path(DEFAULT_ENV_PATH))
 
 setup_logging(log_level="INFO", log_to_file=True)
 logger = get_logger(__name__)
@@ -158,8 +165,7 @@ def main():
         sys.exit(1)
 
     benchmark_overrides = {t: stocks[t].get("benchmark_index") for t in tickers if stocks[t].get("benchmark_index")}
-    bot = TradingBot(skip_trading212=True, benchmark=args.benchmark)
-    provider = CachedDataProviderV2(stocks, bot.data_provider)
+    provider = CachedDataProviderV2(stocks, StockDataProvider(alpha_vantage_api_key=os.getenv("ALPHA_VANTAGE_API_KEY"), prefer_yfinance=True))
     scanner = MinerviniScannerV2(provider, benchmark=args.benchmark)
 
     print(f"SEPA V2 Scan: {len(tickers)} tickers")
@@ -188,6 +194,46 @@ def main():
     with open(SCAN_RESULTS_V2_LATEST, "w", encoding="utf-8") as f:
         json.dump(sanitize_for_json(results), f, indent=2, ensure_ascii=False)
     logger.info("Wrote %s", SCAN_RESULTS_V2_LATEST)
+
+    # Append flattened rows to history.jsonl (one line per ticker per run)
+    scan_ts = datetime.now().isoformat()
+    with open(SCAN_HISTORY_FILE, "a", encoding="utf-8") as hf:
+        for r in results:
+            base = r.get("base") or {}
+            rs = r.get("relative_strength") or {}
+            br = r.get("breakout") or {}
+            risk = r.get("risk") or {}
+            row = {
+                "scan_date": scan_ts,
+                "ticker": r.get("ticker"),
+                "eligible": r.get("eligible"),
+                "grade": r.get("grade"),
+                "composite_score": r.get("composite_score"),
+                "trend_score": r.get("trend_score"),
+                "base_score": r.get("base_score"),
+                "rs_score": r.get("rs_score"),
+                "volume_score": r.get("volume_score"),
+                "breakout_score": r.get("breakout_score"),
+                "power_rank": r.get("power_rank"),
+                "base_type": base.get("type"),
+                "base_depth_pct": base.get("depth_pct"),
+                "base_length_weeks": base.get("length_weeks"),
+                "base_prior_run_pct": base.get("prior_run_pct"),
+                "rs_percentile": rs.get("rs_percentile"),
+                "rs_3m": rs.get("rs_3m"),
+                "rsi_14": rs.get("rsi_14"),
+                "pivot_price": br.get("pivot_price"),
+                "distance_to_pivot_pct": br.get("distance_to_pivot_pct"),
+                "in_breakout": br.get("in_breakout"),
+                "stop_price": risk.get("stop_price"),
+                "reward_to_risk": risk.get("reward_to_risk"),
+                "stop_method": risk.get("stop_method"),
+                "region": r.get("region"),
+                "sector": r.get("sector"),
+                "market_cap": r.get("market_cap"),
+            }
+            hf.write(json.dumps(row, default=str) + "\n")
+    logger.info("Appended %d rows to %s", len(results), SCAN_HISTORY_FILE)
 
     # Human-readable report
     report_run_ts = datetime.now().strftime("%Y-%m-%d %H:%M:%S")

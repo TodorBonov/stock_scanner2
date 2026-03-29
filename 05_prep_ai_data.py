@@ -297,7 +297,31 @@ def main():
         cache_key = t212_to_yahoo.get(ticker.upper()) or ticker
         cached = resolve_cache_entry(cache_key, stocks)
         hist = cached.get("historical_data", {}) if cached else {}
-        to_eur = (pos.get("currency") or "USD").upper() == "EUR" and eur_usd_rate and eur_usd_rate > 0
+        position_currency = (pos.get("currency") or "USD").upper()
+
+        # Determine actual currency of cached OHLCV (may differ from position currency
+        # if step 01 converted EUR→USD when rate was available but rate is now unavailable).
+        cached_info = (cached.get("stock_info") or {}) if cached else {}
+        ohlcv_stored_currency = (cached_info.get("currency") or "USD").upper()
+        original_currency = (cached_info.get("original_currency") or "").upper()
+
+        # OHLCV is in USD but position prices are in EUR → convert back if rate available
+        ohlcv_needs_eur = (
+            ohlcv_stored_currency == "USD"
+            and original_currency == "EUR"
+            and position_currency == "EUR"
+        )
+        if ohlcv_needs_eur and eur_usd_rate and eur_usd_rate > 0:
+            to_eur = True
+            ohlcv_currency = "EUR"
+        elif ohlcv_needs_eur:
+            # Rate unavailable now but OHLCV was converted USD at fetch time — mismatch
+            to_eur = False
+            ohlcv_currency = "USD"
+        else:
+            to_eur = False
+            ohlcv_currency = position_currency
+
         ohlcv_lines = ohlcv_to_csv_rows(hist, to_eur=to_eur, eur_rate=eur_usd_rate)
         ohlcv_csv = "Date, Open, High, Low, Close, Volume\n" + "\n".join(ohlcv_lines) if ohlcv_lines else NO_OHLCV
         prepared_existing.append({
@@ -305,7 +329,8 @@ def main():
             "entry": float(pos.get("entry") or 0),
             "current": float(pos["current"]) if pos.get("current") is not None else None,
             "quantity": float(pos.get("quantity") or 0),
-            "currency": (pos.get("currency") or "USD").upper(),
+            "currency": position_currency,
+            "ohlcv_currency": ohlcv_currency,
             "name": pos.get("name") or ticker,
             "ohlcv_csv": ohlcv_csv,
         })

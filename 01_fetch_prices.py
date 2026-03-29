@@ -16,9 +16,10 @@ from logger_config import setup_logging, get_logger
 if Path(DEFAULT_ENV_PATH).exists():
     load_dotenv(Path(DEFAULT_ENV_PATH))
 
+import os
 from watchlist_loader import load_watchlist, get_yahoo_symbols_for_fetch
 from fetch_utils import fetch_stock_data_batch
-from trading_bot import TradingBot
+from data_provider import StockDataProvider
 
 # New pipeline: own cache file (do not overwrite main pipeline cache)
 NEW_PIPELINE_DIR = Path("data")
@@ -69,7 +70,7 @@ def main():
 
     cached_data = load_new_pipeline_cache()
     cached_stocks = cached_data.get("stocks", {})
-    bot = TradingBot(skip_trading212=True, benchmark=args.benchmark)
+    provider = StockDataProvider(alpha_vantage_api_key=os.getenv("ALPHA_VANTAGE_API_KEY"), prefer_yfinance=True)
 
     total = len(tickers)
     fetched = 0
@@ -100,7 +101,7 @@ def main():
     if to_fetch:
         print(f"\nBatch downloading {len(to_fetch)} tickers from Yahoo (threaded)...")
         try:
-            batch_results = fetch_stock_data_batch(to_fetch, bot, stock_info_workers=6)
+            batch_results = fetch_stock_data_batch(to_fetch, provider, stock_info_workers=6)
         except Exception as e:
             logger.exception("Batch fetch failed")
             batch_results = {t: {"ticker": t, "error": str(e), "data_available": False, "fetched_at": datetime.now().isoformat()} for t in to_fetch}

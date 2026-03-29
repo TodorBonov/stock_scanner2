@@ -55,10 +55,10 @@ fetch_output.log
 data/
 scan_results*.json
 
-# Reports — commit named outputs; ignore intermediate/regenerated files
-# reports/scan/     → scan_<ts>.txt committed; latest.json ignored (regenerated)
-# reports/ai/       → holdings_<ts>.txt and candidates_<ts>.txt committed
-# reports/data/     → ai_holdings_input.json and ai_candidates_input.json ignored (regenerated)
-reports/scan/latest.json
-reports/data/
+# Reports — ignore all regenerated and private outputs
+reports/scan/latest.json        # regenerated each run
+reports/scan/history.jsonl      # growing data file, not source code
+reports/scan/scan_*.txt         # regenerated each run
+reports/ai/                     # GPT outputs — regenerated and contain private position data
+reports/data/                   # intermediate JSON, regenerated each run
 
