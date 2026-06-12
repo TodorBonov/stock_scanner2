@@ -33,6 +33,7 @@ from config import (
     WEIGHT_VOLUME_SIGNATURE, WEIGHT_BREAKOUT_QUALITY,
     GRADE_A_PLUS_MIN_SCORE, GRADE_A_MIN_SCORE, GRADE_B_MIN_SCORE, GRADE_C_MIN_SCORE,
     MIN_RS_PERCENTILE_FOR_A_PLUS, MIN_RS_PERCENTILE_FOR_A,
+    MIN_UNIVERSE_FOR_RS_PERCENTILE,
     BASE_SCORE_LENGTH_IDEAL_MIN_WEEKS, BASE_SCORE_LENGTH_IDEAL_MAX_WEEKS,
     BASE_SCORE_LENGTH_SHORT_PENALTY_WEEKS,
     BASE_SCORE_LENGTH_IDEAL_BONUS, BASE_SCORE_LENGTH_SHORT_PENALTY,
@@ -541,12 +542,15 @@ class MinerviniScannerV2(MinerviniScanner):
                 "breakout_score": breakout_score,
             })
             grade = self._grade_from_composite(composite_score)
-            # Cap grade by RS percentile: A+ requires min RS, A requires min RS
-            rs_pct = rs_percentile if rs_percentile is not None else 0
-            if grade == "A+" and rs_pct < MIN_RS_PERCENTILE_FOR_A_PLUS:
-                grade = "A"
-            elif grade == "A" and rs_pct < MIN_RS_PERCENTILE_FOR_A:
-                grade = "B"
+            # Cap grade by RS percentile, but ONLY when the percentile is meaningful.
+            # For a single-ticker or tiny scan, scan_universe leaves rs_percentile None
+            # (can't rank against a universe), so we keep the composite-score grade
+            # instead of forcing a downgrade from a meaningless 0th percentile.
+            if rs_percentile is not None:
+                if grade == "A+" and rs_percentile < MIN_RS_PERCENTILE_FOR_A_PLUS:
+                    grade = "A"
+                elif grade == "A" and rs_percentile < MIN_RS_PERCENTILE_FOR_A:
+                    grade = "B"
 
             # Base block
             base_type = self._classify_base(base_info or {}, prior_run_pct)
@@ -659,8 +663,11 @@ class MinerviniScannerV2(MinerviniScanner):
                 logger.debug(f"Could not get 3M return for {t}: {e}")
         values = list(returns_3m.values())
         percentiles: Dict[str, float] = {}
-        for t, r in returns_3m.items():
-            percentiles[t] = _percentile_rank(r, values)
+        # Only rank when the universe is large enough for the percentile to mean
+        # something; otherwise leave percentiles empty so scan_stock skips the RS cap.
+        if len(values) >= MIN_UNIVERSE_FOR_RS_PERCENTILE:
+            for t, r in returns_3m.items():
+                percentiles[t] = _percentile_rank(r, values)
 
         # Phase 2: scan each with rs_percentile and rs_3m
         results = []

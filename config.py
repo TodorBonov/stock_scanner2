@@ -665,6 +665,10 @@ GRADE_B_MIN_SCORE = 65.0        # 65–74 → B
 GRADE_C_MIN_SCORE = 55.0        # 55–64 → C
 MIN_RS_PERCENTILE_FOR_A_PLUS = 80.0
 MIN_RS_PERCENTILE_FOR_A = 70.0
+# RS percentile is only meaningful when ranking against enough names. For smaller
+# universes (e.g. a single-ticker scan) the percentile is not computed and the RS
+# grade cap is skipped, so the composite-score grade stands.
+MIN_UNIVERSE_FOR_RS_PERCENTILE = 20
 
 # ----------------------------------------------------------------------------
 # ATR STOP (V2)

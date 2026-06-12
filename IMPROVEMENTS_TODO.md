@@ -22,9 +22,11 @@ Working branch: `review-fixes` (off `main`).
   `_check_relative_strength` now fetches benchmark history once and reuses it for both the
   manual-RS fallback and the RS-line check (was 2 fetches + the live call's internal fetch).
 
-- [ ] **4. Single/small-ticker scans under-grade (RS percentile = 0 caps A+/A).**
-  - Files: `sepa_scorer.py` (`scan_stock` RS cap, `scan_universe`)
-  - Plan: when universe too small / rs_percentile is None, skip the RS grade cap.
+- [x] **4. Single/small-ticker scans under-grade (RS percentile = 0 caps A+/A).** DONE.
+  Added `MIN_UNIVERSE_FOR_RS_PERCENTILE = 20` to config. `scan_universe` now only computes
+  percentiles when the universe is large enough, else leaves them unset; `scan_stock` skips
+  the RS grade cap when `rs_percentile is None`. Single-ticker scans keep their composite
+  grade. New `tests/test_rs_percentile_gating.py` (3 tests).
 
 ## Maintainability / consistency
 
