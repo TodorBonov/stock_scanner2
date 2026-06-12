@@ -655,18 +655,14 @@ class MinerviniScanner:
             
             base_data = base_info["data"]
             
-            # Calculate lookback_days if not already set (when base_info is provided)
-            if 'lookback_days' not in locals():
-                if base_info and "start_date" in base_info:
-                    # Estimate lookback from base start
-                    base_start = base_info["start_date"]
-                    if base_start in hist.index:
-                        base_start_idx = hist.index.get_loc(base_start)
-                        lookback_days = len(hist) - base_start_idx + AVG_VOLUME_LOOKBACK_DAYS  # Add buffer
-                    else:
-                        lookback_days = min(BASE_LOOKBACK_DAYS, len(hist))
-                else:
-                    lookback_days = min(BASE_LOOKBACK_DAYS, len(hist))
+            # Volume lookback window: estimate from where the base starts (with a buffer),
+            # else fall back to the default base lookback. Computed explicitly here so it
+            # does not depend on which branch above set it.
+            lookback_days = min(BASE_LOOKBACK_DAYS, len(hist))
+            base_start = base_info.get("start_date")
+            if base_start is not None and base_start in hist.index:
+                base_start_idx = hist.index.get_loc(base_start)
+                lookback_days = len(hist) - base_start_idx + AVG_VOLUME_LOOKBACK_DAYS  # buffer
             
             # Check for dry volume in base
             base_avg_volume = base_data['Volume'].mean()

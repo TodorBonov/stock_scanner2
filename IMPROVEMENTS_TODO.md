@@ -30,26 +30,23 @@ Working branch: `review-fixes` (off `main`).
 
 ## Maintainability / consistency
 
-- [ ] **5. Fragile control flow.** `_check_volume_signature` uses `if 'lookback_days' not in locals()`.
-  - Files: `sepa_checklist.py`
-  - Plan: compute `lookback_days` explicitly at the top of the function.
+- [x] **5. Fragile control flow.** DONE. `_check_volume_signature` now computes `lookback_days`
+  explicitly (from base start_date with a buffer, else default) instead of `if ... not in locals()`.
 
-- [ ] **6. `scan_stock` mutates `base_info["data"]` then restores.**
-  - Files: `sepa_scorer.py`
-  - Plan: pass a clipped copy to `_check_breakout_rules`/`_calculate_buy_sell_prices`
-    instead of mutating shared state.
+- [x] **6. `scan_stock` mutates `base_info["data"]` then restores.** DONE. Now builds a shallow
+  copy with a clipped `data` frame (`base_info_for_breakout`) and passes that to the breakout /
+  buy-sell calls; shared `base_info` is never mutated.
 
-- [ ] **7. Step 06/07 print "08 V2" headers / argparse say "08".**
-  - Files: `06_analyze_holdings.py`, `07_rank_candidates.py`
-  - Plan: correct labels to 06 / 07.
+- [x] **7. Step 06/07 print "08 V2" headers / argparse say "08".** DONE. Fixed the two "08 V2"
+  strings in `07_rank_candidates.py` (argparse description + report header) to "07 V2".
+  (06 was already correct.)
 
-- [ ] **8. `config.py` comments reference renamed files that no longer exist on main.**
-  - Files: `config.py`
-  - Plan: update comments to current step filenames.
+- [x] **8. `config.py` comments reference renamed files that no longer exist on main.** DONE.
+  Updated comments: `03_prepare_for_minervini.py`→`03_prepare_data.py`,
+  `04_generate_full_report.py`→`04_scan.py`, `05_prepare_chatgpt_data.py`→`05_prep_ai_data.py`.
 
-- [ ] **9. `data_provider.py` logs outside the project logger hierarchy.**
-  - Files: `data_provider.py`
-  - Plan: use `logger_config.get_logger(__name__)` so logs hit the rotating file handler.
+- [x] **9. `data_provider.py` logs outside the project logger hierarchy.** DONE. Switched to
+  `logger_config.get_logger(__name__)` so its logs reach the rotating file handler.
 
 ## Security (low)
 

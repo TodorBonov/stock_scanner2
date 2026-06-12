@@ -500,14 +500,16 @@ class MinerviniScannerV2(MinerviniScanner):
                 base_results["failures"].append(f"Prior run {prior_run_pct:.1f}% < {MIN_PRIOR_RUN_PCT}%")
             base_type = self._classify_base(base_info or {}, prior_run_pct)
             pivot_price, pivot_source = self._get_pivot_by_base_type(base_info, base_type)
-            orig_base_data = None
+            # For breakout/buy-sell, cap the base High at the institutional pivot. Use a
+            # shallow copy with a clipped 'data' frame instead of mutating shared base_info
+            # (other consumers below — e.g. base-quality extras — need the original highs).
+            base_info_for_breakout = base_info
             if pivot_price is not None and base_info and "data" in base_info:
-                orig_base_data = base_info["data"]
-                copy = orig_base_data.copy()
-                copy["High"] = copy["High"].clip(upper=float(pivot_price))
-                copy.loc[copy.index[0], "High"] = float(pivot_price)
-                base_info["data"] = copy
-            breakout_results = self._check_breakout_rules(hist, base_info)
+                clipped = base_info["data"].copy()
+                clipped["High"] = clipped["High"].clip(upper=float(pivot_price))
+                clipped.loc[clipped.index[0], "High"] = float(pivot_price)
+                base_info_for_breakout = {**base_info, "data": clipped}
+            breakout_results = self._check_breakout_rules(hist, base_info_for_breakout)
             checklist = {
                 "trend_structure": trend_results,
                 "base_quality": base_results,
@@ -515,9 +517,7 @@ class MinerviniScannerV2(MinerviniScanner):
                 "volume_signature": volume_results,
                 "breakout_rules": breakout_results,
             }
-            buy_sell = self._calculate_buy_sell_prices(hist, base_info, checklist)
-            if orig_base_data is not None:
-                base_info["data"] = orig_base_data
+            buy_sell = self._calculate_buy_sell_prices(hist, base_info_for_breakout, checklist)
 
             pivot_price = buy_sell.get("pivot_price")
             current_price = float(hist["Close"].iloc[-1])

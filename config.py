@@ -124,7 +124,7 @@ REPORTS_DIR = Path("reports")
 # Pipeline data (01→07)
 PREPARED_FOR_MINERVINI = Path("data/prepared_for_minervini.json")
 # Purpose: Output of step 03; input to step 04. Stored for testing.
-# Used by: 03_prepare_for_minervini.py (write), 04_generate_full_report.py (read)
+# Used by: 03_prepare_data.py (write), 04_scan.py (read)
 
 # Pipeline cache inputs (steps 01, 02 write; step 03 reads)
 NEW_PIPELINE_CACHE = Path("data/cached_stock_data_new_pipeline.json")
@@ -136,11 +136,11 @@ NEW_PIPELINE_POSITIONS = Path("data/positions_new_pipeline.json")
 
 PROBLEMS_WITH_TICKERS = REPORTS_DIR / "problems_with_tickers.txt"
 # Purpose: Report of ticker mismatches, unmapped symbols, missing data (step 03).
-# Used by: 03_prepare_for_minervini.py
+# Used by: 03_prepare_data.py
 
 SCAN_RESULTS_LATEST = REPORTS_DIR / "scan_results_latest.json"
 # Purpose: Scan results JSON (written by 04, read by 05)
-# Used by: 04_generate_full_report.py, 05_prepare_chatgpt_data.py
+# Used by: 04_scan.py, 05_prep_ai_data.py
 
 # ============================================================================
 # LOGGING CONFIGURATION
