@@ -14,7 +14,11 @@ from logger_config import setup_logging, get_logger
 from config import DEFAULT_ENV_PATH
 from ticker_utils import clean_ticker
 from trading212_client import Trading212Client
-from currency_utils import get_eur_usd_rate, get_eur_usd_rate_with_date, warn_if_eur_rate_unavailable
+from currency_utils import (
+    get_eur_usd_rate_with_date,
+    warn_if_eur_rate_unavailable,
+    convert_ohlcv_and_info_to_usd,
+)
 
 # Pipeline paths (must match 01)
 NEW_PIPELINE_DIR = Path("data")
@@ -136,18 +140,8 @@ def refresh_ohlcv_for_tickers(tickers: List[str]) -> None:
                 continue
             stock_info = provider.get_stock_info(ticker) or {}
             hist_dict = {"index": [str(idx) for idx in hist.index], "data": hist.to_dict("records")}
-            if stock_info.get("currency") == "EUR":
-                rate = get_eur_usd_rate()
-                if rate and rate > 0:
-                    for row in hist_dict["data"]:
-                        for key in ("Open", "High", "Low", "Close"):
-                            if key in row and row[key] is not None:
-                                row[key] = round(float(row[key]) * rate, 4)
-                    for key in ("current_price", "52_week_high", "52_week_low"):
-                        if stock_info.get(key) is not None:
-                            stock_info[key] = round(float(stock_info[key]) * rate, 4)
-                    stock_info["currency"] = "USD"
-                    stock_info["original_currency"] = "EUR"
+            # Normalize all non-USD currencies (EUR, GBp/pence, CHF, SEK, ...) to USD.
+            convert_ohlcv_and_info_to_usd(hist_dict, stock_info)
             stocks[ticker] = {
                 "ticker": ticker,
                 "data_available": True,
