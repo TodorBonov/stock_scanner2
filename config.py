@@ -124,7 +124,7 @@ REPORTS_DIR = Path("reports")
 # Pipeline data (01→07)
 PREPARED_FOR_MINERVINI = Path("data/prepared_for_minervini.json")
 # Purpose: Output of step 03; input to step 04. Stored for testing.
-# Used by: 03_prepare_for_minervini.py (write), 04_generate_full_report.py (read)
+# Used by: 03_prepare_data.py (write), 04_scan.py (read)
 
 # Pipeline cache inputs (steps 01, 02 write; step 03 reads)
 NEW_PIPELINE_CACHE = Path("data/cached_stock_data_new_pipeline.json")
@@ -136,11 +136,11 @@ NEW_PIPELINE_POSITIONS = Path("data/positions_new_pipeline.json")
 
 PROBLEMS_WITH_TICKERS = REPORTS_DIR / "problems_with_tickers.txt"
 # Purpose: Report of ticker mismatches, unmapped symbols, missing data (step 03).
-# Used by: 03_prepare_for_minervini.py
+# Used by: 03_prepare_data.py
 
 SCAN_RESULTS_LATEST = REPORTS_DIR / "scan_results_latest.json"
 # Purpose: Scan results JSON (written by 04, read by 05)
-# Used by: 04_generate_full_report.py, 05_prepare_chatgpt_data.py
+# Used by: 04_scan.py, 05_prep_ai_data.py
 
 # ============================================================================
 # LOGGING CONFIGURATION
@@ -665,6 +665,10 @@ GRADE_B_MIN_SCORE = 65.0        # 65–74 → B
 GRADE_C_MIN_SCORE = 55.0        # 55–64 → C
 MIN_RS_PERCENTILE_FOR_A_PLUS = 80.0
 MIN_RS_PERCENTILE_FOR_A = 70.0
+# RS percentile is only meaningful when ranking against enough names. For smaller
+# universes (e.g. a single-ticker scan) the percentile is not computed and the RS
+# grade cap is skipped, so the composite-score grade stands.
+MIN_UNIVERSE_FOR_RS_PERCENTILE = 20
 
 # ----------------------------------------------------------------------------
 # ATR STOP (V2)

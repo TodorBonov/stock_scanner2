@@ -12,6 +12,7 @@ import time
 from typing import Dict, List, Optional, Tuple
 from datetime import datetime, timedelta
 from ticker_utils import clean_ticker
+from logger_config import get_logger
 import logging
 
 # Try to import yfinance (Yahoo Finance)
@@ -28,7 +29,9 @@ except ImportError:
 
 logging.getLogger('urllib3').setLevel(logging.ERROR)  # Suppress HTTP warnings
 
-logger = logging.getLogger(__name__)
+# Route through the project logger hierarchy so warnings/errors reach the rotating
+# file handler configured by logger_config.setup_logging (trading212_bot.*).
+logger = get_logger(__name__)
 
 # Yahoo Finance rate-limit retry: wait times in seconds (exponential backoff)
 YF_RATE_LIMIT_WAIT_SECONDS = [60, 120, 180]

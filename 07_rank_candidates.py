@@ -258,7 +258,7 @@ def _parse_chatgpt_grade_from_response(content: str) -> str:
 
 
 def main():
-    parser = argparse.ArgumentParser(description="08 V2: ChatGPT new position suggestions (uses V2 scan output)")
+    parser = argparse.ArgumentParser(description="07 V2: ChatGPT new position suggestions (uses V2 scan output)")
     parser.add_argument("--model", default=None, help="OpenAI model")
     parser.add_argument("--api-key", default=None, help="OpenAI API key")
     parser.add_argument("--limit", type=int, default=50, help="Max stocks to load for ranking")
@@ -303,7 +303,7 @@ def main():
     print(f"\n{'='*80}\n[GPT] 07: RANK CANDIDATES — uses OpenAI API (costs tokens)\n{'='*80}\n")
     report_run_ts = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     report_lines = [
-        "=" * 80, "08 V2: CHATGPT NEW POSITION SUGGESTIONS", "=" * 80,
+        "=" * 80, "07 V2: CHATGPT NEW POSITION SUGGESTIONS", "=" * 80,
         f"Report run: {report_run_ts}",
         f"Data as of (Yahoo): {data_timestamp_yahoo or '—'}",
         f"Model: {model}", "Source: V2 scan (composite score, base type, RS percentile)", ""

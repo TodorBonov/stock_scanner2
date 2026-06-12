@@ -319,8 +319,11 @@ def main():
             to_eur = False
             ohlcv_currency = "USD"
         else:
+            # OHLCV is stored in whatever currency the fetch step normalized it to
+            # (USD for converted non-USD stocks). Label it honestly rather than
+            # assuming it matches the broker position currency.
             to_eur = False
-            ohlcv_currency = position_currency
+            ohlcv_currency = ohlcv_stored_currency
 
         ohlcv_lines = ohlcv_to_csv_rows(hist, to_eur=to_eur, eur_rate=eur_usd_rate)
         ohlcv_csv = "Date, Open, High, Low, Close, Volume\n" + "\n".join(ohlcv_lines) if ohlcv_lines else NO_OHLCV

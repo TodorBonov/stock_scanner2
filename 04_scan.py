@@ -103,7 +103,44 @@ class CachedDataProviderV2:
         return self.original_provider.get_stock_info(ticker)
 
     def calculate_relative_strength(self, ticker: str, benchmark: str, period: int = 252):
-        return self.original_provider.calculate_relative_strength(ticker, benchmark, period)
+        """
+        Relative strength vs benchmark, computed from the cached snapshot.
+
+        Uses this provider's cache-first get_historical_data for BOTH the ticker and the
+        benchmark so RS comes from the same data vintage as every other metric in the scan
+        (no live Yahoo calls, no mixed snapshots). Falls back to the live provider only if
+        either series is missing from the cache.
+        """
+        try:
+            stock_hist = self.get_historical_data(ticker, period="1y")
+            benchmark_hist = self.get_historical_data(benchmark, period="1y")
+            if stock_hist.empty or benchmark_hist.empty:
+                return self.original_provider.calculate_relative_strength(ticker, benchmark, period)
+
+            stock_returns = stock_hist["Close"].pct_change(fill_method=None).dropna()
+            benchmark_returns = benchmark_hist["Close"].pct_change(fill_method=None).dropna()
+            common_dates = stock_returns.index.intersection(benchmark_returns.index)
+            if len(common_dates) < period:
+                period = len(common_dates)
+            if period <= 0:
+                return {}
+
+            stock_period = stock_returns.loc[common_dates[-period:]]
+            benchmark_period = benchmark_returns.loc[common_dates[-period:]]
+            stock_cumulative = (1 + stock_period).prod() - 1
+            benchmark_cumulative = (1 + benchmark_period).prod() - 1
+            relative_strength = stock_cumulative - benchmark_cumulative
+            rs_rating = min(100, max(0, 50 + (relative_strength * 100)))
+            return {
+                "relative_strength": float(relative_strength),
+                "rs_rating": float(rs_rating),
+                "stock_return": float(stock_cumulative),
+                "benchmark_return": float(benchmark_cumulative),
+                "period_days": period,
+            }
+        except Exception as e:
+            logger.debug("Cached RS calc failed for %s vs %s: %s", ticker, benchmark, e)
+            return {"error": str(e)}
 
 
 def sanitize_for_json(obj):

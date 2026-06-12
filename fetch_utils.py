@@ -15,7 +15,7 @@ from config import (
     YF_BATCH_CHUNK_SIZE,
     YF_BATCH_CHUNK_DELAY_SEC,
 )
-from currency_utils import get_eur_usd_rate
+from currency_utils import convert_ohlcv_and_info_to_usd
 
 logger = get_logger(__name__)
 
@@ -38,28 +38,10 @@ def fetch_stock_data(ticker: str, provider: StockDataProvider) -> Dict:
             "index": [str(idx) for idx in hist.index],
             "data": hist.to_dict("records"),
         }
-        if (stock_info or {}).get("currency") == "EUR":
-            rate = get_eur_usd_rate()
-            if rate and rate > 0:
-                for row in hist_dict["data"]:
-                    for key in ("Open", "High", "Low", "Close"):
-                        if key in row and row[key] is not None:
-                            row[key] = round(float(row[key]) * rate, 4)
-                if stock_info:
-                    for key in ("current_price", "52_week_high", "52_week_low"):
-                        if stock_info.get(key) is not None:
-                            stock_info[key] = round(float(stock_info[key]) * rate, 4)
-                    stock_info["currency"] = "USD"
-                    stock_info["original_currency"] = "EUR"
-                logger.debug("Converted %s from EUR to USD (rate %.4f)", ticker, rate)
-            else:
-                if stock_info:
-                    stock_info["original_currency"] = "EUR"
-                    stock_info["rate_unavailable"] = True
-                logger.warning(
-                    "EUR/USD rate unavailable for %s; cached data left in EUR (downstream may assume USD).",
-                    ticker,
-                )
+        # Normalize all non-USD currencies (EUR, GBp/pence, CHF, SEK, ...) to USD so the
+        # scanner's absolute thresholds and downstream display are consistent.
+        if convert_ohlcv_and_info_to_usd(hist_dict, stock_info):
+            logger.debug("Converted %s to USD from %s", ticker, (stock_info or {}).get("original_currency"))
         return {
             "ticker": ticker,
             "data_available": True,
@@ -103,28 +85,14 @@ def _build_result_from_hist(
     ticker: str,
     hist,
     stock_info: Dict,
-    eur_usd_rate: float,
 ) -> Dict:
     """Build cache result dict from hist DataFrame and stock_info (same shape as fetch_stock_data)."""
     hist_dict = {
         "index": [str(idx) for idx in hist.index],
         "data": hist.to_dict("records"),
     }
-    if (stock_info or {}).get("currency") == "EUR" and eur_usd_rate and eur_usd_rate > 0:
-        for row in hist_dict["data"]:
-            for key in ("Open", "High", "Low", "Close"):
-                if key in row and row[key] is not None:
-                    row[key] = round(float(row[key]) * eur_usd_rate, 4)
-        if stock_info:
-            for key in ("current_price", "52_week_high", "52_week_low"):
-                if stock_info.get(key) is not None:
-                    stock_info[key] = round(float(stock_info[key]) * eur_usd_rate, 4)
-            stock_info["currency"] = "USD"
-            stock_info["original_currency"] = "EUR"
-    elif (stock_info or {}).get("currency") == "EUR":
-        if stock_info:
-            stock_info["original_currency"] = "EUR"
-            stock_info["rate_unavailable"] = True
+    # Normalize all non-USD currencies (EUR, GBp/pence, CHF, SEK, ...) to USD.
+    convert_ohlcv_and_info_to_usd(hist_dict, stock_info)
     return {
         "ticker": ticker,
         "data_available": True,
@@ -171,8 +139,6 @@ def fetch_stock_data_batch(tickers: List[str], provider: StockDataProvider, stoc
             }
     if not ok_tickers:
         return results
-    eur_usd_rate = get_eur_usd_rate()
-    rate = eur_usd_rate if eur_usd_rate and eur_usd_rate > 0 else None
     # Fetch stock_info in parallel
     def get_info(t: str):
         return t, provider.get_stock_info(t)
@@ -192,6 +158,5 @@ def fetch_stock_data_batch(tickers: List[str], provider: StockDataProvider, stoc
             t,
             hist_by_ticker[t],
             info_by_ticker.get(t, {}),
-            rate or 0.0,
         )
     return results
