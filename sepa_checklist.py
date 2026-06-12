@@ -511,29 +511,32 @@ class MinerviniScanner:
                 else:
                     results["failures"].append(f"RSI({RSI_PERIOD}) = {rsi_to_check:.1f} (need >{RSI_MIN_THRESHOLD})")
             
+            # Fetch benchmark history ONCE (cache-first) and reuse it for both the RS value
+            # fallback and the RS-line check below — avoids 2-3 redundant fetches per stock.
+            benchmark_hist = self.data_provider.get_historical_data(bench, period="1y", interval="1d")
+
             # Calculate relative strength vs benchmark
             rs_data = self.data_provider.calculate_relative_strength(ticker, bench, period=252)
-            
+
             if not rs_data or "error" in rs_data:
-                # Try to calculate manually
-                benchmark_hist = self.data_provider.get_historical_data(bench, period="1y", interval="1d")
+                # Fall back to a manual calc using the benchmark history we already fetched
                 if not benchmark_hist.empty:
                     # Calculate RS manually
                     stock_returns = hist['Close'].pct_change(fill_method=None).dropna()
                     bench_returns = benchmark_hist['Close'].pct_change(fill_method=None).dropna()
-                    
+
                     # Align dates
                     common_dates = stock_returns.index.intersection(bench_returns.index)
                     if len(common_dates) >= RS_LOOKBACK_DAYS:
                         stock_period = stock_returns.loc[common_dates[-RS_LOOKBACK_DAYS:]]
                         bench_period = bench_returns.loc[common_dates[-RS_LOOKBACK_DAYS:]]
-                        
+
                         stock_cumulative = (1 + stock_period).prod() - 1
                         bench_cumulative = (1 + bench_period).prod() - 1
-                        
+
                         relative_strength = stock_cumulative - bench_cumulative
                         rs_rating = min(100, max(0, 50 + (relative_strength * 100)))
-                        
+
                         rs_data = {
                             "relative_strength": float(relative_strength),
                             "rs_rating": float(rs_rating),
@@ -548,15 +551,13 @@ class MinerviniScanner:
                     results["passed"] = False
                     results["failures"].append("Cannot fetch benchmark data for relative strength")
                     return results
-            
+
             # Check if stock outperforms benchmark
             if rs_data.get("relative_strength", 0) <= 0:
                 results["passed"] = False
                 results["failures"].append("Stock not outperforming benchmark")
-            
-            # Check if RS line is near new highs
-            # Calculate RS line (price / benchmark price)
-            benchmark_hist = self.data_provider.get_historical_data(bench, period="1y", interval="1d")
+
+            # Check if RS line is near new highs (reuse benchmark_hist fetched above)
             if not benchmark_hist.empty:
                 # Align dates
                 common_dates = hist.index.intersection(benchmark_hist.index)
