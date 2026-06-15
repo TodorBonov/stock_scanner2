@@ -288,6 +288,9 @@ def main():
     legacy_groups = build_ticker_group_map_from_legacy_watchlist()
 
     V2_REPORTS.mkdir(parents=True, exist_ok=True)
+    # Output files live under reports/data/ — make sure that subdir exists too
+    # (it's gitignored, so absent on a fresh checkout).
+    PREPARED_EXISTING_V2.parent.mkdir(parents=True, exist_ok=True)
 
     # --- Existing positions (for 06 V2); resolve cache by Yahoo symbol when position uses T212 symbol (e.g. RWED -> RWE.DE) ---
     NO_OHLCV = "No OHLCV data available for this ticker."

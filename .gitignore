@@ -55,10 +55,21 @@ fetch_output.log
 data/
 scan_results*.json
 
-# Reports — ignore all regenerated and private outputs
-reports/scan/latest.json        # regenerated each run
-reports/scan/history.jsonl      # growing data file, not source code
-reports/scan/scan_*.txt         # regenerated each run
-reports/ai/                     # GPT outputs — regenerated and contain private position data
-reports/data/                   # intermediate JSON, regenerated each run
+# Reports — ignore all regenerated and private outputs.
+# NOTE: git does not support inline (end-of-line) comments in .gitignore — the comment
+# becomes part of the pattern. Keep comments on their own lines.
+# regenerated each run
+reports/scan/latest.json
+# growing data file, not source code
+reports/scan/history.jsonl
+# regenerated each run
+reports/scan/scan_*.txt
+# regenerated each run
+reports/scan/scan_summary_*.csv
+# GPT outputs — regenerated and contain private position data
+reports/ai/
+# intermediate JSON, regenerated each run
+reports/data/
+# ticker diagnostics, regenerated each run
+reports/problems_with_tickers.txt
 
