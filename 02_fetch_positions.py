@@ -138,7 +138,7 @@ def refresh_ohlcv_for_tickers(tickers: List[str]) -> None:
                     "fetched_at": datetime.now().isoformat(),
                 }
                 continue
-            stock_info = provider.get_stock_info(ticker) or {}
+            stock_info = provider.get_stock_info(ticker, fast=True) or {}
             hist_dict = {"index": [str(idx) for idx in hist.index], "data": hist.to_dict("records")}
             # Normalize all non-USD currencies (EUR, GBp/pence, CHF, SEK, ...) to USD.
             convert_ohlcv_and_info_to_usd(hist_dict, stock_info)

@@ -37,9 +37,21 @@ def _fetch_yahoo_fx_with_date(pair_ticker: str) -> Tuple[Optional[float], Option
         import yfinance as yf
         session = None
         if os.environ.get("DISABLE_SSL_VERIFY", "").strip().lower() in ("1", "true", "yes"):
-            import requests
-            session = requests.Session()
-            session.verify = False
+            # Match data_provider: under corporate SSL inspection Yahoo only works via
+            # curl_cffi Chrome impersonation; a plain requests session is blocked/empty.
+            try:
+                from curl_cffi import requests as curl_requests
+                session = curl_requests.Session(impersonate="chrome")
+                session.verify = False
+            except ImportError:
+                import requests
+                session = requests.Session()
+                session.verify = False
+            try:
+                import urllib3
+                urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+            except Exception:
+                pass
         t = yf.Ticker(pair_ticker, session=session) if session else yf.Ticker(pair_ticker)
         hist = t.history(period="5d", interval="1d")
         if hist is not None and not hist.empty and "Close" in hist.columns:

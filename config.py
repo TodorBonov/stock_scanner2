@@ -56,7 +56,9 @@ DATA_PROVIDER_TIMEOUT = 30  # seconds for data provider API calls
 
 # Yahoo Finance batch download (rate-limit mitigation)
 YF_BATCH_CHUNK_SIZE = 150  # tickers per chunk; smaller = gentler on Yahoo, more chunks = longer run
-YF_BATCH_CHUNK_DELAY_SEC = 45  # seconds to wait between chunks to avoid rate limits
+YF_BATCH_CHUNK_DELAY_SEC = 45  # backoff between chunks ONLY when a chunk looks rate-limited
+YF_BATCH_CHUNK_INTER_DELAY_SEC = 2  # small politeness pause between chunks on a clean (non-throttled) run
+YF_BATCH_RATE_LIMIT_RESULT_RATIO = 0.7  # if a chunk returns < this fraction of requested, treat as throttled and back off
 
 # ============================================================================
 # SCORING CONFIGURATION

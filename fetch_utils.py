@@ -14,6 +14,8 @@ from config import (
     TICKER_MAPPING_ERRORS_FILE,
     YF_BATCH_CHUNK_SIZE,
     YF_BATCH_CHUNK_DELAY_SEC,
+    YF_BATCH_CHUNK_INTER_DELAY_SEC,
+    YF_BATCH_RATE_LIMIT_RESULT_RATIO,
 )
 from currency_utils import convert_ohlcv_and_info_to_usd
 
@@ -33,7 +35,7 @@ def fetch_stock_data(ticker: str, provider: StockDataProvider) -> Dict:
                 "data_available": False,
                 "fetched_at": datetime.now().isoformat(),
             }
-        stock_info = provider.get_stock_info(ticker)
+        stock_info = provider.get_stock_info(ticker, fast=True)
         hist_dict = {
             "index": [str(idx) for idx in hist.index],
             "data": hist.to_dict("records"),
@@ -121,9 +123,17 @@ def fetch_stock_data_batch(tickers: List[str], provider: StockDataProvider, stoc
         logger.info("Batch fetching historical data for %d tickers (chunk %d/%d)...", len(chunk), idx + 1, len(chunks))
         chunk_hist = provider.get_historical_data_batch(chunk, period="1y", interval="1d")
         hist_by_ticker.update(chunk_hist)
-        if idx < len(chunks) - 1 and YF_BATCH_CHUNK_DELAY_SEC > 0:
-            logger.info("Waiting %ds before next chunk (rate-limit mitigation)...", YF_BATCH_CHUNK_DELAY_SEC)
-            time.sleep(YF_BATCH_CHUNK_DELAY_SEC)
+        if idx < len(chunks) - 1:
+            # Adaptive delay: only do the long backoff when a chunk looks throttled
+            # (returned well under what we asked for); otherwise a short politeness pause.
+            got = sum(1 for t in chunk if t in chunk_hist)
+            throttled = got < len(chunk) * YF_BATCH_RATE_LIMIT_RESULT_RATIO
+            if throttled and YF_BATCH_CHUNK_DELAY_SEC > 0:
+                logger.info("Chunk %d returned %d/%d; backing off %ds (possible rate limit)...",
+                            idx + 1, got, len(chunk), YF_BATCH_CHUNK_DELAY_SEC)
+                time.sleep(YF_BATCH_CHUNK_DELAY_SEC)
+            elif YF_BATCH_CHUNK_INTER_DELAY_SEC > 0:
+                time.sleep(YF_BATCH_CHUNK_INTER_DELAY_SEC)
     min_rows = 200
     ok_tickers = [t for t in tickers if t in hist_by_ticker and len(hist_by_ticker[t]) >= min_rows]
     results: Dict[str, Dict] = {}
@@ -139,9 +149,9 @@ def fetch_stock_data_batch(tickers: List[str], provider: StockDataProvider, stoc
             }
     if not ok_tickers:
         return results
-    # Fetch stock_info in parallel
+    # Fetch stock_info in parallel (fast_info: currency + cheap fields, no heavy .info)
     def get_info(t: str):
-        return t, provider.get_stock_info(t)
+        return t, provider.get_stock_info(t, fast=True)
     info_by_ticker: Dict[str, Dict] = {}
     with ThreadPoolExecutor(max_workers=min(stock_info_workers, len(ok_tickers))) as ex:
         futures = {ex.submit(get_info, t): t for t in ok_tickers}

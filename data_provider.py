@@ -412,16 +412,70 @@ class StockDataProvider:
         logger.debug(f"Yahoo Finance stock info error for {ticker}: {last_error}")
         return {}
     
-    def get_stock_info(self, ticker: str) -> Dict:
+    def _get_stock_info_yfinance_fast(self, ticker: str) -> Dict:
         """
-        Get stock information and fundamentals from available sources
-        
+        Lightweight stock info via yfinance fast_info — currency plus cheap quote fields.
+        ~14x faster than .info and far less rate-limited; OMITS fundamentals
+        (earnings/revenue growth, margins, ROE). Use when only currency/price are needed.
+        """
+        if not YFINANCE_AVAILABLE:
+            return {}
+        ticker_clean = clean_ticker(ticker)
+        try:
+            stock = yf.Ticker(ticker_clean, session=self._session) if self._session else yf.Ticker(ticker_clean)
+            fi = stock.fast_info
+
+            def _g(*names):
+                for n in names:
+                    v = None
+                    try:
+                        v = getattr(fi, n)
+                    except Exception:
+                        v = None
+                    if v is None:
+                        try:
+                            v = fi[n]
+                        except Exception:
+                            v = None
+                    if v is not None:
+                        return v
+                return None
+
+            currency = _g("currency")
+            if not currency:
+                return {}
+            return {
+                "ticker": ticker_clean,
+                "currency": currency or "",
+                "current_price": _g("last_price") or 0,
+                "market_cap": _g("market_cap") or 0,
+                "52_week_high": _g("year_high") or 0,
+                "52_week_low": _g("year_low") or 0,
+                "source": "yfinance_fast",
+            }
+        except Exception as e:
+            logger.debug("Yahoo fast_info error for %s: %s", ticker, e)
+            return {}
+
+    def get_stock_info(self, ticker: str, fast: bool = False) -> Dict:
+        """
+        Get stock information from available sources.
+
         Args:
             ticker: Stock ticker symbol
-            
+            fast: If True, use the lightweight fast_info path (currency + cheap quote
+                  fields, no fundamentals). Much faster and avoids .info throttling.
+
         Returns:
             Dictionary with stock information
         """
+        # Fast path: fast_info is enough when only currency/price are needed (the pipeline's case).
+        if fast and self.prefer_yfinance:
+            fast_data = self._get_stock_info_yfinance_fast(ticker)
+            if fast_data and fast_data.get("currency"):
+                return fast_data
+            # fall through to the heavier sources if fast_info didn't yield currency
+
         # Try Yahoo Finance first if preferred and available
         if self.prefer_yfinance:
             yf_data = self._get_stock_info_yfinance(ticker)
