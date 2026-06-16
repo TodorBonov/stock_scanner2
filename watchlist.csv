@@ -44,7 +44,7 @@ ticker,ASML.AS,,^AEX,,Information Technology,,Europe,Mega/Large,LargeCap,Y
 ticker,ADYEN.AS,,^AEX,,Information Technology,,Europe,Mega/Large,LargeCap,Y
 ticker,CAP.PA,,^FCHI,,Information Technology,,Europe,Mega/Large,LargeCap,Y
 ticker,SGE.L,,^FTSE,,Information Technology,,UK,Mega/Large,LargeCap,Y
-ticker,ERIC-B.ST,,^OMX,,,,Europe,,,Y
+ticker,ERIC-B.ST,,^OMX,,Communication Services,Telecommunications,Europe,,,Y
 ticker,DBK.DE,,^GDAXI,,Financials,,Europe,Mega/Large,LargeCap,Y
 ticker,CBK.DE,,^GDAXI,,Financials,,Europe,Mega/Large,LargeCap,Y
 ticker,BNP.PA,,^FCHI,,Financials,,Europe,Mega/Large,LargeCap,Y
@@ -59,11 +59,11 @@ ticker,UCG.MI,,^FTMIB,,Financials,,Europe,,,Y
 ticker,INGA.AS,,^AEX,,Financials,,Europe,Mega/Large,LargeCap,Y
 ticker,UBSG.SW,,^SSMI,,Financials,,Europe,Mega/Large,LargeCap,Y
 ticker,VOW3.DE,,^GDAXI,,,,Europe,Mega/Large,LargeCap,Y
-ticker,BMW.DE,,^GDAXI,,,,Europe,Mega/Large,LargeCap,Y
-ticker,RNO.PA,,^FCHI,,,,Europe,Mega/Large,LargeCap,Y
+ticker,BMW.DE,,^GDAXI,,Consumer Discretionary,Automobiles and Parts,Europe,Mega/Large,LargeCap,Y
+ticker,RNO.PA,,^FCHI,,Consumer Discretionary,Automobiles and Parts,Europe,Mega/Large,LargeCap,Y
 ticker,PEUG.PA,,^FCHI,,,,Europe,Mega/Large,LargeCap,Y
 ticker,STLA,,^FTMIB,,,,US,,,Y
-ticker,VOLV-B.ST,,^OMX,,,,Europe,,,Y
+ticker,VOLV-B.ST,,^OMX,,Industrials,Industrial Goods and Services,Europe,,,Y
 ticker,BP.L,,^FTSE,,Energy,,UK,Mega/Large,LargeCap,Y
 ticker,SHEL.L,,^FTSE,,Energy,,UK,Mega/Large,LargeCap,Y
 ticker,TTE.PA,,^FCHI,,Energy,,Europe,Mega/Large,LargeCap,Y
@@ -84,7 +84,7 @@ ticker,MRK.DE,,^GDAXI,,Health Care,,Europe,Mega/Large,LargeCap,Y
 ticker,FRE.DE,,^GDAXI,,Health Care,,Europe,Mega/Large,LargeCap,Y
 ticker,EVT.DE,,^GDAXI,,Health Care,,Europe,Mega/Large,LargeCap,Y
 ticker,NOVO-B.CO,,^OMXC25,,Health Care,,Europe,Mega/Large,LargeCap,Y
-ticker,LUN.TO,,^GSPTSE,,,,Canada,Mega/Large,LargeCap,Y
+ticker,LUN.TO,,^GSPTSE,,Energy,Energy,Canada,Mega/Large,LargeCap,Y
 ticker,UCB.BR,,^BFX,,Health Care,,Europe,,,Y
 ticker,PHIA.AS,,^AEX,,Health Care,,Europe,Mega/Large,LargeCap,Y
 ticker,PHG,,^AEX,,,,US,Mega/Large,LargeCap,Y
@@ -96,7 +96,7 @@ ticker,FAE.MC,,^IBEX,,Health Care,,Europe,Mega/Large,LargeCap,Y
 ticker,PZU.WA,,^WIG20,,Health Care,,Europe,,,Y
 ticker,EVN.VI,,^ATX,,Health Care,,Europe,,,Y
 ticker,MC.PA,,^FCHI,,Consumer Discretionary,,Europe,Mega/Large,LargeCap,Y
-ticker,KER.PA,,^FCHI,,,,Europe,Mega/Large,LargeCap,Y
+ticker,KER.PA,,^FCHI,,Consumer Discretionary,Consumer Products and Services,Europe,Mega/Large,LargeCap,Y
 ticker,CFR.SW,,^SSMI,,Consumer Discretionary,,Europe,Mega/Large,LargeCap,Y
 ticker,DGE.L,,^FTSE,,Consumer Discretionary,,UK,Mega/Large,LargeCap,Y
 ticker,ULVR.L,,^FTSE,,Consumer Discretionary,,UK,Mega/Large,LargeCap,Y
@@ -123,7 +123,7 @@ ticker,LONN.SW,,^SSMI,,Materials,,Europe,Mega/Large,LargeCap,Y
 ticker,BAS.DE,,^GDAXI,,Materials,,Europe,Mega/Large,LargeCap,Y
 ticker,LAND.L,,^FTSE,,Real Estate,,UK,Mega/Large,LargeCap,Y
 ticker,VNA.DE,,^GDAXI,,Real Estate,,Europe,Mega/Large,LargeCap,Y
-ticker,NESN.SW,,^SSMI,,,,Europe,Mega/Large,LargeCap,Y
+ticker,NESN.SW,,^SSMI,,Consumer Staples,"Food, Beverage and Tobacco",Europe,Mega/Large,LargeCap,Y
 ticker,TSCO.L,,^FTSE,,Consumer Staples,,UK,Mega/Large,LargeCap,Y
 ticker,DANOY,DANOY,^GSPC,,Consumer Staples,,US,Mega/Large,LargeCap,Y
 ticker,HEIA.AS,,^AEX,,,,Europe,Mega/Large,LargeCap,Y
@@ -168,8 +168,8 @@ ticker,XOM,XOM,^GSPC,,Energy,Integrated Oil & Gas,US,Large,Dividend,Y
 ticker,BAC,BAC,^GSPC,,Financials,Diversified Banks,US,Large,Dividend,Y
 ticker,BK,BK,^GSPC,,Financials,,US,Mega/Large,LargeCap,Y
 ticker,BLK,BLK,^GSPC,,Financials,Asset Management & Custody Banks,US,Mega/Large,LargeCap,Y
-ticker,BMO,BMO,^GSPC,,,,US,All,curated,Y
-ticker,BNS,BNS,^GSPC,,,,US,All,curated,Y
+ticker,BMO,BMO,^GSPC,,Financials,Banks,US,All,curated,Y
+ticker,BNS,BNS,^GSPC,,Financials,Banks,US,All,curated,Y
 ticker,C,C,^GSPC,,Financials,Diversified Banks,US,Large,Dividend,Y
 ticker,CFG,CFG,^GSPC,,Financials,Regional Banks,US,Large,Dividend,Y
 ticker,CMCSA,CMCSA,^GSPC,,Communication Services,Cable & Satellite,US,Mega/Large,LargeCap,Y
@@ -206,11 +206,11 @@ ticker,PG,PG,^GSPC,,Consumer Staples,Personal Care Products,US,Large,Dividend,Y
 ticker,PHM,PHM,^GSPC,,Consumer Discretionary,Homebuilding,US,Large,Dividend,Y
 ticker,PNC,PNC,^GSPC,,Financials,Diversified Banks,US,Mega/Large,LargeCap,Y
 ticker,ROST,ROST,^GSPC,,Consumer Discretionary,Apparel Retail,US,Mega/Large,LargeCap,Y
-ticker,RY,RY,^GSPC,,,,US,All,curated,Y
+ticker,RY,RY,^GSPC,,Financials,Banks,US,All,curated,Y
 ticker,SCHW,SCHW,^GSPC,,Financials,Investment Banking & Brokerage,US,Mega/Large,LargeCap,Y
 ticker,STT,STT,^GSPC,,Financials,Asset Management & Custody Banks,US,Mega/Large,LargeCap,Y
 ticker,T,T,^GSPC,,Communication Services,Integrated Telecommunication Services,US,Mega/Large,LargeCap,Y
-ticker,TD,TD,^GSPC,,,,US,All,curated,Y
+ticker,TD,TD,^GSPC,,Financials,Banks,US,All,curated,Y
 ticker,TFC,TFC,^GSPC,,Financials,Diversified Banks,US,Mega/Large,LargeCap,Y
 ticker,TGT,TGT,^GSPC,,Consumer Staples,Consumer Staples Merchandise Retail,US,Large,Dividend,Y
 ticker,TJX,TJX,^GSPC,,Consumer Discretionary,Apparel Retail,US,Mega/Large,LargeCap,Y
@@ -239,7 +239,7 @@ ticker,VEEV,VEEV,^GSPC,,Health Care,Health Care Technology,US,Mega/Large,LargeCa
 ticker,WDAY,WDAY,^GSPC,,Information Technology,Application Software,US,Mega/Large,LargeCap,Y
 ticker,ZM,ZM,^GSPC,,Information Technology,,US,Mega/Large,LargeCap,Y
 ticker,AMAT,AMAT,^GSPC,,Information Technology,Semiconductor Materials & Equipment,US,Mega/Large,LargeCap,Y
-ticker,ASML,ASML,^GSPC,,,,US,All,curated,Y
+ticker,ASML,ASML,^GSPC,,Information Technology,Technology,US,All,curated,Y
 ticker,LRCX,LRCX,^GSPC,,Information Technology,Semiconductor Materials & Equipment,US,Mega/Large,LargeCap,Y
 ticker,KLAC,KLAC,^GSPC,,Information Technology,Semiconductor Materials & Equipment,US,Mega/Large,LargeCap,Y
 ticker,MCHP,MCHP,^GSPC,,Information Technology,Semiconductors,US,Mega/Large,LargeCap,Y
@@ -404,40 +404,40 @@ ticker,CABK.MC,,^IBEX,,Financials,,Europe,Mega/Large,LargeCap,Y
 ticker,BPER,,^FTMIB,,,,US,,,Y
 ticker,AEG.AS,,^AEX,,Financials,,Europe,Mega/Large,LargeCap,Y
 ticker,ZURN.SW,,^SSMI,,Financials,,Europe,Mega/Large,LargeCap,Y
-ticker,CON.DE,,^GDAXI,,,,Europe,Mega/Large,LargeCap,Y
+ticker,CON.DE,,^GDAXI,,Consumer Discretionary,Automobiles and Parts,Europe,Mega/Large,LargeCap,Y
 ticker,SCA-B.ST,,^OMX,,,,Europe,,,Y
 ticker,BTG.L,,^FTSE,,Health Care,,UK,Mega/Large,LargeCap,Y
-ticker,FME.DE,,^GDAXI,,,,Europe,Mega/Large,LargeCap,Y
+ticker,FME.DE,,^GDAXI,,Health Care,Health Care,Europe,Mega/Large,LargeCap,Y
 ticker,DBV.PA,,^FCHI,,Health Care,,Europe,Mega/Large,LargeCap,Y
 ticker,GN.CO,,^OMXC25,,Health Care,,Europe,Mega/Large,LargeCap,Y
 ticker,ALC.SW,,^SSMI,,Health Care,,Europe,Mega/Large,LargeCap,Y
 ticker,GIVN.SW,,^SSMI,,Health Care,,Europe,Mega/Large,LargeCap,Y
-ticker,ABF.L,,^FTSE,,,,UK,Mega/Large,LargeCap,Y
-ticker,BRBY.L,,^FTSE,,,,UK,Mega/Large,LargeCap,Y
-ticker,JD.L,,^FTSE,,,,UK,Mega/Large,LargeCap,Y
-ticker,RCO.PA,,^FCHI,,,,Europe,Mega/Large,LargeCap,Y
-ticker,HEN3.DE,,^GDAXI,,,,Europe,Mega/Large,LargeCap,Y
+ticker,ABF.L,,^FTSE,,Consumer Staples,"Food, Beverage and Tobacco",UK,Mega/Large,LargeCap,Y
+ticker,BRBY.L,,^FTSE,,Consumer Discretionary,Consumer Products and Services,UK,Mega/Large,LargeCap,Y
+ticker,JD.L,,^FTSE,,Consumer Discretionary,Retail,UK,Mega/Large,LargeCap,Y
+ticker,RCO.PA,,^FCHI,,Consumer Staples,"Food, Beverage and Tobacco",Europe,Mega/Large,LargeCap,Y
+ticker,HEN3.DE,,^GDAXI,,Consumer Discretionary,Consumer Products and Services,Europe,Mega/Large,LargeCap,Y
 ticker,RWE.DE,RWED,^GDAXI,,Industrials,,Europe,Mega/Large,LargeCap,Y
 ticker,IMI.L,,^FTSE,,Industrials,,UK,Mega/Large,LargeCap,Y
-ticker,SU.PA,,^FCHI,,,,Europe,Mega/Large,LargeCap,Y
+ticker,SU.PA,,^FCHI,,Industrials,Industrial Goods and Services,Europe,Mega/Large,LargeCap,Y
 ticker,ALFA.ST,,^OMX,,Industrials,,Europe,,,Y
 ticker,BABA,BABA,^GSPC,,,,US,All,curated,Y
 ticker,BIDU,BIDU,^GSPC,,,,US,All,curated,Y
-ticker,JD,JD,^GSPC,,,,US,All,curated,Y
+ticker,JD,JD,^GSPC,,Consumer Discretionary,Retail,US,All,curated,Y
 ticker,NIO,NIO,^GSPC,,,,US,All,curated,Y
 ticker,PDD,PDD,^GSPC,,,,US,All,curated,Y
 ticker,TME,TME,^GSPC,,,,US,All,curated,Y
 ticker,TSM,TSM,^GSPC,,,,US,All,curated,Y
 ticker,XPEV,XPEV,^GSPC,,,,US,All,curated,Y
-ticker,CM,CM,^GSPC,,,,US,All,curated,Y
-ticker,CNR.TO,,^GSPTSE,,,,Canada,All,curated,Y
-ticker,CP.TO,,^GSPTSE,,,,Canada,All,curated,Y
-ticker,ENB,ENB,^GSPC,,,,US,All,curated,Y
-ticker,SU,SU,^GSPC,,,,US,All,curated,Y
-ticker,TRP,TRP,^GSPC,,,,US,All,curated,Y
-ticker,WCN,WCN,^GSPC,,,,US,All,curated,Y
+ticker,CM,CM,^GSPC,,Financials,Banks,US,All,curated,Y
+ticker,CNR.TO,,^GSPTSE,,Industrials,Transportation,Canada,All,curated,Y
+ticker,CP.TO,,^GSPTSE,,Industrials,Transportation,Canada,All,curated,Y
+ticker,ENB,ENB,^GSPC,,Energy,Oil & Gas Storage/Transport,US,All,curated,Y
+ticker,SU,SU,^GSPC,,Industrials,Industrial Goods and Services,US,All,curated,Y
+ticker,TRP,TRP,^GSPC,,Energy,Oil & Gas Storage/Transport,US,All,curated,Y
+ticker,WCN,WCN,^GSPC,,Industrials,Waste Management,US,All,curated,Y
 ticker,BHP,BHP,^GSPC,,,,US,All,curated,Y
-ticker,RIO,RIO,^GSPC,,,,US,All,curated,Y
+ticker,RIO,RIO,^GSPC,,Materials,Basic Resources,US,All,curated,Y
 ticker,WES,WES,^GSPC,,,,US,All,curated,Y
 ticker,ABNB,ABNB,^GSPC,,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",US,Mega/Large,LargeCap,Y
 ticker,AFRM,AFRM,^GSPC,,,,US,Mega/Large,LargeCap,Y
@@ -484,7 +484,7 @@ ticker,SMFG,SMFG,^GSPC,,,,US,All,curated,Y
 ticker,LPL,LPL,^GSPC,,,,US,All,curated,Y
 ticker,UMC,UMC,^GSPC,,,,US,All,curated,Y
 ticker,SSE.L,,^FTSE,,Utilities,,UK,Mega/Large,LargeCap,Y
-ticker,CNQ,CNQ,^GSPC,,,,US,All,curated,Y
+ticker,CNQ,CNQ,^GSPC,,Energy,Oil & Gas Exploration and Production,US,All,curated,Y
 ticker,BRK-B,BRK-B,^GSPC,,Financials,Multi-Sector Holdings,US,Mega/Large,LargeCap,Y
 ticker,BRK-A,BRK-A,^GSPC,,,,US,Mega/Large,LargeCap,Y
 ticker,A,A,^GSPC,,Health Care,Life Sciences Tools & Services,US,Mid/Small,S&P1000,Y
