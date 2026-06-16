@@ -79,16 +79,18 @@ class TestCachedRelativeStrength:
         rs = provider.calculate_relative_strength("BBB", "^BENCH", period=252)
         assert rs["relative_strength"] < 0
 
-    def test_falls_back_to_live_when_ticker_missing(self):
+    def test_cache_only_no_live_when_ticker_missing(self):
+        # The scan provider is cache-only: a cache miss must NOT trigger any live Yahoo call
+        # (that's what turned a 40s scan into 60+ min). It returns empty/{} instead.
         cached = {"^BENCH": _cached_entry(0.0005)}
         live = MagicMock()
-        live.get_historical_data.return_value = pd.DataFrame()  # live also has nothing
-        live.calculate_relative_strength.return_value = {"relative_strength": 0.1, "rs_rating": 60.0}
         provider = CachedDataProviderV2(cached, live)
 
         rs = provider.calculate_relative_strength("ZZZ", "^BENCH", period=252)
-
-        # Ticker not in cache -> cache-first get_historical_data delegated to live (empty)
-        # -> calculate_relative_strength falls back to the live provider.
-        live.calculate_relative_strength.assert_called_once()
-        assert rs == {"relative_strength": 0.1, "rs_rating": 60.0}
+        assert rs == {}
+        assert provider.get_historical_data("ZZZ").empty
+        assert provider.get_stock_info("ZZZ") == {}
+        # No live calls of any kind.
+        live.calculate_relative_strength.assert_not_called()
+        live.get_historical_data.assert_not_called()
+        live.get_stock_info.assert_not_called()

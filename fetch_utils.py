@@ -5,7 +5,6 @@ Used by 01_fetch_prices.py (pipeline cache).
 import time
 from datetime import datetime
 from typing import Dict, List
-from concurrent.futures import ThreadPoolExecutor, as_completed
 
 from data_provider import StockDataProvider
 from logger_config import get_logger
@@ -14,8 +13,10 @@ from config import (
     TICKER_MAPPING_ERRORS_FILE,
     YF_BATCH_CHUNK_SIZE,
     YF_BATCH_CHUNK_DELAY_SEC,
+    YF_BATCH_CHUNK_INTER_DELAY_SEC,
+    YF_BATCH_RATE_LIMIT_RESULT_RATIO,
 )
-from currency_utils import convert_ohlcv_and_info_to_usd
+from currency_utils import convert_ohlcv_and_info_to_usd, currency_for_symbol
 
 logger = get_logger(__name__)
 
@@ -33,7 +34,9 @@ def fetch_stock_data(ticker: str, provider: StockDataProvider) -> Dict:
                 "data_available": False,
                 "fetched_at": datetime.now().isoformat(),
             }
-        stock_info = provider.get_stock_info(ticker)
+        # Currency from exchange suffix (no network call — the per-ticker quote endpoint
+        # is Yahoo's main rate-limit bottleneck).
+        stock_info = {"currency": currency_for_symbol(ticker), "source": "suffix"}
         hist_dict = {
             "index": [str(idx) for idx in hist.index],
             "data": hist.to_dict("records"),
@@ -121,42 +124,55 @@ def fetch_stock_data_batch(tickers: List[str], provider: StockDataProvider, stoc
         logger.info("Batch fetching historical data for %d tickers (chunk %d/%d)...", len(chunk), idx + 1, len(chunks))
         chunk_hist = provider.get_historical_data_batch(chunk, period="1y", interval="1d")
         hist_by_ticker.update(chunk_hist)
-        if idx < len(chunks) - 1 and YF_BATCH_CHUNK_DELAY_SEC > 0:
-            logger.info("Waiting %ds before next chunk (rate-limit mitigation)...", YF_BATCH_CHUNK_DELAY_SEC)
-            time.sleep(YF_BATCH_CHUNK_DELAY_SEC)
+        if idx < len(chunks) - 1:
+            # Adaptive delay: only do the long backoff when a chunk looks throttled
+            # (returned well under what we asked for); otherwise a short politeness pause.
+            got = sum(1 for t in chunk if t in chunk_hist)
+            throttled = got < len(chunk) * YF_BATCH_RATE_LIMIT_RESULT_RATIO
+            if throttled and YF_BATCH_CHUNK_DELAY_SEC > 0:
+                logger.info("Chunk %d returned %d/%d; backing off %ds (possible rate limit)...",
+                            idx + 1, got, len(chunk), YF_BATCH_CHUNK_DELAY_SEC)
+                time.sleep(YF_BATCH_CHUNK_DELAY_SEC)
+            elif YF_BATCH_CHUNK_INTER_DELAY_SEC > 0:
+                time.sleep(YF_BATCH_CHUNK_INTER_DELAY_SEC)
     min_rows = 200
-    ok_tickers = [t for t in tickers if t in hist_by_ticker and len(hist_by_ticker[t]) >= min_rows]
+
+    def _valid_rows(df) -> int:
+        # yf.download aligns all tickers to a shared date index and fills failures with NaN,
+        # so a failed ticker can still have >=200 *rows*. Count rows with real OHLC instead.
+        try:
+            return int(df.dropna(subset=["Open", "High", "Low", "Close"]).shape[0])
+        except Exception:
+            return 0
+
+    failed = [t for t in tickers if t not in hist_by_ticker or _valid_rows(hist_by_ticker[t]) < min_rows]
+    # One gentle retry (single extra batch) for tickers that came back NaN/short — recovers
+    # transient in-batch failures without per-ticker live calls.
+    if failed:
+        logger.info("Retrying %d tickers with insufficient/NaN data in one batch...", len(failed))
+        retry_hist = provider.get_historical_data_batch(failed, period="1y", interval="1d")
+        for t, df in retry_hist.items():
+            if _valid_rows(df) >= min_rows:
+                hist_by_ticker[t] = df
+
+    ok_tickers = [t for t in tickers if t in hist_by_ticker and _valid_rows(hist_by_ticker[t]) >= min_rows]
     results: Dict[str, Dict] = {}
     for t in tickers:
-        if t not in hist_by_ticker or len(hist_by_ticker[t]) < min_rows:
+        if t not in ok_tickers:
             results[t] = {
                 "ticker": t,
-                "error": "Insufficient historical data ({} rows, need ≥{})".format(
-                    len(hist_by_ticker.get(t, [])) if t in hist_by_ticker else 0, min_rows
+                "error": "Insufficient historical data ({} valid OHLC rows, need ≥{})".format(
+                    _valid_rows(hist_by_ticker[t]) if t in hist_by_ticker else 0, min_rows
                 ),
                 "data_available": False,
                 "fetched_at": datetime.now().isoformat(),
             }
     if not ok_tickers:
         return results
-    # Fetch stock_info in parallel
-    def get_info(t: str):
-        return t, provider.get_stock_info(t)
-    info_by_ticker: Dict[str, Dict] = {}
-    with ThreadPoolExecutor(max_workers=min(stock_info_workers, len(ok_tickers))) as ex:
-        futures = {ex.submit(get_info, t): t for t in ok_tickers}
-        for future in as_completed(futures):
-            try:
-                t, info = future.result()
-                info_by_ticker[t] = info or {}
-            except Exception as e:
-                t = futures[future]
-                logger.warning("Stock info failed for %s: %s", t, e)
-                info_by_ticker[t] = {}
+    # Currency from exchange suffix (no network). Avoids the per-ticker quote/info endpoint,
+    # which is Yahoo's main rate-limit bottleneck at scale. EUR/GBp/... -> USD conversion uses
+    # the FX rate, which is cached per currency (a handful of calls for the whole universe).
     for t in ok_tickers:
-        results[t] = _build_result_from_hist(
-            t,
-            hist_by_ticker[t],
-            info_by_ticker.get(t, {}),
-        )
+        stock_info = {"currency": currency_for_symbol(t), "source": "suffix"}
+        results[t] = _build_result_from_hist(t, hist_by_ticker[t], stock_info)
     return results

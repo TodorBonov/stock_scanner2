@@ -27,6 +27,33 @@ MINOR_UNIT_CURRENCIES: Dict[str, Tuple[str, float]] = {
 # Process-lifetime cache of FX rates to USD, keyed by the quoted currency code.
 _FX_TO_USD_CACHE: Dict[str, Optional[float]] = {}
 
+# Yahoo exchange-suffix -> quoted currency. Lets us label a ticker's currency WITHOUT a
+# per-ticker network call. The per-ticker quote/info endpoint is Yahoo's main rate-limit
+# bottleneck at scale; exchange-suffix inference is deterministic and free.
+SUFFIX_CURRENCY: Dict[str, str] = {
+    ".L": "GBp",   # London — quoted in pence
+    ".DE": "EUR", ".F": "EUR", ".HM": "EUR", ".HA": "EUR", ".MU": "EUR",
+    ".SG": "EUR", ".BE": "EUR", ".DU": "EUR", ".STU": "EUR",
+    ".PA": "EUR", ".AS": "EUR", ".MI": "EUR", ".MC": "EUR", ".BR": "EUR",
+    ".VI": "EUR", ".LS": "EUR", ".IR": "EUR", ".HE": "EUR",
+    ".SW": "CHF", ".VX": "CHF",
+    ".ST": "SEK", ".OL": "NOK", ".CO": "DKK", ".WA": "PLN",
+    ".TO": "CAD", ".V": "CAD", ".NE": "CAD", ".CN": "CAD",
+    ".HK": "HKD", ".T": "JPY", ".AX": "AUD", ".NZ": "NZD", ".SI": "SGD",
+}
+
+
+def currency_for_symbol(symbol: str) -> str:
+    """
+    Infer the quoted currency from a Yahoo symbol's exchange suffix (no network).
+    No suffix -> USD (US listings). Unknown suffix -> USD (best effort).
+    """
+    s = (symbol or "").strip().upper()
+    if "." in s:
+        suffix = "." + s.rsplit(".", 1)[1]
+        return SUFFIX_CURRENCY.get(suffix, "USD")
+    return "USD"
+
 
 def _fetch_yahoo_fx_with_date(pair_ticker: str) -> Tuple[Optional[float], Optional[str]]:
     """
@@ -37,9 +64,21 @@ def _fetch_yahoo_fx_with_date(pair_ticker: str) -> Tuple[Optional[float], Option
         import yfinance as yf
         session = None
         if os.environ.get("DISABLE_SSL_VERIFY", "").strip().lower() in ("1", "true", "yes"):
-            import requests
-            session = requests.Session()
-            session.verify = False
+            # Match data_provider: under corporate SSL inspection Yahoo only works via
+            # curl_cffi Chrome impersonation; a plain requests session is blocked/empty.
+            try:
+                from curl_cffi import requests as curl_requests
+                session = curl_requests.Session(impersonate="chrome")
+                session.verify = False
+            except ImportError:
+                import requests
+                session = requests.Session()
+                session.verify = False
+            try:
+                import urllib3
+                urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+            except Exception:
+                pass
         t = yf.Ticker(pair_ticker, session=session) if session else yf.Ticker(pair_ticker)
         hist = t.history(period="5d", interval="1d")
         if hist is not None and not hist.empty and "Close" in hist.columns:

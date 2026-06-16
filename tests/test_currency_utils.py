@@ -12,7 +12,40 @@ from currency_utils import (
     _split_minor_unit,
     get_fx_rate_to_usd,
     convert_ohlcv_and_info_to_usd,
+    currency_for_symbol,
 )
+
+
+class TestCurrencyForSymbol:
+    def test_us_no_suffix_is_usd(self):
+        assert currency_for_symbol("AAPL") == "USD"
+
+    def test_london_is_pence(self):
+        assert currency_for_symbol("VOD.L") == "GBp"
+        assert currency_for_symbol(".L") == "GBp"
+
+    def test_xetra_is_eur(self):
+        assert currency_for_symbol("RWE.DE") == "EUR"
+
+    def test_other_european_eur(self):
+        assert currency_for_symbol("AIR.PA") == "EUR"   # Paris
+        assert currency_for_symbol("ASML.AS") == "EUR"  # Amsterdam
+
+    def test_swiss_chf(self):
+        assert currency_for_symbol("NESN.SW") == "CHF"
+
+    def test_nordics_and_canada(self):
+        assert currency_for_symbol("VOLV-B.ST") == "SEK"
+        assert currency_for_symbol("EQNR.OL") == "NOK"
+        assert currency_for_symbol("MAERSK-B.CO") == "DKK"
+        assert currency_for_symbol("SHOP.TO") == "CAD"
+
+    def test_unknown_suffix_defaults_usd(self):
+        assert currency_for_symbol("FOO.XYZ") == "USD"
+
+    def test_case_insensitive_and_empty(self):
+        assert currency_for_symbol("vod.l") == "GBp"
+        assert currency_for_symbol("") == "USD"
 
 
 @pytest.fixture(autouse=True)
