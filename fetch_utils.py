@@ -136,14 +136,33 @@ def fetch_stock_data_batch(tickers: List[str], provider: StockDataProvider, stoc
             elif YF_BATCH_CHUNK_INTER_DELAY_SEC > 0:
                 time.sleep(YF_BATCH_CHUNK_INTER_DELAY_SEC)
     min_rows = 200
-    ok_tickers = [t for t in tickers if t in hist_by_ticker and len(hist_by_ticker[t]) >= min_rows]
+
+    def _valid_rows(df) -> int:
+        # yf.download aligns all tickers to a shared date index and fills failures with NaN,
+        # so a failed ticker can still have >=200 *rows*. Count rows with real OHLC instead.
+        try:
+            return int(df.dropna(subset=["Open", "High", "Low", "Close"]).shape[0])
+        except Exception:
+            return 0
+
+    failed = [t for t in tickers if t not in hist_by_ticker or _valid_rows(hist_by_ticker[t]) < min_rows]
+    # One gentle retry (single extra batch) for tickers that came back NaN/short — recovers
+    # transient in-batch failures without per-ticker live calls.
+    if failed:
+        logger.info("Retrying %d tickers with insufficient/NaN data in one batch...", len(failed))
+        retry_hist = provider.get_historical_data_batch(failed, period="1y", interval="1d")
+        for t, df in retry_hist.items():
+            if _valid_rows(df) >= min_rows:
+                hist_by_ticker[t] = df
+
+    ok_tickers = [t for t in tickers if t in hist_by_ticker and _valid_rows(hist_by_ticker[t]) >= min_rows]
     results: Dict[str, Dict] = {}
     for t in tickers:
-        if t not in hist_by_ticker or len(hist_by_ticker[t]) < min_rows:
+        if t not in ok_tickers:
             results[t] = {
                 "ticker": t,
-                "error": "Insufficient historical data ({} rows, need ≥{})".format(
-                    len(hist_by_ticker.get(t, [])) if t in hist_by_ticker else 0, min_rows
+                "error": "Insufficient historical data ({} valid OHLC rows, need ≥{})".format(
+                    _valid_rows(hist_by_ticker[t]) if t in hist_by_ticker else 0, min_rows
                 ),
                 "data_available": False,
                 "fetched_at": datetime.now().isoformat(),

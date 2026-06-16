@@ -26,6 +26,7 @@ from config import (
     SEPA_USER_REPORT_PREFIX,
     SEPA_CSV_PREFIX,
     DEFAULT_ENV_PATH,
+    NEW_PIPELINE_CACHE,
 )
 from cache_utils import load_cached_data
 
@@ -71,8 +72,10 @@ def convert_cached_data_to_dataframe(cached_stock: Dict) -> Optional[pd.DataFram
         if any(c not in df.columns for c in required_cols):
             return None
         df = df[required_cols].copy()
-        # Drop rows with NaN in OHLCV (e.g. from Yahoo); otherwise rolling(SMA) and trend checks fail
-        df = df.dropna(subset=required_cols)
+        # Volume is often NaN for index benchmarks (^FTMIB, etc.); don't let that wipe the
+        # series — fill it with 0 and only require OHLC to be present.
+        df["Volume"] = df["Volume"].fillna(0)
+        df = df.dropna(subset=["Open", "High", "Low", "Close"])
         if len(df) < 200:
             return None
         # Ensure chronological order (oldest first) so iloc[-1] = latest and SMAs are correct
@@ -84,9 +87,15 @@ def convert_cached_data_to_dataframe(cached_stock: Dict) -> Optional[pd.DataFram
 
 
 class CachedDataProviderV2:
-    """Data provider that uses cached data (V2)."""
+    """
+    Cache-ONLY data provider for the scan. It never makes live Yahoo calls: step 01 is
+    responsible for fetching, and during a 1,700-name scan a per-ticker live fallback means
+    60/180s rate-limit backoffs that can turn a seconds-long scan into an hour. If a ticker's
+    cached data is missing/short, we return empty and let the scanner mark it insufficient.
+    `original_provider` is accepted for API compatibility but intentionally not used here.
+    """
 
-    def __init__(self, cached_stocks: Dict, original_provider):
+    def __init__(self, cached_stocks: Dict, original_provider=None):
         self.cached_stocks = cached_stocks
         self.original_provider = original_provider
 
@@ -95,27 +104,23 @@ class CachedDataProviderV2:
             hist = convert_cached_data_to_dataframe(self.cached_stocks[ticker])
             if hist is not None and not hist.empty:
                 return hist
-        return self.original_provider.get_historical_data(ticker, period, interval)
+        return pd.DataFrame()  # cache miss -> empty (NO live fetch during scan)
 
     def get_stock_info(self, ticker: str):
         if ticker in self.cached_stocks and self.cached_stocks[ticker].get("stock_info"):
             return self.cached_stocks[ticker]["stock_info"]
-        return self.original_provider.get_stock_info(ticker)
+        return {}
 
     def calculate_relative_strength(self, ticker: str, benchmark: str, period: int = 252):
         """
-        Relative strength vs benchmark, computed from the cached snapshot.
-
-        Uses this provider's cache-first get_historical_data for BOTH the ticker and the
-        benchmark so RS comes from the same data vintage as every other metric in the scan
-        (no live Yahoo calls, no mixed snapshots). Falls back to the live provider only if
-        either series is missing from the cache.
+        Relative strength vs benchmark, computed purely from the cached snapshot — no live
+        calls. Returns {} if either series is missing from cache (caller handles the fallback).
         """
         try:
             stock_hist = self.get_historical_data(ticker, period="1y")
             benchmark_hist = self.get_historical_data(benchmark, period="1y")
             if stock_hist.empty or benchmark_hist.empty:
-                return self.original_provider.calculate_relative_strength(ticker, benchmark, period)
+                return {}
 
             stock_returns = stock_hist["Close"].pct_change(fill_method=None).dropna()
             benchmark_returns = benchmark_hist["Close"].pct_change(fill_method=None).dropna()
@@ -202,7 +207,25 @@ def main():
         sys.exit(1)
 
     benchmark_overrides = {t: stocks[t].get("benchmark_index") for t in tickers if stocks[t].get("benchmark_index")}
-    provider = CachedDataProviderV2(stocks, StockDataProvider(alpha_vantage_api_key=os.getenv("ALPHA_VANTAGE_API_KEY"), prefer_yfinance=True))
+
+    # The prepared file excludes index rows, but RS needs benchmark OHLCV (^GSPC, ^GDAXI, ...).
+    # Merge the raw step-01 cache (which has the indices) into the provider's data so RS is
+    # served from cache instead of a live Yahoo fetch per stock. Scan list (`tickers`) is unchanged.
+    provider_stocks = dict(stocks)
+    try:
+        if NEW_PIPELINE_CACHE.exists():
+            with open(NEW_PIPELINE_CACHE, "r", encoding="utf-8") as f:
+                raw_stocks = (json.load(f) or {}).get("stocks", {})
+            added = 0
+            for sym, entry in raw_stocks.items():
+                if sym not in provider_stocks and entry.get("data_available", False):
+                    provider_stocks[sym] = entry
+                    added += 1
+            logger.info("Merged %d cached entries (incl. benchmark indices) into the scan provider", added)
+    except Exception as e:
+        logger.warning("Could not merge raw cache for benchmarks: %s", e)
+
+    provider = CachedDataProviderV2(provider_stocks, StockDataProvider(alpha_vantage_api_key=os.getenv("ALPHA_VANTAGE_API_KEY"), prefer_yfinance=True))
     scanner = MinerviniScannerV2(provider, benchmark=args.benchmark)
 
     print(f"SEPA V2 Scan: {len(tickers)} tickers")
