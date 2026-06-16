@@ -5,7 +5,6 @@ Used by 01_fetch_prices.py (pipeline cache).
 import time
 from datetime import datetime
 from typing import Dict, List
-from concurrent.futures import ThreadPoolExecutor, as_completed
 
 from data_provider import StockDataProvider
 from logger_config import get_logger
@@ -17,7 +16,7 @@ from config import (
     YF_BATCH_CHUNK_INTER_DELAY_SEC,
     YF_BATCH_RATE_LIMIT_RESULT_RATIO,
 )
-from currency_utils import convert_ohlcv_and_info_to_usd
+from currency_utils import convert_ohlcv_and_info_to_usd, currency_for_symbol
 
 logger = get_logger(__name__)
 
@@ -35,7 +34,9 @@ def fetch_stock_data(ticker: str, provider: StockDataProvider) -> Dict:
                 "data_available": False,
                 "fetched_at": datetime.now().isoformat(),
             }
-        stock_info = provider.get_stock_info(ticker, fast=True)
+        # Currency from exchange suffix (no network call — the per-ticker quote endpoint
+        # is Yahoo's main rate-limit bottleneck).
+        stock_info = {"currency": currency_for_symbol(ticker), "source": "suffix"}
         hist_dict = {
             "index": [str(idx) for idx in hist.index],
             "data": hist.to_dict("records"),
@@ -149,24 +150,10 @@ def fetch_stock_data_batch(tickers: List[str], provider: StockDataProvider, stoc
             }
     if not ok_tickers:
         return results
-    # Fetch stock_info in parallel (fast_info: currency + cheap fields, no heavy .info)
-    def get_info(t: str):
-        return t, provider.get_stock_info(t, fast=True)
-    info_by_ticker: Dict[str, Dict] = {}
-    with ThreadPoolExecutor(max_workers=min(stock_info_workers, len(ok_tickers))) as ex:
-        futures = {ex.submit(get_info, t): t for t in ok_tickers}
-        for future in as_completed(futures):
-            try:
-                t, info = future.result()
-                info_by_ticker[t] = info or {}
-            except Exception as e:
-                t = futures[future]
-                logger.warning("Stock info failed for %s: %s", t, e)
-                info_by_ticker[t] = {}
+    # Currency from exchange suffix (no network). Avoids the per-ticker quote/info endpoint,
+    # which is Yahoo's main rate-limit bottleneck at scale. EUR/GBp/... -> USD conversion uses
+    # the FX rate, which is cached per currency (a handful of calls for the whole universe).
     for t in ok_tickers:
-        results[t] = _build_result_from_hist(
-            t,
-            hist_by_ticker[t],
-            info_by_ticker.get(t, {}),
-        )
+        stock_info = {"currency": currency_for_symbol(t), "source": "suffix"}
+        results[t] = _build_result_from_hist(t, hist_by_ticker[t], stock_info)
     return results
