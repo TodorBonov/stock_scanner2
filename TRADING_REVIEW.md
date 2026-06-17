@@ -17,12 +17,11 @@ Not financial advice — a methodology critique. Ordered by trading impact.
   - Which index per stock: the stock's assigned `benchmark_index` (watchlist column, else inferred
     from exchange suffix via benchmark_mapping). Same index used for RS.
 
-- [ ] **No segment/sector-relative marking.** Beyond the broad market, the watchlist has a `Sector`
-  (and `Region`) column that isn't used to assess whether a stock's *segment* is leading or lagging.
-  - **DECISION: also clearly mark when a stock's sector/segment is currently underperforming.**
-    Approach: rank sectors by recent relative performance (e.g. median 3M return of the stocks in
-    each sector vs the market, or a sector index), and tag stocks in lagging sectors
-    (e.g. `sector: lagging`). Flag only — no grade change.
+- [x] **No segment/sector-relative marking.** DONE (Marker 2, flag-only). `compute_sector_strength`
+  in step 04 ranks sectors by MEDIAN 3M return of their constituents; bottom third = `lagging`,
+  top third = `leading`, rest = `inline` (blank sector / no return = `unknown`). Attaches
+  `sector_strength` to each result + history.jsonl and adds a SECTOR STRENGTH summary to the
+  report. Grades unchanged. (Uses the 95%-filled GICS `sector` column from the watchlist remake.)
 
 - [ ] **No fundamental leg (SEPA's "A" is missing).** `get_stock_info` fetches `earnings_growth`,
   `revenue_growth`, `profit_margins`, `return_on_equity` but **none are used** in eligibility or the
@@ -76,7 +75,8 @@ index symbols have `type=index` rows (so RS + regime data is available for every
 | CNP | `^FCHI` | `^GSPC` | ⚠️ Symbol risk — bare `CNP` = CenterPoint (US); if CNP Assurances use `CNP.PA` |
 | BPER | `^FTMIB` | `^GSPC` | ⚠️ Symbol risk — BPER Banca is Italian; bare symbol may need `BPER.MI` |
 
-- [ ] Fix clear benchmark errors: **GS71.DE → `^GDAXI`**, **LUN.TO → `^GSPTSE`**.
-- [ ] Verify **CNP** / **BPER** resolve to the intended (European?) company — a wrong *symbol* means
-  the whole row's price data is the wrong instrument, far worse than a wrong benchmark. Add proper
-  suffixes (`CNP.PA`, `BPER.MI`) if European. Cross-check fetched currency once the cache is built.
+- [x] Fix clear benchmark errors: **GS71.DE → `^GDAXI`**, **LUN.TO → `^GSPTSE`** (done in watchlist remake).
+- [x] **CNP** resolved: it's CenterPoint Energy (US, S&P 1000) → `^GSPC` + Utilities. **BPER** still
+  fails to fetch (bare symbol; flagged in problems_with_tickers via the new benchmark/data checks) —
+  needs `BPER.MI` if the Italian bank is intended. (Also fixed dead benchmarks: `^FTMIB → FTSEMIB.MI`;
+  `^WIG20` has no reliable Yahoo symbol — flagged.)
