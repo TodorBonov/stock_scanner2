@@ -168,6 +168,45 @@ def sanitize_for_json(obj):
     return str(obj)
 
 
+def compute_sector_strength(results):
+    """
+    Marker 2 (FLAG ONLY): tag each result with how its sector is performing vs the universe.
+    Uses each result's 3-month return (relative_strength.rs_3m). Sectors are ranked by their
+    MEDIAN 3M return; the bottom third are 'lagging', the top third 'leading', the rest 'inline'.
+    Stocks with no sector or no return get 'unknown'. Attaches r['sector_strength'] and returns
+    (sector_median dict, market_3m) for the report summary.
+    """
+    from statistics import median
+    sector_returns = {}
+    all_returns = []
+    for r in results:
+        rs3 = (r.get("relative_strength") or {}).get("rs_3m")
+        if rs3 is None:
+            continue
+        all_returns.append(rs3)
+        sec = (r.get("sector") or "").strip()
+        if sec:
+            sector_returns.setdefault(sec, []).append(rs3)
+    market_3m = round(median(all_returns), 2) if all_returns else 0.0
+    sector_median = {s: median(v) for s, v in sector_returns.items() if v}
+    ranked = sorted(sector_median, key=lambda s: sector_median[s])  # ascending
+    lagging, leading = set(), set()
+    if len(ranked) >= 3:
+        cut = max(1, len(ranked) // 3)
+        lagging = set(ranked[:cut])
+        leading = set(ranked[-cut:])
+    for r in results:
+        sec = (r.get("sector") or "").strip()
+        if sec and sec in sector_median:
+            status = "lagging" if sec in lagging else "leading" if sec in leading else "inline"
+            r["sector_strength"] = {"sector": sec, "sector_3m": round(sector_median[sec], 2),
+                                    "market_3m": market_3m, "status": status}
+        else:
+            r["sector_strength"] = {"sector": sec or None, "sector_3m": None,
+                                    "market_3m": market_3m, "status": "unknown"}
+    return {s: round(v, 2) for s, v in sector_median.items()}, market_3m
+
+
 def main():
     parser = argparse.ArgumentParser(description="Minervini SEPA V2 scan: eligibility + composite score + user report")
     parser.add_argument("--ticker", type=str, help="Single ticker only")
@@ -263,9 +302,14 @@ def main():
         if status == "risk-off":
             risk_off_count += 1
         r["market_regime"] = {"benchmark": b, "above_200sma": above, "status": status}
+    # Marker 2 — sector strength (FLAG ONLY, no grade change)
+    sector_medians, market_3m = compute_sector_strength(results)
+    lagging_count = sum(1 for r in results if (r.get("sector_strength") or {}).get("status") == "lagging")
+
     print(f"Scan complete: {len(results)} results")
     print(f"Market regime: {sum(1 for v in regime_by_bench.values() if v.get('above_200sma') is True)}/"
           f"{len(regime_by_bench)} benchmarks in uptrend; {risk_off_count} candidates in risk-off markets")
+    print(f"Sector strength: {len(sector_medians)} sectors ranked; {lagging_count} candidates in lagging sectors")
 
     # Write machine-readable JSON (single source of truth for downstream steps)
     scan_dir = REPORTS_DIR_V2 / "scan"
@@ -311,6 +355,7 @@ def main():
                 "sector": r.get("sector"),
                 "market_cap": r.get("market_cap"),
                 "market_regime": (r.get("market_regime") or {}).get("status"),
+                "sector_strength": (r.get("sector_strength") or {}).get("status"),
             }
             hf.write(json.dumps(row, default=str) + "\n")
     logger.info("Appended %d rows to %s", len(results), SCAN_HISTORY_FILE)
@@ -334,6 +379,17 @@ def main():
                  else "RISK-OFF (below 200 SMA)" if above is False else "unknown (no data)")
         regime_lines.append(f"  {b:8}  {label}")
     regime_lines.append(f"  => {risk_off_count} candidate(s) currently in a risk-off market")
+    regime_lines.append("")
+    # Marker 2 — sector strength summary (flag only)
+    regime_lines.append("=" * 80)
+    regime_lines.append("SECTOR STRENGTH (median 3M return per sector vs universe) — flag only")
+    regime_lines.append("=" * 80)
+    for sec in sorted(sector_medians, key=lambda s: sector_medians[s], reverse=True):
+        med = sector_medians[sec]
+        status = next((r["sector_strength"]["status"] for r in results
+                       if (r.get("sector_strength") or {}).get("sector") == sec), "")
+        regime_lines.append(f"  {sec:26}  3M median {med:+6.1f}%   {status.upper()}")
+    regime_lines.append(f"  (market 3M median {market_3m:+.1f}%; {lagging_count} candidate(s) in lagging sectors)")
     regime_lines.append("")
     report_txt = "\n".join(regime_lines) + "\n" + report_txt
     ts = datetime.now().strftime("%Y%m%d_%H%M%S")
