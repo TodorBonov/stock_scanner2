@@ -107,11 +107,13 @@ def main():
 
     prepared_stocks: Dict[str, Dict] = {}
     problems: List[str] = []
+    benchmarks_used: Dict[str, int] = {}
 
     for r in ticker_rows:
         yahoo = (r.get(YAHOO_SYMBOL) or "").strip().upper()
         t212 = (r.get(TRADING212_SYMBOL) or "").strip().upper()
         bench = (r.get(BENCHMARK_INDEX) or "").strip().upper() or "^GDAXI"
+        benchmarks_used[bench] = benchmarks_used.get(bench, 0) + 1
 
         entry = resolve_cache_entry(yahoo, stocks) or resolve_cache_entry(t212, stocks)
         if not entry:
@@ -141,6 +143,15 @@ def main():
     for pt in pos_tickers:
         if pt not in t212_to_row and not resolve_cache_entry(pt, stocks):
             problems.append(f"Position not in watchlist / no cache: trading212={pt}")
+
+    # Benchmark health: a failed/missing benchmark index silently breaks RS AND market regime
+    # for every stock that uses it. Indices aren't ticker rows, so they'd otherwise go unreported.
+    for bench, n in sorted(benchmarks_used.items()):
+        entry = resolve_cache_entry(bench, stocks)
+        if not entry:
+            problems.append(f"Benchmark MISSING from cache: {bench} (used by {n} tickers) — RS/regime degraded")
+        elif not entry.get("data_available", False):
+            problems.append(f"Benchmark NO DATA: {bench} (used by {n} tickers) — {entry.get('error', 'unknown')} — RS/regime degraded")
 
     # Latest Yahoo fetch time from cache (when data was taken from Yahoo)
     data_timestamp_yahoo = None

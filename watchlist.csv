@@ -34,7 +34,7 @@ ticker,AM.PA,,^FCHI,,Industrials,,Europe,Mega/Large,LargeCap,Y
 ticker,BA.L,,^FTSE,,Industrials,,UK,Mega/Large,LargeCap,Y
 ticker,RR.L,,^FTSE,,Industrials,,UK,Mega/Large,LargeCap,Y
 ticker,QQ.L,,^FTSE,,Industrials,,UK,Mega/Large,LargeCap,Y
-ticker,LDO.MI,,^FTMIB,,Industrials,,Europe,,,Y
+ticker,LDO.MI,,FTSEMIB.MI,,Industrials,,Europe,,,Y
 ticker,IDR.MC,,^IBEX,,Industrials,,Europe,Mega/Large,LargeCap,Y
 ticker,SAAB-B.ST,,^OMX,,Industrials,,Europe,,,Y
 ticker,AIR.AS,,^AEX,,Industrials,,Europe,Mega/Large,LargeCap,Y
@@ -54,20 +54,20 @@ ticker,LLOY.L,,^FTSE,,Financials,,UK,Mega/Large,LargeCap,Y
 ticker,BARC.L,,^FTSE,,Financials,,UK,Mega/Large,LargeCap,Y
 ticker,SAN.MC,,^IBEX,,Financials,,Europe,Mega/Large,LargeCap,Y
 ticker,BBVA.MC,,^IBEX,,Financials,,Europe,Mega/Large,LargeCap,Y
-ticker,ISP.MI,,^FTMIB,,Financials,,Europe,,,Y
-ticker,UCG.MI,,^FTMIB,,Financials,,Europe,,,Y
+ticker,ISP.MI,,FTSEMIB.MI,,Financials,,Europe,,,Y
+ticker,UCG.MI,,FTSEMIB.MI,,Financials,,Europe,,,Y
 ticker,INGA.AS,,^AEX,,Financials,,Europe,Mega/Large,LargeCap,Y
 ticker,UBSG.SW,,^SSMI,,Financials,,Europe,Mega/Large,LargeCap,Y
 ticker,VOW3.DE,,^GDAXI,,,,Europe,Mega/Large,LargeCap,Y
 ticker,BMW.DE,,^GDAXI,,Consumer Discretionary,Automobiles and Parts,Europe,Mega/Large,LargeCap,Y
 ticker,RNO.PA,,^FCHI,,Consumer Discretionary,Automobiles and Parts,Europe,Mega/Large,LargeCap,Y
 ticker,PEUG.PA,,^FCHI,,,,Europe,Mega/Large,LargeCap,Y
-ticker,STLA,,^FTMIB,,,,US,,,Y
+ticker,STLA,,FTSEMIB.MI,,,,US,,,Y
 ticker,VOLV-B.ST,,^OMX,,Industrials,Industrial Goods and Services,Europe,,,Y
 ticker,BP.L,,^FTSE,,Energy,,UK,Mega/Large,LargeCap,Y
 ticker,SHEL.L,,^FTSE,,Energy,,UK,Mega/Large,LargeCap,Y
 ticker,TTE.PA,,^FCHI,,Energy,,Europe,Mega/Large,LargeCap,Y
-ticker,ENI.MI,,^FTMIB,,Energy,,Europe,,,Y
+ticker,ENI.MI,,FTSEMIB.MI,,Energy,,Europe,,,Y
 ticker,REP.MC,,^IBEX,,Energy,,Europe,Mega/Large,LargeCap,Y
 ticker,EQNR.OL,,^OSEAX,,Energy,,Europe,,,Y
 ticker,NOVN.SW,,^SSMI,,Health Care,,Europe,Mega/Large,LargeCap,Y
@@ -89,8 +89,8 @@ ticker,UCB.BR,,^BFX,,Health Care,,Europe,,,Y
 ticker,PHIA.AS,,^AEX,,Health Care,,Europe,Mega/Large,LargeCap,Y
 ticker,PHG,,^AEX,,,,US,Mega/Large,LargeCap,Y
 ticker,GETI-B.ST,,^OMX,,Health Care,,Europe,,,Y
-ticker,REC.MI,,^FTMIB,,Health Care,,Europe,,,Y
-ticker,DIA.MI,,^FTMIB,,Health Care,,Europe,,,Y
+ticker,REC.MI,,FTSEMIB.MI,,Health Care,,Europe,,,Y
+ticker,DIA.MI,,FTSEMIB.MI,,Health Care,,Europe,,,Y
 ticker,GRF.MC,,^IBEX,,Health Care,,Europe,Mega/Large,LargeCap,Y
 ticker,FAE.MC,,^IBEX,,Health Care,,Europe,Mega/Large,LargeCap,Y
 ticker,PZU.WA,,^WIG20,,Health Care,,Europe,,,Y
@@ -101,7 +101,7 @@ ticker,CFR.SW,,^SSMI,,Consumer Discretionary,,Europe,Mega/Large,LargeCap,Y
 ticker,DGE.L,,^FTSE,,Consumer Discretionary,,UK,Mega/Large,LargeCap,Y
 ticker,ULVR.L,,^FTSE,,Consumer Discretionary,,UK,Mega/Large,LargeCap,Y
 ticker,ADS.DE,,^GDAXI,,Consumer Discretionary,,Europe,Mega/Large,LargeCap,Y
-ticker,PRY.MI,,^FTMIB,,Consumer Discretionary,,Europe,,,Y
+ticker,PRY.MI,,FTSEMIB.MI,,Consumer Discretionary,,Europe,,,Y
 ticker,SIEGY,SIEGY,^GSPC,,Industrials,,US,Mega/Large,LargeCap,Y
 ticker,SIE.DE,,^GDAXI,,Industrials,,Europe,Mega/Large,LargeCap,Y
 ticker,SMIN.L,,^FTSE,,Industrials,,UK,Mega/Large,LargeCap,Y
@@ -116,7 +116,7 @@ ticker,EOAN.DE,,^GDAXI,,Utilities,,Europe,Mega/Large,LargeCap,Y
 ticker,ENGI.PA,,^FCHI,,Utilities,,Europe,Mega/Large,LargeCap,Y
 ticker,NG.L,,^FTSE,,Utilities,,UK,Mega/Large,LargeCap,Y
 ticker,IBE.MC,,^IBEX,,Utilities,,Europe,Mega/Large,LargeCap,Y
-ticker,ENEL.MI,,^FTMIB,,Utilities,,Europe,,,Y
+ticker,ENEL.MI,,FTSEMIB.MI,,Utilities,,Europe,,,Y
 ticker,RIO.L,,^FTSE,,Materials,,UK,Mega/Large,LargeCap,Y
 ticker,GLEN.L,,^FTSE,,Materials,,UK,Mega/Large,LargeCap,Y
 ticker,LONN.SW,,^SSMI,,Materials,,Europe,Mega/Large,LargeCap,Y
@@ -401,7 +401,7 @@ ticker,BNZL.L,,^FTSE,,Financials,,UK,Mega/Large,LargeCap,Y
 ticker,CPG.L,,^FTSE,,Financials,,UK,Mega/Large,LargeCap,Y
 ticker,CNP,,^GSPC,,Utilities,Multi-Utilities,US,Mid/Small,S&P1000,Y
 ticker,CABK.MC,,^IBEX,,Financials,,Europe,Mega/Large,LargeCap,Y
-ticker,BPER,,^FTMIB,,,,US,,,Y
+ticker,BPER,,FTSEMIB.MI,,,,US,,,Y
 ticker,AEG.AS,,^AEX,,Financials,,Europe,Mega/Large,LargeCap,Y
 ticker,ZURN.SW,,^SSMI,,Financials,,Europe,Mega/Large,LargeCap,Y
 ticker,CON.DE,,^GDAXI,,Consumer Discretionary,Automobiles and Parts,Europe,Mega/Large,LargeCap,Y
@@ -1730,7 +1730,7 @@ index,^AEX,,^AEX,,,,,,Index,Y
 index,^ATX,,^ATX,,,,,,Index,Y
 index,^BFX,,^BFX,,,,,,Index,Y
 index,^FCHI,,^FCHI,,,,,,Index,Y
-index,^FTMIB,,^FTMIB,,,,,,Index,Y
+index,FTSEMIB.MI,,FTSEMIB.MI,,,,,,Index,Y
 index,^FTSE,,^FTSE,,,,,,Index,Y
 index,^GDAXI,,^GDAXI,,,,,,Index,Y
 index,^GSPC,,^GSPC,,,,,,Index,Y

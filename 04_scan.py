@@ -246,7 +246,26 @@ def main():
             r["sector"] = extra.get("sector")
         if extra.get("market_cap") is not None:
             r["market_cap"] = extra.get("market_cap")
+
+    # Marker 1 — market regime (FLAG ONLY, no grade change). Minervini's #1 rule: trade with
+    # the market. For each stock's benchmark index, compare its latest close to its own 200-day
+    # SMA (computed once per benchmark from cached index data; no live calls).
+    benchmarks_used = {(benchmark_overrides.get(t) or args.benchmark) for t in tickers}
+    regime_by_bench = {}
+    for b in benchmarks_used:
+        if b:
+            regime_by_bench[b] = scanner.get_market_regime(b)
+    risk_off_count = 0
+    for r in results:
+        b = benchmark_overrides.get(r.get("ticker")) or args.benchmark
+        above = (regime_by_bench.get(b) or {}).get("above_200sma")
+        status = "uptrend" if above is True else ("risk-off" if above is False else "unknown")
+        if status == "risk-off":
+            risk_off_count += 1
+        r["market_regime"] = {"benchmark": b, "above_200sma": above, "status": status}
     print(f"Scan complete: {len(results)} results")
+    print(f"Market regime: {sum(1 for v in regime_by_bench.values() if v.get('above_200sma') is True)}/"
+          f"{len(regime_by_bench)} benchmarks in uptrend; {risk_off_count} candidates in risk-off markets")
 
     # Write machine-readable JSON (single source of truth for downstream steps)
     scan_dir = REPORTS_DIR_V2 / "scan"
@@ -291,6 +310,7 @@ def main():
                 "region": r.get("region"),
                 "sector": r.get("sector"),
                 "market_cap": r.get("market_cap"),
+                "market_regime": (r.get("market_regime") or {}).get("status"),
             }
             hf.write(json.dumps(row, default=str) + "\n")
     logger.info("Appended %d rows to %s", len(results), SCAN_HISTORY_FILE)
@@ -302,6 +322,20 @@ def main():
         data_timestamp=data_timestamp,
         report_run_timestamp=report_run_ts,
     )
+    # Marker 1 — prepend a market-regime summary (flag only; does not change grades)
+    regime_lines = [
+        "=" * 80,
+        "MARKET REGIME (benchmark index vs its 200-day SMA) — flag only, grades unchanged",
+        "=" * 80,
+    ]
+    for b in sorted(regime_by_bench):
+        above = regime_by_bench[b].get("above_200sma")
+        label = ("UPTREND  (above 200 SMA)" if above is True
+                 else "RISK-OFF (below 200 SMA)" if above is False else "unknown (no data)")
+        regime_lines.append(f"  {b:8}  {label}")
+    regime_lines.append(f"  => {risk_off_count} candidate(s) currently in a risk-off market")
+    regime_lines.append("")
+    report_txt = "\n".join(regime_lines) + "\n" + report_txt
     ts = datetime.now().strftime("%Y%m%d_%H%M%S")
     report_file = scan_dir / f"{SEPA_USER_REPORT_PREFIX}{ts}.txt"
     report_file.write_text(report_txt, encoding="utf-8")

@@ -12,7 +12,7 @@ BENCHMARK_BY_SUFFIX = {
     ".V": "^GSPTSE",
     ".PA": "^FCHI",     # CAC 40
     ".MC": "^IBEX",     # Madrid
-    ".MI": "^FTMIB",    # Milan
+    ".MI": "FTSEMIB.MI",    # Milan (FTSE MIB; ^FTMIB is unreliable on Yahoo)
     ".SW": "^SSMI",     # Swiss
     ".AS": "^AEX",      # Amsterdam
     ".DE": "^GDAXI",    # Xetra/DAX
