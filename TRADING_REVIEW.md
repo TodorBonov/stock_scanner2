@@ -5,9 +5,11 @@ Not financial advice — a methodology critique. Ordered by trading impact.
 
 ## P1 — Highest impact
 
-- [ ] **No market-regime filter.** `REQUIRE_MARKET_ABOVE_200SMA = False` (config.py) — it's off, and
-  `get_market_regime()` isn't used. Minervini's first rule is to trade in sync with the general market.
-  Result: A/A+ breakouts get surfaced even in market downtrends (highest failure rate).
+- [x] **No market-regime filter.** DONE (Marker 1, flag-only). Step 04 computes regime per
+  benchmark index (close vs its own 200-day SMA, from cached index data — no live calls),
+  attaches `market_regime` to each result + history.jsonl, and prepends a MARKET REGIME
+  summary to the report. Grades unchanged. Indices with no data show "unknown".
+  Original finding: `REQUIRE_MARKET_ABOVE_200SMA = False`; `get_market_regime()` was unused.
   - **DECISION: mark/flag, do NOT gate.** Compute regime per benchmark index (index close vs its own
     200-day SMA), once per unique benchmark in the scan, and **clearly label** each stock when its
     market is risk-off (e.g. a `market: risk-off` tag + regime line at the top of the report).
