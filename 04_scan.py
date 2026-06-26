@@ -7,6 +7,7 @@ Writes: reports/scan/latest.json (machine output), reports/scan/scan_<ts>.txt (h
 import json
 import os
 import sys
+import time
 import argparse
 from pathlib import Path
 from datetime import datetime
@@ -27,6 +28,8 @@ from config import (
     SEPA_CSV_PREFIX,
     DEFAULT_ENV_PATH,
     NEW_PIPELINE_CACHE,
+    EARNINGS_GUARD_DAYS,
+    EARNINGS_GUARD_GRADES,
 )
 from cache_utils import load_cached_data
 
@@ -207,6 +210,72 @@ def compute_sector_strength(results):
     return {s: round(v, 2) for s, v in sector_median.items()}, market_3m
 
 
+def earnings_days_until(next_date, today):
+    """Days from `today` to `next_date` (a datetime.date), or None. Negative if in the past."""
+    if next_date is None or today is None:
+        return None
+    try:
+        return (next_date - today).days
+    except Exception:
+        return None
+
+
+def _yf_session():
+    """curl_cffi Chrome session under DISABLE_SSL_VERIFY (corporate proxy), else default."""
+    if os.environ.get("DISABLE_SSL_VERIFY", "").strip().lower() in ("1", "true", "yes"):
+        try:
+            from curl_cffi import requests as cr
+            s = cr.Session(impersonate="chrome"); s.verify = False
+            return s
+        except ImportError:
+            return None
+    return None
+
+
+def fetch_next_earnings_date(ticker, session=None):
+    """Next FUTURE earnings date via Yahoo .calendar (the endpoint that isn't throttled here)."""
+    import yfinance as yf
+    from datetime import date
+    try:
+        tk = yf.Ticker(ticker, session=session) if session else yf.Ticker(ticker)
+        cal = tk.calendar
+        dates = cal.get("Earnings Date") if isinstance(cal, dict) else None
+        if not dates:
+            return None
+        today = date.today()
+        future = sorted(d for d in dates if hasattr(d, "year") and d >= today)
+        return future[0] if future else None
+    except Exception:
+        return None
+
+
+def apply_earnings_guard(results, window_days=EARNINGS_GUARD_DAYS, grades=EARNINGS_GUARD_GRADES):
+    """
+    Flag actionable candidates (grade in `grades`) that report earnings within `window_days`.
+    Live .calendar fetch per candidate (scoped small). Attaches r['earnings']; flag only.
+    Returns the count flagged as reporting soon.
+    """
+    from datetime import date
+    session = _yf_session()
+    today = date.today()
+    soon = 0
+    for r in results:
+        if r.get("grade") not in grades:
+            continue
+        nd = fetch_next_earnings_date(r.get("ticker"), session)
+        days = earnings_days_until(nd, today)
+        is_soon = days is not None and 0 <= days <= window_days
+        r["earnings"] = {
+            "next_date": nd.isoformat() if nd else None,
+            "days_until": days,
+            "soon": is_soon,
+        }
+        if is_soon:
+            soon += 1
+        time.sleep(0.2)  # gentle pacing for the scoped live calls
+    return soon
+
+
 def main():
     parser = argparse.ArgumentParser(description="Minervini SEPA V2 scan: eligibility + composite score + user report")
     parser.add_argument("--ticker", type=str, help="Single ticker only")
@@ -306,10 +375,16 @@ def main():
     sector_medians, market_3m = compute_sector_strength(results)
     lagging_count = sum(1 for r in results if (r.get("sector_strength") or {}).get("status") == "lagging")
 
+    # Earnings-date guard (FLAG ONLY) — scoped to actionable candidates (A+/A); live .calendar.
+    n_to_check = sum(1 for r in results if r.get("grade") in EARNINGS_GUARD_GRADES)
+    print(f"Earnings guard: checking {n_to_check} {'/'.join(EARNINGS_GUARD_GRADES)} candidates...")
+    earnings_soon_count = apply_earnings_guard(results)
+
     print(f"Scan complete: {len(results)} results")
     print(f"Market regime: {sum(1 for v in regime_by_bench.values() if v.get('above_200sma') is True)}/"
           f"{len(regime_by_bench)} benchmarks in uptrend; {risk_off_count} candidates in risk-off markets")
     print(f"Sector strength: {len(sector_medians)} sectors ranked; {lagging_count} candidates in lagging sectors")
+    print(f"Earnings guard: {earnings_soon_count} candidate(s) report within {EARNINGS_GUARD_DAYS} days")
 
     # Write machine-readable JSON (single source of truth for downstream steps)
     scan_dir = REPORTS_DIR_V2 / "scan"
@@ -356,6 +431,8 @@ def main():
                 "market_cap": r.get("market_cap"),
                 "market_regime": (r.get("market_regime") or {}).get("status"),
                 "sector_strength": (r.get("sector_strength") or {}).get("status"),
+                "earnings_date": (r.get("earnings") or {}).get("next_date"),
+                "earnings_soon": (r.get("earnings") or {}).get("soon"),
             }
             hf.write(json.dumps(row, default=str) + "\n")
     logger.info("Appended %d rows to %s", len(results), SCAN_HISTORY_FILE)
@@ -390,6 +467,21 @@ def main():
                        if (r.get("sector_strength") or {}).get("sector") == sec), "")
         regime_lines.append(f"  {sec:26}  3M median {med:+6.1f}%   {status.upper()}")
     regime_lines.append(f"  (market 3M median {market_3m:+.1f}%; {lagging_count} candidate(s) in lagging sectors)")
+    regime_lines.append("")
+    # Earnings-date guard summary (flag only) — A+/A candidates reporting within the window
+    regime_lines.append("=" * 80)
+    regime_lines.append(f"EARNINGS WATCH ({'/'.join(EARNINGS_GUARD_GRADES)} candidates reporting within {EARNINGS_GUARD_DAYS} days) — flag only")
+    regime_lines.append("=" * 80)
+    soon = sorted(
+        (r for r in results if (r.get("earnings") or {}).get("soon")),
+        key=lambda r: (r.get("earnings") or {}).get("days_until", 99),
+    )
+    if soon:
+        for r in soon:
+            e = r["earnings"]
+            regime_lines.append(f"  {r.get('ticker',''):10} {r.get('grade',''):3}  earnings {e['next_date']} (in {e['days_until']}d) — avoid fresh entry")
+    else:
+        regime_lines.append("  none")
     regime_lines.append("")
     report_txt = "\n".join(regime_lines) + "\n" + report_txt
     ts = datetime.now().strftime("%Y%m%d_%H%M%S")

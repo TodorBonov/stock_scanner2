@@ -673,6 +673,15 @@ MIN_RS_PERCENTILE_FOR_A = 70.0
 MIN_UNIVERSE_FOR_RS_PERCENTILE = 20
 
 # ----------------------------------------------------------------------------
+# EARNINGS-DATE GUARD (flag only)
+# ----------------------------------------------------------------------------
+# Flag actionable candidates (A+/A) that report earnings within this many days — don't
+# initiate into an earnings gap. Fetched live per candidate (Yahoo .calendar), so kept
+# small/scoped; does NOT change grades.
+EARNINGS_GUARD_DAYS = 7
+EARNINGS_GUARD_GRADES = ("A+", "A")  # which grades to check (keeps the live-fetch set small)
+
+# ----------------------------------------------------------------------------
 # ATR STOP (V2)
 # ----------------------------------------------------------------------------
 USE_ATR_STOP_V2 = True
