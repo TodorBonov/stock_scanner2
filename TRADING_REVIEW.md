@@ -49,8 +49,10 @@ Not financial advice — a methodology critique. Ordered by trading impact.
 
 - [ ] **Within 15% of 52w high** (`PRICE_FROM_52W_HIGH_MAX_PCT = 15`) is stricter than Minervini's 25%
   — trims early-stage names. Intentional? Document or relax.
-- [ ] **No earnings-date guard.** Nothing prevents a "buy" signal landing days before an earnings report
-  (event risk). Add an earnings-date flag to candidate output.
+- [x] **No earnings-date guard.** DONE (flag-only). Step 04 fetches the next earnings date (Yahoo
+  `.calendar`, scoped to A+/A candidates only — `get_earnings_dates()` is throttled here) and flags
+  any reporting within `EARNINGS_GUARD_DAYS` (7). Adds `earnings {next_date, days_until, soon}` to
+  results + history.jsonl and an EARNINGS WATCH block to the report. Grades unchanged.
 - [ ] **Profit-taking is two fixed targets** (10% / 45%). Minervini sells partial into strength and
   trails. Consider a tiered/trailing model.
 
