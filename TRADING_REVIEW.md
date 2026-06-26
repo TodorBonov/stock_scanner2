@@ -41,9 +41,12 @@ Not financial advice — a methodology critique. Ordered by trading impact.
   Can pass loose consolidations that aren't VCPs.
   - Action: count contractions and require each tighter than the last; verify volume dry-up.
 
-- [ ] **Breakout volume confirmation loosened.** `VOLUME_EXPANSION_MIN = 1.2` over a 2-day window
-  vs Minervini's ~+40–50% on the breakout day. Admits low-conviction breakouts.
-  - Action: treat weak-volume breakouts as a score downgrade rather than a pass.
+- [x] **Breakout volume confirmation loosened.** DONE (affects grade). Once a breakout clears the
+  pivot, `_component_score_breakout` now scales the score by volume: ≥1.4× → 100, 1.2–1.4× → 80,
+  <1.2× → 65. Only already-broken-out names are affected; pre-breakout proximity bands unchanged.
+  - **Also added: entry-actionability `status`** (Ready / In-breakout / Extended / Near / Watch from
+    distance-to-pivot) + an ACTIONABLE NOW report block listing A+/A "Ready at the pivot" names — so
+    pre-breakout setups are surfaced *before* they run (buy-stop-at-pivot workflow), not chased.
 
 ## P3 — Minor / polish
 
