@@ -703,6 +703,15 @@ BREAKOUT_SCORE_TIGHT_HIGH_PCT = 0
 BREAKOUT_SCORE_NEAR_LOW_PCT = -5
 BREAKOUT_SCORE_NEAR_HIGH_PCT = -3
 
+# Breakout volume quality: once a breakout clears the pivot, scale its score by how strong
+# the volume was (institutional confirmation). Weak-volume breakouts are downgraded, not given
+# full credit. (Only affects already-broken-out names; pre-breakout proximity bands above are
+# unchanged, so this does NOT bias the scanner toward chasing post-breakout stocks.)
+BREAKOUT_VOL_STRONG_RATIO = 1.4        # >= ~+40% (Minervini) -> full credit
+BREAKOUT_SCORE_VOL_STRONG = 100.0      # strong-volume breakout
+BREAKOUT_SCORE_VOL_MODERATE = 80.0     # VOLUME_EXPANSION_MIN..strong
+BREAKOUT_SCORE_VOL_WEAK = 65.0         # cleared pivot but weak volume
+
 # ----------------------------------------------------------------------------
 # BASE QUALITY SCORE BANDS (V2)
 # ----------------------------------------------------------------------------

@@ -30,6 +30,9 @@ from config import (
     NEW_PIPELINE_CACHE,
     EARNINGS_GUARD_DAYS,
     EARNINGS_GUARD_GRADES,
+    EXTENDED_DISTANCE_PCT,
+    BREAKOUT_SCORE_TIGHT_LOW_PCT,
+    BREAKOUT_SCORE_NEAR_LOW_PCT,
 )
 from cache_utils import load_cached_data
 
@@ -210,6 +213,31 @@ def compute_sector_strength(results):
     return {s: round(v, 2) for s, v in sector_median.items()}, market_3m
 
 
+def actionable_status(distance_to_pivot_pct, in_breakout,
+                      tight_low=BREAKOUT_SCORE_TIGHT_LOW_PCT,
+                      near_low=BREAKOUT_SCORE_NEAR_LOW_PCT,
+                      extended=EXTENDED_DISTANCE_PCT):
+    """
+    Entry-actionability label from distance-to-pivot (and whether it already broke out):
+      Extended    — broke out and is already > `extended`% past the pivot (chasing zone, avoid)
+      In-breakout — just cleared the pivot (actionable now)
+      Ready       — coiled just under the pivot (tight_low..0): buy-stop-at-pivot candidate
+      Near        — near_low..tight_low below pivot (developing)
+      Watch       — further below pivot
+      unknown     — no distance available
+    """
+    d = distance_to_pivot_pct
+    if d is None:
+        return "unknown"
+    if in_breakout:
+        return "Extended" if d > extended else "In-breakout"
+    if tight_low <= d <= 0:
+        return "Ready"
+    if near_low <= d < tight_low:
+        return "Near"
+    return "Watch"
+
+
 def earnings_days_until(next_date, today):
     """Days from `today` to `next_date` (a datetime.date), or None. Negative if in the past."""
     if next_date is None or today is None:
@@ -375,6 +403,14 @@ def main():
     sector_medians, market_3m = compute_sector_strength(results)
     lagging_count = sum(1 for r in results if (r.get("sector_strength") or {}).get("status") == "lagging")
 
+    # Entry-actionability status (Ready / In-breakout / Extended / Near / Watch) from
+    # distance-to-pivot — so pre-breakout "Ready" names are easy to find (don't chase Extended).
+    from collections import Counter
+    for r in results:
+        br = r.get("breakout") or {}
+        r["status"] = actionable_status(br.get("distance_to_pivot_pct"), br.get("in_breakout"))
+    status_counts = Counter(r.get("status") for r in results if r.get("eligible"))
+
     # Earnings-date guard (FLAG ONLY) — scoped to actionable candidates (A+/A); live .calendar.
     n_to_check = sum(1 for r in results if r.get("grade") in EARNINGS_GUARD_GRADES)
     print(f"Earnings guard: checking {n_to_check} {'/'.join(EARNINGS_GUARD_GRADES)} candidates...")
@@ -385,6 +421,7 @@ def main():
           f"{len(regime_by_bench)} benchmarks in uptrend; {risk_off_count} candidates in risk-off markets")
     print(f"Sector strength: {len(sector_medians)} sectors ranked; {lagging_count} candidates in lagging sectors")
     print(f"Earnings guard: {earnings_soon_count} candidate(s) report within {EARNINGS_GUARD_DAYS} days")
+    print(f"Actionable status (eligible): " + ", ".join(f"{k}={v}" for k, v in status_counts.most_common()))
 
     # Write machine-readable JSON (single source of truth for downstream steps)
     scan_dir = REPORTS_DIR_V2 / "scan"
@@ -433,6 +470,7 @@ def main():
                 "sector_strength": (r.get("sector_strength") or {}).get("status"),
                 "earnings_date": (r.get("earnings") or {}).get("next_date"),
                 "earnings_soon": (r.get("earnings") or {}).get("soon"),
+                "status": r.get("status"),
             }
             hf.write(json.dumps(row, default=str) + "\n")
     logger.info("Appended %d rows to %s", len(results), SCAN_HISTORY_FILE)
@@ -482,6 +520,25 @@ def main():
             regime_lines.append(f"  {r.get('ticker',''):10} {r.get('grade',''):3}  earnings {e['next_date']} (in {e['days_until']}d) — avoid fresh entry")
     else:
         regime_lines.append("  none")
+    regime_lines.append("")
+    # Actionable-status summary — surface the prime pre-breakout/just-triggered A+/A names
+    regime_lines.append("=" * 80)
+    regime_lines.append("ACTIONABLE NOW (A+/A that are Ready at the pivot or just In-breakout, not Extended)")
+    regime_lines.append("=" * 80)
+    actionable = [r for r in results
+                  if r.get("grade") in ("A+", "A") and r.get("status") in ("Ready", "In-breakout")]
+    actionable.sort(key=lambda r: (r["status"] != "Ready", -(r.get("composite_score") or 0)))
+    if actionable:
+        for r in actionable:
+            br = r.get("breakout") or {}
+            dist = br.get("distance_to_pivot_pct")
+            ew = " ⚠earnings" if (r.get("earnings") or {}).get("soon") else ""
+            regime_lines.append(
+                f"  {r.get('ticker',''):10} {r.get('grade',''):3} {r['status']:11} "
+                f"pivot {br.get('pivot_price')}  dist {dist:+.1f}%{ew}")
+    else:
+        regime_lines.append("  none")
+    regime_lines.append(f"  (eligible status mix: " + ", ".join(f"{k}={v}" for k, v in status_counts.most_common()) + ")")
     regime_lines.append("")
     report_txt = "\n".join(regime_lines) + "\n" + report_txt
     ts = datetime.now().strftime("%Y%m%d_%H%M%S")

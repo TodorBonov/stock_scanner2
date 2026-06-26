@@ -42,6 +42,8 @@ from config import (
     EXTENDED_DISTANCE_PCT,
     BREAKOUT_SCORE_TIGHT_LOW_PCT, BREAKOUT_SCORE_TIGHT_HIGH_PCT,
     BREAKOUT_SCORE_NEAR_LOW_PCT, BREAKOUT_SCORE_NEAR_HIGH_PCT,
+    VOLUME_EXPANSION_MIN, BREAKOUT_VOL_STRONG_RATIO,
+    BREAKOUT_SCORE_VOL_STRONG, BREAKOUT_SCORE_VOL_MODERATE, BREAKOUT_SCORE_VOL_WEAK,
     BASE_SCORE_DEPTH_ELITE_PCT, BASE_SCORE_DEPTH_GOOD_PCT,
     BASE_SCORE_PRIOR_RUN_BONUS, BASE_SCORE_PRIOR_RUN_PENALTY,
     VOLUME_SCORE_STRONG_CONTRACTION, VOLUME_SCORE_MODERATE_CONTRACTION,
@@ -378,10 +380,23 @@ class MinerviniScannerV2(MinerviniScanner):
         return 0.0
 
     def _component_score_breakout(self, checklist: Dict, distance_to_pivot_pct: float) -> float:
-        """Breakout Quality: 0-100 from pass + distance to pivot."""
+        """Breakout Quality: 0-100 from pass + distance to pivot.
+
+        When a breakout has cleared the pivot, scale the score by volume quality so a
+        weak-volume breakout is downgraded (not given full credit). Pre-breakout proximity
+        bands are unchanged — this only affects already-broken-out names.
+        """
         br = checklist.get("breakout_rules", {})
         if br.get("passed", False):
-            return 100.0
+            try:
+                vr = float((br.get("details") or {}).get("volume_ratio") or 0.0)
+            except (TypeError, ValueError):
+                vr = 0.0
+            if vr >= BREAKOUT_VOL_STRONG_RATIO:
+                return BREAKOUT_SCORE_VOL_STRONG
+            if vr >= VOLUME_EXPANSION_MIN:
+                return BREAKOUT_SCORE_VOL_MODERATE
+            return BREAKOUT_SCORE_VOL_WEAK  # cleared pivot but weak volume
         # Pre-breakout: closer to pivot = higher score
         if BREAKOUT_SCORE_TIGHT_LOW_PCT <= distance_to_pivot_pct <= BREAKOUT_SCORE_TIGHT_HIGH_PCT:
             return 80.0
