@@ -39,7 +39,7 @@ ticker,IDR.MC,,^IBEX,,Industrials,,Europe,Mega/Large,LargeCap,Y
 ticker,SAAB-B.ST,,^OMX,,Industrials,,Europe,,,Y
 ticker,AIR.AS,,^AEX,,Industrials,,Europe,Mega/Large,LargeCap,Y
 ticker,KOG.OL,,^OSEAX,,Industrials,,Europe,,,Y
-ticker,SAP.DE,,^GDAXI,,Information Technology,,Europe,Mega/Large,LargeCap,Y
+ticker,SAP.DE,SAPD,^GDAXI,,Information Technology,,Europe,Mega/Large,LargeCap,Y
 ticker,ASML.AS,,^AEX,,Information Technology,,Europe,Mega/Large,LargeCap,Y
 ticker,ADYEN.AS,,^AEX,,Information Technology,,Europe,Mega/Large,LargeCap,Y
 ticker,CAP.PA,,^FCHI,,Information Technology,,Europe,Mega/Large,LargeCap,Y
@@ -1741,3 +1741,4 @@ index,^OMXC25,,^OMXC25,,,,,,Index,Y
 index,^OSEAX,,^OSEAX,,,,,,Index,Y
 index,^SSMI,,^SSMI,,,,,,Index,Y
 index,^WIG20,,^WIG20,,,,,,Index,Y
+ticker,MSF.DE,MSFD,^GDAXI,,Information Technology,Systems Software,Europe,Mega/Large,curated,Y
