@@ -74,7 +74,7 @@ ticker,NOVN.SW,,^SSMI,,Health Care,,Europe,Mega/Large,LargeCap,Y
 ticker,ROG.SW,,^SSMI,,Health Care,,Europe,Mega/Large,LargeCap,Y
 ticker,GSK.L,,^FTSE,,Health Care,,UK,Mega/Large,LargeCap,Y
 ticker,GS71.DE,GS71,^GDAXI,,,,Europe,Mega/Large,LargeCap,Y
-ticker,WTAI,WTAI,^GSPC,,,,US,Mega/Large,LargeCap,Y
+ticker,WTAI.MI,WTAI,^GSPC,,Information Technology,,Europe,ETF,ETF,Y
 ticker,AZN.L,,^FTSE,,Health Care,,UK,Mega/Large,LargeCap,Y
 ticker,HIK.L,,^FTSE,,Health Care,,UK,Mega/Large,LargeCap,Y
 ticker,SAN.PA,,^FCHI,,Health Care,,Europe,Mega/Large,LargeCap,Y
