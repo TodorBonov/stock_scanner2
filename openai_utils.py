@@ -14,6 +14,8 @@ from config import (
     OPENAI_API_TIMEOUT,
     OPENAI_CHATGPT_RETRY_ATTEMPTS,
     OPENAI_CHATGPT_RETRY_BASE_SECONDS,
+    OPENAI_CHATGPT_TEMPERATURE,
+    OPENAI_CHATGPT_SEED,
 )
 
 logger = get_logger(__name__)
@@ -41,6 +43,8 @@ def send_to_chatgpt(
     max_tokens: Optional[int] = None,
     system_content: Optional[str] = None,
     timeout: Optional[int] = None,
+    temperature: Optional[float] = None,
+    seed: Optional[int] = None,
 ) -> Tuple[Optional[str], Optional[dict]]:
     """
     Send a single prompt to OpenAI Chat Completions API with retries.
@@ -61,12 +65,21 @@ def send_to_chatgpt(
     _new_api = any(model.startswith(p) for p in ("gpt-5", "o1", "o3", "o4"))
     token_kwarg = {"max_completion_tokens": max_tokens} if _new_api else {"max_tokens": max_tokens}
 
+    # Determinism: fixed seed for everything; temperature for all but the o-series reasoning
+    # models (which reject temperature != 1). Reduces run-to-run swing in the verdicts.
+    temperature = OPENAI_CHATGPT_TEMPERATURE if temperature is None else temperature
+    seed = OPENAI_CHATGPT_SEED if seed is None else seed
+    det_kwarg = {"seed": seed}
+    if not any(model.startswith(p) for p in ("o1", "o3", "o4")):
+        det_kwarg["temperature"] = temperature
+
     for attempt in range(OPENAI_CHATGPT_RETRY_ATTEMPTS):
         try:
             resp = client.chat.completions.create(
                 model=model,
                 messages=messages,
                 **token_kwarg,
+                **det_kwarg,
                 timeout=timeout,
             )
             choice = resp.choices[0] if resp.choices else None

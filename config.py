@@ -48,6 +48,11 @@ OPENAI_CHATGPT_MAX_PRE_BREAKOUT_STOCKS = 9999  # Max pre-breakout setups in one 
 OPENAI_CHATGPT_INCLUDE_FULL_SCAN_DATA = False  # If False, report omits duplicate "ORIGINAL SCAN DATA" block (smaller file)
 OPENAI_CHATGPT_RETRY_ATTEMPTS = 3  # Retries on rate limit / transient errors
 OPENAI_CHATGPT_RETRY_BASE_SECONDS = 60  # First backoff wait (then 120, 180...)
+# Determinism: temperature 0 + a fixed seed reduce run-to-run swing in the verdicts.
+# (Best-effort — the API does not guarantee identical output, but it cuts the variance
+# that produced opposite HOLD/EXIT calls on identical data.)
+OPENAI_CHATGPT_TEMPERATURE = 0.0
+OPENAI_CHATGPT_SEED = 7
 
 DATA_PROVIDER_TIMEOUT = 30  # seconds for data provider API calls
 # Purpose: Maximum time to wait for stock data API responses
