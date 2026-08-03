@@ -17,7 +17,7 @@ import pandas as pd
 from dotenv import load_dotenv
 from data_provider import StockDataProvider
 from sepa_scorer import MinerviniScannerV2
-from sepa_report import generate_user_friendly_report, export_scan_summary_to_csv
+from sepa_report import generate_user_friendly_report, export_scan_summary_to_csv, important_note_short
 from logger_config import setup_logging, get_logger
 from config import (
     PREPARED_FOR_MINERVINI,
@@ -531,11 +531,18 @@ def main():
     if actionable:
         for r in actionable:
             br = r.get("breakout") or {}
+            risk = r.get("risk") or {}
             dist = br.get("distance_to_pivot_pct")
+            stop = risk.get("stop_price")
+            stop_str = f"{stop:.2f}" if stop is not None else "—"
+            rr = risk.get("reward_to_risk")
+            rr_str = f"{rr:.1f}" if rr is not None else "—"
+            note = important_note_short(r)
+            note_str = f"  [{note}]" if note != "—" else ""
             ew = " ⚠earnings" if (r.get("earnings") or {}).get("soon") else ""
             regime_lines.append(
                 f"  {r.get('ticker',''):10} {r.get('grade',''):3} {r['status']:11} "
-                f"pivot {br.get('pivot_price')}  dist {dist:+.1f}%{ew}")
+                f"pivot {br.get('pivot_price')}  dist {dist:+.1f}%  stop {stop_str}  R/R {rr_str}{note_str}{ew}")
     else:
         regime_lines.append("  none")
     regime_lines.append(f"  (eligible status mix: " + ", ".join(f"{k}={v}" for k, v in status_counts.most_common()) + ")")

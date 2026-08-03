@@ -106,7 +106,7 @@ def _important_notes(r: Dict) -> List[str]:
     return notes
 
 
-def _important_note_short(r: Dict) -> str:
+def important_note_short(r: Dict) -> str:
     """Short note string for ranked tables: Ext, Late, LowRS, BO; or for REJECT a truncated reason; or —."""
     if r.get("eligible", False):
         notes = _important_notes(r)
@@ -414,7 +414,7 @@ def generate_user_friendly_report(
         rr_str = f"{_safe_float(rr, round_to=1)}" if rr is not None else "—"
         stop = (r.get("risk") or {}).get("stop_price")
         stop_str = f"{_safe_float(stop, round_to=2)}" if stop is not None else "—"
-        note_str = _important_note_short(r)
+        note_str = important_note_short(r)
         status = _status_line(r)
         region = r.get("region") or "—"
         sector = r.get("sector") or "—"
@@ -481,7 +481,7 @@ def generate_user_friendly_report(
         rs_str = f"{_safe_float(rs_pct_val, round_to=1)}" if rs_pct_val is not None else "—"
         dist = _safe_float((r.get("breakout") or {}).get("distance_to_pivot_pct"), round_to=1)
         base_type = (r.get("base") or {}).get("type", "—")
-        note_str = _important_note_short(r)
+        note_str = important_note_short(r)
         lines.append(f"| {i} | {ticker} | {grade} | {score} | {trend_s} | {rs_str} | {dist} | {base_type} | {note_str} |")
     lines.append("")
     if not early_sorted:
@@ -498,6 +498,7 @@ def generate_user_friendly_report(
     extended = [r for r in eligible if _safe_float((r.get("breakout") or {}).get("distance_to_pivot_pct")) > EXTENDED_RISK_WARNING_PCT]
     late_base = [r for r in eligible if _safe_float((r.get("base") or {}).get("depth_pct")) > LATE_STAGE_BASE_DEPTH_PCT]
     low_rs = [r for r in eligible if (r.get("relative_strength") or {}).get("rs_percentile") is not None and _safe_float((r.get("relative_strength") or {}).get("rs_percentile")) < LOW_RS_PERCENTILE_THRESHOLD]
+    in_breakout = [r for r in eligible if (r.get("breakout") or {}).get("in_breakout", False)]
     for r in extended:
         lines.append(f"  Extended: {r.get('ticker')} (>{EXTENDED_RISK_WARNING_PCT}% above pivot)")
     for r in late_base:
@@ -505,7 +506,9 @@ def generate_user_friendly_report(
     for r in low_rs:
         pct = (r.get("relative_strength") or {}).get("rs_percentile")
         lines.append(f"  Low RS percentile: {r.get('ticker')} ({pct})")
-    if not (extended or late_base or low_rs):
+    for r in in_breakout:
+        lines.append(f"  In breakout (already triggered): {r.get('ticker')}")
+    if not (extended or late_base or low_rs or in_breakout):
         lines.append("  None")
     lines.append("")
 
