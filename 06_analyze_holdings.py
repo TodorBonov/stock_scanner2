@@ -97,6 +97,7 @@ My entry price: {entry_price}
 Current price (from broker at fetch time): {current_price}
 Position size: {position_size}
 Currency: {currency}
+{currency_note}
 
 {v2_context}
 
@@ -149,6 +150,7 @@ My entry price: {entry_price}
 Current price: {current_price}
 Position size: {position_size}
 Currency: {currency}
+{currency_note}
 
 {v2_context}
 
@@ -161,6 +163,24 @@ Follow with one short sentence explaining why. Suggest stop and add levels if ap
 """
 
 NO_OHLCV_PLACEHOLDER = "No OHLCV data available for this ticker."
+
+
+def _currency_note(position_currency: str, ohlcv_currency: str) -> str:
+    """
+    When the position's currency and the OHLCV's currency differ (e.g. EUR entry price vs
+    USD-normalized OHLCV, when the live EUR/USD rate was unavailable at fetch time — see
+    05_prep_ai_data.py), the raw numbers legitimately don't match. Without this note the
+    model reads that as a data-quality problem; it's actually already correctly labeled.
+    """
+    if not ohlcv_currency or not position_currency or position_currency.upper() == ohlcv_currency.upper():
+        return ""
+    return (
+        f"Note: entry/current price above is in {position_currency}, but the OHLCV data below is in "
+        f"{ohlcv_currency} — this is a known, already-labeled currency difference (not a data error; "
+        f"do not report it as a mismatch). Compute all technical levels from the OHLCV in "
+        f"{ohlcv_currency} as usual. If you need to compare entry/current price against those levels, "
+        f"state the approximate {position_currency}/{ohlcv_currency} conversion rate you assumed."
+    )
 
 
 def _parse_recommendation(content: str) -> Tuple[str, str]:
@@ -235,6 +255,7 @@ def main():
 
         v2_row = v2_by_ticker.get((ticker or "").strip().upper()) if ticker else None
         v2_context = _build_v2_context_block(v2_row) if v2_row else "scan context: not available (ticker not in latest scan or scan not run)."
+        currency_note = _currency_note(currency, ohlcv_currency)
 
         if not ohlcv or ohlcv == NO_OHLCV_PLACEHOLDER:
             prompt_text = PROMPT_NO_OHLCV.format(
@@ -244,6 +265,7 @@ def main():
                 current_price=current_str,
                 position_size=position_size,
                 currency=currency,
+                currency_note=currency_note,
                 v2_context=v2_context,
             )
         else:
@@ -254,6 +276,7 @@ def main():
                 current_price=current_str,
                 position_size=position_size,
                 currency=currency,
+                currency_note=currency_note,
                 ohlcv_currency=ohlcv_currency,
                 v2_context=v2_context,
                 ohlcv_csv=ohlcv,
