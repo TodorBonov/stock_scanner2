@@ -54,6 +54,19 @@ OPENAI_CHATGPT_RETRY_BASE_SECONDS = 60  # First backoff wait (then 120, 180...)
 OPENAI_CHATGPT_TEMPERATURE = 0.0
 OPENAI_CHATGPT_SEED = 7
 
+# ----------------------------------------------------------------------------
+# FUNDAMENTALS (flag-only; US via SEC EDGAR, quarterly)
+# ----------------------------------------------------------------------------
+# Coverage is US-domestic-filer only (10-Q/10-K, US-GAAP). Foreign filers (20-F/IFRS) and
+# EU/UK local lines are 'n/a'. Kept OUT of the composite score (flag only) precisely because
+# coverage is uneven — putting it in the score would make US and EU grades non-comparable.
+# Promote to a scored component only once coverage is uniform (e.g. a paid global provider).
+FUNDAMENTALS_ENABLED = True
+FUNDAMENTALS_STRONG_EPS_YOY = 25.0   # latest quarter EPS YoY >= this AND accelerating -> "strong"
+FUNDAMENTALS_WEAK_EPS_YOY = 0.0      # latest quarter EPS YoY < this -> "weak"
+FUNDAMENTALS_CACHE_DAYS = 7          # re-fetch a ticker's fundamentals at most this often
+SEC_EDGAR_USER_AGENT = "stock_scanner2 research (todor.bonov@dreamix.eu)"  # SEC requires a UA with contact
+
 DATA_PROVIDER_TIMEOUT = 30  # seconds for data provider API calls
 # Purpose: Maximum time to wait for stock data API responses
 # Used by: StockDataProvider (yfinance, Alpha Vantage)
