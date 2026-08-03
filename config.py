@@ -18,11 +18,6 @@ DEFAULT_RATE_LIMIT_DELAY = 0.5  # seconds between API calls
 # Used by: Trading212Client, StockDataProvider
 # Why important: Avoids rate limiting errors and potential IP bans
 
-POSITION_EVALUATION_DELAY = 0.5  # seconds between position evaluations
-# Purpose: Delay between evaluating multiple positions
-# Used by: Trading bot position management
-# Why important: Prevents rapid-fire API calls that could trigger rate limits
-
 MAX_API_RETRIES = 3
 # Purpose: Maximum number of retry attempts for failed API calls
 # Used by: All API clients
@@ -66,30 +61,10 @@ YF_BATCH_CHUNK_INTER_DELAY_SEC = 2  # small politeness pause between chunks on a
 YF_BATCH_RATE_LIMIT_RESULT_RATIO = 0.7  # if a chunk returns < this fraction of requested, treat as throttled and back off
 
 # ============================================================================
-# SCORING CONFIGURATION
-# ============================================================================
-
-# Score Calculation Weights
-TECHNICAL_SCORE_WEIGHT = 0.6
-# Purpose: Weight for technical analysis score (60%)
-# Used by: Overall stock scoring algorithm
-# Why important: Determines how much technical vs fundamental analysis matters
-
-FUNDAMENTAL_SCORE_WEIGHT = 0.4
-# Purpose: Weight for fundamental analysis score (40%)
-# Used by: Overall stock scoring algorithm
-# Why important: Balances technical and fundamental factors in final score
-
-# ============================================================================
 # FILE PATH CONFIGURATION
 # ============================================================================
 
 # Default File Paths
-DEFAULT_RULESET_PATH = "ruleset.json"
-# Purpose: Path to trading ruleset configuration file
-# Used by: Trading bot rule engine
-# Why important: Centralizes trading rules configuration
-
 DEFAULT_ENV_PATH = ".env"
 # Purpose: Path to environment variables file
 # Used by: All modules that need API keys or secrets
@@ -145,10 +120,6 @@ PROBLEMS_WITH_TICKERS = REPORTS_DIR / "problems_with_tickers.txt"
 # Purpose: Report of ticker mismatches, unmapped symbols, missing data (step 03).
 # Used by: 03_prepare_data.py
 
-SCAN_RESULTS_LATEST = REPORTS_DIR / "scan_results_latest.json"
-# Purpose: Scan results JSON (written by 04, read by 05)
-# Used by: 04_scan.py, 05_prep_ai_data.py
-
 # ============================================================================
 # LOGGING CONFIGURATION
 # ============================================================================
@@ -173,36 +144,6 @@ LOG_BACKUP_COUNT = 5
 # Purpose: Number of backup log files to keep
 # Used by: RotatingFileHandler
 # Why important: Maintains log history while limiting disk usage
-
-# ============================================================================
-# INPUT VALIDATION CONFIGURATION
-# ============================================================================
-
-# Input Validation
-MAX_TICKER_LENGTH = 20
-# Purpose: Maximum allowed length for stock ticker symbols
-# Used by: Ticker validation functions
-# Why important: Prevents invalid ticker formats and potential injection
-
-MAX_PATH_LENGTH = 260  # Windows path limit
-# Purpose: Maximum file path length (Windows limitation)
-# Used by: Path validation functions
-# Why important: Prevents errors on Windows systems with long paths
-
-ALLOWED_TICKER_CHARS = set("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789._-")
-# Purpose: Valid characters allowed in ticker symbols
-# Used by: Ticker validation and cleaning functions
-# Why important: Ensures ticker symbols are safe and valid
-
-# ============================================================================
-# SECURITY CONFIGURATION
-# ============================================================================
-
-# Security
-MASKED_CREDENTIAL_LENGTH = 4  # Show last 4 chars when masking
-# Purpose: Number of characters to show when masking sensitive data
-# Used by: Credential masking functions (for logging)
-# Why important: Allows identification while protecting sensitive information
 
 # ============================================================================
 # MINERVINI SEPA SCANNER CONFIGURATION
